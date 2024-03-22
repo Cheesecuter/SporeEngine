@@ -1,0 +1,523 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="源文件\Core">
+      <UniqueIdentifier>{cfd837a1-b808-4d7b-ad9a-35733d07ce15}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Asset">
+      <UniqueIdentifier>{c63143cf-50ec-4f37-8701-fceb1d8f7717}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Core\Base">
+      <UniqueIdentifier>{5ee6e396-d357-4609-ac69-55c847bf8dc1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Debug">
+      <UniqueIdentifier>{528a03d8-8cc3-4c46-a9e3-a1138e930ce6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\ECS">
+      <UniqueIdentifier>{1b770808-553b-457d-8f80-8479a20490c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Input">
+      <UniqueIdentifier>{c75d33a8-c91e-4058-9436-8653f88a7998}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Renderer">
+      <UniqueIdentifier>{76969f4a-0fdd-4a9a-b1de-af2f0911718e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Utils">
+      <UniqueIdentifier>{560b98ff-6919-4eee-9d37-dd9940187242}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Window">
+      <UniqueIdentifier>{eb7d7b1e-cec9-4700-b71a-0f56e5446336}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\ECS\Component">
+      <UniqueIdentifier>{8dcd3e2f-7258-4d42-8a0f-83fbff069292}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Renderer\GraphicRenderer">
+      <UniqueIdentifier>{8ce0027c-3df7-438b-bf7c-90e5691ffcda}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Window\UI">
+      <UniqueIdentifier>{1f6b5331-aee6-4b8b-81bf-da0af17bbfee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\imgui">
+      <UniqueIdentifier>{b9fa9278-ba8b-46a6-a281-6f2ce29c4f7e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Core\Reflection">
+      <UniqueIdentifier>{cf1a2215-280f-488e-9e1f-739559b6a1e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Core\Serializer">
+      <UniqueIdentifier>{bac714be-4d75-40d5-b029-3587ced02aaf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\Assets">
+      <UniqueIdentifier>{fb817f1c-218b-4d0e-bcf1-d32e1df1873c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\Assets\Models">
+      <UniqueIdentifier>{972d4ff8-8140-4675-b47c-c9ed5b93b70b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\Assets\Shaders">
+      <UniqueIdentifier>{6797b3cd-5b9d-48ee-adad-988fc6304455}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\Assets\Textures">
+      <UniqueIdentifier>{d8b838eb-8705-43c8-86ee-ba8a2dcb74cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\VisualEffect">
+      <UniqueIdentifier>{621d0bf3-4c62-40e8-b39f-fbf3e317ce70}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Runtime\Debug\AddvantageRenderTest.cpp">
+      <Filter>源文件\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Debug\BasicLightingTest.cpp">
+      <Filter>源文件\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Debug\DeferredShaderingTest.cpp">
+      <Filter>源文件\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Debug\DepthTest.cpp">
+      <Filter>源文件\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Debug\HDRTest.cpp">
+      <Filter>源文件\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Debug\ImGuiTest.cpp">
+      <Filter>源文件\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Debug\LightingTest.cpp">
+      <Filter>源文件\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Debug\ModelTest.cpp">
+      <Filter>源文件\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Debug\NamespaceTest.cpp">
+      <Filter>源文件\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Debug\NormalMappingTest.cpp">
+      <Filter>源文件\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Debug\ParallaxMappingTest.cpp">
+      <Filter>源文件\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Debug\PbrTest.cpp">
+      <Filter>源文件\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Debug\ShadowTest.cpp">
+      <Filter>源文件\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Debug\SSAOTest.cpp">
+      <Filter>源文件\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Debug\StencilTest.cpp">
+      <Filter>源文件\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\ECS\Component.cpp">
+      <Filter>源文件\ECS</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\ECS\Object.cpp">
+      <Filter>源文件\ECS</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\ECS\Scene.cpp">
+      <Filter>源文件\ECS</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\ECS\Tick.cpp">
+      <Filter>源文件\ECS</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\ECS\Transform.cpp">
+      <Filter>源文件\ECS</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Input\Keyboard.cpp">
+      <Filter>源文件\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Input\Mouse.cpp">
+      <Filter>源文件\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Renderer\GraphicRenderer\Camera.cpp">
+      <Filter>源文件\Renderer\GraphicRenderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Renderer\GraphicRenderer\glad.c">
+      <Filter>源文件\Renderer\GraphicRenderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Renderer\GraphicRenderer\Mesh.cpp">
+      <Filter>源文件\Renderer\GraphicRenderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Renderer\GraphicRenderer\Model.cpp">
+      <Filter>源文件\Renderer\GraphicRenderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Renderer\GraphicRenderer\RenderPipeline.cpp">
+      <Filter>源文件\Renderer\GraphicRenderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Renderer\GraphicRenderer\Shader.cpp">
+      <Filter>源文件\Renderer\GraphicRenderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Renderer\GraphicRenderer\stb_image.cpp">
+      <Filter>源文件\Renderer\GraphicRenderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Renderer\GraphicRenderer\Texture.cpp">
+      <Filter>源文件\Renderer\GraphicRenderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Window\UI\UI.cpp">
+      <Filter>源文件\Window\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Window\Window.cpp">
+      <Filter>源文件\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\imgui\imgui.cpp">
+      <Filter>头文件\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\imgui\imgui_demo.cpp">
+      <Filter>头文件\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\imgui\imgui_draw.cpp">
+      <Filter>头文件\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\imgui\imgui_tables.cpp">
+      <Filter>头文件\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\imgui\imgui_widgets.cpp">
+      <Filter>头文件\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\imgui\backends\imgui_impl_opengl3.cpp">
+      <Filter>头文件\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Asset\AssetsManager.cpp">
+      <Filter>源文件\Asset</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Asset\Files.cpp">
+      <Filter>源文件\Asset</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\imgui\backends\imgui_impl_glfw.cpp">
+      <Filter>头文件\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\ECS\Component\TransformComponent.cpp">
+      <Filter>源文件\ECS\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Core\Reflection\Reflection.cpp">
+      <Filter>源文件\Core\Reflection</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\ECS\Component\ShaderComponent.cpp">
+      <Filter>源文件\ECS\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Renderer\GraphicRenderer\Grid.cpp">
+      <Filter>源文件\Renderer\GraphicRenderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\ECS\Light.cpp">
+      <Filter>源文件\ECS</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Renderer\GraphicRenderer\SkyBox.cpp">
+      <Filter>源文件\Renderer\GraphicRenderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Debug\RendererDemo.cpp">
+      <Filter>源文件\Debug</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Runtime\Core\Base\Types.hpp">
+      <Filter>源文件\Core\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\ECS\Component\TransformComponent.hpp">
+      <Filter>源文件\ECS\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\ECS\Component.hpp">
+      <Filter>源文件\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\ECS\Object.hpp">
+      <Filter>源文件\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\ECS\Scene.hpp">
+      <Filter>源文件\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\ECS\Tick.hpp">
+      <Filter>源文件\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\ECS\Transform.hpp">
+      <Filter>源文件\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\Input\InputDevices.hpp">
+      <Filter>源文件\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\Input\Keyboard.hpp">
+      <Filter>源文件\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\Input\Mouse.hpp">
+      <Filter>源文件\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\Renderer\GraphicRenderer\Camera.hpp">
+      <Filter>源文件\Renderer\GraphicRenderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\Renderer\GraphicRenderer\Mesh.hpp">
+      <Filter>源文件\Renderer\GraphicRenderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\Renderer\GraphicRenderer\Model.hpp">
+      <Filter>源文件\Renderer\GraphicRenderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\Renderer\GraphicRenderer\RenderPipeline.hpp">
+      <Filter>源文件\Renderer\GraphicRenderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\Renderer\GraphicRenderer\Shader.hpp">
+      <Filter>源文件\Renderer\GraphicRenderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\Renderer\GraphicRenderer\stb_image.h">
+      <Filter>源文件\Renderer\GraphicRenderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\Renderer\GraphicRenderer\Texture.hpp">
+      <Filter>源文件\Renderer\GraphicRenderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\Utils\SingletonInstance.hpp">
+      <Filter>源文件\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\Window\UI\IMGUI_GLFW_OPENGL3.hpp">
+      <Filter>源文件\Window\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\Window\UI\UI.hpp">
+      <Filter>源文件\Window\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\Window\Window.hpp">
+      <Filter>源文件\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\imgui\imconfig.h">
+      <Filter>头文件\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\imgui\imgui.h">
+      <Filter>头文件\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\imgui\imgui_internal.h">
+      <Filter>头文件\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\imgui\imstb_rectpack.h">
+      <Filter>头文件\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\imgui\imstb_textedit.h">
+      <Filter>头文件\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\imgui\imstb_truetype.h">
+      <Filter>头文件\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\imgui\backends\imgui_impl_opengl3.h">
+      <Filter>头文件\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\imgui\backends\imgui_impl_opengl3_loader.h">
+      <Filter>头文件\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\Asset\AssetsManager.hpp">
+      <Filter>源文件\Asset</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\Asset\Files.hpp">
+      <Filter>源文件\Asset</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\imgui\backends\imgui_impl_glfw.h">
+      <Filter>头文件\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\Core\Reflection\Reflection.hpp">
+      <Filter>源文件\Core\Reflection</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\ECS\Component\ShaderComponent.hpp">
+      <Filter>源文件\ECS\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\Renderer\GraphicRenderer\Grid.hpp">
+      <Filter>源文件\Renderer\GraphicRenderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\ECS\Light.hpp">
+      <Filter>源文件\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\Renderer\GraphicRenderer\SkyBox.hpp">
+      <Filter>源文件\Renderer\GraphicRenderer</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="SDKs\imgui\misc\debuggers\imgui.natstepfilter">
+      <Filter>头文件\imgui</Filter>
+    </None>
+    <None Include="Assets\Shaders\BackgroundFragment.glsl">
+      <Filter>资源文件\Assets\Shaders</Filter>
+    </None>
+    <None Include="Assets\Shaders\BackgroundVertex.glsl">
+      <Filter>资源文件\Assets\Shaders</Filter>
+    </None>
+    <None Include="Assets\Shaders\BlendingFragment.glsl">
+      <Filter>资源文件\Assets\Shaders</Filter>
+    </None>
+    <None Include="Assets\Shaders\BlendingVertex.glsl">
+      <Filter>资源文件\Assets\Shaders</Filter>
+    </None>
+    <None Include="Assets\Shaders\CubemapVertex.glsl">
+      <Filter>资源文件\Assets\Shaders</Filter>
+    </None>
+    <None Include="Assets\Shaders\DebugQuadFragment.glsl">
+      <Filter>资源文件\Assets\Shaders</Filter>
+    </None>
+    <None Include="Assets\Shaders\DebugQuadVertex.glsl">
+      <Filter>资源文件\Assets\Shaders</Filter>
+    </None>
+    <None Include="Assets\Shaders\DeferredLightBoxFragment.glsl">
+      <Filter>资源文件\Assets\Shaders</Filter>
+    </None>
+    <None Include="Assets\Shaders\DeferredLightBoxVertex.glsl">
+      <Filter>资源文件\Assets\Shaders</Filter>
+    </None>
+    <None Include="Assets\Shaders\DeferredShadingFragment.glsl">
+      <Filter>资源文件\Assets\Shaders</Filter>
+    </None>
+    <None Include="Assets\Shaders\DeferredShadingVertex.glsl">
+      <Filter>资源文件\Assets\Shaders</Filter>
+    </None>
+    <None Include="Assets\Shaders\DepthFragment.glsl">
+      <Filter>资源文件\Assets\Shaders</Filter>
+    </None>
+    <None Include="Assets\Shaders\DepthVertex.glsl">
+      <Filter>资源文件\Assets\Shaders</Filter>
+    </None>
+    <None Include="Assets\Shaders\EquirectangularToCubemapFragment.glsl">
+      <Filter>资源文件\Assets\Shaders</Filter>
+    </None>
+    <None Include="Assets\Shaders\FrameBuffersFragment.glsl">
+      <Filter>资源文件\Assets\Shaders</Filter>
+    </None>
+    <None Include="Assets\Shaders\FrameBuffersScreenFragment.glsl">
+      <Filter>资源文件\Assets\Shaders</Filter>
+    </None>
+    <None Include="Assets\Shaders\FrameBuffersScreenVertex.glsl">
+      <Filter>资源文件\Assets\Shaders</Filter>
+    </None>
+    <None Include="Assets\Shaders\FrameBuffersVertex.glsl">
+      <Filter>资源文件\Assets\Shaders</Filter>
+    </None>
+    <None Include="Assets\Shaders\GBufferFragment.glsl">
+      <Filter>资源文件\Assets\Shaders</Filter>
+    </None>
+    <None Include="Assets\Shaders\GBufferVertex.glsl">
+      <Filter>资源文件\Assets\Shaders</Filter>
+    </None>
+    <None Include="Assets\Shaders\HDRFragment.glsl">
+      <Filter>资源文件\Assets\Shaders</Filter>
+    </None>
+    <None Include="Assets\Shaders\HDRVertex.glsl">
+      <Filter>资源文件\Assets\Shaders</Filter>
+    </None>
+    <None Include="Assets\Shaders\IrradianceConvolutionFragment.glsl">
+      <Filter>资源文件\Assets\Shaders</Filter>
+    </None>
+    <None Include="Assets\Shaders\LightCubeFragment.glsl">
+      <Filter>资源文件\Assets\Shaders</Filter>
+    </None>
+    <None Include="Assets\Shaders\LightCubeVertex.glsl">
+      <Filter>资源文件\Assets\Shaders</Filter>
+    </None>
+    <None Include="Assets\Shaders\LightingFragment.glsl">
+      <Filter>资源文件\Assets\Shaders</Filter>
+    </None>
+    <None Include="Assets\Shaders\LightingVertex.glsl">
+      <Filter>资源文件\Assets\Shaders</Filter>
+    </None>
+    <None Include="Assets\Shaders\ModelLoadingFragment.glsl">
+      <Filter>资源文件\Assets\Shaders</Filter>
+    </None>
+    <None Include="Assets\Shaders\ModelLoadingVertex.glsl">
+      <Filter>资源文件\Assets\Shaders</Filter>
+    </None>
+    <None Include="Assets\Shaders\MultipleLightsFragment.glsl">
+      <Filter>资源文件\Assets\Shaders</Filter>
+    </None>
+    <None Include="Assets\Shaders\MultipleLightsVertex.glsl">
+      <Filter>资源文件\Assets\Shaders</Filter>
+    </None>
+    <None Include="Assets\Shaders\NormalMappingFragment.glsl">
+      <Filter>资源文件\Assets\Shaders</Filter>
+    </None>
+    <None Include="Assets\Shaders\NormalMappingVertex.glsl">
+      <Filter>资源文件\Assets\Shaders</Filter>
+    </None>
+    <None Include="Assets\Shaders\ParallaxMappingFragment.glsl">
+      <Filter>资源文件\Assets\Shaders</Filter>
+    </None>
+    <None Include="Assets\Shaders\ParallaxMappingVertex.glsl">
+      <Filter>资源文件\Assets\Shaders</Filter>
+    </None>
+    <None Include="Assets\Shaders\PbrFragment.glsl">
+      <Filter>资源文件\Assets\Shaders</Filter>
+    </None>
+    <None Include="Assets\Shaders\PbrVertex.glsl">
+      <Filter>资源文件\Assets\Shaders</Filter>
+    </None>
+    <None Include="Assets\Shaders\PointShadowsDepthFragment.glsl">
+      <Filter>资源文件\Assets\Shaders</Filter>
+    </None>
+    <None Include="Assets\Shaders\PointShadowsDepthGeometry.glsl">
+      <Filter>资源文件\Assets\Shaders</Filter>
+    </None>
+    <None Include="Assets\Shaders\PointShadowsDepthVertex.glsl">
+      <Filter>资源文件\Assets\Shaders</Filter>
+    </None>
+    <None Include="Assets\Shaders\PointShadowsFragment.glsl">
+      <Filter>资源文件\Assets\Shaders</Filter>
+    </None>
+    <None Include="Assets\Shaders\PointShadowsVertex.glsl">
+      <Filter>资源文件\Assets\Shaders</Filter>
+    </None>
+    <None Include="Assets\Shaders\ShadowMappingDepthFragment.glsl">
+      <Filter>资源文件\Assets\Shaders</Filter>
+    </None>
+    <None Include="Assets\Shaders\ShadowMappingDepthVertex.glsl">
+      <Filter>资源文件\Assets\Shaders</Filter>
+    </None>
+    <None Include="Assets\Shaders\ShadowMappingFragment.glsl">
+      <Filter>资源文件\Assets\Shaders</Filter>
+    </None>
+    <None Include="Assets\Shaders\ShadowMappingVertex.glsl">
+      <Filter>资源文件\Assets\Shaders</Filter>
+    </None>
+    <None Include="Assets\Shaders\SkyboxFragment.glsl">
+      <Filter>资源文件\Assets\Shaders</Filter>
+    </None>
+    <None Include="Assets\Shaders\SkyboxVertex.glsl">
+      <Filter>资源文件\Assets\Shaders</Filter>
+    </None>
+    <None Include="Assets\Shaders\SSAOBlurFragment.glsl">
+      <Filter>资源文件\Assets\Shaders</Filter>
+    </None>
+    <None Include="Assets\Shaders\SSAOFragment.glsl">
+      <Filter>资源文件\Assets\Shaders</Filter>
+    </None>
+    <None Include="Assets\Shaders\SSAOGeometryFragment.glsl">
+      <Filter>资源文件\Assets\Shaders</Filter>
+    </None>
+    <None Include="Assets\Shaders\SSAOGeometryVertex.glsl">
+      <Filter>资源文件\Assets\Shaders</Filter>
+    </None>
+    <None Include="Assets\Shaders\SSAOLightingFragment.glsl">
+      <Filter>资源文件\Assets\Shaders</Filter>
+    </None>
+    <None Include="Assets\Shaders\SSAOVertex.glsl">
+      <Filter>资源文件\Assets\Shaders</Filter>
+    </None>
+    <None Include="Assets\Shaders\StencilFragment.glsl">
+      <Filter>资源文件\Assets\Shaders</Filter>
+    </None>
+    <None Include="Assets\Shaders\StencilSingleColorFragment.glsl">
+      <Filter>资源文件\Assets\Shaders</Filter>
+    </None>
+    <None Include="Assets\Shaders\StencilVertex.glsl">
+      <Filter>资源文件\Assets\Shaders</Filter>
+    </None>
+    <None Include="Assets\Shaders\GridVertex.glsl">
+      <Filter>资源文件\Assets\Shaders</Filter>
+    </None>
+    <None Include="Assets\Shaders\GridFragment.glsl">
+      <Filter>资源文件\Assets\Shaders</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Natvis Include="SDKs\imgui\misc\debuggers\imgui.natvis">
+      <Filter>头文件\imgui</Filter>
+    </Natvis>
+  </ItemGroup>
+</Project>
