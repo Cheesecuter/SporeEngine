@@ -43,6 +43,18 @@ namespace Spore
 		}
 	}
 
+	void RenderPipeline::PreRender()
+	{
+		/*if (gammaCorrection)
+		{
+			glEnable(GL_FRAMEBUFFER_SRGB);
+		}
+		else
+		{
+			glDisable(GL_FRAMEBUFFER_SRGB);
+		}*/
+	}
+
 	void RenderPipeline::Render(std::vector<Shader> shaders_p, Camera* camera_p,
 								uint32 scrWidth_p, uint32 scrHeight_p,
 								mat4f projection_p, mat4f view_p, mat4f model_p)
@@ -137,9 +149,9 @@ namespace Spore
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	}
 
-	void RenderPipeline::CleanUp()
+	void RenderPipeline::PostProcessing()
 	{
-		initialized = false;
+
 	}
 
 	void RenderPipeline::RenderGrid(Camera* camera_p, mat4f projection_p, mat4f view_p)

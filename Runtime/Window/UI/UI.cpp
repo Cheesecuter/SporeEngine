@@ -138,6 +138,7 @@ namespace Spore
 					}
 					ImGui::SeparatorText("General Setting");
 					ImGui::Checkbox("Show Skybox", &window_p->renderPipeline->skyboxOn);
+					ImGui::Checkbox("Gamma Correction", &window_p->renderPipeline->gammaCorrection);
 					ImGui::SliderFloat("Camera Speed", &window_p->camera->MovementSpeed, 0.0f, 50.0f);
 					static int32 windowSizeIndex = -1;
 					ImGui::Checkbox("Console", &showConsole);

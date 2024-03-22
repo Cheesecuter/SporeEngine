@@ -17,11 +17,13 @@ namespace Spore
 
 		std::map<std::string, std::shared_ptr<Scene>> sceneMapper;
 		bool skyboxOn = true;
+		bool gammaCorrection = true;
 
 		void Initialize();
 		void AddScene(std::shared_ptr<Scene> scene_p);
 		void DeleteScene(std::shared_ptr<Scene> scene_p);
 		void DeleteScene(std::string identifier_p);
+		void PreRender();
 		void Render(std::vector<Shader> shaders_p, Camera* camera_p,
 					uint32 scrWidth_p, uint32 scrHeight_p,
 					mat4f projection_p, mat4f view_p, mat4f model_p);
@@ -32,7 +34,7 @@ namespace Spore
 		void DeferredRender(std::vector<Shader> shaders_p, Camera* camera_p,
 							uint32 scrWidth_p, uint32 scrHeight_p,
 							mat4f projection_p, mat4f view_p, mat4f model_p);
-		void CleanUp();
+		void PostProcessing();
 		void RenderGrid(Camera* camera_p, mat4f projection_p, mat4f view_p);
 		void InitSkyBox();
 		void RenderSkyBox(Camera* camera_p, mat4f projection_p, mat4f view_p);
