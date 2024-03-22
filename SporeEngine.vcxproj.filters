@@ -210,14 +210,14 @@
     <ClCompile Include="Runtime\Renderer\GraphicRenderer\Grid.cpp">
       <Filter>源文件\Renderer\GraphicRenderer</Filter>
     </ClCompile>
-    <ClCompile Include="Runtime\ECS\Light.cpp">
-      <Filter>源文件\ECS</Filter>
-    </ClCompile>
     <ClCompile Include="Runtime\Renderer\GraphicRenderer\SkyBox.cpp">
       <Filter>源文件\Renderer\GraphicRenderer</Filter>
     </ClCompile>
     <ClCompile Include="Runtime\Debug\RendererDemo.cpp">
       <Filter>源文件\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\ECS\Light.cpp">
+      <Filter>源文件\VisualEffect</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -326,11 +326,11 @@
     <ClInclude Include="Runtime\Renderer\GraphicRenderer\Grid.hpp">
       <Filter>源文件\Renderer\GraphicRenderer</Filter>
     </ClInclude>
-    <ClInclude Include="Runtime\ECS\Light.hpp">
-      <Filter>源文件\ECS</Filter>
-    </ClInclude>
     <ClInclude Include="Runtime\Renderer\GraphicRenderer\SkyBox.hpp">
       <Filter>源文件\Renderer\GraphicRenderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\ECS\Light.hpp">
+      <Filter>源文件\VisualEffect</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
