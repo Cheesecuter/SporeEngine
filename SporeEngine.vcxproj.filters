@@ -73,6 +73,9 @@
     <Filter Include="源文件\VisualEffect">
       <UniqueIdentifier>{621d0bf3-4c62-40e8-b39f-fbf3e317ce70}</UniqueIdentifier>
     </Filter>
+    <Filter Include="源文件\ECS\Objects">
+      <UniqueIdentifier>{794cdf20-25a8-4a29-9703-226ca4412233}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Runtime\Debug\AddvantageRenderTest.cpp">
@@ -111,7 +114,7 @@
     <ClCompile Include="Runtime\Debug\PbrTest.cpp">
       <Filter>源文件\Debug</Filter>
     </ClCompile>
-    <ClCompile Include="Runtime\Debug\ShadowTest.cpp">
+    <ClCompile Include="Runtime\Debug\PointShadowTest.cpp">
       <Filter>源文件\Debug</Filter>
     </ClCompile>
     <ClCompile Include="Runtime\Debug\SSAOTest.cpp">
@@ -218,6 +221,12 @@
     </ClCompile>
     <ClCompile Include="Runtime\ECS\Light.cpp">
       <Filter>源文件\VisualEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Debug\ShadowTest.cpp">
+      <Filter>源文件\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\ECS\Objects\Plane.cpp">
+      <Filter>源文件\ECS\Objects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -331,6 +340,9 @@
     </ClInclude>
     <ClInclude Include="Runtime\ECS\Light.hpp">
       <Filter>源文件\VisualEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\ECS\Objects\Plane.hpp">
+      <Filter>源文件\ECS\Objects</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -24,17 +24,17 @@ namespace Spore
 		void DeleteScene(std::shared_ptr<Scene> scene_p);
 		void DeleteScene(std::string identifier_p);
 		void PreRender();
-		void Render(std::vector<Shader> shaders_p, Camera* camera_p,
+		void Render(std::vector<Shader*> shaders_p, Camera* camera_p,
 					uint32 scrWidth_p, uint32 scrHeight_p,
 					mat4f projection_p, mat4f view_p, mat4f model_p);
-		void ForwardRender(std::vector<Shader> shaders_p, Camera* camera_p,
+		void ForwardRender(std::vector<Shader*> shaders_p, Camera* camera_p,
 						   uint32 scrWidth_p, uint32 scrHeight_p,
 						   mat4f projection_p, mat4f view_p, mat4f model_p);
 		void InitGBuffer(uint32 scrWidth_p, uint32 scrHeight_p);
-		void DeferredRender(std::vector<Shader> shaders_p, Camera* camera_p,
+		void DeferredRender(std::vector<Shader*> shaders_p, Camera* camera_p,
 							uint32 scrWidth_p, uint32 scrHeight_p,
 							mat4f projection_p, mat4f view_p, mat4f model_p);
-		void PostProcessing();
+		void PostProcess();
 		void RenderGrid(Camera* camera_p, mat4f projection_p, mat4f view_p);
 		void InitSkyBox();
 		void RenderSkyBox(Camera* camera_p, mat4f projection_p, mat4f view_p);
@@ -48,6 +48,9 @@ namespace Spore
 		uint32 attachments [3];
 		uint32 rboDepth;
 		SkyBox skybox;
+
+		void ShadowMapRender();
+		void ShadingRender();
 	};
 }
 

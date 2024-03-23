@@ -55,7 +55,7 @@ namespace Spore
 		}*/
 	}
 
-	void RenderPipeline::Render(std::vector<Shader> shaders_p, Camera* camera_p,
+	void RenderPipeline::Render(std::vector<Shader*> shaders_p, Camera* camera_p,
 								uint32 scrWidth_p, uint32 scrHeight_p,
 								mat4f projection_p, mat4f view_p, mat4f model_p)
 	{
@@ -67,7 +67,7 @@ namespace Spore
 		}
 	}
 
-	void RenderPipeline::ForwardRender(std::vector<Shader> shaders_p, Camera* camera_p,
+	void RenderPipeline::ForwardRender(std::vector<Shader*> shaders_p, Camera* camera_p,
 									   uint32 scrWidth_p, uint32 scrHeight_p,
 									   mat4f projection_p, mat4f view_p, mat4f model_p)
 	{
@@ -120,7 +120,7 @@ namespace Spore
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	}
 
-	void RenderPipeline::DeferredRender(std::vector<Shader> shaders_p, Camera* camera_p,
+	void RenderPipeline::DeferredRender(std::vector<Shader*> shaders_p, Camera* camera_p,
 										uint32 scrWidth_p, uint32 scrHeight_p,
 										mat4f projection_p, mat4f view_p, mat4f model_p)
 	{
@@ -149,7 +149,17 @@ namespace Spore
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	}
 
-	void RenderPipeline::PostProcessing()
+	void RenderPipeline::ShadowMapRender()
+	{
+
+	}
+
+	void RenderPipeline::ShadingRender()
+	{
+
+	}
+
+	void RenderPipeline::PostProcess()
 	{
 
 	}
@@ -183,5 +193,6 @@ namespace Spore
 }
 // Forward Rendering
 // ShadowMap(Geometry -> VS) -> Shading(Drawcall -> Skybox) -> Post-Process(Bloom -> ColorGrading)
+// 
 // Deferred Rendering
 // Rendering G-Buffer -> Deferred Shading

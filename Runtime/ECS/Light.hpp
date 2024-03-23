@@ -13,7 +13,7 @@ namespace Spore
 		Light(const std::string& identifier_p);
 		~Light();
 		vec3f GetLightColor();
-		void Render(std::vector<Shader> shaders_p, Camera* camera_p,
+		void Render(std::vector<Shader*> shaders_p, Camera* camera_p,
 					uint32 scrWidth_p, uint32 scrHeight_p,
 					mat4f projection_p, mat4f view_p, mat4f model_p) override;
 	protected:

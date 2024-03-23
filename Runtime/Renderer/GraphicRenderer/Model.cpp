@@ -131,82 +131,82 @@ namespace Spore
 		// specular: texture_specularN
 		// normal: texture_normalN
 
-		//// 1. diffuse maps
-		//std::vector<Texture> diffuseMaps = LoadMaterialTextures(material, aiTextureType_DIFFUSE, "texture_diffuse");
-		//textures.insert(textures.end(), diffuseMaps.begin(), diffuseMaps.end());
-		//// 2. specular maps
-		//std::vector<Texture> specularMaps = LoadMaterialTextures(material, aiTextureType_SPECULAR, "texture_specular");
-		//textures.insert(textures.end(), specularMaps.begin(), specularMaps.end());
-		//// 3. normal maps
-		//std::vector<Texture> normalMaps = LoadMaterialTextures(material, aiTextureType_NORMALS, "texture_normal");
-		////std::vector<Texture> normalMaps = LoadMaterialTextures(material, aiTextureType_HEIGHT, "texture_normal");
-		//textures.insert(textures.end(), normalMaps.begin(), normalMaps.end());
-		//// 4. height maps
-		//std::vector<Texture> heightMaps = LoadMaterialTextures(material, aiTextureType_HEIGHT, "texture_height");
-		////std::vector<Texture> heightMaps = LoadMaterialTextures(material, aiTextureType_AMBIENT, "texture_height");
-		//textures.insert(textures.end(), heightMaps.begin(), heightMaps.end());
-
-
-		// 1. ambient maps
-		std::vector<Texture> ambientMaps = LoadMaterialTextures(material, aiTextureType_AMBIENT, "texture_ambient");
-		textures.insert(textures.end(), ambientMaps.begin(), ambientMaps.end());
-		// 2. ambient occlusion maps
-		std::vector<Texture> ambientOcclusionMaps = LoadMaterialTextures(material, aiTextureType_AMBIENT_OCCLUSION, "texture_ambient_occlusion");
-		textures.insert(textures.end(), ambientOcclusionMaps.begin(), ambientOcclusionMaps.end());
-		// 3. base color maps
-		std::vector<Texture> baseColorMaps = LoadMaterialTextures(material, aiTextureType_BASE_COLOR, "texture_base_color");
-		textures.insert(textures.end(), baseColorMaps.begin(), baseColorMaps.end());
-		// 4. clear coat maps
-		std::vector<Texture> clearCoatMaps = LoadMaterialTextures(material, aiTextureType_CLEARCOAT, "texture_clear_coat");
-		textures.insert(textures.end(), clearCoatMaps.begin(), clearCoatMaps.end());
-		// 5. diffuse maps
+		// 1. diffuse maps
 		std::vector<Texture> diffuseMaps = LoadMaterialTextures(material, aiTextureType_DIFFUSE, "texture_diffuse");
 		textures.insert(textures.end(), diffuseMaps.begin(), diffuseMaps.end());
-		// 6. diffuse roughness maps
-		std::vector<Texture> diffuseRoughnessMaps = LoadMaterialTextures(material, aiTextureType_DIFFUSE_ROUGHNESS, "texture_diffuse_roughness");
-		textures.insert(textures.end(), diffuseRoughnessMaps.begin(), diffuseRoughnessMaps.end());
-		// 7. displacement maps
-		std::vector<Texture> displacementMaps = LoadMaterialTextures(material, aiTextureType_DISPLACEMENT, "texture_displacement");
-		textures.insert(textures.end(), displacementMaps.begin(), displacementMaps.end());
-		// 8. emission color maps
-		std::vector<Texture> emissionColorMaps = LoadMaterialTextures(material, aiTextureType_EMISSION_COLOR, "texture_emission_color");
-		textures.insert(textures.end(), emissionColorMaps.begin(), emissionColorMaps.end());
-		// 9. emissive maps
-		std::vector<Texture> emissiveMaps = LoadMaterialTextures(material, aiTextureType_EMISSIVE, "texture_emissive");
-		textures.insert(textures.end(), emissiveMaps.begin(), emissiveMaps.end());
-		// 10. height maps
-		std::vector<Texture> heightMaps = LoadMaterialTextures(material, aiTextureType_HEIGHT, "texture_height");
-		textures.insert(textures.end(), heightMaps.begin(), heightMaps.end());
-		// 11. lightmap maps
-		std::vector<Texture> lightmapMaps = LoadMaterialTextures(material, aiTextureType_LIGHTMAP, "texture_lightmap");
-		textures.insert(textures.end(), lightmapMaps.begin(), lightmapMaps.end());
-		// 12. metalness maps
-		std::vector<Texture> metalnessMaps = LoadMaterialTextures(material, aiTextureType_METALNESS, "texture_metalness");
-		textures.insert(textures.end(), metalnessMaps.begin(), metalnessMaps.end());
-		// 13. normal maps
-		std::vector<Texture> normalMaps = LoadMaterialTextures(material, aiTextureType_NORMALS, "texture_normal");
-		textures.insert(textures.end(), normalMaps.begin(), normalMaps.end());
-		// 14. normal camera maps
-		std::vector<Texture> normalCameraMaps = LoadMaterialTextures(material, aiTextureType_NORMAL_CAMERA, "texture_normal_camera");
-		textures.insert(textures.end(), normalCameraMaps.begin(), normalCameraMaps.end());
-		// 15. opacity maps
-		std::vector<Texture> opacityMaps = LoadMaterialTextures(material, aiTextureType_OPACITY, "texture_opacity");
-		textures.insert(textures.end(), opacityMaps.begin(), opacityMaps.end());
-		// 16. reflection maps
-		std::vector<Texture> reflectionMaps = LoadMaterialTextures(material, aiTextureType_REFLECTION, "texture_reflection");
-		textures.insert(textures.end(), reflectionMaps.begin(), reflectionMaps.end());
-		// 17. sheen maps
-		std::vector<Texture> sheenMaps = LoadMaterialTextures(material, aiTextureType_SHEEN, "texture_sheen");
-		textures.insert(textures.end(), sheenMaps.begin(), sheenMaps.end());
-		// 18. shininess maps
-		std::vector<Texture> shininessMaps = LoadMaterialTextures(material, aiTextureType_SHININESS, "texture_shininess");
-		textures.insert(textures.end(), shininessMaps.begin(), shininessMaps.end());
-		// 19. specular maps
+		// 2. specular maps
 		std::vector<Texture> specularMaps = LoadMaterialTextures(material, aiTextureType_SPECULAR, "texture_specular");
 		textures.insert(textures.end(), specularMaps.begin(), specularMaps.end());
-		// 20. transmission maps
-		std::vector<Texture> transmissionMaps = LoadMaterialTextures(material, aiTextureType_TRANSMISSION, "texture_transmission");
-		textures.insert(textures.end(), transmissionMaps.begin(), transmissionMaps.end());
+		// 3. normal maps
+		std::vector<Texture> normalMaps = LoadMaterialTextures(material, aiTextureType_NORMALS, "texture_normal");
+		//std::vector<Texture> normalMaps = LoadMaterialTextures(material, aiTextureType_HEIGHT, "texture_normal");
+		textures.insert(textures.end(), normalMaps.begin(), normalMaps.end());
+		// 4. height maps
+		std::vector<Texture> heightMaps = LoadMaterialTextures(material, aiTextureType_HEIGHT, "texture_height");
+		//std::vector<Texture> heightMaps = LoadMaterialTextures(material, aiTextureType_AMBIENT, "texture_height");
+		textures.insert(textures.end(), heightMaps.begin(), heightMaps.end());
+
+
+		//// 1. ambient maps
+		//std::vector<Texture> ambientMaps = LoadMaterialTextures(material, aiTextureType_AMBIENT, "texture_ambient");
+		//textures.insert(textures.end(), ambientMaps.begin(), ambientMaps.end());
+		//// 2. ambient occlusion maps
+		//std::vector<Texture> ambientOcclusionMaps = LoadMaterialTextures(material, aiTextureType_AMBIENT_OCCLUSION, "texture_ambient_occlusion");
+		//textures.insert(textures.end(), ambientOcclusionMaps.begin(), ambientOcclusionMaps.end());
+		//// 3. base color maps
+		//std::vector<Texture> baseColorMaps = LoadMaterialTextures(material, aiTextureType_BASE_COLOR, "texture_base_color");
+		//textures.insert(textures.end(), baseColorMaps.begin(), baseColorMaps.end());
+		//// 4. clear coat maps
+		//std::vector<Texture> clearCoatMaps = LoadMaterialTextures(material, aiTextureType_CLEARCOAT, "texture_clear_coat");
+		//textures.insert(textures.end(), clearCoatMaps.begin(), clearCoatMaps.end());
+		//// 5. diffuse maps
+		//std::vector<Texture> diffuseMaps = LoadMaterialTextures(material, aiTextureType_DIFFUSE, "texture_diffuse");
+		//textures.insert(textures.end(), diffuseMaps.begin(), diffuseMaps.end());
+		//// 6. diffuse roughness maps
+		//std::vector<Texture> diffuseRoughnessMaps = LoadMaterialTextures(material, aiTextureType_DIFFUSE_ROUGHNESS, "texture_diffuse_roughness");
+		//textures.insert(textures.end(), diffuseRoughnessMaps.begin(), diffuseRoughnessMaps.end());
+		//// 7. displacement maps
+		//std::vector<Texture> displacementMaps = LoadMaterialTextures(material, aiTextureType_DISPLACEMENT, "texture_displacement");
+		//textures.insert(textures.end(), displacementMaps.begin(), displacementMaps.end());
+		//// 8. emission color maps
+		//std::vector<Texture> emissionColorMaps = LoadMaterialTextures(material, aiTextureType_EMISSION_COLOR, "texture_emission_color");
+		//textures.insert(textures.end(), emissionColorMaps.begin(), emissionColorMaps.end());
+		//// 9. emissive maps
+		//std::vector<Texture> emissiveMaps = LoadMaterialTextures(material, aiTextureType_EMISSIVE, "texture_emissive");
+		//textures.insert(textures.end(), emissiveMaps.begin(), emissiveMaps.end());
+		//// 10. height maps
+		//std::vector<Texture> heightMaps = LoadMaterialTextures(material, aiTextureType_HEIGHT, "texture_height");
+		//textures.insert(textures.end(), heightMaps.begin(), heightMaps.end());
+		//// 11. lightmap maps
+		//std::vector<Texture> lightmapMaps = LoadMaterialTextures(material, aiTextureType_LIGHTMAP, "texture_lightmap");
+		//textures.insert(textures.end(), lightmapMaps.begin(), lightmapMaps.end());
+		//// 12. metalness maps
+		//std::vector<Texture> metalnessMaps = LoadMaterialTextures(material, aiTextureType_METALNESS, "texture_metalness");
+		//textures.insert(textures.end(), metalnessMaps.begin(), metalnessMaps.end());
+		//// 13. normal maps
+		//std::vector<Texture> normalMaps = LoadMaterialTextures(material, aiTextureType_NORMALS, "texture_normal");
+		//textures.insert(textures.end(), normalMaps.begin(), normalMaps.end());
+		//// 14. normal camera maps
+		//std::vector<Texture> normalCameraMaps = LoadMaterialTextures(material, aiTextureType_NORMAL_CAMERA, "texture_normal_camera");
+		//textures.insert(textures.end(), normalCameraMaps.begin(), normalCameraMaps.end());
+		//// 15. opacity maps
+		//std::vector<Texture> opacityMaps = LoadMaterialTextures(material, aiTextureType_OPACITY, "texture_opacity");
+		//textures.insert(textures.end(), opacityMaps.begin(), opacityMaps.end());
+		//// 16. reflection maps
+		//std::vector<Texture> reflectionMaps = LoadMaterialTextures(material, aiTextureType_REFLECTION, "texture_reflection");
+		//textures.insert(textures.end(), reflectionMaps.begin(), reflectionMaps.end());
+		//// 17. sheen maps
+		//std::vector<Texture> sheenMaps = LoadMaterialTextures(material, aiTextureType_SHEEN, "texture_sheen");
+		//textures.insert(textures.end(), sheenMaps.begin(), sheenMaps.end());
+		//// 18. shininess maps
+		//std::vector<Texture> shininessMaps = LoadMaterialTextures(material, aiTextureType_SHININESS, "texture_shininess");
+		//textures.insert(textures.end(), shininessMaps.begin(), shininessMaps.end());
+		//// 19. specular maps
+		//std::vector<Texture> specularMaps = LoadMaterialTextures(material, aiTextureType_SPECULAR, "texture_specular");
+		//textures.insert(textures.end(), specularMaps.begin(), specularMaps.end());
+		//// 20. transmission maps
+		//std::vector<Texture> transmissionMaps = LoadMaterialTextures(material, aiTextureType_TRANSMISSION, "texture_transmission");
+		//textures.insert(textures.end(), transmissionMaps.begin(), transmissionMaps.end());
 
 		if (textures.size() == 0)
 		{

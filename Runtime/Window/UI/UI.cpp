@@ -353,6 +353,7 @@ namespace Spore
 			if (selectedObjectIndex >= 0)
 			{
 				selectedObject = scene->objectMapper.find(objectIdentifiers [selectedObjectIndex])->second;
+				selectedObject->selected = true;
 			}
 			if (ImGui::CollapsingHeader("Scene", true))
 			{

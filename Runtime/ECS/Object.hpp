@@ -33,6 +33,7 @@ namespace Spore
 		std::string identifier;
 		std::map<std::string, Model*> modelMapper;
 		uint32 VAO, VBO, EBO;
+		bool selected = false;
 
 		void AddModel(Model* model_p);
 		void DeleteModel(Model model_p);
@@ -42,7 +43,7 @@ namespace Spore
 		void RemoveObserver(std::shared_ptr<ObjectObserver> observer_p);
 		void DeleteObject();
 		void Update(float32 deltaTime);
-		virtual void Render(std::vector<Shader> shaders_p, Camera* camera_p,
+		virtual void Render(std::vector<Shader*> shaders_p, Camera* camera_p,
 					uint32 scrWidth_p, uint32 scrHeight_p,
 					mat4f projection_p, mat4f view_p, mat4f model_p);
 
@@ -62,6 +63,7 @@ namespace Spore
 
 	protected:
 		std::unordered_map<std::string, Component*> components;
+		Shader* modelShader;
 
 	private:
 		std::vector<std::shared_ptr<ObjectObserver>> observerList;
