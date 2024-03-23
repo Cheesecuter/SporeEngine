@@ -14,8 +14,8 @@ namespace Spore
 			Shader* shader = AssetsManager::GetInstance().shaderMapper.find("ModelLoadingFragment.glsl")->second;
 			modelShader = shader;
 			shaderComponent->AddShader(modelShader);
-			Shader* lightingShader = AssetsManager::GetInstance().shaderMapper.find("LightingFragment.glsl")->second;
-			shaderComponent->AddShader(lightingShader);
+			//Shader* lightingShader = AssetsManager::GetInstance().shaderMapper.find("LightingFragment.glsl")->second;
+			//shaderComponent->AddShader(lightingShader);
 			components [shaderComponent->GetName()] = shaderComponent;
 		}
 	}
@@ -227,5 +227,23 @@ namespace Spore
 	{
 		TransformComponent* transformComponent = dynamic_cast<TransformComponent*>(components.find("Transform")->second);
 		return transformComponent->GetScale();
+	}
+
+	vec3f Object::GetFront() const
+	{
+		TransformComponent* transformComponent = dynamic_cast<TransformComponent*>(components.find("Transform")->second);
+		return transformComponent->GetFront();
+	}
+
+	vec3f Object::GetRight() const
+	{
+		TransformComponent* transformComponent = dynamic_cast<TransformComponent*>(components.find("Transform")->second);
+		return transformComponent->GetRight();
+	}
+
+	vec3f Object::GetUp() const
+	{
+		TransformComponent* transformComponent = dynamic_cast<TransformComponent*>(components.find("Transform")->second);
+		return transformComponent->GetUp();
 	}
 }

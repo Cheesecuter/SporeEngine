@@ -47,6 +47,21 @@ namespace Spore
 		return transformBuffer [currentIndex].scale;
 	}
 
+	vec3f TransformComponent::GetFront() const
+	{
+		return transformBuffer [currentIndex].front;
+	}
+
+	vec3f TransformComponent::GetRight() const
+	{
+		return transformBuffer [currentIndex].right;
+	}
+
+	vec3f TransformComponent::GetUp() const
+	{
+		return transformBuffer [currentIndex].up;
+	}
+
 	mat4x4f TransformComponent::GetMatrix() const
 	{
 		return transform.GetMatrix();

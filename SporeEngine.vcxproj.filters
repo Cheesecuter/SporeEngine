@@ -228,6 +228,9 @@
     <ClCompile Include="Runtime\ECS\Objects\Plane.cpp">
       <Filter>源文件\ECS\Objects</Filter>
     </ClCompile>
+    <ClCompile Include="Runtime\VisualEffect\PostProcess.cpp">
+      <Filter>源文件\VisualEffect</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Runtime\Core\Base\Types.hpp">
@@ -343,6 +346,12 @@
     </ClInclude>
     <ClInclude Include="Runtime\ECS\Objects\Plane.hpp">
       <Filter>源文件\ECS\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\VisualEffect\PostProcesser.hpp">
+      <Filter>源文件\VisualEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\VisualEffect\PostProcess.hpp">
+      <Filter>源文件\VisualEffect</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

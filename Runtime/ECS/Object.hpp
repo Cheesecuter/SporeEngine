@@ -60,6 +60,9 @@ namespace Spore
 		vec3f GetPosition() const;
 		vec3f GetRotation() const;
 		vec3f GetScale() const;
+		vec3f GetFront() const;
+		vec3f GetRight() const;
+		vec3f GetUp() const;
 
 	protected:
 		std::unordered_map<std::string, Component*> components;

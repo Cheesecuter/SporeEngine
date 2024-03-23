@@ -186,6 +186,7 @@
     <ClCompile Include="Runtime\Renderer\GraphicRenderer\SkyBox.cpp" />
     <ClCompile Include="Runtime\Renderer\GraphicRenderer\stb_image.cpp" />
     <ClCompile Include="Runtime\Renderer\GraphicRenderer\Texture.cpp" />
+    <ClCompile Include="Runtime\VisualEffect\PostProcess.cpp" />
     <ClCompile Include="Runtime\Window\UI\UI.cpp" />
     <ClCompile Include="Runtime\Window\Window.cpp" />
     <ClCompile Include="SDKs\imgui\backends\imgui_impl_glfw.cpp" />
@@ -223,6 +224,8 @@
     <ClInclude Include="Runtime\Renderer\GraphicRenderer\stb_image.h" />
     <ClInclude Include="Runtime\Renderer\GraphicRenderer\Texture.hpp" />
     <ClInclude Include="Runtime\Utils\SingletonInstance.hpp" />
+    <ClInclude Include="Runtime\VisualEffect\PostProcess.hpp" />
+    <ClInclude Include="Runtime\VisualEffect\PostProcesser.hpp" />
     <ClInclude Include="Runtime\Window\UI\IMGUI_GLFW_OPENGL3.hpp" />
     <ClInclude Include="Runtime\Window\UI\UI.hpp" />
     <ClInclude Include="Runtime\Window\Window.hpp" />
