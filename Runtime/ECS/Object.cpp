@@ -92,7 +92,7 @@ namespace Spore
 						mat4f projection_p, mat4f view_p, mat4f model_p)
 	{
 		projection_p = glm::perspective(glm::radians(camera_p->Zoom),
-										(float32) scrWidth_p / (float32) scrHeight_p, 0.1f, 100.0f);
+										(float32) scrWidth_p / (float32) scrHeight_p, 0.1f, 10000.0f);
 		view_p = camera_p->GetViewMatrix();
 
 		TransformComponent* transformComponent = dynamic_cast<TransformComponent*>(components.find("Transform")->second);
@@ -100,27 +100,27 @@ namespace Spore
 		model_p = transformComponent->GetMatrix();
 		for (std::map<std::string, Model*>::iterator it_model = modelMapper.begin(); it_model != modelMapper.end(); it_model++)
 		{
-			Model* model1 = it_model->second;
+			Model* model = it_model->second;
 			ShaderComponent* shaderComponent = dynamic_cast<ShaderComponent*>(components.find("Shader")->second);
 			for (uint32 i = 0; i < shaders_p.size(); i++)
 			{
 				shaderComponent->AddShader(shaders_p [i]);
 			}
 
-			modelShader->Use();
+			/*modelShader->Use();
 			modelShader->SetMat4("projection", projection_p);
 			modelShader->SetMat4("view", view_p);
-			modelShader->SetMat4("model", model_p);
+			modelShader->SetMat4("model", model_p);*/
 
 			for (std::pair<std::string, ShaderNode*> it_shader : shaderComponent->GetShaders())
 			{
 				if (it_shader.second->isLoading)
 				{
 					it_shader.second->shader->Use();
-					//it_shader.second->shader->SetMat4("projection", projection_p);
-					//it_shader.second->shader->SetMat4("view", view_p);
+					it_shader.second->shader->SetMat4("projection", projection_p);
+					it_shader.second->shader->SetMat4("view", view_p);
 					it_shader.second->shader->SetMat4("model", model_p);
-					model1->Draw(*(it_shader.second->shader));
+					model->Draw(*(it_shader.second->shader));
 				}
 			}
 

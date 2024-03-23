@@ -4,6 +4,16 @@ namespace Spore
 {
 	Plane::Plane(const std::string& identifier_p) : Object(identifier_p)
 	{
+		TransformComponent* transformComponent = new TransformComponent();
+		modelMapper = std::map<std::string, Model*>();
+		components [transformComponent->GetName()] = transformComponent;
+		ShaderComponent* shaderComponent = new ShaderComponent();
+		Shader* shader = AssetsManager::GetInstance().shaderMapper.find("ShadowMappingFragment.glsl")->second;
+		modelShader = shader;
+		shaderComponent->AddShader(modelShader);
+		//Shader* lightingShader = AssetsManager::GetInstance().shaderMapper.find("LightingFragment.glsl")->second;
+		//shaderComponent->AddShader(lightingShader);
+		components [shaderComponent->GetName()] = shaderComponent;
 		Init();
 	}
 
@@ -31,7 +41,15 @@ namespace Spore
 	void Plane::Render(Shader* shader_p)
 	{
 		mat4x4f model = mat4x4f(1.0f);
-		shader_p->SetMat4("model", model);
+		ShaderComponent* shaderComponent = dynamic_cast<ShaderComponent*>(components.find("Shader")->second);
+		for (std::pair<std::string, ShaderNode*> it_shader : shaderComponent->GetShaders())
+		{
+			if (it_shader.second->isLoading)
+			{
+				it_shader.second->shader->SetMat4("model", model);
+			}
+		}
+		//shader_p->SetMat4("model", model);
 		glBindVertexArray(VAO);
 		glDrawArrays(GL_TRIANGLES, 0, 6);
 	}
