@@ -5,6 +5,7 @@
 
 # Assets and SDKs
 Assets/
+Runtime/Debug
 SDKs/
 
 # User-specific files
