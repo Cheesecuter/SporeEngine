@@ -52,10 +52,25 @@ namespace Spore
 		for (const std::pair<std::string, std::shared_ptr<Object>> it : objectMapper)
 		{
 			std::shared_ptr<Object> object = it.second;
-			if (!object->modelMapper.empty())
+			if (object->type == "default")
 			{
-				object->Render(shaders_p, camera_p, scrWidth_p, scrHeight_p,
-							   projection_p, view_p, model_p);
+				if (!object->modelMapper.empty())
+				{
+					object->Render(shaders_p, camera_p, scrWidth_p, scrHeight_p,
+								   projection_p, view_p, model_p);
+				}
+			}
+			else if (object->type == "plane")
+			{
+				std::shared_ptr<Plane> plane = std::dynamic_pointer_cast<Plane>(object);
+				Texture* floorTexture = AssetsManager::GetInstance().textureMapper.find("default.png")->second;
+				plane->Render(shaders_p, floorTexture, model_p);
+			}
+			else if (object->type == "light")
+			{
+				std::shared_ptr<Light> light = std::dynamic_pointer_cast<Light>(object);
+				light->Render(shaders_p, camera_p, scrWidth_p, scrHeight_p,
+							  projection_p, view_p, model_p);
 			}
 		}
 	}

@@ -3,6 +3,7 @@
 #define PLANE_HPP
 
 #include <Types.hpp>
+#include <Texture.hpp>
 #include <Object.hpp>
 
 namespace Spore
@@ -12,7 +13,7 @@ namespace Spore
 	public:
 		Plane(const std::string& identifier_p);
 		~Plane();
-		void Render(Shader* shader_p);
+		void Render(std::vector<Shader*> shaders_p, Texture* texture_p, mat4x4f model_p);
 
 	protected:
 

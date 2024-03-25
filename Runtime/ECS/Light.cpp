@@ -4,6 +4,7 @@ namespace Spore
 {
 	Light::Light(const std::string& identifier_p) : Object(identifier_p, true)
 	{
+		type = "light";
 		ShaderComponent* shaderComponent = new ShaderComponent();
 		Shader* lightingShader = AssetsManager::GetInstance().shaderMapper.find("LightingFragment.glsl")->second;
 		shaderComponent->AddShader(lightingShader);
@@ -29,9 +30,8 @@ namespace Spore
 		view_p = camera_p->GetViewMatrix();
 
 		TransformComponent* transformComponent = dynamic_cast<TransformComponent*>(components.find("Transform")->second);
-		model_p = mat4f(1.0f);
-		model_p = transformComponent->GetMatrix();
 		ShaderComponent* shaderComponent = dynamic_cast<ShaderComponent*>(components.find("Shader")->second);
+		model_p = transformComponent->GetMatrix();
 
 		for (std::pair<std::string, ShaderNode*> it_shader : shaderComponent->GetShaders())
 		{

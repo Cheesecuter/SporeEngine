@@ -4,7 +4,7 @@ namespace Spore
 {
 	SkyBox::SkyBox()
 	{
-
+		Init();
 	}
 
 	SkyBox::~SkyBox()

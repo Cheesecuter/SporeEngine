@@ -4,6 +4,7 @@ namespace Spore
 {
 	RenderPipeline::RenderPipeline() : initialized(false)
 	{
+
 	}
 
 	RenderPipeline::~RenderPipeline()
@@ -149,9 +150,59 @@ namespace Spore
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	}
 
-	void RenderPipeline::ShadowMapRender()
+	void RenderPipeline::InitShadowMap()
 	{
+		shadowMappingShader = AssetsManager::GetInstance().shaderMapper.find("ShadowMappingFragment.glsl")->second;
+		shadowMappingDepthShader = AssetsManager::GetInstance().shaderMapper.find("ShadowMappingDepthFragment.glsl")->second;
+		debugDepthQuadShader = AssetsManager::GetInstance().shaderMapper.find("DebugQuadFragment.glsl")->second;
+		glGenFramebuffers(1, &depthMapFBO);
+		glGenTextures(1, &depthMap);
+		glBindTexture(GL_TEXTURE_2D, depthMap);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, SHADOW_WIDTH, SHADOW_HEIGHT, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
+		float borderColor [] = { 1.0, 1.0, 1.0, 1.0 };
+		glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, borderColor);
+		glBindFramebuffer(GL_FRAMEBUFFER, depthMapFBO);
+		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, depthMap, 0);
+		glDrawBuffer(GL_NONE);
+		glReadBuffer(GL_NONE);
+		glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	}
 
+	void RenderPipeline::ShadowMapRender(std::shared_ptr<Light> light_p,
+										 std::vector<Shader*> shaders_p, Camera* camera_p,
+										 uint32 scrWidth_p, uint32 scrHeight_p,
+										 mat4f projection_p, mat4f view_p, mat4f model_p)
+	{
+		lightProjection = glm::ortho(-10.0f, 10.0f, -10.0f, 10.0f, nearPlane, farPlane);
+		lightView = glm::lookAt(light_p->GetPosition(), vec3f(0.0f), vec3f(0.0f, 1.0f, 0.0f));
+		lightSpaceMatrix = lightProjection * lightView;
+		shadowMappingDepthShader->Use();
+		shadowMappingDepthShader->SetMat4("lightSpaceMatrix", lightSpaceMatrix);
+		glViewport(0, 0, SHADOW_WIDTH, SHADOW_HEIGHT);
+		glBindFramebuffer(GL_FRAMEBUFFER, depthMapFBO);
+		glClear(GL_DEPTH_BUFFER_BIT);
+		Render(shaders_p, camera_p, scrWidth_p, scrHeight_p, projection_p, view_p, model_p);
+		glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+		shadowMappingShader->Use();
+		shadowMappingShader->SetMat4("projection", projection_p);
+		shadowMappingShader->SetMat4("view", view_p);
+		shadowMappingShader->SetVec3("viewPos", camera_p->Position);
+		shadowMappingShader->SetVec3("lightPos", light_p->GetPosition());
+		shadowMappingShader->SetMat4("lightSpaceMatrix", lightSpaceMatrix);
+		glActiveTexture(GL_TEXTURE1);
+		glBindTexture(GL_TEXTURE_2D, depthMap);
+		Render(shaders_p, camera_p, scrWidth_p, scrHeight_p, projection_p, view_p, model_p);
+
+		debugDepthQuadShader->Use();
+		debugDepthQuadShader->SetFloat("near_plane", nearPlane);
+		debugDepthQuadShader->SetFloat("far_plane", farPlane);
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, depthMap);
 	}
 
 	void RenderPipeline::ShadingRender()
@@ -164,30 +215,49 @@ namespace Spore
 
 	}
 
+	void RenderPipeline::InitGrid()
+	{
+		grid = new Grid();
+	}
+
 	void RenderPipeline::RenderGrid(Camera* camera_p, mat4f projection_p, mat4f view_p)
 	{
 		glEnable(GL_DEPTH_TEST | GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		Grid grid;
-		Shader* shader = AssetsManager::GetInstance().shaderMapper.find("GridFragment.glsl")->second;
-		shader->Use();
-		shader->SetMat4("view", view_p);
-		shader->SetMat4("projection", projection_p);
-		shader->SetVec3("cameraPos", camera_p->Position);
-		grid.Draw(shader);
+		Shader* gridShader = AssetsManager::GetInstance().shaderMapper.find("GridFragment.glsl")->second;
+		Shader* shadowMappingShader = AssetsManager::GetInstance().shaderMapper.find("ShadowMappingFragment.glsl")->second;
+		Shader* shadowMappingDepthShader = AssetsManager::GetInstance().shaderMapper.find("ShadowMappingDepthFragment.glsl")->second;
+		std::vector<Shader*> shaders;
+		shaders.push_back(shadowMappingShader);
+		shaders.push_back(shadowMappingDepthShader);
+		mat4f model = mat4f(1.0f);
+		//for (uint32 i = 0; i < shaders.size(); i++)
+		//{
+		//	shaders [i]->Use();
+		//	//shaders [i]->SetMat4("view", view_p);
+		//	//shaders [i]->SetMat4("projection", projection_p);
+		//	//shaders [i]->SetVec3("cameraPos", camera_p->Position);
+		//	shaders [i]->SetMat4("model", model);
+		//	grid.Draw(shaders [i]);
+		//}
+		gridShader->Use();
+		gridShader->SetMat4("view", view_p);
+		gridShader->SetMat4("projection", projection_p);
+		gridShader->SetVec3("cameraPos", camera_p->Position);
+		grid->Draw(gridShader);
 		glDisable(GL_BLEND);
 	}
 
 	void RenderPipeline::InitSkyBox()
 	{
-		skybox.Init();
+		skybox = new SkyBox();
 	}
 
 	void RenderPipeline::RenderSkyBox(Camera* camera_p, mat4f projection_p, mat4f view_p)
 	{
 		if (skyboxOn)
 		{
-			skybox.Draw(camera_p, projection_p, view_p);
+			skybox->Draw(camera_p, projection_p, view_p);
 		}
 	}
 }

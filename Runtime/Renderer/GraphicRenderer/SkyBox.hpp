@@ -14,7 +14,6 @@ namespace Spore
 	public:
 		SkyBox();
 		~SkyBox();
-		void Init();
 		void Draw(Camera* camera_p, mat4x4f projection_p, mat4x4f view_p);
 
 	protected:
@@ -75,7 +74,8 @@ namespace Spore
 			-1.0f, -1.0f,  1.0f,
 			 1.0f, -1.0f,  1.0f
 		};
-		
+
+		void Init();
 		uint32 LoadCubeMap();
 	};
 }

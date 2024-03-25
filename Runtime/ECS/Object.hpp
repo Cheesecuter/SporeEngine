@@ -31,6 +31,7 @@ namespace Spore
 		virtual ~Object();
 
 		std::string identifier;
+		std::string type = "default";
 		std::map<std::string, Model*> modelMapper;
 		uint32 VAO, VBO, EBO;
 		bool selected = false;

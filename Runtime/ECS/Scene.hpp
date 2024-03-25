@@ -4,6 +4,8 @@
 
 #include <Types.hpp>
 #include <Object.hpp>
+#include <Light.hpp>
+#include <Plane.hpp>
 
 namespace Spore
 {

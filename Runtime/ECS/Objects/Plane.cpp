@@ -4,15 +4,13 @@ namespace Spore
 {
 	Plane::Plane(const std::string& identifier_p) : Object(identifier_p)
 	{
+		type = "plane";
 		TransformComponent* transformComponent = new TransformComponent();
+		ShaderComponent* shaderComponent = new ShaderComponent();
 		modelMapper = std::map<std::string, Model*>();
 		components [transformComponent->GetName()] = transformComponent;
-		ShaderComponent* shaderComponent = new ShaderComponent();
-		Shader* shader = AssetsManager::GetInstance().shaderMapper.find("ShadowMappingFragment.glsl")->second;
-		modelShader = shader;
-		shaderComponent->AddShader(modelShader);
-		//Shader* lightingShader = AssetsManager::GetInstance().shaderMapper.find("LightingFragment.glsl")->second;
-		//shaderComponent->AddShader(lightingShader);
+		Shader* shadowMappingShader = AssetsManager::GetInstance().shaderMapper.find("ShadowMappingFragment.glsl")->second;
+		shaderComponent->AddShader(shadowMappingShader);
 		components [shaderComponent->GetName()] = shaderComponent;
 		Init();
 	}
@@ -38,18 +36,22 @@ namespace Spore
 		glBindVertexArray(0);
 	}
 
-	void Plane::Render(Shader* shader_p)
+	void Plane::Render(std::vector<Shader*> shaders_p, Texture* texture_p, mat4x4f model_p)
 	{
-		mat4x4f model = mat4x4f(1.0f);
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, texture_p->ID);
 		ShaderComponent* shaderComponent = dynamic_cast<ShaderComponent*>(components.find("Shader")->second);
+		for (uint32 i = 0; i < shaders_p.size(); i++)
+		{
+			shaderComponent->AddShader(shaders_p [i]);
+		}
 		for (std::pair<std::string, ShaderNode*> it_shader : shaderComponent->GetShaders())
 		{
 			if (it_shader.second->isLoading)
 			{
-				it_shader.second->shader->SetMat4("model", model);
+				it_shader.second->shader->SetMat4("model", model_p);
 			}
 		}
-		//shader_p->SetMat4("model", model);
 		glBindVertexArray(VAO);
 		glDrawArrays(GL_TRIANGLES, 0, 6);
 	}

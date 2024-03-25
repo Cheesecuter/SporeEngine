@@ -6,6 +6,8 @@
 #include <Scene.hpp>
 #include <Grid.hpp>
 #include <SkyBox.hpp>
+#include <Light.hpp>
+#include <Plane.hpp>
 
 namespace Spore
 {
@@ -35,6 +37,13 @@ namespace Spore
 							uint32 scrWidth_p, uint32 scrHeight_p,
 							mat4f projection_p, mat4f view_p, mat4f model_p);
 		void PostProcess();
+		void InitShadowMap();
+		void ShadowMapRender(std::shared_ptr<Light> light_p,
+							 std::vector<Shader*> shaders_p, Camera* camera_p,
+							 uint32 scrWidth_p, uint32 scrHeight_p,
+							 mat4f projection_p, mat4f view_p, mat4f model_p);
+		void ShadingRender();
+		void InitGrid();
 		void RenderGrid(Camera* camera_p, mat4f projection_p, mat4f view_p);
 		void InitSkyBox();
 		void RenderSkyBox(Camera* camera_p, mat4f projection_p, mat4f view_p);
@@ -47,10 +56,15 @@ namespace Spore
 		uint32 gPosition, gNormal, gAlbedoSpec;
 		uint32 attachments [3];
 		uint32 rboDepth;
-		SkyBox skybox;
-
-		void ShadowMapRender();
-		void ShadingRender();
+		SkyBox* skybox;
+		Grid* grid;
+		const uint32 SHADOW_WIDTH = 1024, SHADOW_HEIGHT = 1024;
+		Shader* shadowMappingShader;
+		Shader* shadowMappingDepthShader;
+		Shader* debugDepthQuadShader;
+		uint32 depthMap, depthMapFBO;
+		float32 nearPlane = 1.0f, farPlane = 100.0f;
+		mat4x4f lightProjection, lightView, lightSpaceMatrix;
 	};
 }
 

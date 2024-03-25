@@ -96,64 +96,29 @@ namespace Spore
 		view_p = camera_p->GetViewMatrix();
 
 		TransformComponent* transformComponent = dynamic_cast<TransformComponent*>(components.find("Transform")->second);
-		model_p = mat4f(1.0f);
+		ShaderComponent* shaderComponent = nullptr;
+		Model* model = nullptr;
 		model_p = transformComponent->GetMatrix();
 		for (std::map<std::string, Model*>::iterator it_model = modelMapper.begin(); it_model != modelMapper.end(); it_model++)
 		{
-			Model* model = it_model->second;
-			ShaderComponent* shaderComponent = dynamic_cast<ShaderComponent*>(components.find("Shader")->second);
+			model = it_model->second;
+			shaderComponent = dynamic_cast<ShaderComponent*>(components.find("Shader")->second);
 			for (uint32 i = 0; i < shaders_p.size(); i++)
 			{
 				shaderComponent->AddShader(shaders_p [i]);
 			}
-
-			/*modelShader->Use();
-			modelShader->SetMat4("projection", projection_p);
-			modelShader->SetMat4("view", view_p);
-			modelShader->SetMat4("model", model_p);*/
 
 			for (std::pair<std::string, ShaderNode*> it_shader : shaderComponent->GetShaders())
 			{
 				if (it_shader.second->isLoading)
 				{
 					it_shader.second->shader->Use();
-					it_shader.second->shader->SetMat4("projection", projection_p);
-					it_shader.second->shader->SetMat4("view", view_p);
+					//it_shader.second->shader->SetMat4("projection", projection_p);
+					//it_shader.second->shader->SetMat4("view", view_p);
 					it_shader.second->shader->SetMat4("model", model_p);
 					model->Draw(*(it_shader.second->shader));
 				}
 			}
-
-			/*glEnable(GL_STENCIL_TEST);
-			glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
-			glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
-			glClear(GL_STENCIL_BUFFER_BIT);
-
-			Shader* stencilSingleColorShader = AssetsManager::GetInstance().shaderMapper.find("StencilSingleColorFragment.glsl")->second;
-			stencilSingleColorShader->Use();
-			stencilSingleColorShader->SetMat4("view", view_p);
-			stencilSingleColorShader->SetMat4("projection", projection_p);
-			Shader* stencilTestingShader = AssetsManager::GetInstance().shaderMapper.find("StencilFragment.glsl")->second;
-			modelShader->Use();
-			modelShader->SetMat4("view", view_p);
-			modelShader->SetMat4("projection", projection_p);
-
-			glStencilFunc(GL_ALWAYS, 1, 0xFF);
-			glStencilMask(0xFF);
-
-			modelShader->SetMat4("model", model_p);
-
-			glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
-			glStencilMask(0x00);
-			glDisable(GL_DEPTH_TEST);
-			stencilSingleColorShader->Use();
-			float32 scale = 1.1f;
-			mat4x4f model_p2 = glm::scale(model_p, vec3f(scale, scale, scale));
-			stencilSingleColorShader->SetMat4("model", model_p2);
-			glStencilMask(0xFF);
-			glStencilFunc(GL_ALWAYS, 0, 0xFF);
-			glEnable(GL_DEPTH_TEST);
-			glDisable(GL_STENCIL_TEST);*/
 		}
 	}
 

@@ -19,7 +19,6 @@ namespace Spore
 			shaderNode->shader = shader_p;
 			shaders [shader_p->identifier] = shaderNode;
 		}
-		//shaders [shader_p->identifier] = shader_p;
 	}
 
 	void ShaderComponent::RemoveShader(Shader* shader_p)
