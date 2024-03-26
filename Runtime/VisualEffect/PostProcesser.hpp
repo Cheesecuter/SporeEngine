@@ -15,15 +15,26 @@ namespace Spore
 
 		void SetPostProcess(PostProcess* postProcess_p);
 		PostProcess* GetPostProcesS();
-		void Render();
+		void Render(mat4f projection_p, mat4f view_p, mat4f model_p);
 
 	protected:
 
 	private:
-		uint32 FBO;
+		uint32 FBO, quadVAO, quadVBO;
 		uint32 texture;
 		uint32 depthBuffer;
 		PostProcess* postProcess;
+		float quadVertices [24] = { 
+		// vertex attributes for a quad that fills the entire screen in Normalized Device Coordinates.
+		// positions   // texCoords
+		-1.0f,  1.0f,  0.0f, 1.0f,
+		-1.0f, -1.0f,  0.0f, 0.0f,
+		 1.0f, -1.0f,  1.0f, 0.0f,
+
+		-1.0f,  1.0f,  0.0f, 1.0f,
+		 1.0f, -1.0f,  1.0f, 0.0f,
+		 1.0f,  1.0f,  1.0f, 1.0f
+		};
 	};
 }
 

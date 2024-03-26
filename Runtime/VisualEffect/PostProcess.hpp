@@ -19,7 +19,7 @@ namespace Spore
 		
 		void SetShader(Shader* shader_p);
 		Shader* GetShader();
-		void Render(uint32 fbo_p);
+		void Render(uint32 fbo_p, uint32 texture_p, uint32 quadVAO_p, mat4f projection_p, mat4f view_p, mat4f model_p);
 
 	protected:
 

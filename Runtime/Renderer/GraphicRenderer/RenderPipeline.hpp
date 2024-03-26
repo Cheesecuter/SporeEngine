@@ -38,7 +38,7 @@ namespace Spore
 							uint32 scrWidth_p, uint32 scrHeight_p,
 							mat4f projection_p, mat4f view_p, mat4f model_p);
 		void InitPostProcesser(uint32 screenWidth_p, uint32 screenHeight_p);
-		void PostProcess();
+		void PostProcess(mat4f projection_p, mat4f view_p, mat4f model_p);
 		void InitShadowMap();
 		void ShadowMapRender(std::shared_ptr<Light> light_p,
 							 std::vector<Shader*> shaders_p, Camera* camera_p,

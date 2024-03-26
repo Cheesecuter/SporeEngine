@@ -155,9 +155,9 @@ namespace Spore
 		postProcesser = new PostProcesser(screenWidth_p, screenHeight_p);
 	}
 
-	void RenderPipeline::PostProcess()
+	void RenderPipeline::PostProcess(mat4f projection_p, mat4f view_p, mat4f model_p)
 	{
-		postProcesser->Render();
+		postProcesser->Render(projection_p, view_p, model_p);
 	}
 
 	void RenderPipeline::InitShadowMap()
