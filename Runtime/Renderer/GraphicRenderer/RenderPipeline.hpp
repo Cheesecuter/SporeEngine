@@ -8,6 +8,7 @@
 #include <SkyBox.hpp>
 #include <Light.hpp>
 #include <Plane.hpp>
+#include <PostProcesser.hpp>
 
 namespace Spore
 {
@@ -36,6 +37,7 @@ namespace Spore
 		void DeferredRender(std::vector<Shader*> shaders_p, Camera* camera_p,
 							uint32 scrWidth_p, uint32 scrHeight_p,
 							mat4f projection_p, mat4f view_p, mat4f model_p);
+		void InitPostProcesser(uint32 screenWidth_p, uint32 screenHeight_p);
 		void PostProcess();
 		void InitShadowMap();
 		void ShadowMapRender(std::shared_ptr<Light> light_p,
@@ -54,8 +56,10 @@ namespace Spore
 		bool initialized;
 		uint32 gBuffer;
 		uint32 gPosition, gNormal, gAlbedoSpec;
+		uint32 forwardRenderFBO;
 		uint32 attachments [3];
 		uint32 rboDepth;
+		PostProcesser* postProcesser;
 		SkyBox* skybox;
 		Grid* grid;
 		const uint32 SHADOW_WIDTH = 1024, SHADOW_HEIGHT = 1024;

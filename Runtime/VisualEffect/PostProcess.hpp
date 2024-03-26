@@ -16,6 +16,10 @@ namespace Spore
 		std::string identifier;
 		Shader* shader;
 		//std::vector<Shader*> shaders;
+		
+		void SetShader(Shader* shader_p);
+		Shader* GetShader();
+		void Render(uint32 fbo_p);
 
 	protected:
 

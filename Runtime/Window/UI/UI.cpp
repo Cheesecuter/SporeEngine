@@ -3,6 +3,7 @@
 #include <Types.hpp>
 #include <UI.hpp>
 #include <IMGUI_GLFW_OPENGL3.hpp>
+#include <Windows.h>
 
 namespace fs = std::filesystem;
 namespace Spore
@@ -418,6 +419,43 @@ namespace Spore
 
 			if (selectedObject != nullptr)
 			{
+				if (ImGui::CollapsingHeader(selectedObject->identifier.c_str(), true))
+				{
+					ImGui::Text("Type: %s", selectedObject->type.c_str());
+					ImGui::Separator();
+					ImGui::Text("Models");
+					for (std::pair<std::string, Model*> it_model : selectedObject->modelMapper)
+					{
+						ImGui::Text(it_model.second->identifier.c_str());
+						ImGui::Separator();
+					}
+					ImGui::Text("Layer");
+					const char* layers [] = {
+						"Default",
+						"TransparentFX",
+						"UI",
+						"PostProcessing",
+						"Terrain",
+						"Background"
+					};
+					static int currentLayer = 0;
+					if (ImGui::BeginCombo("##Layer", layers[currentLayer]))
+					{
+						for (uint32 i = 0; i < IM_ARRAYSIZE(layers); i++)
+						{
+							const bool isSelected = (currentLayer == i);
+							if (ImGui::Selectable(layers [i], isSelected))
+							{
+								currentLayer = i;
+							}
+							if (isSelected)
+							{
+								ImGui::SetItemDefaultFocus();
+							}
+						}
+						ImGui::EndCombo();
+					}
+				}
 				if (ImGui::CollapsingHeader("Transform", true))
 				{
 					vec3f pos = selectedObject->GetPosition();
@@ -449,7 +487,8 @@ namespace Spore
 					for (std::pair<std::string, ShaderNode*> it_shader : shaderComponent->GetShaders())
 					{
 						ImGui::Text(it_shader.second->shader->identifier.c_str());
-						ImGui::Checkbox(it_shader.second->shader->identifier.c_str(), &it_shader.second->isLoading);
+						ImGui::Checkbox("Is dLoading", &it_shader.second->isLoading);
+						ImGui::Checkbox("Alpha Filter", &it_shader.second->shader->alphaFilterFlag);
 						ImGui::Separator();
 					}
 				}
@@ -837,6 +876,7 @@ namespace Spore
 			style.Colors [ImGuiCol_ButtonActive] = ImVec4(0.511f, 0.511f, 0.511f, 1.0f);
 			style.Colors [ImGuiCol_ButtonHovered] = ImVec4(0.422f, 0.422f, 0.422f, 1.0f);
 
+			ImGui::Text("Camera Position: %.2f, %.2f, %.2f", window_p->camera->Position.x, window_p->camera->Position.y, window_p->camera->Position.z);
 			ImGui::Text(" %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
 
 			ImGui::End();
@@ -1002,7 +1042,8 @@ namespace Spore
 			{
 				importAssetsPath = Files::GetInstance().GetAssetsPath() / "Models";
 				filePath = &importAssetsPath;
-				showFileBrowser = true;
+				//showFileBrowser = true;
+				FileExplorer(window_p, filePath);
 			}
 			if (ImGui::Button("Cancel"))
 			{
@@ -1099,7 +1140,8 @@ namespace Spore
 		{
 			importAssetsPath = Files::GetInstance().GetAssetsPath() / "Textures";
 			filePath = &importAssetsPath;
-			showFileBrowser = true;
+			//showFileBrowser = true;
+			FileExplorer(window_p, filePath);
 		}
 		if (ImGui::Button("Cancel"))
 		{
@@ -1242,6 +1284,34 @@ namespace Spore
 			std::cerr << "Filesystem error: " << ex.what() << std::endl;
 		}
 
+	}
+
+	void UI::FileExplorer(MainWindow* window_p, std::filesystem::path* path_p)
+	{
+		try
+		{
+			OPENFILENAME ofn;
+			TCHAR szFile [260] = { 0 };
+
+			ZeroMemory(&ofn, sizeof(ofn));
+			ofn.lStructSize = sizeof(ofn);
+			ofn.lpstrFile = szFile;
+			ofn.lpstrFile [0] = '\0';
+			ofn.nMaxFile = sizeof(szFile);
+			ofn.lpstrFilter = TEXT("ALL Files\0*.*\0");
+			ofn.nFilterIndex = 1;
+			ofn.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST | OFN_NOCHANGEDIR;
+
+			if (GetOpenFileName(&ofn) == TRUE)
+			{
+				std::filesystem::path filePath(ofn.lpstrFile);
+				*path_p = filePath;
+			}
+		}
+		catch (const std::filesystem::filesystem_error& ex)
+		{
+			std::cerr << "Filesystem error: " << ex.what() << std::endl;
+		}
 	}
 }
 

@@ -20,6 +20,7 @@ namespace Spore
 		// program ID
 		uint32 ID;
 		std::string identifier;
+		bool alphaFilterFlag;
 
 		// read and construct shader
 		Shader(const char* vertexPath, const char* fragmentPath, const char* geometryPath = nullptr);

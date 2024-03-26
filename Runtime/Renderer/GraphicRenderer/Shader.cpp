@@ -5,6 +5,7 @@ namespace Spore
 {
 	Shader::Shader(const char* vertexPath, const char* fragmentPath, const char* geometryPath)
 	{
+		alphaFilterFlag = true;
 		// get vertex/fragment shader from the path
 		std::string vertexCode;
 		std::string fragmentCode;

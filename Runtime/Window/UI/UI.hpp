@@ -29,6 +29,7 @@ namespace Spore
 		void InitPanels(MainWindow* window_p);
 		void ShowDemoWindow();
 		void FileBrowser(MainWindow* window_p, std::filesystem::path* path_p);
+		void FileExplorer(MainWindow* window_p, std::filesystem::path* path_p);
 		void ImportShaderPanel(MainWindow* window_p);
 		void ImportTexturePanel(MainWindow* window_p);
 		void ImportModelPanel(MainWindow* window_p);

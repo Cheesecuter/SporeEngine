@@ -113,8 +113,9 @@ namespace Spore
 				if (it_shader.second->isLoading)
 				{
 					it_shader.second->shader->Use();
-					//it_shader.second->shader->SetMat4("projection", projection_p);
-					//it_shader.second->shader->SetMat4("view", view_p);
+					it_shader.second->shader->SetBool("alphaFilterFlag", it_shader.second->shader->alphaFilterFlag);
+					it_shader.second->shader->SetMat4("projection", projection_p);
+					it_shader.second->shader->SetMat4("view", view_p);
 					it_shader.second->shader->SetMat4("model", model_p);
 					model->Draw(*(it_shader.second->shader));
 				}

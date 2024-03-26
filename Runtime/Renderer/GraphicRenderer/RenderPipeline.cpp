@@ -150,6 +150,16 @@ namespace Spore
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	}
 
+	void RenderPipeline::InitPostProcesser(uint32 screenWidth_p, uint32 screenHeight_p)
+	{
+		postProcesser = new PostProcesser(screenWidth_p, screenHeight_p);
+	}
+
+	void RenderPipeline::PostProcess()
+	{
+		postProcesser->Render();
+	}
+
 	void RenderPipeline::InitShadowMap()
 	{
 		shadowMappingShader = AssetsManager::GetInstance().shaderMapper.find("ShadowMappingFragment.glsl")->second;
@@ -206,11 +216,6 @@ namespace Spore
 	}
 
 	void RenderPipeline::ShadingRender()
-	{
-
-	}
-
-	void RenderPipeline::PostProcess()
 	{
 
 	}

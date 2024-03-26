@@ -231,6 +231,9 @@
     <ClCompile Include="Runtime\VisualEffect\PostProcess.cpp">
       <Filter>源文件\VisualEffect</Filter>
     </ClCompile>
+    <ClCompile Include="Runtime\VisualEffect\PostProcesser.cpp">
+      <Filter>源文件\VisualEffect</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Runtime\Core\Base\Types.hpp">

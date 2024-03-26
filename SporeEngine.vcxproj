@@ -188,6 +188,7 @@
     <ClCompile Include="Runtime\Renderer\GraphicRenderer\stb_image.cpp" />
     <ClCompile Include="Runtime\Renderer\GraphicRenderer\Texture.cpp" />
     <ClCompile Include="Runtime\VisualEffect\PostProcess.cpp" />
+    <ClCompile Include="Runtime\VisualEffect\PostProcesser.cpp" />
     <ClCompile Include="Runtime\Window\UI\UI.cpp" />
     <ClCompile Include="Runtime\Window\Window.cpp" />
     <ClCompile Include="SDKs\imgui\backends\imgui_impl_glfw.cpp" />

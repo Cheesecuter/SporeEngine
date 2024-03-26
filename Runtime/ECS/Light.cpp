@@ -7,8 +7,12 @@ namespace Spore
 		type = "light";
 		ShaderComponent* shaderComponent = new ShaderComponent();
 		Shader* lightingShader = AssetsManager::GetInstance().shaderMapper.find("LightingFragment.glsl")->second;
-		shaderComponent->AddShader(lightingShader);
+		Shader* modelShader = AssetsManager::GetInstance().shaderMapper.find("ModelLoadingFragment.glsl")->second;
+		//shaderComponent->AddShader(lightingShader);
+		shaderComponent->AddShader(modelShader);
 		components [shaderComponent->GetName()] = shaderComponent;
+		Model* model = new Model(std::string("./Assets/Models/cube.fbx"));
+		modelMapper.insert(std::make_pair(model->identifier, model));
 	}
 
 	Light::~Light()
