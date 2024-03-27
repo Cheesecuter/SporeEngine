@@ -26,7 +26,7 @@ namespace Spore
 		~UI();
 		void InitImGui(MainWindow* window_p);
 		void UITerminate();
-		void InitPanels(MainWindow* window_p);
+		void RenderPanels(MainWindow* window_p);
 		void ShowDemoWindow();
 		void FileBrowser(MainWindow* window_p, std::filesystem::path* path_p);
 		void FileExplorer(MainWindow* window_p, std::filesystem::path* path_p);
@@ -47,6 +47,8 @@ namespace Spore
 		MainWindow* window;
 		int selectedObjectIndex = -1;
 		std::shared_ptr<Object> selectedObject;
+		Texture* btnImgReset;
+		void InitImages();
 		void RenderMenuBar(MainWindow* window_p);
 		void RenderHierarchyPanel(MainWindow* window_p);
 		void RenderScenePanel(MainWindow* window_p);

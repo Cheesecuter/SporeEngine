@@ -10,12 +10,15 @@ namespace Spore
 	class PostProcesser
 	{
 	public:
-		PostProcesser(uint32 screenWidth_p, uint32 screenHeight_p);
+		PostProcesser(uint32 sceneWidth_p, uint32 sceneHeight_p);
 		~PostProcesser();
 
 		void SetPostProcess(PostProcess* postProcess_p);
-		PostProcess* GetPostProcesS();
-		void Render(mat4f projection_p, mat4f view_p, mat4f model_p);
+		PostProcess* GetPostProcess();
+		uint32 GetFrameBufferTexture();
+		uint32 GetDepthBuffer();
+		void RenderToFBO();
+		void RenderFBO();
 
 	protected:
 

@@ -46,14 +46,14 @@ namespace Spore
 
 	void RenderPipeline::PreRender()
 	{
-		/*if (gammaCorrection)
+		if (gammaCorrection)
 		{
 			glEnable(GL_FRAMEBUFFER_SRGB);
 		}
 		else
 		{
 			glDisable(GL_FRAMEBUFFER_SRGB);
-		}*/
+		}
 	}
 
 	void RenderPipeline::Render(std::vector<Shader*> shaders_p, Camera* camera_p,
@@ -155,9 +155,19 @@ namespace Spore
 		postProcesser = new PostProcesser(screenWidth_p, screenHeight_p);
 	}
 
-	void RenderPipeline::PostProcess(mat4f projection_p, mat4f view_p, mat4f model_p)
+	PostProcesser* RenderPipeline::GetPostProcesser()
 	{
-		postProcesser->Render(projection_p, view_p, model_p);
+		return postProcesser;
+	}
+
+	void RenderPipeline::PostProcessRenderToFBO()
+	{
+		postProcesser->RenderToFBO();
+	}
+
+	void RenderPipeline::PostProcess()
+	{
+		postProcesser->RenderFBO();
 	}
 
 	void RenderPipeline::InitShadowMap()

@@ -4,13 +4,14 @@
 
 #include <Types.hpp>
 #include <Shader.hpp>
+#include <Camera.hpp>
 
 namespace Spore
 {
 	class PostProcess
 	{
 	public:
-		PostProcess(std::string& identifier_p, Shader* shader_p);
+		PostProcess(std::string const& identifier_p, Shader* shader_p);
 		~PostProcess();
 
 		std::string identifier;
@@ -19,7 +20,7 @@ namespace Spore
 		
 		void SetShader(Shader* shader_p);
 		Shader* GetShader();
-		void Render(uint32 fbo_p, uint32 texture_p, uint32 quadVAO_p, mat4f projection_p, mat4f view_p, mat4f model_p);
+		void RenderToFBO(uint32 fbo_p);
 
 	protected:
 

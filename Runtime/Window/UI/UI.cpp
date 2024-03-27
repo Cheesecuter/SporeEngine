@@ -12,6 +12,7 @@ namespace Spore
 
 	UI::UI(MainWindow* window_p)
 	{
+		InitImages();
 		InitImGui(window_p);
 	}
 
@@ -68,7 +69,7 @@ namespace Spore
 		ImGui::DestroyContext();
 	}
 
-	void UI::InitPanels(MainWindow* window_p)
+	void UI::RenderPanels(MainWindow* window_p)
 	{
 		/*int32 displayW, displayH;
 		glfwGetFramebufferSize(window_p->window, &displayW, &displayH);
@@ -139,7 +140,11 @@ namespace Spore
 					}
 					ImGui::SeparatorText("General Setting");
 					ImGui::Checkbox("Show Skybox", &window_p->renderPipeline->skyboxOn);
+					ImGui::SeparatorText("============");
 					ImGui::Checkbox("Gamma Correction", &window_p->renderPipeline->gammaCorrection);
+					ImGui::Checkbox("Shadow Mapping", &window_p->renderPipeline->shadowMapOn);
+					ImGui::Checkbox("Post Process", &window_p->renderPipeline->postProcessOn);
+					ImGui::SeparatorText("============");
 					ImGui::SliderFloat("Camera Speed", &window_p->camera->MovementSpeed, 0.0f, 50.0f);
 					static int32 windowSizeIndex = -1;
 					ImGui::Checkbox("Console", &showConsole);
@@ -462,21 +467,57 @@ namespace Spore
 					float position [3] = { pos.x, pos.y, pos.z };
 					ImGui::Text("Position");
 					ImGui::PushID("Inspector:Transform:Position");
-					ImGui::DragFloat3("", position, 0.1f);
+					ImGui::DragFloat3("##Inspector:Transform:Position", position, 0.1f);
+					ImGui::PopID();
+					ImGui::SameLine();
+					ImGui::PushID("Inspector:Transform:ImageButtonResetPosition");
+					if (ImGui::ImageButton((ImTextureID) (intptr_t) btnImgReset->ID, ImVec2(13, 13)))
+					{	
+					}
+					if (ImGui::IsItemClicked())
+					{
+						position [0] = 0.0f;
+						position [1] = 0.0f;
+						position [2] = 0.0f;
+					}
 					ImGui::PopID();
 					selectedObject->SetPosition(vec3f(position [0], position [1], position [2]));
 					vec3f rot = selectedObject->GetRotation();
 					float rotation [3] = { rot.x, rot.y, rot.z };
 					ImGui::Text("Rotation");
 					ImGui::PushID("Inspector:Transform:Rotation");
-					ImGui::DragFloat3("", rotation, 0.1f);
+					ImGui::DragFloat3("##Inspector:Transform:Rotation", rotation, 0.1f);
+					ImGui::PopID();
+					ImGui::SameLine();
+					ImGui::PushID("Inspector:Transform:ImageButtonResetRotation");
+					if (ImGui::ImageButton((ImTextureID) (intptr_t) btnImgReset->ID, ImVec2(13, 13)))
+					{
+					}
+					if (ImGui::IsItemClicked())
+					{
+						rotation [0] = 0.0f;
+						rotation [1] = 0.0f;
+						rotation [2] = 0.0f;
+					}
 					ImGui::PopID();
 					selectedObject->SetRotation(vec3f(rotation [0], rotation [1], rotation [2]));
 					vec3f sca = selectedObject->GetScale();
 					float scale [3] = { sca.x, sca.y, sca.z };
 					ImGui::Text("Scale");
 					ImGui::PushID("Inspector:Transform:Scale");
-					ImGui::DragFloat3("", scale, 0.1f);
+					ImGui::DragFloat3("##Inspector:Transform:Scale", scale, 0.1f);
+					ImGui::PopID();
+					ImGui::SameLine();
+					ImGui::PushID("Inspector:Transform:ImageButtonResetScale");
+					if (ImGui::ImageButton((ImTextureID) (intptr_t) btnImgReset->ID, ImVec2(13, 13)))
+					{
+					}
+					if (ImGui::IsItemClicked())
+					{
+						scale [0] = 1.0f;
+						scale [1] = 1.0f;
+						scale [2] = 1.0f;
+					}
 					ImGui::PopID();
 					selectedObject->SetScale(vec3f(scale [0], scale [1], scale [2]));
 				}
@@ -881,6 +922,11 @@ namespace Spore
 
 			ImGui::End();
 		}
+	}
+
+	void UI::InitImages()
+	{
+		btnImgReset = new Texture("./Assets/Utils/Images/reset.png");
 	}
 
 	void UI::ShowDemoWindow()

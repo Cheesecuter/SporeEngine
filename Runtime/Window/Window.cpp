@@ -11,11 +11,16 @@ namespace Spore
 
 	static void FrameBufferSizeCallback(GLFWwindow* window_p, int32 width_p, int32 height_p)
 	{
-		glViewport(0, 0, width_p, height_p);
+		//glViewport(0, 0, width_p, height_p);
+		//glViewport(width_p / 6, height_p / 3, width_p / 6 * 4, height_p / 3 * 2);
 		/*int displayW, displayH;
 		glfwGetFramebufferSize(window_p, &displayW, &displayH);
 		glViewport(displayW / 6, displayH / 3, displayW / 6 * 4, displayH / 3 * 2);*/
-		//glViewport(width_p / 6, height_p / 3, width_p / 6 * 4, height_p / 3 * 2);
+		
+		/*int32 displayW, displayH;
+		glfwGetFramebufferSize(window_p, &displayW, &displayH);
+		SetWindowSize(displayW, displayH);
+		glViewport(displayW / 6, displayH / 3, displayW / 6 * 4, displayH / 3 * 2);*/
 	}
 
 	static void MouseMoveCallback(GLFWwindow* window_p, float64 xPos_p, float64 yPos_p)

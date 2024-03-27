@@ -20,7 +20,9 @@ namespace Spore
 
 		std::map<std::string, std::shared_ptr<Scene>> sceneMapper;
 		bool skyboxOn = true;
-		bool gammaCorrection = true;
+		bool gammaCorrection = false;
+		bool shadowMapOn = false;
+		bool postProcessOn = true;
 
 		void Initialize();
 		void AddScene(std::shared_ptr<Scene> scene_p);
@@ -38,7 +40,9 @@ namespace Spore
 							uint32 scrWidth_p, uint32 scrHeight_p,
 							mat4f projection_p, mat4f view_p, mat4f model_p);
 		void InitPostProcesser(uint32 screenWidth_p, uint32 screenHeight_p);
-		void PostProcess(mat4f projection_p, mat4f view_p, mat4f model_p);
+		PostProcesser* GetPostProcesser();
+		void PostProcessRenderToFBO();
+		void PostProcess();
 		void InitShadowMap();
 		void ShadowMapRender(std::shared_ptr<Light> light_p,
 							 std::vector<Shader*> shaders_p, Camera* camera_p,
