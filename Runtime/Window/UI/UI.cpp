@@ -465,7 +465,7 @@ namespace Spore
 						"Default",
 						"Inversion",
 						"Grayscale",
-						"Kernel",
+						"Sharpen",
 						"Blur",
 						"Edge Detection"
 					};

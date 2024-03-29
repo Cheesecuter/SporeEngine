@@ -292,7 +292,7 @@
     <None Include="Assets\Shaders\PostProcesses\EdgeDetectionPostProcessFS.glsl" />
     <None Include="Assets\Shaders\PostProcesses\GrayscalePostProcessFS.glsl" />
     <None Include="Assets\Shaders\PostProcesses\InversionPostProcessFS.glsl" />
-    <None Include="Assets\Shaders\PostProcesses\KernelPostProcessFS.glsl" />
+    <None Include="Assets\Shaders\PostProcesses\SharpenPostProcessFS.glsl" />
     <None Include="Assets\Shaders\ShadowMappingDepthFragment.glsl" />
     <None Include="Assets\Shaders\ShadowMappingDepthVertex.glsl" />
     <None Include="Assets\Shaders\ShadowMappingFragment.glsl" />

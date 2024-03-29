@@ -553,7 +553,7 @@
     <None Include="Assets\Shaders\PostProcesses\GrayscalePostProcessFS.glsl">
       <Filter>资源文件\Assets\Shaders\PostProcesses</Filter>
     </None>
-    <None Include="Assets\Shaders\PostProcesses\KernelPostProcessFS.glsl">
+    <None Include="Assets\Shaders\PostProcesses\SharpenPostProcessFS.glsl">
       <Filter>资源文件\Assets\Shaders\PostProcesses</Filter>
     </None>
     <None Include="Assets\Shaders\PostProcesses\BlurPostProcessFS.glsl">
