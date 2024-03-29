@@ -460,6 +460,34 @@ namespace Spore
 						}
 						ImGui::EndCombo();
 					}
+					ImGui::Text("PostProcessing");
+					const char* postProcesses [] = {
+						"Default",
+						"Inversion",
+						"Grayscale",
+						"Kernel",
+						"Blur",
+						"Edge Detection"
+					};
+					static int currentPostProcess = 0;
+					if (ImGui::BeginCombo("##PostProcessing", postProcesses [currentPostProcess]))
+					{
+						for (uint32 i = 0; i < IM_ARRAYSIZE(postProcesses); i++)
+						{
+							const bool isSelected = (currentPostProcess == i);
+							if (ImGui::Selectable(postProcesses [i], isSelected))
+							{
+								currentPostProcess = i;
+								window_p->renderPipeline->postProcess = postProcesses [currentPostProcess];
+								window_p->renderPipeline->GetPostProcesser()->SetPostProcess(postProcesses [currentPostProcess]);
+							}
+							if (isSelected)
+							{
+								ImGui::SetItemDefaultFocus();
+							}
+						}
+						ImGui::EndCombo();
+					}
 				}
 				if (ImGui::CollapsingHeader("Transform", true))
 				{

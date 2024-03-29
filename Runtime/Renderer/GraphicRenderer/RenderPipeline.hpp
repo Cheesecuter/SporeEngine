@@ -9,6 +9,7 @@
 #include <Light.hpp>
 #include <Plane.hpp>
 #include <PostProcesser.hpp>
+#include <PostProcess.hpp>
 
 namespace Spore
 {
@@ -23,11 +24,18 @@ namespace Spore
 		bool gammaCorrection = false;
 		bool shadowMapOn = false;
 		bool postProcessOn = true;
+		std::string postProcess = "";
 
 		void Initialize();
 		void AddScene(std::shared_ptr<Scene> scene_p);
 		void DeleteScene(std::shared_ptr<Scene> scene_p);
 		void DeleteScene(std::string identifier_p);
+		void SetScenePos(uint32 sceneX_p, uint32 sceneY_p);
+		vec2f GetScenePos();
+		void SetSceneSize(uint32 sceneWidth_p, uint32 sceneHeight_p);
+		vec2f GetSceneSize();
+		void UpdateSceneFBO();
+		void UpdateSceneRBO();
 		void PreRender();
 		void Render(std::vector<Shader*> shaders_p, Camera* camera_p,
 					uint32 scrWidth_p, uint32 scrHeight_p,
@@ -39,10 +47,10 @@ namespace Spore
 		void DeferredRender(std::vector<Shader*> shaders_p, Camera* camera_p,
 							uint32 scrWidth_p, uint32 scrHeight_p,
 							mat4f projection_p, mat4f view_p, mat4f model_p);
-		void InitPostProcesser(uint32 screenWidth_p, uint32 screenHeight_p);
+		void InitPostProcesser(uint32 screenWidth_p, uint32 screenHeight_p, PostProcess* postProcess_p);
 		PostProcesser* GetPostProcesser();
 		void PostProcessRenderToFBO();
-		void PostProcess();
+		void PostProcessFBO();
 		void InitShadowMap();
 		void ShadowMapRender(std::shared_ptr<Light> light_p,
 							 std::vector<Shader*> shaders_p, Camera* camera_p,
@@ -67,6 +75,8 @@ namespace Spore
 		SkyBox* skybox;
 		Grid* grid;
 		const uint32 SHADOW_WIDTH = 1024, SHADOW_HEIGHT = 1024;
+		uint32 sceneX, sceneY;
+		uint32 sceneWidth, sceneHeight;
 		Shader* shadowMappingShader;
 		Shader* shadowMappingDepthShader;
 		Shader* debugDepthQuadShader;

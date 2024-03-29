@@ -10,10 +10,11 @@ namespace Spore
 	class PostProcesser
 	{
 	public:
-		PostProcesser(uint32 sceneWidth_p, uint32 sceneHeight_p);
+		PostProcesser(uint32 sceneWidth_p, uint32 sceneHeight_p, PostProcess* postProcess_p);
 		~PostProcesser();
 
-		void SetPostProcess(PostProcess* postProcess_p);
+		void SetPostProcess(std::string identifier_p);
+		void AddPostProcess(PostProcess* postProcess_p);
 		PostProcess* GetPostProcess();
 		uint32 GetFrameBufferTexture();
 		uint32 GetDepthBuffer();
@@ -27,6 +28,7 @@ namespace Spore
 		uint32 texture;
 		uint32 depthBuffer;
 		PostProcess* postProcess;
+		std::unordered_map<std::string, PostProcess*> postProcessMapper;
 		float quadVertices [24] = { 
 		// vertex attributes for a quad that fills the entire screen in Normalized Device Coordinates.
 		// positions   // texCoords

@@ -76,6 +76,9 @@
     <Filter Include="源文件\ECS\Objects">
       <UniqueIdentifier>{794cdf20-25a8-4a29-9703-226ca4412233}</UniqueIdentifier>
     </Filter>
+    <Filter Include="资源文件\Assets\Shaders\PostProcesses">
+      <UniqueIdentifier>{5814a216-2e04-47ff-a2e3-4b94370b8636}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Runtime\Debug\AddvantageRenderTest.cpp">
@@ -233,6 +236,9 @@
     </ClCompile>
     <ClCompile Include="Runtime\VisualEffect\PostProcesser.cpp">
       <Filter>源文件\VisualEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Debug\FrameBufferTest.cpp">
+      <Filter>源文件\Debug</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -537,6 +543,24 @@
     </None>
     <None Include="Assets\Shaders\GridFragment.glsl">
       <Filter>资源文件\Assets\Shaders</Filter>
+    </None>
+    <None Include="Assets\Shaders\PostProcesses\InversionPostProcessFS.glsl">
+      <Filter>资源文件\Assets\Shaders\PostProcesses</Filter>
+    </None>
+    <None Include="Assets\Shaders\PostProcesses\DefaultPostProcessFS.glsl">
+      <Filter>资源文件\Assets\Shaders\PostProcesses</Filter>
+    </None>
+    <None Include="Assets\Shaders\PostProcesses\GrayscalePostProcessFS.glsl">
+      <Filter>资源文件\Assets\Shaders\PostProcesses</Filter>
+    </None>
+    <None Include="Assets\Shaders\PostProcesses\KernelPostProcessFS.glsl">
+      <Filter>资源文件\Assets\Shaders\PostProcesses</Filter>
+    </None>
+    <None Include="Assets\Shaders\PostProcesses\BlurPostProcessFS.glsl">
+      <Filter>资源文件\Assets\Shaders\PostProcesses</Filter>
+    </None>
+    <None Include="Assets\Shaders\PostProcesses\EdgeDetectionPostProcessFS.glsl">
+      <Filter>资源文件\Assets\Shaders\PostProcesses</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

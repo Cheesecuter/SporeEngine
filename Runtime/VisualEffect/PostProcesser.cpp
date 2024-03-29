@@ -2,9 +2,9 @@
 
 namespace Spore
 {
-	PostProcesser::PostProcesser(uint32 sceneWidth_p, uint32 sceneHeight_p)
+	PostProcesser::PostProcesser(uint32 sceneWidth_p, uint32 sceneHeight_p, PostProcess* postProcess_p)
 	{
-		postProcess = nullptr;
+		postProcess = postProcess_p;
 		glGenFramebuffers(1, &FBO);
 		glBindFramebuffer(GL_FRAMEBUFFER, FBO);
 
@@ -40,9 +40,14 @@ namespace Spore
 
 	}
 
-	void PostProcesser::SetPostProcess(PostProcess* postProcess_p)
+	void PostProcesser::SetPostProcess(std::string identifier_p)
 	{
-		postProcess = postProcess_p;
+		postProcess = postProcessMapper[identifier_p];
+	}
+
+	void PostProcesser::AddPostProcess(PostProcess* postProcess_p)
+	{
+		postProcessMapper [postProcess_p->identifier] = postProcess_p;
 	}
 
 	PostProcess* PostProcesser::GetPostProcess()

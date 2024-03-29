@@ -153,6 +153,7 @@
     <ClCompile Include="Runtime\Debug\BasicLightingTest.cpp" />
     <ClCompile Include="Runtime\Debug\DeferredShaderingTest.cpp" />
     <ClCompile Include="Runtime\Debug\DepthTest.cpp" />
+    <ClCompile Include="Runtime\Debug\FrameBufferTest.cpp" />
     <ClCompile Include="Runtime\Debug\HDRTest.cpp" />
     <ClCompile Include="Runtime\Debug\ImGuiTest.cpp" />
     <ClCompile Include="Runtime\Debug\LightingTest.cpp" />
@@ -286,6 +287,12 @@
     <None Include="Assets\Shaders\PointShadowsDepthVertex.glsl" />
     <None Include="Assets\Shaders\PointShadowsFragment.glsl" />
     <None Include="Assets\Shaders\PointShadowsVertex.glsl" />
+    <None Include="Assets\Shaders\PostProcesses\BlurPostProcessFS.glsl" />
+    <None Include="Assets\Shaders\PostProcesses\DefaultPostProcessFS.glsl" />
+    <None Include="Assets\Shaders\PostProcesses\EdgeDetectionPostProcessFS.glsl" />
+    <None Include="Assets\Shaders\PostProcesses\GrayscalePostProcessFS.glsl" />
+    <None Include="Assets\Shaders\PostProcesses\InversionPostProcessFS.glsl" />
+    <None Include="Assets\Shaders\PostProcesses\KernelPostProcessFS.glsl" />
     <None Include="Assets\Shaders\ShadowMappingDepthFragment.glsl" />
     <None Include="Assets\Shaders\ShadowMappingDepthVertex.glsl" />
     <None Include="Assets\Shaders\ShadowMappingFragment.glsl" />

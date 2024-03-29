@@ -44,6 +44,50 @@ namespace Spore
 		}
 	}
 
+	void RenderPipeline::SetScenePos(uint32 sceneX_p, uint32 sceneY_p)
+	{
+		sceneX = sceneX_p;
+		sceneY = sceneY_p;
+	}
+
+	vec2f RenderPipeline::GetScenePos()
+	{
+		vec2f scenePos(sceneX, sceneY);
+		return scenePos;
+	}
+
+	void RenderPipeline::SetSceneSize(uint32 sceneWidth_p, uint32 sceneHeight_p)
+	{
+		sceneWidth = sceneWidth_p;
+		sceneHeight = sceneHeight_p;
+	}
+
+	vec2f RenderPipeline::GetSceneSize()
+	{
+		vec2f sceneSize(sceneWidth, sceneHeight);
+		return sceneSize;
+	}
+
+	void RenderPipeline::UpdateSceneFBO()
+	{
+		uint32 frameBufferTexture = postProcesser->GetFrameBufferTexture();
+		glBindTexture(GL_TEXTURE_2D, frameBufferTexture);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, sceneWidth, sceneHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, frameBufferTexture, 0);
+	}
+
+	void RenderPipeline::UpdateSceneRBO()
+	{
+		uint32 renderBuffer = postProcesser->GetDepthBuffer();
+		glBindRenderbuffer(GL_RENDERBUFFER, renderBuffer);
+		glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT, sceneWidth, sceneHeight);
+		glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, renderBuffer);
+		glBindFramebuffer(GL_FRAMEBUFFER, 0);
+		glViewport(sceneX, sceneY, sceneWidth, sceneHeight);
+	}
+
 	void RenderPipeline::PreRender()
 	{
 		if (gammaCorrection)
@@ -150,9 +194,9 @@ namespace Spore
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	}
 
-	void RenderPipeline::InitPostProcesser(uint32 screenWidth_p, uint32 screenHeight_p)
+	void RenderPipeline::InitPostProcesser(uint32 screenWidth_p, uint32 screenHeight_p, PostProcess* postProcess_p)
 	{
-		postProcesser = new PostProcesser(screenWidth_p, screenHeight_p);
+		postProcesser = new PostProcesser(screenWidth_p, screenHeight_p, postProcess_p);
 	}
 
 	PostProcesser* RenderPipeline::GetPostProcesser()
@@ -163,9 +207,10 @@ namespace Spore
 	void RenderPipeline::PostProcessRenderToFBO()
 	{
 		postProcesser->RenderToFBO();
+		glViewport(0, 0, sceneWidth, sceneHeight);
 	}
 
-	void RenderPipeline::PostProcess()
+	void RenderPipeline::PostProcessFBO()
 	{
 		postProcesser->RenderFBO();
 	}
