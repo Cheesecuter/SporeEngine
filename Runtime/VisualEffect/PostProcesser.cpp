@@ -57,6 +57,11 @@ namespace Spore
 		return postProcess;
 	}
 
+	std::unordered_map<std::string, PostProcess*>* PostProcesser::GetPostProcesses()
+	{
+		return &postProcessMapper;
+	}
+
 	uint32 PostProcesser::GetFrameBufferTexture()
 	{
 		return texture;

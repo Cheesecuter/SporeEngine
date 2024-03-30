@@ -47,6 +47,7 @@ namespace Spore
 		MainWindow* window;
 		int selectedObjectIndex = -1;
 		std::shared_ptr<Object> selectedObject;
+		std::unordered_map<std::string, PostProcess*> postProcessMapper;
 		Texture* btnImgReset;
 		void InitImages();
 		void RenderMenuBar(MainWindow* window_p);

@@ -434,7 +434,6 @@ namespace Spore
 						ImGui::Text(it_model.second->identifier.c_str());
 						ImGui::Separator();
 					}
-					ImGui::Text("Layer");
 					const char* layers [] = {
 						"Default",
 						"TransparentFX",
@@ -444,6 +443,7 @@ namespace Spore
 						"Background"
 					};
 					static int currentLayer = 0;
+					ImGui::Text("Layer");
 					if (ImGui::BeginCombo("##Layer", layers[currentLayer]))
 					{
 						for (uint32 i = 0; i < IM_ARRAYSIZE(layers); i++)
@@ -460,22 +460,20 @@ namespace Spore
 						}
 						ImGui::EndCombo();
 					}
-					ImGui::Text("PostProcessing");
-					const char* postProcesses [] = {
-						"Default",
-						"Inversion",
-						"Grayscale",
-						"Sharpen",
-						"Blur",
-						"Edge Detection"
-					};
-					static int currentPostProcess = 0;
-					if (ImGui::BeginCombo("##PostProcessing", postProcesses [currentPostProcess]))
+					postProcessMapper = *window_p->renderPipeline->GetPostProcesser()->GetPostProcesses();
+					std::vector<std::string> postProcesses;
+					for (const std::pair<std::string, PostProcess*> it_postProcess : postProcessMapper)
 					{
-						for (uint32 i = 0; i < IM_ARRAYSIZE(postProcesses); i++)
+						postProcesses.push_back(it_postProcess.first);
+					}
+					static int currentPostProcess = 0;
+					ImGui::Text("PostProcessing");
+					if (ImGui::BeginCombo("##PostProcessing", postProcesses [currentPostProcess].c_str()))
+					{
+						for (uint32 i = 0; i < postProcesses.size(); i++)
 						{
 							const bool isSelected = (currentPostProcess == i);
-							if (ImGui::Selectable(postProcesses [i], isSelected))
+							if (ImGui::Selectable(postProcesses [i].c_str(), isSelected))
 							{
 								currentPostProcess = i;
 								window_p->renderPipeline->postProcess = postProcesses [currentPostProcess];

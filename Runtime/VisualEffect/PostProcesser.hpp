@@ -16,6 +16,7 @@ namespace Spore
 		void SetPostProcess(std::string identifier_p);
 		void AddPostProcess(PostProcess* postProcess_p);
 		PostProcess* GetPostProcess();
+		std::unordered_map<std::string, PostProcess*>* GetPostProcesses();
 		uint32 GetFrameBufferTexture();
 		uint32 GetDepthBuffer();
 		void RenderToFBO();
