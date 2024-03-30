@@ -115,7 +115,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;_USING_V110_SDK71_;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <AdditionalIncludeDirectories>D:\SporeEngine\master\SporeEngine\SDKs\assimp-master\include;D:\SporeEngine\master\SporeEngine\SDKs\imgui;D:\SporeEngine\master\SporeEngine\SDKs\imgui\backends;D:\SporeEngine\master\SporeEngine\SDKs;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
