@@ -42,6 +42,8 @@ namespace Spore
 		bool showImportTexturePanel = false;
 		bool showFileBrowser = false;
 		bool showConsole = false;
+		bool show_demo_window = false;
+		bool show_another_window = false;
 		std::filesystem::path* filePath;
 		std::filesystem::path importAssetsPath = Files::GetInstance().GetAssetsPath();
 		MainWindow* window;

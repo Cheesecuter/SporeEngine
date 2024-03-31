@@ -172,6 +172,7 @@
     <ClCompile Include="Runtime\ECS\Component\TransformComponent.cpp" />
     <ClCompile Include="Runtime\ECS\Light.cpp" />
     <ClCompile Include="Runtime\ECS\Object.cpp" />
+    <ClCompile Include="Runtime\ECS\Objects\ModelObject.cpp" />
     <ClCompile Include="Runtime\ECS\Objects\Plane.cpp" />
     <ClCompile Include="Runtime\ECS\Scene.cpp" />
     <ClCompile Include="Runtime\ECS\Tick.cpp" />
@@ -210,6 +211,7 @@
     <ClInclude Include="Runtime\ECS\Component\TransformComponent.hpp" />
     <ClInclude Include="Runtime\ECS\Light.hpp" />
     <ClInclude Include="Runtime\ECS\Object.hpp" />
+    <ClInclude Include="Runtime\ECS\Objects\ModelObject.hpp" />
     <ClInclude Include="Runtime\ECS\Objects\Plane.hpp" />
     <ClInclude Include="Runtime\ECS\Scene.hpp" />
     <ClInclude Include="Runtime\ECS\Tick.hpp" />

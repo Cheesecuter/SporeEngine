@@ -4,6 +4,7 @@
 
 #include <Types.hpp>
 #include <Object.hpp>
+#include <ModelObject.hpp>
 #include <Light.hpp>
 #include <Plane.hpp>
 

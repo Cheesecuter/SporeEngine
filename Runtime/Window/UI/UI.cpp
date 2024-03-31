@@ -83,6 +83,8 @@ namespace Spore
 		RenderInspectorPanel(window_p);
 		RenderProjectPanel(window_p);
 		RenderConsolePanel(window_p);
+
+		ShowDemoWindow();
 	}
 
 	void UI::RenderMenuBar(MainWindow* window_p)
@@ -148,6 +150,7 @@ namespace Spore
 					ImGui::SliderFloat("Camera Speed", &window_p->camera->MovementSpeed, 0.0f, 50.0f);
 					static int32 windowSizeIndex = -1;
 					ImGui::Checkbox("Console", &showConsole);
+					ImGui::Checkbox("Demo Window", &show_demo_window);
 					ImGui::SeparatorText("============");
 					ImGui::SeparatorText("============");
 
@@ -363,6 +366,37 @@ namespace Spore
 			}
 			if (ImGui::CollapsingHeader("Scene", true))
 			{
+				if (ImGui::BeginPopupContextItem())
+				{
+					if (ImGui::BeginMenu("Add Object"))
+					{
+						if (ImGui::BeginMenu("3D Object"))
+						{
+							if (ImGui::MenuItem("Model", NULL, false, true))
+							{
+
+							}
+							ImGui::MenuItem("Cube", NULL, false, true);
+							ImGui::MenuItem("Sphere", NULL, false, true);
+							ImGui::MenuItem("Capsule", NULL, false, true);
+							ImGui::MenuItem("Cylinder", NULL, false, true);
+							ImGui::MenuItem("Plane", NULL, false, true);
+							ImGui::MenuItem("Quad", NULL, false, true);
+							ImGui::EndMenu();
+						}
+						if (ImGui::BeginMenu("Light"))
+						{
+							ImGui::MenuItem("Directional Light", NULL, false, true);
+							ImGui::MenuItem("Point Light", NULL, false, true);
+							ImGui::MenuItem("Spotlight", NULL, false, true);
+							ImGui::MenuItem("Area Light", NULL, false, true);
+							ImGui::EndMenu();
+						}
+						ImGui::MenuItem("Camera", NULL, false, true);
+						ImGui::EndMenu();
+					}
+					ImGui::EndPopup();
+				}
 				for (int i = 0; i < objectIdentifiers.size(); i++)
 				{
 					const char* objIdentifier = objectIdentifiers [i].c_str();
@@ -612,7 +646,8 @@ namespace Spore
 							{
 								std::string name = modelIdentifiers [n];
 								int32 modelCount = ++AssetsManager::GetInstance().modelCounter [name];
-								std::shared_ptr<Object> object = std::make_shared<Object>("obj_" + std::to_string(modelCount) + "_" + modelMapper [name]->identifier);
+								//std::shared_ptr<Object> object = std::make_shared<Object>("obj_" + std::to_string(modelCount) + "_" + modelMapper [name]->identifier);
+								std::shared_ptr<ModelObject> object = std::make_shared<ModelObject>("obj_" + std::to_string(modelCount) + "_" + modelMapper [name]->identifier);
 								std::shared_ptr<Scene> scene = window_p->renderPipeline->sceneMapper.find("scene1")->second;
 								object->AddModel(modelMapper [name]);
 								scene->AddObject(object);
@@ -959,36 +994,33 @@ namespace Spore
 	{
 		ImVec4 backgroungColor(0.725f, 0.725f, 0.725f, 1.0f);
 
-		bool show_demo_window = true;
-		bool show_another_window = false;
-
 		if (show_demo_window)
 		{
 			ImGui::ShowDemoWindow(&show_demo_window);
 		}
 
 		// show a simple window
-		{
-			static float32 f = 0.0f;
-			static int32 counter = 0;
+		//{
+		//	static float32 f = 0.0f;
+		//	static int32 counter = 0;
 
-			ImGui::Begin("Hello, world!");                          // Create a window called "Hello, world!" and append into it.
+		//	ImGui::Begin("Hello, world!");                          // Create a window called "Hello, world!" and append into it.
 
-			ImGui::Text("This is some useful text.");               // Display some text (you can use a format strings too)
-			ImGui::Checkbox("Demo Window", &show_demo_window);      // Edit bools storing our window open/close state
-			ImGui::Checkbox("Another Window", &show_another_window);
+		//	ImGui::Text("This is some useful text.");               // Display some text (you can use a format strings too)
+		//	ImGui::Checkbox("Demo Window", &show_demo_window);      // Edit bools storing our window open/close state
+		//	ImGui::Checkbox("Another Window", &show_another_window);
 
-			ImGui::SliderFloat("float", &f, 0.0f, 1.0f);            // Edit 1 float using a slider from 0.0f to 1.0f
+		//	ImGui::SliderFloat("float", &f, 0.0f, 1.0f);            // Edit 1 float using a slider from 0.0f to 1.0f
 
-			ImGui::ColorEdit3("clear color", (float32*) &backgroungColor); // Edit 3 floats representing a color
+		//	ImGui::ColorEdit3("clear color", (float32*) &backgroungColor); // Edit 3 floats representing a color
 
-			if (ImGui::Button("Button"))                            // Buttons return true when clicked (most widgets return true when edited/activated)
-				counter++;
-			ImGui::SameLine();
-			ImGui::Text("counter = %d", counter);
+		//	if (ImGui::Button("Button"))                            // Buttons return true when clicked (most widgets return true when edited/activated)
+		//		counter++;
+		//	ImGui::SameLine();
+		//	ImGui::Text("counter = %d", counter);
 
-			ImGui::End();
-		}
+		//	ImGui::End();
+		//}
 	}
 
 	void UI::ImportModelPanel(MainWindow* window_p)

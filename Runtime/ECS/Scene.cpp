@@ -54,9 +54,18 @@ namespace Spore
 			std::shared_ptr<Object> object = it.second;
 			if (object->type == "default")
 			{
-				if (!object->modelMapper.empty())
+				/*if (!object->modelMapper.empty())
 				{
 					object->Render(shaders_p, camera_p, scrWidth_p, scrHeight_p,
+								   projection_p, view_p, model_p);
+				}*/
+			}
+			else if (object->type == "model")
+			{
+				std::shared_ptr<ModelObject> modelObject = std::dynamic_pointer_cast<ModelObject>(object);
+				if (!modelObject->modelMapper.empty())
+				{
+					modelObject->Render(shaders_p, camera_p, scrWidth_p, scrHeight_p,
 								   projection_p, view_p, model_p);
 				}
 			}

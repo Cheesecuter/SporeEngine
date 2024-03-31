@@ -19,6 +19,7 @@ namespace Spore
 
 	private:
 		uint32 VAO, VBO;
+		std::map<std::string, Model*> modelMapper;
 		float vertices [48] = {
 			// positions            // normals         // texcoords
 			 25.0f, -0.5f,  25.0f,  0.0f, 1.0f, 0.0f,  25.0f,  0.0f,
