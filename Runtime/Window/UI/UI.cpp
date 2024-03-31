@@ -352,87 +352,104 @@ namespace Spore
 		windowFlags = ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoCollapse;
 		{
 			ImGui::Begin("Hierarchy", &pOpen, windowFlags);
-			std::shared_ptr<Scene> scene = window_p->renderPipeline->sceneMapper.find("scene1")->second;
-			std::vector<std::string> objectIdentifiers;
-			std::map<std::string, std::shared_ptr<Object>>* objectMapper = &scene->objectMapper;
-			for (std::map<std::string, std::shared_ptr<Object>>::iterator it = objectMapper->begin(); it != objectMapper->end(); it++)
+			std::map<std::string, std::shared_ptr<Scene>> sceneMapper = window_p->renderPipeline->sceneMapper;
+			std::map<std::string, std::shared_ptr<Object>> objectMapper;
+			std::map<std::string, std::map<std::string, std::shared_ptr<Object>>> sceneObjectMapper;
+			for (std::map<std::string, std::shared_ptr<Scene>>::iterator it_scene = sceneMapper.begin(); it_scene != sceneMapper.end(); it_scene++)
 			{
-				objectIdentifiers.push_back(it->first);
+				objectMapper = it_scene->second->objectMapper;
+				sceneObjectMapper.insert(std::make_pair(it_scene->first, objectMapper));
 			}
-			if (selectedObjectIndex >= 0)
+			if (selectedSceneIdentifier != "")
 			{
-				selectedObject = scene->objectMapper.find(objectIdentifiers [selectedObjectIndex])->second;
-				selectedObject->selected = true;
-			}
-			if (ImGui::CollapsingHeader("Scene", true))
-			{
-				if (ImGui::BeginPopupContextItem())
+				selectedScene = sceneMapper.find(selectedSceneIdentifier)->second;
+				if (selectedObjectIdentifier != "")
 				{
-					if (ImGui::BeginMenu("Add Object"))
-					{
-						if (ImGui::BeginMenu("3D Object"))
-						{
-							if (ImGui::MenuItem("Model", NULL, false, true))
-							{
-
-							}
-							ImGui::MenuItem("Cube", NULL, false, true);
-							ImGui::MenuItem("Sphere", NULL, false, true);
-							ImGui::MenuItem("Capsule", NULL, false, true);
-							ImGui::MenuItem("Cylinder", NULL, false, true);
-							ImGui::MenuItem("Plane", NULL, false, true);
-							ImGui::MenuItem("Quad", NULL, false, true);
-							ImGui::EndMenu();
-						}
-						if (ImGui::BeginMenu("Light"))
-						{
-							ImGui::MenuItem("Directional Light", NULL, false, true);
-							ImGui::MenuItem("Point Light", NULL, false, true);
-							ImGui::MenuItem("Spotlight", NULL, false, true);
-							ImGui::MenuItem("Area Light", NULL, false, true);
-							ImGui::EndMenu();
-						}
-						ImGui::MenuItem("Camera", NULL, false, true);
-						ImGui::EndMenu();
-					}
-					ImGui::EndPopup();
+					selectedObject = selectedScene->objectMapper.find(selectedObjectIdentifier)->second;
+					selectedObject->selected = true;
 				}
-				for (int i = 0; i < objectIdentifiers.size(); i++)
+			}
+			for (std::map<std::string, std::shared_ptr<Scene>>::iterator it_scene = sceneMapper.begin(); it_scene != sceneMapper.end(); it_scene++)
+			{
+				if (ImGui::CollapsingHeader(it_scene->second->identifier.c_str(), true))
 				{
-					const char* objIdentifier = objectIdentifiers [i].c_str();
-					if (ImGui::Selectable(objIdentifier, selectedObjectIndex == i))
-					{
-						selectedObjectIndex = i;
-					}
 					if (ImGui::BeginPopupContextItem())
 					{
-						selectedObjectIndex = i;
-						ImGui::Text("%s", objectIdentifiers [i].c_str());
-						if (ImGui::Button("Remove"))
+						if (ImGui::BeginMenu("Add Object"))
 						{
-							std::string name = objectIdentifiers [i];
-							std::string subName = "";
-							uint64 startPos = name.find("_");
-							if (startPos != std::string::npos)
+							if (ImGui::BeginMenu("3D Object"))
 							{
-								uint64 endPos = name.find("_", startPos + 1);
-								if (endPos != std::string::npos)
+								if (ImGui::MenuItem("Model", NULL, false, true))
 								{
-									subName = name.substr(endPos + 1);
+
 								}
+								ImGui::MenuItem("Cube", NULL, false, true);
+								ImGui::MenuItem("Sphere", NULL, false, true);
+								ImGui::MenuItem("Capsule", NULL, false, true);
+								ImGui::MenuItem("Cylinder", NULL, false, true);
+								ImGui::MenuItem("Plane", NULL, false, true);
+								ImGui::MenuItem("Quad", NULL, false, true);
+								ImGui::EndMenu();
 							}
-							AssetsManager::GetInstance().modelCounter [subName]--;
-							//scene->objectMapper.erase(name);
-							objectMapper->erase(name);
-							objectIdentifiers.erase(std::remove(objectIdentifiers.begin(), objectIdentifiers.end(), name), objectIdentifiers.end());
-							selectedObjectIndex = -1;
+							if (ImGui::BeginMenu("Light"))
+							{
+								ImGui::MenuItem("Directional Light", NULL, false, true);
+								ImGui::MenuItem("Point Light", NULL, false, true);
+								ImGui::MenuItem("Spotlight", NULL, false, true);
+								ImGui::MenuItem("Area Light", NULL, false, true);
+								ImGui::EndMenu();
+							}
+							ImGui::MenuItem("Camera", NULL, false, true);
+							ImGui::EndMenu();
 						}
-						if (ImGui::Button("Close"))
-							ImGui::CloseCurrentPopup();
 						ImGui::EndPopup();
 					}
-					ImGui::SetItemTooltip("Right-click to open popup");
+					objectMapper = it_scene->second->objectMapper;
+					for (std::map<std::string, std::shared_ptr<Object>>::iterator it_object = objectMapper.begin(); it_object != objectMapper.end(); it_object++)
+					{
+						if (ImGui::Selectable(it_object->second->identifier.c_str(), selectedObjectIdentifier == it_object->second->identifier))
+						{
+							/*if (ImGui::IsItemClicked())
+							{
+								selectedSceneIdentifier = it_scene->second->identifier;
+								std::cout << selectedSceneIdentifier << std::endl;
+							}*/
+							selectedObjectIdentifier = it_object->second->identifier;
+							selectedObject = it_scene->second->objectMapper.find(selectedObjectIdentifier)->second;
+							selectedObject->selected = true;
+						}
+						if (ImGui::BeginPopupContextItem())
+						{
+							selectedObjectIdentifier = it_object->second->identifier;
+							ImGui::Text("%s", selectedObjectIdentifier.c_str());
+							if (ImGui::Button("Remove"))
+							{
+								std::string name = selectedObjectIdentifier;
+								std::string subName = "";
+								uint64 startPos = name.find("_");
+								if (startPos != std::string::npos)
+								{
+									uint64 endPos = name.find("_", startPos + 1);
+									if (endPos != std::string::npos)
+									{
+										subName = name.substr(endPos + 1);
+									}
+								}
+								AssetsManager::GetInstance().modelCounter [subName]--;
+								//scene->objectMapper.erase(name);
+								objectMapper.erase(name);
+								it_scene->second->objectMapper.erase(name);
+								it_object = objectMapper.begin();
+								selectedObjectIdentifier = "";
+							}
+							if (ImGui::Button("Close"))
+								ImGui::CloseCurrentPopup();
+							ImGui::EndPopup();
+						}
+						ImGui::SetItemTooltip("Right-click to open popup");
+					}
 				}
+				ImGui::SetItemTooltip("Right-click to open popup");
 			}
 			ImGui::End();
 		}
@@ -648,7 +665,7 @@ namespace Spore
 								int32 modelCount = ++AssetsManager::GetInstance().modelCounter [name];
 								//std::shared_ptr<Object> object = std::make_shared<Object>("obj_" + std::to_string(modelCount) + "_" + modelMapper [name]->identifier);
 								std::shared_ptr<ModelObject> object = std::make_shared<ModelObject>("obj_" + std::to_string(modelCount) + "_" + modelMapper [name]->identifier);
-								std::shared_ptr<Scene> scene = window_p->renderPipeline->sceneMapper.find("scene1")->second;
+								std::shared_ptr<Scene> scene = window_p->renderPipeline->sceneMapper.find("scene_1")->second;
 								object->AddModel(modelMapper [name]);
 								scene->AddObject(object);
 								modelMapper [name]->AddObserver(object);
@@ -658,7 +675,8 @@ namespace Spore
 							if (ImGui::Button("Remove"))
 							{
 								selected_model = -1;
-								selectedObjectIndex = -1;
+								//selectedObjectIndex = -1;
+								selectedObjectIdentifier = "";
 								selectedObject = nullptr;
 								std::string name = modelIdentifiers [n];
 								Model* modelTemp = AssetsManager::GetInstance().modelMapper [name];

@@ -47,10 +47,13 @@ namespace Spore
 		std::filesystem::path* filePath;
 		std::filesystem::path importAssetsPath = Files::GetInstance().GetAssetsPath();
 		MainWindow* window;
-		int selectedObjectIndex = -1;
+		std::string selectedSceneIdentifier = "";
+		std::shared_ptr<Scene> selectedScene;
+		std::string selectedObjectIdentifier = "";
 		std::shared_ptr<Object> selectedObject;
 		std::unordered_map<std::string, PostProcess*> postProcessMapper;
 		Texture* btnImgReset;
+
 		void InitImages();
 		void RenderMenuBar(MainWindow* window_p);
 		void RenderHierarchyPanel(MainWindow* window_p);
