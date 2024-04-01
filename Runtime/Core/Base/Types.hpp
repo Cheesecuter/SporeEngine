@@ -21,6 +21,8 @@
 #endif
 #include <stb_image.h>
 
+#include <Global.hpp>
+
 #include <map>
 #include <functional>
 #include <unordered_map>
@@ -32,6 +34,7 @@
 #include <sstream>
 #include <iostream>
 #include <filesystem>
+#include <mutex>
 //#include <Windows.h>
 
 namespace Spore

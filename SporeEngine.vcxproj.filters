@@ -243,6 +243,9 @@
     <ClCompile Include="Runtime\ECS\Objects\ModelObject.cpp">
       <Filter>源文件\ECS\Objects</Filter>
     </ClCompile>
+    <ClCompile Include="Runtime\Core\Base\Global.cpp">
+      <Filter>源文件\Core\Base</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Runtime\Core\Base\Types.hpp">
@@ -367,6 +370,9 @@
     </ClInclude>
     <ClInclude Include="Runtime\ECS\Objects\ModelObject.hpp">
       <Filter>源文件\ECS\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\Core\Base\Global.hpp">
+      <Filter>源文件\Core\Base</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

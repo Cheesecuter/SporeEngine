@@ -12,14 +12,16 @@ namespace Spore
 
 	}
 
-	void Scene::AddObject(std::shared_ptr<Object> object)
+	void Scene::AddObject(std::shared_ptr<Object> object_p)
 	{
-		objectMapper.insert(std::make_pair(object->identifier, object));
+		std::shared_ptr<Scene> scene = std::make_shared<Scene>(this->identifier);
+		objectMapper.insert(std::make_pair(object_p->identifier, object_p));
+		object_p->AddObserver(scene);
 	}
 
-	void Scene::DeleteObject(std::shared_ptr<Object> object)
+	void Scene::DeleteObject(std::shared_ptr<Object> object_p)
 	{
-		std::map<std::string, std::shared_ptr<Object>>::iterator it = objectMapper.find(object->identifier);
+		std::map<std::string, std::shared_ptr<Object>>::iterator it = objectMapper.find(object_p->identifier);
 		if (it != objectMapper.end())
 		{
 			objectMapper.erase(it);

@@ -148,6 +148,7 @@
   <ItemGroup>
     <ClCompile Include="Runtime\Asset\AssetsManager.cpp" />
     <ClCompile Include="Runtime\Asset\Files.cpp" />
+    <ClCompile Include="Runtime\Core\Base\Global.cpp" />
     <ClCompile Include="Runtime\Core\Reflection\Reflection.cpp" />
     <ClCompile Include="Runtime\Debug\AddvantageRenderTest.cpp" />
     <ClCompile Include="Runtime\Debug\BasicLightingTest.cpp" />
@@ -204,6 +205,7 @@
   <ItemGroup>
     <ClInclude Include="Runtime\Asset\AssetsManager.hpp" />
     <ClInclude Include="Runtime\Asset\Files.hpp" />
+    <ClInclude Include="Runtime\Core\Base\Global.hpp" />
     <ClInclude Include="Runtime\Core\Base\Types.hpp" />
     <ClInclude Include="Runtime\Core\Reflection\Reflection.hpp" />
     <ClInclude Include="Runtime\ECS\Component.hpp" />

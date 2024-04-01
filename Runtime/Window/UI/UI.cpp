@@ -107,18 +107,18 @@ namespace Spore
 					ImGui::MenuItem("New Scene", NULL, false, true);
 					ImGui::MenuItem("Open Scene", NULL, false, true);
 					ImGui::MenuItem("Open Recent Scene", NULL, false, true);
-					ImGui::SeparatorText("");
+					ImGui::Separator();
 					ImGui::MenuItem("Save", NULL, false, true);
 					ImGui::MenuItem("Save As...", NULL, false, true);
 					ImGui::MenuItem("Save As Scene Template...", NULL, false, true);
-					ImGui::SeparatorText("");
+					ImGui::Separator();
 					ImGui::MenuItem("New Project...", NULL, false, true);
 					ImGui::MenuItem("Open Project...", NULL, false, true);
 					ImGui::MenuItem("Save Project", NULL, false, true);
-					ImGui::SeparatorText("");
+					ImGui::Separator();
 					ImGui::MenuItem("Build Settings...", NULL, false, true);
 					ImGui::MenuItem("Build And Run", NULL, false, true);
-					ImGui::SeparatorText("");
+					ImGui::Separator();
 					if (ImGui::MenuItem("Exit"))
 					{
 						glfwSetWindowShouldClose(window_p->window, true);
@@ -142,11 +142,11 @@ namespace Spore
 					}
 					ImGui::SeparatorText("General Setting");
 					ImGui::Checkbox("Show Skybox", &window_p->renderPipeline->skyboxOn);
-					ImGui::SeparatorText("============");
+					ImGui::Separator();
 					ImGui::Checkbox("Gamma Correction", &window_p->renderPipeline->gammaCorrection);
 					ImGui::Checkbox("Shadow Mapping", &window_p->renderPipeline->shadowMapOn);
 					ImGui::Checkbox("Post Process", &window_p->renderPipeline->postProcessOn);
-					ImGui::SeparatorText("============");
+					ImGui::Separator();
 					ImGui::SliderFloat("Camera Speed", &window_p->camera->MovementSpeed, 0.0f, 50.0f);
 					static int32 windowSizeIndex = -1;
 					ImGui::Checkbox("Console", &showConsole);
@@ -161,42 +161,42 @@ namespace Spore
 					ImGui::MenuItem("Undo Clear Selection", NULL, false, true);
 					ImGui::MenuItem("Redo", NULL, false, true);
 					ImGui::MenuItem("Undo History", NULL, false, true);
-					ImGui::SeparatorText("");
+					ImGui::Separator();
 					ImGui::MenuItem("Select All", NULL, false, true);
 					ImGui::MenuItem("Deselect All", NULL, false, true);
 					ImGui::MenuItem("Select Children", NULL, false, true);
 					ImGui::MenuItem("Select Prefab Root", NULL, false, true);
 					ImGui::MenuItem("Invert Selection", NULL, false, true);
-					ImGui::SeparatorText("");
+					ImGui::Separator();
 					ImGui::MenuItem("Cut", NULL, false, true);
 					ImGui::MenuItem("Copy", NULL, false, true);
 					ImGui::MenuItem("Paste", NULL, false, true);
 					ImGui::MenuItem("Paste As Child", NULL, false, true);
-					ImGui::SeparatorText("");
+					ImGui::Separator();
 					ImGui::MenuItem("Duplicate", NULL, false, true);
 					ImGui::MenuItem("Rename", NULL, false, true);
 					ImGui::MenuItem("Delete", NULL, false, true);
-					ImGui::SeparatorText("");
+					ImGui::Separator();
 					ImGui::MenuItem("Frame Selected", NULL, false, true);
 					ImGui::MenuItem("Lock View to Selected", NULL, false, true);
-					ImGui::SeparatorText("");
+					ImGui::Separator();
 					ImGui::MenuItem("Find", NULL, false, true);
 					ImGui::MenuItem("Search All...", NULL, false, true);
-					ImGui::SeparatorText("");
+					ImGui::Separator();
 					ImGui::MenuItem("Play", NULL, false, true);
 					ImGui::MenuItem("Pause", NULL, false, true);
 					ImGui::MenuItem("Step", NULL, false, true);
-					ImGui::SeparatorText("");
+					ImGui::Separator();
 					ImGui::MenuItem("Sign in...", NULL, false, true);
 					ImGui::MenuItem("Sign out", NULL, false, true);
-					ImGui::SeparatorText("");
+					ImGui::Separator();
 					ImGui::MenuItem("Selection", NULL, false, true);
-					ImGui::SeparatorText("");
+					ImGui::Separator();
 					ImGui::MenuItem("Project Settings...", NULL, false, true);
 					ImGui::MenuItem("Preferences...", NULL, false, true);
 					ImGui::MenuItem("Shortcuts...", NULL, false, true);
 					ImGui::MenuItem("Clear All PlayerPrefs", NULL, false, true);
-					ImGui::SeparatorText("");
+					ImGui::Separator();
 					ImGui::MenuItem("Graphics Tier", NULL, false, true);
 					ImGui::EndMenu();
 				}
@@ -208,29 +208,29 @@ namespace Spore
 					ImGui::MenuItem("Delete", NULL, false, true);
 					ImGui::MenuItem("Rename", NULL, false, true);
 					ImGui::MenuItem("Copy Path", NULL, false, true);
-					ImGui::SeparatorText("");
+					ImGui::Separator();
 					ImGui::MenuItem("Open Scene Additive", NULL, false, true);
-					ImGui::SeparatorText("");
+					ImGui::Separator();
 					ImGui::MenuItem("View in Package Manager", NULL, false, true);
-					ImGui::SeparatorText("");
+					ImGui::Separator();
 					ImGui::MenuItem("Import New Asset...", NULL, false, true);
 					ImGui::MenuItem("Import Package", NULL, false, true);
 					ImGui::MenuItem("Export Package...", NULL, false, true);
 					ImGui::MenuItem("Find References In Scene", NULL, false, true);
 					ImGui::MenuItem("Select Dependencies", NULL, false, true);
-					ImGui::SeparatorText("");
+					ImGui::Separator();
 					ImGui::MenuItem("Refresh", NULL, false, true);
 					ImGui::MenuItem("Reimport", NULL, false, true);
-					ImGui::SeparatorText("");
+					ImGui::Separator();
 					ImGui::MenuItem("Reimport All", NULL, false, true);
-					ImGui::SeparatorText("");
+					ImGui::Separator();
 					ImGui::MenuItem("Extract From Prefab", NULL, false, true);
-					ImGui::SeparatorText("");
+					ImGui::Separator();
 					ImGui::MenuItem("Update UXML Schema", NULL, false, true);
-					ImGui::SeparatorText("");
+					ImGui::Separator();
 					ImGui::MenuItem("Open C# Project", NULL, false, true);
 					ImGui::MenuItem("View in Import Activity Window", NULL, false, true);
-					ImGui::SeparatorText("");
+					ImGui::Separator();
 					ImGui::MenuItem("Properties...", NULL, false, true);
 					ImGui::EndMenu();
 				}
@@ -248,12 +248,12 @@ namespace Spore
 					ImGui::MenuItem("UI Tookit", NULL, false, true);
 					ImGui::MenuItem("Camera", NULL, false, true);
 					ImGui::MenuItem("Visual Scripting Scene Variables", NULL, false, true);
-					ImGui::SeparatorText("");
+					ImGui::Separator();
 					ImGui::MenuItem("Center On Children", NULL, false, true);
-					ImGui::SeparatorText("");
+					ImGui::Separator();
 					ImGui::MenuItem("Make Parent", NULL, false, true);
 					ImGui::MenuItem("Clear Parent", NULL, false, true);
-					ImGui::SeparatorText("");
+					ImGui::Separator();
 					ImGui::MenuItem("Set as first sibling", NULL, false, true);
 					ImGui::MenuItem("Set as last sibling", NULL, false, true);
 					ImGui::MenuItem("Move To View", NULL, false, true);
@@ -287,26 +287,26 @@ namespace Spore
 				if (ImGui::BeginMenu("Windows"))
 				{
 					ImGui::MenuItem("Panels", NULL, false, true);
-					ImGui::SeparatorText("");
+					ImGui::Separator();
 					ImGui::MenuItem("Next Window", NULL, false, true);
 					ImGui::MenuItem("Previous Window", NULL, false, true);
-					ImGui::SeparatorText("");
+					ImGui::Separator();
 					ImGui::MenuItem("Layouts", NULL, false, true);
-					ImGui::SeparatorText("");
+					ImGui::Separator();
 					ImGui::MenuItem("Search", NULL, false, true);
-					ImGui::SeparatorText("");
+					ImGui::Separator();
 					ImGui::MenuItem("Collaborate", NULL, false, true);
 					ImGui::MenuItem("Plastic SCM", NULL, false, true);
-					ImGui::SeparatorText("");
+					ImGui::Separator();
 					ImGui::MenuItem("Asset Store", NULL, false, true);
 					ImGui::MenuItem("Package Manager", NULL, false, true);
-					ImGui::SeparatorText("");
+					ImGui::Separator();
 					ImGui::MenuItem("Asset Management", NULL, false, true);
-					ImGui::SeparatorText("");
+					ImGui::Separator();
 					ImGui::MenuItem("Text", NULL, false, true);
-					ImGui::SeparatorText("");
+					ImGui::Separator();
 					ImGui::MenuItem("TextMeshPro", NULL, false, true);
-					ImGui::SeparatorText("");
+					ImGui::Separator();
 					ImGui::MenuItem("General", NULL, false, true);
 					ImGui::MenuItem("Rendering", NULL, false, true);
 					ImGui::MenuItem("Animation", NULL, false, true);
@@ -321,16 +321,16 @@ namespace Spore
 				if (ImGui::BeginMenu("Help"))
 				{
 					ImGui::MenuItem("About", NULL, false, true);
-					ImGui::SeparatorText("");
+					ImGui::Separator();
 					ImGui::MenuItem("Check for Updates", NULL, false, true);
 					ImGui::MenuItem("Download Beta...", NULL, false, true);
-					ImGui::SeparatorText("");
+					ImGui::Separator();
 					ImGui::MenuItem("Manage License", NULL, false, true);
-					ImGui::SeparatorText("");
+					ImGui::Separator();
 					ImGui::MenuItem("Release Notes", NULL, false, true);
 					ImGui::MenuItem("Software Licenses", NULL, false, true);
 					ImGui::MenuItem("Report a Bug...", NULL, false, true);
-					ImGui::SeparatorText("");
+					ImGui::Separator();
 					ImGui::MenuItem("Reset Packages to defaults", NULL, false, true);
 					ImGui::EndMenu();
 				}
@@ -381,7 +381,12 @@ namespace Spore
 							{
 								if (ImGui::MenuItem("Model", NULL, false, true))
 								{
-
+									std::string name = "model";
+									std::shared_ptr<ModelObject> object = std::make_shared<ModelObject>("obj_" + std::to_string(it_scene->second->objIndex++) + "_" + name);
+									//object->AddModel(modelMapper [name]);
+									it_scene->second->AddObject(object);
+									//modelMapper [name]->AddObserver(object);
+									object->AddObserver(it_scene->second);
 								}
 								ImGui::MenuItem("Cube", NULL, false, true);
 								ImGui::MenuItem("Sphere", NULL, false, true);
@@ -422,7 +427,10 @@ namespace Spore
 						{
 							selectedObjectIdentifier = it_object->second->identifier;
 							ImGui::Text("%s", selectedObjectIdentifier.c_str());
-							if (ImGui::Button("Remove"))
+							ImGui::Separator();
+							ImGui::MenuItem("Rename", NULL, false, true);
+							ImGui::MenuItem("Duplicate", NULL, false, true);
+							if (ImGui::MenuItem("Delete", NULL, false, true))
 							{
 								std::string name = selectedObjectIdentifier;
 								std::string subName = "";
@@ -442,7 +450,8 @@ namespace Spore
 								it_object = objectMapper.begin();
 								selectedObjectIdentifier = "";
 							}
-							if (ImGui::Button("Close"))
+							ImGui::Separator();
+							if (ImGui::MenuItem("Close", NULL, false, true))
 								ImGui::CloseCurrentPopup();
 							ImGui::EndPopup();
 						}
@@ -662,20 +671,19 @@ namespace Spore
 							if (ImGui::Button("Create Object"))
 							{
 								std::string name = modelIdentifiers [n];
-								int32 modelCount = ++AssetsManager::GetInstance().modelCounter [name];
-								//std::shared_ptr<Object> object = std::make_shared<Object>("obj_" + std::to_string(modelCount) + "_" + modelMapper [name]->identifier);
-								std::shared_ptr<ModelObject> object = std::make_shared<ModelObject>("obj_" + std::to_string(modelCount) + "_" + modelMapper [name]->identifier);
 								std::shared_ptr<Scene> scene = window_p->renderPipeline->sceneMapper.find("scene_1")->second;
+								//std::shared_ptr<Object> object = std::make_shared<Object>("obj_" + std::to_string(modelCount) + "_" + modelMapper [name]->identifier);
+								//std::shared_ptr<ModelObject> object = std::make_shared<ModelObject>("obj_" + std::to_string(modelCount) + "_" + modelMapper [name]->identifier);
+								std::shared_ptr<ModelObject> object = std::make_shared<ModelObject>("obj_" + std::to_string(scene->objIndex++) + "_" + modelMapper [name]->identifier);
 								object->AddModel(modelMapper [name]);
 								scene->AddObject(object);
-								modelMapper [name]->AddObserver(object);
-								object->AddObserver(scene);
+								//modelMapper [name]->AddObserver(object);
+								//object->AddObserver(scene);
 								ImGui::CloseCurrentPopup();
 							}
 							if (ImGui::Button("Remove"))
 							{
 								selected_model = -1;
-								//selectedObjectIndex = -1;
 								selectedObjectIdentifier = "";
 								selectedObject = nullptr;
 								std::string name = modelIdentifiers [n];
@@ -1413,7 +1421,7 @@ namespace Spore
 		try
 		{
 			OPENFILENAME ofn;
-			TCHAR szFile [260] = { 0 };
+			TCHAR szFile [512] = { 0 };
 
 			ZeroMemory(&ofn, sizeof(ofn));
 			ofn.lStructSize = sizeof(ofn);
@@ -1423,6 +1431,8 @@ namespace Spore
 			ofn.lpstrFilter = TEXT("ALL Files\0*.*\0");
 			ofn.nFilterIndex = 1;
 			ofn.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST | OFN_NOCHANGEDIR;
+
+			std::lock_guard<std::mutex> lock(gMutex);
 
 			if (GetOpenFileName(&ofn) == TRUE)
 			{

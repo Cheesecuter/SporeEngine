@@ -19,6 +19,7 @@ namespace Spore
 		std::string identifier;
 		std::map<std::string, std::shared_ptr<Object>> objectMapper;
 		vec4f enviromentColor = vec4f(0.725f, 0.725f, 0.725f, 1.0f);
+		int objIndex = 0;
 
 		void AddObject(std::shared_ptr<Object> object_p);
 		void DeleteObject(std::shared_ptr<Object> object_p);
