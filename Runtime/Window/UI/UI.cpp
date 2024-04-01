@@ -130,7 +130,14 @@ namespace Spore
 					{
 						/*importAssetsPath = Files::GetInstance().GetAssetsPath() / "Models";
 						filePath = &importAssetsPath;*/
-						showImportModelPanel = true;
+						//showImportModelPanel = true;
+
+						importAssetsPath = Files::GetInstance().GetAssetsPath() / "Models";
+						FileExplorer(window_p, &importAssetsPath);
+						static char model_path [512];
+						strcpy_s(model_path, importAssetsPath.string().c_str());
+						std::string path_s = model_path;
+						Model* new_model = new Model(std::filesystem::path(path_s));
 					}
 					if (ImGui::MenuItem("Import Shader"))
 					{
@@ -1062,110 +1069,7 @@ namespace Spore
 			static char model_path [128];
 			strcpy_s(model_path, importAssetsPath.string().c_str());
 			static std::string info = "";
-			//try
-			//{
-			//	ImGui::PushStyleVar(ImGuiStyleVar_ChildRounding, 5.0f);
-
-			//	if (ImGui::Button(".."))
-			//	{
-			//		*filePath = filePath->parent_path();
-			//	}
-			//	ImGui::SameLine();
-			//	std::vector<fs::path> roots = Files::GetInstance().GetRootPaths();
-			//	int32 rootNum = (int32) roots.size();
-			//	static int32 rootIndex = 0;
-			//	if (ImGui::BeginCombo("root paths", filePath->string().c_str()))
-			//	{
-			//		for (int32 n = 0; n < rootNum; n++)
-			//		{
-			//			const bool isSelected = (rootIndex == n);
-			//			if (ImGui::Selectable(roots [n].string().c_str(), isSelected))
-			//			{
-			//				rootIndex = n;
-			//				*filePath = fs::path(roots [n].string().c_str());
-			//			}
-			//			if (isSelected)
-			//				ImGui::SetItemDefaultFocus();
-			//		}
-			//		ImGui::EndCombo();
-			//	}
-			//	std::vector<fs::directory_entry> files;
-			//	for (auto const& dir_entry : fs::directory_iterator { *filePath })
-			//	{
-			//		files.push_back(dir_entry);
-			//	}
-			//	ImGuiWindowFlags windowFlags = ImGuiWindowFlags_HorizontalScrollbar;
-			//	ImGui::BeginChild("FileList", ImVec2((float32) (width - 50), (float32) (height - 100)), ImGuiChildFlags_Border, windowFlags);
-			//	static int32 selectedFile = -1;
-			//	for (uint32 i = 0; i < files.size(); i++)
-			//	{
-			//		std::string fileName = files [i].path().filename().string();
-			//		float32 witdh = 16;
-			//		float32 height = 16;
-			//		ImVec2 uvMin = ImVec2(0.0f, 0.0f);
-			//		ImVec2 uvMax = ImVec2(1.0f, 1.0f);
-			//		ImVec4 tintCol = ImGui::GetStyleColorVec4(ImGuiCol_Text);
-			//		/*if (fs::is_directory(files [i]))
-			//		{
-			//		}
-			//		else
-			//		{
-			//		}
-			//		ImGui::SameLine();*/
-			//		if (ImGui::Selectable(fileName.c_str(), selectedFile == i))
-			//		{
-			//			if (selectedFile == i)
-			//			{
-			//				if (fs::is_directory(files [selectedFile]))
-			//				{
-			//					*filePath = files [selectedFile].path();
-			//				}
-			//				else
-			//				{
-			//					*filePath = files [selectedFile].path();
-			//					showImportModelPanel = false;
-			//				}
-			//				selectedFile = -1;
-			//			}
-			//			else
-			//			{
-			//				selectedFile = i;
-			//			}
-			//		}
-			//	}
-			//	ImGui::EndChild();
-			//	if (ImGui::Button("Cancel"))
-			//	{
-			//		showImportModelPanel = false;
-			//	}
-			//	ImGui::SameLine();
-			//	if (ImGui::Button("Confirm"))
-			//	{
-			//		if (selectedFile != -1)
-			//		{
-			//			if (fs::is_directory(files [selectedFile]))
-			//			{
-			//				*filePath = files [selectedFile].path();
-			//			}
-			//			else
-			//			{
-			//				*filePath = files [selectedFile].path();
-			//				showImportModelPanel = false;
-			//			}
-			//			selectedFile = -1;
-			//		}
-			//		else
-			//		{
-			//			showImportModelPanel = false;
-			//		}
-			//	}
-			//	ImGui::PopStyleVar();
-			//}
-			//catch (const std::filesystem::filesystem_error& ex)
-			//{
-			//	std::cerr << "Filesystem error: " << ex.what() << std::endl;
-			//}
-
+			
 			ImGui::InputText("Path", model_path, IM_ARRAYSIZE(model_path));
 			ImGui::SameLine();
 			if (ImGui::Button("..."))
@@ -1183,6 +1087,7 @@ namespace Spore
 			ImGui::SameLine();
 			if (ImGui::Button("Confirm"))
 			{
+				std::lock_guard<std::mutex> lock(gMutex);
 				std::string path_s = model_path;
 				Model* new_model = new Model(std::filesystem::path(path_s));
 				if (new_model->meshes.size() == 0)
@@ -1431,8 +1336,6 @@ namespace Spore
 			ofn.lpstrFilter = TEXT("ALL Files\0*.*\0");
 			ofn.nFilterIndex = 1;
 			ofn.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST | OFN_NOCHANGEDIR;
-
-			std::lock_guard<std::mutex> lock(gMutex);
 
 			if (GetOpenFileName(&ofn) == TRUE)
 			{
