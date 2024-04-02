@@ -34,15 +34,15 @@ namespace Spore
 		std::string directory;
 		bool gammaCorrection;
 
-		void AddObserver(std::shared_ptr<ModelObserver> observer_p);
-		void RemoveObserver(std::shared_ptr<ModelObserver> observer_p);
+		void AddObserver(ModelObserver* observer_p);
+		void RemoveObserver(ModelObserver* observer_p);
 		void DeleteModel();
 		void Draw(Shader& shader);
 
 	private:
 		Mesh ProcessMesh(aiMesh* mesh, const aiScene* scene);
 		std::vector<Texture> LoadMaterialTextures(aiMaterial* mat, aiTextureType type, std::string typeName);
-		std::vector<std::shared_ptr<ModelObserver>> observerList;
+		std::vector<ModelObserver*> observerList;
 		void LoadModel(std::string const& path);
 		void ProcessNode(aiNode* node, const aiScene* scene);
 	};

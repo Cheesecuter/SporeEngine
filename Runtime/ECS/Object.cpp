@@ -22,6 +22,10 @@ namespace Spore
 
 	Object::~Object()
 	{
+		for (std::map<std::string, Model*>::iterator it_model = modelMapper.begin(); it_model != modelMapper.end(); it_model++)
+		{
+			it_model->second->RemoveObserver(this);
+		}
 		components.clear();
 		modelMapper.clear();
 		DeleteObject();
@@ -29,19 +33,20 @@ namespace Spore
 
 	void Object::AddModel(Model* model_p)
 	{
-		std::shared_ptr<Object> object = std::make_shared<Object>(this->identifier);
 		modelMapper.insert(std::make_pair(model_p->identifier, model_p));
-		modelMapper [model_p->identifier]->AddObserver(object);
+		modelMapper [model_p->identifier]->AddObserver(this);
 	}
 
-	void Object::DeleteModel(Model model_p)
+	void Object::DeleteModel(Model* model_p)
 	{
-		modelMapper.erase(model_p.identifier);
+		modelMapper.erase(model_p->identifier);
+		modelMapper [model_p->identifier]->RemoveObserver(this);
 	}
 
 	void Object::DeleteModel(std::string identifier_p)
 	{
 		modelMapper.erase(identifier_p);
+		modelMapper [identifier_p]->RemoveObserver(this);
 	}
 
 	void Object::OnModelDeleted(Model* model)
@@ -50,14 +55,14 @@ namespace Spore
 		Object::~Object();
 	}
 
-	void Object::AddObserver(std::shared_ptr<ObjectObserver> observer_p)
+	void Object::AddObserver(ObjectObserver* observer_p)
 	{
 		observerList.push_back(observer_p);
 	}
 
-	void Object::RemoveObserver(std::shared_ptr<ObjectObserver> observer_p)
+	void Object::RemoveObserver(ObjectObserver* observer_p)
 	{
-		const std::vector<std::shared_ptr<ObjectObserver>>::iterator it = std::find(observerList.begin(), observerList.end(), observer_p);
+		const std::vector<ObjectObserver*>::iterator it = std::find(observerList.begin(), observerList.end(), observer_p);
 		if (it != observerList.end())
 		{
 			observerList.erase(it);
@@ -66,7 +71,7 @@ namespace Spore
 
 	void Object::DeleteObject()
 	{
-		for (std::shared_ptr<ObjectObserver> observer : observerList)
+		for (ObjectObserver* observer : observerList)
 		{
 			observer->OnObjectDeleted(this);
 		}

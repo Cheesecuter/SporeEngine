@@ -15,6 +15,10 @@ namespace Spore
 
 	ModelObject::~ModelObject()
 	{
+		for (std::map<std::string, Model*>::iterator it_model = modelMapper.begin(); it_model != modelMapper.end(); it_model++)
+		{
+			it_model->second->RemoveObserver(this);
+		}
 		components.clear();
 		modelMapper.clear();
 		DeleteObject();
@@ -22,19 +26,20 @@ namespace Spore
 
 	void ModelObject::AddModel(Model* model_p)
 	{
-		std::shared_ptr<ModelObject> object = std::make_shared<ModelObject>(this->identifier);
 		modelMapper.insert(std::make_pair(model_p->identifier, model_p));
-		modelMapper [model_p->identifier]->AddObserver(object);
+		modelMapper [model_p->identifier]->AddObserver(this);
 	}
 
-	void ModelObject::DeleteModel(Model model_p)
+	void ModelObject::DeleteModel(Model* model_p)
 	{
-		modelMapper.erase(model_p.identifier);
+		modelMapper.erase(model_p->identifier);
+		modelMapper [model_p->identifier]->RemoveObserver(this);
 	}
 
 	void ModelObject::DeleteModel(std::string identifier_p)
 	{
 		modelMapper.erase(identifier_p);
+		modelMapper [identifier_p]->RemoveObserver(this);
 	}
 
 	void ModelObject::OnModelDeleted(Model* model)

@@ -21,14 +21,14 @@ namespace Spore
 		initialized = true;
 	}
 
-	void RenderPipeline::AddScene(std::shared_ptr<Scene> scene_p)
+	void RenderPipeline::AddScene(Scene* scene_p)
 	{
 		sceneMapper.insert(std::make_pair(scene_p->identifier, scene_p));
 	}
 
-	void RenderPipeline::DeleteScene(std::shared_ptr<Scene> scene_p)
+	void RenderPipeline::DeleteScene(Scene* scene_p)
 	{
-		const std::map<std::string, std::shared_ptr<Scene>>::iterator it = sceneMapper.find(scene_p->identifier);
+		const std::map<std::string, Scene*>::iterator it = sceneMapper.find(scene_p->identifier);
 		if (it != sceneMapper.end())
 		{
 			sceneMapper.erase(it);
@@ -37,7 +37,7 @@ namespace Spore
 
 	void RenderPipeline::DeleteScene(std::string identifier_p)
 	{
-		const std::map<std::string, std::shared_ptr<Scene>>::iterator it = sceneMapper.find(identifier_p);
+		const std::map<std::string, Scene*>::iterator it = sceneMapper.find(identifier_p);
 		if (it != sceneMapper.end())
 		{
 			sceneMapper.erase(it);
@@ -104,9 +104,9 @@ namespace Spore
 								uint32 scrWidth_p, uint32 scrHeight_p,
 								mat4f projection_p, mat4f view_p, mat4f model_p)
 	{
-		for (std::pair<std::string, std::shared_ptr<Scene>> it : sceneMapper)
+		for (std::pair<std::string, Scene*> it : sceneMapper)
 		{
-			std::shared_ptr<Scene> scene = it.second;
+			Scene* scene = it.second;
 			scene->Render(shaders_p, camera_p, scrWidth_p, scrHeight_p,
 						  projection_p, view_p, model_p);
 		}
@@ -116,9 +116,9 @@ namespace Spore
 									   uint32 scrWidth_p, uint32 scrHeight_p,
 									   mat4f projection_p, mat4f view_p, mat4f model_p)
 	{
-		for (std::pair<std::string, std::shared_ptr<Scene>> it : sceneMapper)
+		for (std::pair<std::string, Scene*> it : sceneMapper)
 		{
-			std::shared_ptr<Scene> scene = it.second;
+			Scene* scene = it.second;
 			scene->Render(shaders_p, camera_p, scrWidth_p, scrHeight_p,
 						  projection_p, view_p, model_p);
 		}
@@ -171,9 +171,9 @@ namespace Spore
 	{
 		glBindFramebuffer(GL_FRAMEBUFFER, gBuffer);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		for (std::pair<std::string, std::shared_ptr<Scene>> it : sceneMapper)
+		for (std::pair<std::string, Scene*> it : sceneMapper)
 		{
-			std::shared_ptr<Scene> scene = it.second;
+			Scene* scene = it.second;
 			scene->Render(shaders_p, camera_p, scrWidth_p, scrHeight_p,
 						  projection_p, view_p, model_p);
 		}

@@ -19,7 +19,7 @@ namespace Spore
 		RenderPipeline();
 		~RenderPipeline();
 
-		std::map<std::string, std::shared_ptr<Scene>> sceneMapper;
+		std::map<std::string, Scene*> sceneMapper;
 		bool skyboxOn = true;
 		bool gammaCorrection = false;
 		bool shadowMapOn = false;
@@ -27,8 +27,8 @@ namespace Spore
 		std::string postProcess = "";
 
 		void Initialize();
-		void AddScene(std::shared_ptr<Scene> scene_p);
-		void DeleteScene(std::shared_ptr<Scene> scene_p);
+		void AddScene(Scene* scene_p);
+		void DeleteScene(Scene* scene_p);
 		void DeleteScene(std::string identifier_p);
 		void SetScenePos(uint32 sceneX_p, uint32 sceneY_p);
 		vec2f GetScenePos();

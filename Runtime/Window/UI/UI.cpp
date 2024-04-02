@@ -134,6 +134,7 @@ namespace Spore
 
 						importAssetsPath = Files::GetInstance().GetAssetsPath() / "Models";
 						FileExplorer(window_p, &importAssetsPath);
+						//importAssetsPath = Files::GetInstance().GetAssetsPath() / "Models/cube.fbx";
 						static char model_path [512];
 						strcpy_s(model_path, importAssetsPath.string().c_str());
 						std::string path_s = model_path;
@@ -359,10 +360,10 @@ namespace Spore
 		windowFlags = ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoCollapse;
 		{
 			ImGui::Begin("Hierarchy", &pOpen, windowFlags);
-			std::map<std::string, std::shared_ptr<Scene>> sceneMapper = window_p->renderPipeline->sceneMapper;
-			std::map<std::string, std::shared_ptr<Object>> objectMapper;
-			std::map<std::string, std::map<std::string, std::shared_ptr<Object>>> sceneObjectMapper;
-			for (std::map<std::string, std::shared_ptr<Scene>>::iterator it_scene = sceneMapper.begin(); it_scene != sceneMapper.end(); it_scene++)
+			std::map<std::string, Scene*> sceneMapper = window_p->renderPipeline->sceneMapper;
+			std::map<std::string, Object*> objectMapper;
+			std::map<std::string, std::map<std::string, Object*>> sceneObjectMapper;
+			for (std::map<std::string, Scene*>::iterator it_scene = sceneMapper.begin(); it_scene != sceneMapper.end(); it_scene++)
 			{
 				objectMapper = it_scene->second->objectMapper;
 				sceneObjectMapper.insert(std::make_pair(it_scene->first, objectMapper));
@@ -376,7 +377,7 @@ namespace Spore
 					selectedObject->selected = true;
 				}
 			}
-			for (std::map<std::string, std::shared_ptr<Scene>>::iterator it_scene = sceneMapper.begin(); it_scene != sceneMapper.end(); it_scene++)
+			for (std::map<std::string, Scene*>::iterator it_scene = sceneMapper.begin(); it_scene != sceneMapper.end(); it_scene++)
 			{
 				if (ImGui::CollapsingHeader(it_scene->second->identifier.c_str(), true))
 				{
@@ -389,7 +390,7 @@ namespace Spore
 								if (ImGui::MenuItem("Model", NULL, false, true))
 								{
 									std::string name = "model";
-									std::shared_ptr<ModelObject> object = std::make_shared<ModelObject>("obj_" + std::to_string(it_scene->second->objIndex++) + "_" + name);
+									ModelObject* object = new ModelObject("obj_" + std::to_string(it_scene->second->objIndex++) + "_" + name);
 									//object->AddModel(modelMapper [name]);
 									it_scene->second->AddObject(object);
 									//modelMapper [name]->AddObserver(object);
@@ -417,7 +418,7 @@ namespace Spore
 						ImGui::EndPopup();
 					}
 					objectMapper = it_scene->second->objectMapper;
-					for (std::map<std::string, std::shared_ptr<Object>>::iterator it_object = objectMapper.begin(); it_object != objectMapper.end(); it_object++)
+					for (std::map<std::string, Object*>::iterator it_object = objectMapper.begin(); it_object != objectMapper.end(); it_object++)
 					{
 						if (ImGui::Selectable(it_object->second->identifier.c_str(), selectedObjectIdentifier == it_object->second->identifier))
 						{
@@ -678,10 +679,10 @@ namespace Spore
 							if (ImGui::Button("Create Object"))
 							{
 								std::string name = modelIdentifiers [n];
-								std::shared_ptr<Scene> scene = window_p->renderPipeline->sceneMapper.find("scene_1")->second;
+								Scene* scene = window_p->renderPipeline->sceneMapper.find("scene_1")->second;
 								//std::shared_ptr<Object> object = std::make_shared<Object>("obj_" + std::to_string(modelCount) + "_" + modelMapper [name]->identifier);
 								//std::shared_ptr<ModelObject> object = std::make_shared<ModelObject>("obj_" + std::to_string(modelCount) + "_" + modelMapper [name]->identifier);
-								std::shared_ptr<ModelObject> object = std::make_shared<ModelObject>("obj_" + std::to_string(scene->objIndex++) + "_" + modelMapper [name]->identifier);
+								ModelObject* object = new ModelObject("obj_" + std::to_string(scene->objIndex++) + "_" + modelMapper [name]->identifier);
 								object->AddModel(modelMapper [name]);
 								scene->AddObject(object);
 								//modelMapper [name]->AddObserver(object);
@@ -982,7 +983,7 @@ namespace Spore
 		ImportShaderPanel(window_p);
 		ImportTexturePanel(window_p);
 		ImportModelPanel(window_p);
-		FileBrowser(window_p, filePath);
+		FileBrowser(window_p, &filePath);
 	}
 
 	void UI::RenderConsolePanel(MainWindow* window_p)
@@ -1075,9 +1076,9 @@ namespace Spore
 			if (ImGui::Button("..."))
 			{
 				importAssetsPath = Files::GetInstance().GetAssetsPath() / "Models";
-				filePath = &importAssetsPath;
+				filePath = importAssetsPath;
 				//showFileBrowser = true;
-				FileExplorer(window_p, filePath);
+				FileExplorer(window_p, &filePath);
 			}
 			if (ImGui::Button("Cancel"))
 			{
@@ -1174,9 +1175,9 @@ namespace Spore
 		if (ImGui::Button("..."))
 		{
 			importAssetsPath = Files::GetInstance().GetAssetsPath() / "Textures";
-			filePath = &importAssetsPath;
+			filePath = importAssetsPath;
 			//showFileBrowser = true;
-			FileExplorer(window_p, filePath);
+			FileExplorer(window_p, &filePath);
 		}
 		if (ImGui::Button("Cancel"))
 		{

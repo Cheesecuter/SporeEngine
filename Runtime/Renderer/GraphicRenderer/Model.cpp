@@ -295,14 +295,14 @@ namespace Spore
 		return textureID;
 	}
 
-	void Model::AddObserver(std::shared_ptr<ModelObserver> observer_p)
+	void Model::AddObserver(ModelObserver* observer_p)
 	{
 		observerList.push_back(observer_p);
 	}
 
-	void Model::RemoveObserver(std::shared_ptr<ModelObserver> observer_p)
+	void Model::RemoveObserver(ModelObserver* observer_p)
 	{
-		const std::vector<std::shared_ptr<ModelObserver>>::iterator it = std::find(observerList.begin(), observerList.end(), observer_p);
+		const std::vector<ModelObserver*>::iterator it = std::find(observerList.begin(), observerList.end(), observer_p);
 		if (it != observerList.end())
 		{
 			observerList.erase(it);
@@ -311,7 +311,7 @@ namespace Spore
 
 	void Model::DeleteModel()
 	{
-		for (std::shared_ptr<ModelObserver> observer : observerList)
+		for (ModelObserver* observer : observerList)
 		{
 			observer->OnModelDeleted(this);
 		}

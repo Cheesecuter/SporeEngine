@@ -24,7 +24,7 @@ namespace Spore
 		virtual void OnObjectDeleted(Object* object_p) = 0;
 	};
 
-	class Object : public ModelObserver, std::enable_shared_from_this<Object>
+	class Object : public ModelObserver
 	{
 	public:
 		Object(const std::string& identifier_p, const bool light_p = false);
@@ -37,11 +37,11 @@ namespace Spore
 		bool selected = false;
 
 		void AddModel(Model* model_p);
-		void DeleteModel(Model model_p);
+		void DeleteModel(Model* model_p);
 		void DeleteModel(std::string identifier_p);
 		void OnModelDeleted(Model* model) override;
-		void AddObserver(std::shared_ptr<ObjectObserver> observer_p);
-		void RemoveObserver(std::shared_ptr<ObjectObserver> observer_p);
+		void AddObserver(ObjectObserver* observer_p);
+		void RemoveObserver(ObjectObserver* observer_p);
 		void DeleteObject();
 		void Update(float32 deltaTime);
 		virtual void Render(std::vector<Shader*> shaders_p, Camera* camera_p,
@@ -70,7 +70,7 @@ namespace Spore
 		Shader* modelShader;
 
 	private:
-		std::vector<std::shared_ptr<ObjectObserver>> observerList;
+		std::vector<ObjectObserver*> observerList;
 	};
 }
 

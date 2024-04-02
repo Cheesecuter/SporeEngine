@@ -44,13 +44,13 @@ namespace Spore
 		bool showConsole = false;
 		bool show_demo_window = false;
 		bool show_another_window = false;
-		std::filesystem::path* filePath;
+		std::filesystem::path filePath;
 		std::filesystem::path importAssetsPath = Files::GetInstance().GetAssetsPath();
 		MainWindow* window;
 		std::string selectedSceneIdentifier = "";
-		std::shared_ptr<Scene> selectedScene;
+		Scene* selectedScene;
 		std::string selectedObjectIdentifier = "";
-		std::shared_ptr<Object> selectedObject;
+		Object* selectedObject;
 		std::unordered_map<std::string, PostProcess*> postProcessMapper;
 		Texture* btnImgReset;
 

@@ -18,7 +18,7 @@ namespace Spore
 		uint32 VAO, VBO, EBO;
 
 		void AddModel(Model* model_p);
-		void DeleteModel(Model model_p);
+		void DeleteModel(Model* model_p);
 		void DeleteModel(std::string identifier_p);
 		void OnModelDeleted(Model* model) override;
 		void Render(std::vector<Shader*> shaders_p, Camera* camera_p,
