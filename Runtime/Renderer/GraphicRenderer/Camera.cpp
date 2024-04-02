@@ -2,98 +2,98 @@
 
 namespace Spore
 {
-	Camera::Camera(vec3f position_p, vec3f up_p,
-				   float32 yaw_p, float32 pitch_p) :
-		Front(vec3f(0.0f, 0.0f, -1.0f)),
-		MovementSpeed(SPEED),
-		MouseSensitivity(SENSITIVITY),
-		Zoom(ZOOM)
+	Camera::Camera(vec3f p_position, vec3f p_up,
+				   float32 p_yaw, float32 p_pitch) :
+		m_front(vec3f(0.0f, 0.0f, -1.0f)),
+		m_movement_speed(SPEED),
+		m_mouse_sensitivity(SENSITIVITY),
+		m_zoom(ZOOM)
 	{
-		Position = position_p;
-		WorldUp = up_p;
-		Yaw = yaw_p;
-		Pitch = pitch_p;
+		m_position = p_position;
+		m_world_up = p_up;
+		m_yaw = p_yaw;
+		m_pitch = p_pitch;
 		UpdateCameraVectors();
 	}
 
-	Camera::Camera(float32 posX_p, float32 posY_p, float32 posZ_p,
-				   float32 upX_p, float32 upY_p, float32 upZ_p,
-				   float32 yaw_p, float32 pitch_p) :
-		Front(vec3f(0.0f, 0.0f, -1.0f)),
-		MovementSpeed(SPEED),
-		MouseSensitivity(SENSITIVITY),
-		Zoom(ZOOM)
+	Camera::Camera(float32 p_pos_x, float32 p_pos_y, float32 p_pos_z,
+				   float32 p_up_x, float32 p_up_y, float32 p_up_z,
+				   float32 p_yaw, float32 p_pitch) :
+		m_front(vec3f(0.0f, 0.0f, -1.0f)),
+		m_movement_speed(SPEED),
+		m_mouse_sensitivity(SENSITIVITY),
+		m_zoom(ZOOM)
 	{
-		Position = vec3f(posX_p, posY_p, posZ_p);
-		WorldUp = vec3f(upX_p, upY_p, upZ_p);
-		Yaw = yaw_p;
-		Pitch = pitch_p;
+		m_position = vec3f(p_pos_x, p_pos_y, p_pos_z);
+		m_world_up = vec3f(p_up_x, p_up_y, p_up_z);
+		m_yaw = p_yaw;
+		m_pitch = p_pitch;
 		UpdateCameraVectors();
 	}
 
 	mat4f Camera::GetViewMatrix()
 	{
-		return glm::lookAt(Position, Position + Front, Up);
+		return glm::lookAt(m_position, m_position + m_front, m_up);
 	}
 
-	void Camera::ProcessKeyboard(Camera_Movement direction_p, float32 deltaTime_p)
+	void Camera::ProcessKeyboard(Camera_Movement p_direction, float32 p_delta_time)
 	{
-		float32 velocity = MovementSpeed * deltaTime_p;
-		if (direction_p == FORWARD)
-			Position += Front * velocity;
-		if (direction_p == BACKWARD)
-			Position -= Front * velocity;
-		if (direction_p == LEFT)
-			Position -= Right * velocity;
-		if (direction_p == RIGHT)
-			Position += Right * velocity;
-		if (direction_p == UP)
-			Position += Up * velocity;
-		if (direction_p == DOWN)
-			Position -= Up * velocity;
+		float32 velocity = m_movement_speed * p_delta_time;
+		if (p_direction == FORWARD)
+			m_position += m_front * velocity;
+		if (p_direction == BACKWARD)
+			m_position -= m_front * velocity;
+		if (p_direction == LEFT)
+			m_position -= m_right * velocity;
+		if (p_direction == RIGHT)
+			m_position += m_right * velocity;
+		if (p_direction == UP)
+			m_position += m_up * velocity;
+		if (p_direction == DOWN)
+			m_position -= m_up * velocity;
 	}
 
-	void Camera::ProcessMouseMovement(float32 xOffset_p, float32 yOffset_p, GLboolean constrainPitch_p)
+	void Camera::ProcessMouseMovement(float32 p_x_offset, float32 p_y_offset, GLboolean p_constrain_pitch)
 	{
-		xOffset_p *= MouseSensitivity;
-		yOffset_p *= MouseSensitivity;
+		p_x_offset *= m_mouse_sensitivity;
+		p_y_offset *= m_mouse_sensitivity;
 
-		Yaw += xOffset_p;
-		Pitch += yOffset_p;
+		m_yaw += p_x_offset;
+		m_pitch += p_y_offset;
 
 		// make sure that when pitch is out of bounds, screen doesn't get flipped
-		if (constrainPitch_p)
+		if (p_constrain_pitch)
 		{
-			if (Pitch > 89.0f)
-				Pitch = 89.0f;
-			if (Pitch < -89.0f)
-				Pitch = -89.0f;
+			if (m_pitch > 89.0f)
+				m_pitch = 89.0f;
+			if (m_pitch < -89.0f)
+				m_pitch = -89.0f;
 		}
 
 		UpdateCameraVectors();
 	}
 
-	void Camera::ProcessMouseScroll(float32 yOffset_p)
+	void Camera::ProcessMouseScroll(float32 p_y_offset)
 	{
-		Zoom -= (float32) yOffset_p;
-		if (Zoom < 1.0f)
-			Zoom = 1.0f;
-		if (Zoom > 45.0f)
-			Zoom = 45.0f;
+		m_zoom -= (float32) p_y_offset;
+		if (m_zoom < 1.0f)
+			m_zoom = 1.0f;
+		if (m_zoom > 45.0f)
+			m_zoom = 45.0f;
 	}
 
 	void Camera::UpdateCameraVectors()
 	{
 		// calculate the new Front vector
 		vec3f front;
-		front.x = cos(glm::radians(Yaw)) * cos(glm::radians(Pitch));
-		front.y = sin(glm::radians(Pitch));
-		front.z = sin(glm::radians(Yaw)) * cos(glm::radians(Pitch));
-		Front = glm::normalize(front);
+		front.x = cos(glm::radians(m_yaw)) * cos(glm::radians(m_pitch));
+		front.y = sin(glm::radians(m_pitch));
+		front.z = sin(glm::radians(m_yaw)) * cos(glm::radians(m_pitch));
+		m_front = glm::normalize(front);
 		// also re-calculate the Right and Up vector.
 		// normalize the vectors, because their length gets closer to 0 the more you
 		// look up or down which results in slower movement.
-		Right = glm::normalize(glm::cross(Front, WorldUp));
-		Up = glm::normalize(glm::cross(Right, Front));
+		m_right = glm::normalize(glm::cross(m_front, m_world_up));
+		m_up = glm::normalize(glm::cross(m_right, m_front));
 	}
 }

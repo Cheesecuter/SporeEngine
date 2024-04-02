@@ -14,15 +14,15 @@ namespace Spore
 	public:
 		SkyBox();
 		~SkyBox();
-		void Draw(Camera* camera_p, mat4x4f projection_p, mat4x4f view_p);
+		void Draw(Camera* p_camera, mat4x4f p_projection, mat4x4f p_view);
 
 	protected:
 
 	private:
-		uint32 VAO, VBO;
-		Shader* shader;
-		uint32 cubemapTexture;
-		std::vector<std::string> faces {
+		uint32 m_VAO, m_VBO;
+		Shader* m_shader;
+		uint32 m_cubemap_texture;
+		std::vector<std::string> m_faces {
 			"./Assets/Textures/sky/right1.jpg",
 			"./Assets/Textures/sky/left1.jpg",
 			"./Assets/Textures/sky/top1.jpg",
@@ -30,7 +30,7 @@ namespace Spore
 			"./Assets/Textures/sky/front1.jpg",
 			"./Assets/Textures/sky/back1.jpg",
 		};
-		const float32 vertices [108] = {
+		const float32 m_vertices [108] = {
 			// positions          
 			-1.0f,  1.0f, -1.0f,
 			-1.0f, -1.0f, -1.0f,

@@ -13,13 +13,13 @@ namespace Spore
 	public:
 		Grid();
 		~Grid();
-		void Draw(Shader* shader_p);
+		void Draw(Shader* p_shader);
 
 	protected:
 
 	private:
-		uint32 quadVAO, quadVBO;
-		const float32 quadVertices [24] = {
+		uint32 m_quad_VAO, m_quad_VBO;
+		const float32 m_quad_vertices [24] = {
 			// positions	// texCoords
 			-1.0f,  1.0f,	0.0f, 1.0f,
 			-1.0f, -1.0f,	0.0f, 0.0f,

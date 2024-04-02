@@ -14,10 +14,12 @@ namespace Spore
 	class AssetsManager : public Singleton<AssetsManager>
 	{
 	public:
-		static std::map<std::string, Shader*> shaderMapper;
-		static std::map<std::string, Texture*> textureMapper;
-		static std::map<std::string, Model*> modelMapper;
-		static std::unordered_map<std::string, int32> modelCounter;
+		static std::map<std::string, Shader*> m_shader_mapper;
+		static std::map<std::string, Texture*> m_texture_mapper;
+		static std::map<std::string, Model*> m_model_mapper;
+		static std::unordered_map<std::string, int32> m_model_counter;
+
+	protected:
 
 	private:
 		AssetsManager();

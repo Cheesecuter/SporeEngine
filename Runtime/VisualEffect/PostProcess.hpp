@@ -11,16 +11,16 @@ namespace Spore
 	class PostProcess
 	{
 	public:
-		PostProcess(std::string const& identifier_p, Shader* shader_p);
+		PostProcess(std::string const& p_identifier, Shader* p_shader);
 		~PostProcess();
 
-		std::string identifier;
-		Shader* shader;
+		std::string m_identifier;
+		Shader* m_shader;
 		//std::vector<Shader*> shaders;
 		
-		void SetShader(Shader* shader_p);
+		void SetShader(Shader* p_shader);
 		Shader* GetShader();
-		void RenderToFBO(uint32 fbo_p);
+		void RenderToFBO(uint32 p_fbo);
 
 	protected:
 

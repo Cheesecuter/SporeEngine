@@ -2,83 +2,83 @@
 
 namespace Spore
 {
-	ModelObject::ModelObject(const std::string& identifier_p) : Object(identifier_p)
+	ModelObject::ModelObject(const std::string& p_identifier) : Object(p_identifier)
 	{
-		type = "model";
-		modelMapper = std::map<std::string, Model*>();
+		m_type = "model";
+		m_model_mapper = std::map<std::string, Model*>();
 		ShaderComponent* shaderComponent = new ShaderComponent();
-		Shader* shader = AssetsManager::GetInstance().shaderMapper.find("ModelLoadingFragment.glsl")->second;
-		modelShader = shader;
-		shaderComponent->AddShader(modelShader);
-		components [shaderComponent->GetName()] = shaderComponent;
+		Shader* shader = AssetsManager::GetInstance().m_shader_mapper.find("ModelLoadingFragment.glsl")->second;
+		m_model_shader = shader;
+		shaderComponent->AddShader(m_model_shader);
+		m_components [shaderComponent->GetName()] = shaderComponent;
 	}
 
 	ModelObject::~ModelObject()
 	{
-		for (std::map<std::string, Model*>::iterator it_model = modelMapper.begin(); it_model != modelMapper.end(); it_model++)
+		for (std::map<std::string, Model*>::iterator it_model = m_model_mapper.begin(); it_model != m_model_mapper.end(); it_model++)
 		{
 			it_model->second->RemoveObserver(this);
 		}
-		components.clear();
-		modelMapper.clear();
+		m_components.clear();
+		m_model_mapper.clear();
 		DeleteObject();
 	}
 
-	void ModelObject::AddModel(Model* model_p)
+	void ModelObject::AddModel(Model* p_model)
 	{
-		modelMapper.insert(std::make_pair(model_p->identifier, model_p));
-		modelMapper [model_p->identifier]->AddObserver(this);
+		m_model_mapper.insert(std::make_pair(p_model->m_identifier, p_model));
+		m_model_mapper [p_model->m_identifier]->AddObserver(this);
 	}
 
-	void ModelObject::DeleteModel(Model* model_p)
+	void ModelObject::DeleteModel(Model* p_model)
 	{
-		modelMapper.erase(model_p->identifier);
-		modelMapper [model_p->identifier]->RemoveObserver(this);
+		m_model_mapper.erase(p_model->m_identifier);
+		m_model_mapper [p_model->m_identifier]->RemoveObserver(this);
 	}
 
-	void ModelObject::DeleteModel(std::string identifier_p)
+	void ModelObject::DeleteModel(std::string p_identifier)
 	{
-		modelMapper.erase(identifier_p);
-		modelMapper [identifier_p]->RemoveObserver(this);
+		m_model_mapper.erase(p_identifier);
+		m_model_mapper [p_identifier]->RemoveObserver(this);
 	}
 
-	void ModelObject::OnModelDeleted(Model* model)
+	void ModelObject::OnModelDeleted(Model* p_model)
 	{
-		modelMapper.erase(model->identifier);
+		m_model_mapper.erase(p_model->m_identifier);
 		ModelObject::~ModelObject();
 	}
 
-	void ModelObject::Render(std::vector<Shader*> shaders_p, Camera* camera_p,
-						uint32 scrWidth_p, uint32 scrHeight_p,
-						mat4f projection_p, mat4f view_p, mat4f model_p)
+	void ModelObject::Render(std::vector<Shader*> p_shaders, Camera* p_camera,
+						uint32 p_screen_width, uint32 p_screen_height,
+						mat4f p_projection, mat4f p_view, mat4f p_model)
 	{
-		projection_p = glm::perspective(glm::radians(camera_p->Zoom),
-										(float32) scrWidth_p / (float32) scrHeight_p, 0.1f, 10000.0f);
-		view_p = camera_p->GetViewMatrix();
+		p_projection = glm::perspective(glm::radians(p_camera->m_zoom),
+										(float32) p_screen_width / (float32) p_screen_height, 0.1f, 10000.0f);
+		p_view = p_camera->GetViewMatrix();
 
-		TransformComponent* transformComponent = dynamic_cast<TransformComponent*>(components.find("Transform")->second);
+		TransformComponent* transformComponent = dynamic_cast<TransformComponent*>(m_components.find("Transform")->second);
 		ShaderComponent* shaderComponent = nullptr;
 		Model* model = nullptr;
-		model_p = transformComponent->GetMatrix();
-		for (std::map<std::string, Model*>::iterator it_model = modelMapper.begin(); it_model != modelMapper.end(); it_model++)
+		p_model = transformComponent->GetMatrix();
+		for (std::map<std::string, Model*>::iterator it_model = m_model_mapper.begin(); it_model != m_model_mapper.end(); it_model++)
 		{
 			model = it_model->second;
-			shaderComponent = dynamic_cast<ShaderComponent*>(components.find("Shader")->second);
-			for (uint32 i = 0; i < shaders_p.size(); i++)
+			shaderComponent = dynamic_cast<ShaderComponent*>(m_components.find("Shader")->second);
+			for (uint32 i = 0; i < p_shaders.size(); i++)
 			{
-				shaderComponent->AddShader(shaders_p [i]);
+				shaderComponent->AddShader(p_shaders [i]);
 			}
 
 			for (std::pair<std::string, ShaderNode*> it_shader : shaderComponent->GetShaders())
 			{
-				if (it_shader.second->isLoading)
+				if (it_shader.second->m_is_loading)
 				{
-					it_shader.second->shader->Use();
-					it_shader.second->shader->SetBool("alphaFilterFlag", it_shader.second->shader->alphaFilterFlag);
-					it_shader.second->shader->SetMat4("projection", projection_p);
-					it_shader.second->shader->SetMat4("view", view_p);
-					it_shader.second->shader->SetMat4("model", model_p);
-					model->Draw(*(it_shader.second->shader));
+					it_shader.second->m_shader->Use();
+					it_shader.second->m_shader->SetBool("alphaFilterFlag", it_shader.second->m_shader->m_alpha_filter_flag);
+					it_shader.second->m_shader->SetMat4("projection", p_projection);
+					it_shader.second->m_shader->SetMat4("view", p_view);
+					it_shader.second->m_shader->SetMat4("model", p_model);
+					model->Draw(*(it_shader.second->m_shader));
 				}
 			}
 		}

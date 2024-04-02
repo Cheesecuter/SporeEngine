@@ -2,5 +2,5 @@
 
 namespace Spore
 {
-	std::mutex gMutex;
+	std::mutex g_global_mutex;
 }

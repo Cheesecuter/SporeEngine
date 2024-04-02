@@ -6,7 +6,7 @@
 
 namespace Spore
 {
-	extern std::mutex gMutex;
+	extern std::mutex g_global_mutex;
 }
 
 #endif

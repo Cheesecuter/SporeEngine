@@ -12,8 +12,10 @@ namespace Spore
 	class Keyboard : public Singleton<Keyboard>
 	{
 	public:
-		void processInput(Spore::MainWindow* window,
-						  Camera& camera, float32 deltaTime);
+		void processInput(Spore::MainWindow* p_window,
+						  Camera& p_camera, float32 p_delta_time);
+
+	protected:
 
 	private:
 		Keyboard();

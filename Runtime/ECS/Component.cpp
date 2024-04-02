@@ -6,16 +6,16 @@ namespace Spore
 
 	bool Component::IsDirty() const
 	{
-		return isDirty;
+		return m_is_dirty;
 	}
 
-	void Component::SetDirtyFlag(bool isDirty_p)
+	void Component::SetDirtyFlag(bool p_is_dirty)
 	{
-		isDirty = isDirty_p;
+		m_is_dirty = p_is_dirty;
 	}
 
 	std::string Component::GetName() const
 	{
-		return name;
+		return m_name;
 	}
 }

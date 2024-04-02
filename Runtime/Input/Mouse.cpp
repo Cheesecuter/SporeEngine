@@ -4,9 +4,9 @@ namespace Spore
 {
 	Mouse::Mouse()
 	{
-		xOffset = 0; yOffset = 0;
-		lastX = 0; lastY = 0;
-		buttonLeft = 0; buttonRight = 0;
+		m_x_offset = 0; m_y_offset = 0;
+		m_last_x = 0; m_last_y = 0;
+		m_button_left = 0; m_button_right = 0;
 	}
 
 	Mouse::~Mouse()
@@ -15,9 +15,9 @@ namespace Spore
 
 	void Mouse::Update()
 	{
-		xOffset = xPos - lastX;
-		yOffset = lastY - yPos;
-		lastX = xPos;
-		lastY = yPos;
+		m_x_offset = m_x_pos - m_last_x;
+		m_y_offset = m_last_y - m_y_pos;
+		m_last_x = m_x_pos;
+		m_last_y = m_y_pos;
 	}
 }

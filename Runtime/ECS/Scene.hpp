@@ -13,22 +13,22 @@ namespace Spore
 	class Scene : public ObjectObserver
 	{
 	public:
-		Scene(std::string identifier_p);
+		Scene(std::string p_identifier);
 		~Scene();
 
-		std::string identifier;
-		std::map<std::string, Object*> objectMapper;
-		vec4f enviromentColor = vec4f(0.725f, 0.725f, 0.725f, 1.0f);
-		int objIndex = 0;
+		std::string m_identifier;
+		std::map<std::string, Object*> m_object_mapper;
+		vec4f m_enviroment_color = vec4f(0.725f, 0.725f, 0.725f, 1.0f);
+		int m_object_index = 0;
 
-		void AddObject(Object* object_p);
-		void DeleteObject(Object* object_p);
-		void DeleteObject(std::string identifier_p);
-		void OnObjectDeleted(Object* object_p) override;
-		void Update(float32 deltaTime);
-		void Render(std::vector<Shader*> shaders_p, Camera* camera_p,
-					uint32 scrWidth_p, uint32 scrHeight_p,
-					mat4f projection_p, mat4f view_p, mat4f model_p);
+		void AddObject(Object* p_object);
+		void DeleteObject(Object* p_object);
+		void DeleteObject(std::string p_identifier);
+		void OnObjectDeleted(Object* p_object) override;
+		void Update(float32 p_deltaTime);
+		void Render(std::vector<Shader*> p_shaders, Camera* p_camera,
+					uint32 p_screen_width, uint32 p_screen_height,
+					mat4f p_projection, mat4f p_view, mat4f p_model);
 
 	private:
 	};

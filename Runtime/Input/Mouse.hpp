@@ -10,15 +10,18 @@ namespace Spore
 	class Mouse : public Singleton<Mouse>
 	{
 	public:
-		float32 xPos;
-		float32 yPos;
-		float32 xOffset;
-		float32 yOffset;
-		float32 lastX;
-		float32 lastY;
-		bool buttonLeft;
-		bool buttonRight;
+		float32 m_x_pos;
+		float32 m_y_pos;
+		float32 m_x_offset;
+		float32 m_y_offset;
+		float32 m_last_x;
+		float32 m_last_y;
+		bool m_button_left;
+		bool m_button_right;
+
 		void Update();
+
+	protected:
 
 	private:
 		Mouse();

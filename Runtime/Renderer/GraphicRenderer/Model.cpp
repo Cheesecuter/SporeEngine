@@ -3,14 +3,14 @@
 
 namespace Spore
 {
-	Model::Model(std::string const& path, bool gamma) : gammaCorrection(gamma)
+	Model::Model(std::string const& p_path, bool p_gamma) : m_gamma_correction(p_gamma)
 	{
-		LoadModel(path);
+		LoadModel(p_path);
 	}
 
-	Model::Model(std::filesystem::path path, bool gamma) : gammaCorrection(gamma)
+	Model::Model(std::filesystem::path p_path, bool p_gamma) : m_gamma_correction(p_gamma)
 	{
-		LoadModel(path.string().c_str());
+		LoadModel(p_path.string().c_str());
 	}
 
 	Model::~Model()
@@ -18,17 +18,39 @@ namespace Spore
 		DeleteModel();
 	}
 
-	void Model::Draw(Shader& shader)
+	void Model::AddObserver(ModelObserver* p_observer)
 	{
-		for (uint32 i = 0; i < meshes.size(); i++)
-			meshes [i].Draw(shader);
+		m_observer_list.push_back(p_observer);
 	}
 
-	void Model::LoadModel(std::string const& path)
+	void Model::RemoveObserver(ModelObserver* p_observer)
+	{
+		const std::vector<ModelObserver*>::iterator it = std::find(m_observer_list.begin(), m_observer_list.end(), p_observer);
+		if (it != m_observer_list.end())
+		{
+			m_observer_list.erase(it);
+		}
+	}
+
+	void Model::DeleteModel()
+	{
+		for (ModelObserver* observer : m_observer_list)
+		{
+			observer->OnModelDeleted(this);
+		}
+	}
+
+	void Model::Draw(Shader& p_shader)
+	{
+		for (uint32 i = 0; i < m_meshes.size(); i++)
+			m_meshes [i].Draw(p_shader);
+	}
+
+	void Model::LoadModel(std::string const& p_path)
 	{
 		// read file via ASSIMP
 		Assimp::Importer importer;
-		const aiScene* scene = importer.ReadFile(path, aiProcess_Triangulate | aiProcess_GenSmoothNormals | aiProcess_FlipUVs | aiProcess_CalcTangentSpace);
+		const aiScene* scene = importer.ReadFile(p_path, aiProcess_Triangulate | aiProcess_GenSmoothNormals | aiProcess_FlipUVs | aiProcess_CalcTangentSpace);
 		// check for errors (if is Not Zero)
 		if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode)
 		{
@@ -36,34 +58,34 @@ namespace Spore
 			return;
 		}
 		// retrieve the directory path of the filepath
-		std::string pathS = path;
+		std::string pathS = p_path;
 		std::replace(pathS.begin(), pathS.end(), '\\', '/');
-		directory = pathS.substr(0, pathS.find_last_of('/'));
-		identifier = pathS.substr(pathS.find_last_of('/') + 1, pathS.size());
+		m_directory = pathS.substr(0, pathS.find_last_of('/'));
+		m_identifier = pathS.substr(pathS.find_last_of('/') + 1, pathS.size());
 		// process ASSIMP's root node recursively
 		ProcessNode(scene->mRootNode, scene);
-		AssetsManager::GetInstance().modelMapper.insert(std::make_pair(identifier, this));
-		AssetsManager::GetInstance().modelCounter [identifier] = 0;
+		AssetsManager::GetInstance().m_model_mapper.insert(std::make_pair(m_identifier, this));
+		AssetsManager::GetInstance().m_model_counter [m_identifier] = 0;
 	}
 
-	void Model::ProcessNode(aiNode* node, const aiScene* scene)
+	void Model::ProcessNode(aiNode* p_node, const aiScene* p_scene)
 	{
 		// process each mesh located at the current node
-		for (uint32 i = 0; i < node->mNumMeshes; i++)
+		for (uint32 i = 0; i < p_node->mNumMeshes; i++)
 		{
 			// the node object only contains indices to index the actual objects in the scene
 			// the scene contains all the data, node is just to keep stuff organized (like relation between nodes)
-			aiMesh* mesh = scene->mMeshes [node->mMeshes [i]];
-			meshes.push_back(ProcessMesh(mesh, scene));
+			aiMesh* mesh = p_scene->mMeshes [p_node->mMeshes [i]];
+			m_meshes.push_back(ProcessMesh(mesh, p_scene));
 		}
 		// after we've processed all of the meshes (if any) we then recursively process each of the children nodes
-		for (uint32 i = 0; i < node->mNumChildren; i++)
+		for (uint32 i = 0; i < p_node->mNumChildren; i++)
 		{
-			ProcessNode(node->mChildren [i], scene);
+			ProcessNode(p_node->mChildren [i], p_scene);
 		}
 	}
 
-	Mesh Model::ProcessMesh(aiMesh* mesh, const aiScene* scene)
+	Mesh Model::ProcessMesh(aiMesh* p_mesh, const aiScene* p_scene)
 	{
 		// data to fill
 		std::vector<Vertex> vertices;
@@ -71,59 +93,59 @@ namespace Spore
 		std::vector<Texture> textures;
 
 		// walk through each of the mesh's vertices
-		for (uint32 i = 0; i < mesh->mNumVertices; i++)
+		for (uint32 i = 0; i < p_mesh->mNumVertices; i++)
 		{
 			Vertex vertex;
 			vec3f vector;
 			// position
-			vector.x = mesh->mVertices [i].x;
-			vector.y = mesh->mVertices [i].y;
-			vector.z = mesh->mVertices [i].z;
-			vertex.Position = vector;
+			vector.x = p_mesh->mVertices [i].x;
+			vector.y = p_mesh->mVertices [i].y;
+			vector.z = p_mesh->mVertices [i].z;
+			vertex.m_position = vector;
 			// normals
-			if (mesh->HasNormals())
+			if (p_mesh->HasNormals())
 			{
-				vector.x = mesh->mNormals [i].x;
-				vector.y = mesh->mNormals [i].y;
-				vector.z = mesh->mNormals [i].z;
-				vertex.Normal = vector;
+				vector.x = p_mesh->mNormals [i].x;
+				vector.y = p_mesh->mNormals [i].y;
+				vector.z = p_mesh->mNormals [i].z;
+				vertex.m_normal = vector;
 			}
 			// texture coordinates
-			if (mesh->mTextureCoords [0])
+			if (p_mesh->mTextureCoords [0])
 			{
 				vec2f vec;
 				// a vertex can contain up to 8 different texture coordinates. We thus make the  assumption that we won't
 				// use models where a vertex can have multiple texture coordinates so we always take the first set (0).
-				vec.x = mesh->mTextureCoords [0][i].x;
-				vec.y = mesh->mTextureCoords [0][i].y;
-				vertex.TexCoords = vec;
+				vec.x = p_mesh->mTextureCoords [0][i].x;
+				vec.y = p_mesh->mTextureCoords [0][i].y;
+				vertex.m_tex_coords = vec;
 				// tangent
-				vector.x = mesh->mTangents [i].x;
-				vector.y = mesh->mTangents [i].y;
-				vector.z = mesh->mTangents [i].z;
-				vertex.Tangent = vector;
+				vector.x = p_mesh->mTangents [i].x;
+				vector.y = p_mesh->mTangents [i].y;
+				vector.z = p_mesh->mTangents [i].z;
+				vertex.m_tangent = vector;
 				// bitangent
-				vector.x = mesh->mBitangents [i].x;
-				vector.y = mesh->mBitangents [i].y;
-				vector.z = mesh->mBitangents [i].z;
-				vertex.Bitangent = vector;
+				vector.x = p_mesh->mBitangents [i].x;
+				vector.y = p_mesh->mBitangents [i].y;
+				vector.z = p_mesh->mBitangents [i].z;
+				vertex.m_bitangent = vector;
 			}
 			else
 			{
-				vertex.TexCoords = vec2f(0.0f, 0.0f);
+				vertex.m_tex_coords = vec2f(0.0f, 0.0f);
 			}
 			vertices.push_back(vertex);
 		}
 		// now walk through each of the mesh's faces (a face is a mesh its triangle) and retrieve the corresponding vertex indices
-		for (uint32 i = 0; i < mesh->mNumFaces; i++)
+		for (uint32 i = 0; i < p_mesh->mNumFaces; i++)
 		{
-			aiFace face = mesh->mFaces [i];
+			aiFace face = p_mesh->mFaces [i];
 			// retrieve all indices of the face and store them in the indices vector
 			for (uint32 j = 0; j < face.mNumIndices; j++)
 				indices.push_back(face.mIndices [j]);
 		}
 		// process materials
-		aiMaterial* material = scene->mMaterials [mesh->mMaterialIndex];
+		aiMaterial* material = p_scene->mMaterials [p_mesh->mMaterialIndex];
 		// we assume a convertion for sampler names in the shaders. Each diffuse texture should be named
 		// as 'texture_diffuseN' where N is a sequential number ranging from 1 to MAX_SAMPLER_NUMBER.
 		// Same applies to other texture as the following list summarizes:
@@ -212,9 +234,9 @@ namespace Spore
 		{
 			Texture texture;
 			std::string path = "default.png";
-			texture.ID = TextureFromFile(path.c_str(), this->directory);
-			texture.type = "texture_default";
-			texture.path = path.c_str();
+			texture.m_ID = TextureFromFile(path.c_str(), this->m_directory);
+			texture.m_type = "texture_default";
+			texture.m_path = path.c_str();
 			textures.insert(textures.end(), texture);
 		}
 
@@ -222,20 +244,20 @@ namespace Spore
 		return Mesh(vertices, indices, textures);
 	}
 
-	std::vector<Texture> Model::LoadMaterialTextures(aiMaterial* mat, aiTextureType type, std::string typeName)
+	std::vector<Texture> Model::LoadMaterialTextures(aiMaterial* p_material, aiTextureType p_type, std::string p_type_name)
 	{
 		std::vector<Texture> textures;
-		for (uint32 i = 0; i < mat->GetTextureCount(type); i++)
+		for (uint32 i = 0; i < p_material->GetTextureCount(p_type); i++)
 		{
 			aiString str;
-			mat->GetTexture(type, i, &str);
+			p_material->GetTexture(p_type, i, &str);
 			// check if texture was loaded before and if so, continue to next iteration: skip loading a new texture
 			bool skip = false;
-			for (uint32 j = 0; j < texturesLoaded.size(); j++)
+			for (uint32 j = 0; j < m_textures_loaded.size(); j++)
 			{
-				if (std::strcmp(texturesLoaded [j].path.data(), str.C_Str()) == 0)
+				if (std::strcmp(m_textures_loaded [j].m_path.data(), str.C_Str()) == 0)
 				{
-					textures.push_back(texturesLoaded [j]);
+					textures.push_back(m_textures_loaded [j]);
 					skip = true;
 					break;
 				}
@@ -244,21 +266,21 @@ namespace Spore
 			{
 				// if texture hasn't been loaded already, load it
 				Texture texture;
-				texture.ID = TextureFromFile(str.C_Str(), this->directory);
-				texture.type = typeName;
-				texture.path = str.C_Str();
+				texture.m_ID = TextureFromFile(str.C_Str(), this->m_directory);
+				texture.m_type = p_type_name;
+				texture.m_path = str.C_Str();
 				textures.push_back(texture);
 				// store it as texture loaded for entire model, to ensure we won't unnecessary load duplicate textures
-				texturesLoaded.push_back(texture);
+				m_textures_loaded.push_back(texture);
 			}
 		}
 		return textures;
 	}
 
-	uint32 TextureFromFile(const char* path, const std::string& directory, bool gamma)
+	uint32 TextureFromFile(const char* p_path, const std::string& p_directory, bool p_gamma)
 	{
-		std::string filename = std::string(path);
-		filename = directory + '/' + filename;
+		std::string filename = std::string(p_path);
+		filename = p_directory + '/' + filename;
 
 		uint32 textureID;
 		glGenTextures(1, &textureID);
@@ -288,32 +310,10 @@ namespace Spore
 		}
 		else
 		{
-			std::cout << "SporeEngine::Model: Texture failed to load at path: " << path << std::endl;
+			std::cout << "SporeEngine::Model: Texture failed to load at path: " << p_path << std::endl;
 			stbi_image_free(data);
 		}
 
 		return textureID;
-	}
-
-	void Model::AddObserver(ModelObserver* observer_p)
-	{
-		observerList.push_back(observer_p);
-	}
-
-	void Model::RemoveObserver(ModelObserver* observer_p)
-	{
-		const std::vector<ModelObserver*>::iterator it = std::find(observerList.begin(), observerList.end(), observer_p);
-		if (it != observerList.end())
-		{
-			observerList.erase(it);
-		}
-	}
-
-	void Model::DeleteModel()
-	{
-		for (ModelObserver* observer : observerList)
-		{
-			observer->OnModelDeleted(this);
-		}
 	}
 }

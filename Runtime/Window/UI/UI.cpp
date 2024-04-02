@@ -10,10 +10,10 @@ namespace Spore
 {
 	const char* glsl_version = "#version 130";
 
-	UI::UI(MainWindow* window_p)
+	UI::UI(MainWindow* p_window)
 	{
 		InitImages();
-		InitImGui(window_p);
+		InitImGui(p_window);
 	}
 
 	UI::~UI()
@@ -21,7 +21,7 @@ namespace Spore
 
 	}
 
-	void UI::InitImGui(MainWindow* window_p)
+	void UI::InitImGui(MainWindow* p_window)
 	{
 		IMGUI_CHECKVERSION();
 		ImGui::CreateContext();
@@ -32,7 +32,7 @@ namespace Spore
 		//io.ConfigFlags |= ImGuiConfigFlags_NavEnableSetMousePos;
 
 		//ImGui::StyleColorsDark();
-		ImGui_ImplGlfw_InitForOpenGL(window_p->window, true);
+		ImGui_ImplGlfw_InitForOpenGL(p_window->m_window, true);
 		ImGui_ImplOpenGL3_Init(glsl_version);
 		ImGuiStyle& style = ImGui::GetStyle();
 		style.Colors [ImGuiCol_TitleBg] = ImVec4(0.289f, 0.289f, 0.289f, 1.0f);
@@ -69,7 +69,7 @@ namespace Spore
 		ImGui::DestroyContext();
 	}
 
-	void UI::RenderPanels(MainWindow* window_p)
+	void UI::RenderPanels(MainWindow* p_window)
 	{
 		/*int32 displayW, displayH;
 		glfwGetFramebufferSize(window_p->window, &displayW, &displayH);
@@ -77,19 +77,19 @@ namespace Spore
 		io.DisplaySize.x = displayW;
 		io.DisplaySize.y = displayH;*/
 
-		RenderMenuBar(window_p);
-		RenderHierarchyPanel(window_p);
+		RenderMenuBar(p_window);
+		RenderHierarchyPanel(p_window);
 		//RenderScenePanel(window);
-		RenderInspectorPanel(window_p);
-		RenderProjectPanel(window_p);
-		RenderConsolePanel(window_p);
+		RenderInspectorPanel(p_window);
+		RenderProjectPanel(p_window);
+		RenderConsolePanel(p_window);
 
 		ShowDemoWindow();
 	}
 
-	void UI::RenderMenuBar(MainWindow* window_p)
+	void UI::RenderMenuBar(MainWindow* p_window)
 	{
-		int32 width = window_p->width;
+		int32 width = p_window->m_width;
 		int32 height = (int32) (ImGui::GetTextLineHeightWithSpacing() + ImGui::GetStyle().FramePadding.y * 2.0f);
 		ImGui::SetNextWindowPos(ImVec2(0.0f, 0.0f), ImGuiCond_Always);
 		ImGui::SetNextWindowSize(ImVec2((float32) width, (float32) height), ImGuiCond_Always);
@@ -121,7 +121,7 @@ namespace Spore
 					ImGui::Separator();
 					if (ImGui::MenuItem("Exit"))
 					{
-						glfwSetWindowShouldClose(window_p->window, true);
+						glfwSetWindowShouldClose(p_window->m_window, true);
 					}
 
 					ImGui::SeparatorText("============");
@@ -132,33 +132,33 @@ namespace Spore
 						filePath = &importAssetsPath;*/
 						//showImportModelPanel = true;
 
-						importAssetsPath = Files::GetInstance().GetAssetsPath() / "Models";
-						FileExplorer(window_p, &importAssetsPath);
+						m_import_assets_path = Files::GetInstance().GetAssetsPath() / "Models";
+						FileExplorer(p_window, &m_import_assets_path);
 						//importAssetsPath = Files::GetInstance().GetAssetsPath() / "Models/cube.fbx";
 						static char model_path [512];
-						strcpy_s(model_path, importAssetsPath.string().c_str());
+						strcpy_s(model_path, m_import_assets_path.string().c_str());
 						std::string path_s = model_path;
 						Model* new_model = new Model(std::filesystem::path(path_s));
 					}
 					if (ImGui::MenuItem("Import Shader"))
 					{
-						showImportShaderPanel = true;
+						m_show_import_shader_panel = true;
 					}
 					if (ImGui::MenuItem("Import Texture"))
 					{
-						showImportTexturePanel = true;
+						m_show_import_texture_panel = true;
 					}
 					ImGui::SeparatorText("General Setting");
-					ImGui::Checkbox("Show Skybox", &window_p->renderPipeline->skyboxOn);
+					ImGui::Checkbox("Show Skybox", &p_window->m_render_pipeline->m_skybox_on);
 					ImGui::Separator();
-					ImGui::Checkbox("Gamma Correction", &window_p->renderPipeline->gammaCorrection);
-					ImGui::Checkbox("Shadow Mapping", &window_p->renderPipeline->shadowMapOn);
-					ImGui::Checkbox("Post Process", &window_p->renderPipeline->postProcessOn);
+					ImGui::Checkbox("Gamma Correction", &p_window->m_render_pipeline->m_gamma_correction_on);
+					ImGui::Checkbox("Shadow Mapping", &p_window->m_render_pipeline->m_shadow_map_on);
+					ImGui::Checkbox("Post Process", &p_window->m_render_pipeline->m_post_process_on);
 					ImGui::Separator();
-					ImGui::SliderFloat("Camera Speed", &window_p->camera->MovementSpeed, 0.0f, 50.0f);
+					ImGui::SliderFloat("Camera Speed", &p_window->m_camera->m_movement_speed, 0.0f, 50.0f);
 					static int32 windowSizeIndex = -1;
-					ImGui::Checkbox("Console", &showConsole);
-					ImGui::Checkbox("Demo Window", &show_demo_window);
+					ImGui::Checkbox("Console", &m_show_console);
+					ImGui::Checkbox("Demo Window", &m_show_demo_window);
 					ImGui::SeparatorText("============");
 					ImGui::SeparatorText("============");
 
@@ -348,10 +348,10 @@ namespace Spore
 		}
 	}
 
-	void UI::RenderHierarchyPanel(MainWindow* window_p)
+	void UI::RenderHierarchyPanel(MainWindow* p_window)
 	{
-		int32 width = window_p->width / 6 > 200 ? window_p->width / 6 : 200;
-		int32 height = window_p->height / 3 * 2 > 400 ? window_p->height / 3 * 2 : 400;
+		int32 width = p_window->m_width / 6 > 200 ? p_window->m_width / 6 : 200;
+		int32 height = p_window->m_height / 3 * 2 > 400 ? p_window->m_height / 3 * 2 : 400;
 		int32 height1 = (int32) (ImGui::GetTextLineHeightWithSpacing() + ImGui::GetStyle().FramePadding.y * 0.5f);
 		ImGui::SetNextWindowPos(ImVec2(0.0f, (float32) height1), ImGuiCond_Always);
 		ImGui::SetNextWindowSize(ImVec2((float32) width, (float32) (height - height1)), ImGuiCond_Always);
@@ -360,26 +360,26 @@ namespace Spore
 		windowFlags = ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoCollapse;
 		{
 			ImGui::Begin("Hierarchy", &pOpen, windowFlags);
-			std::map<std::string, Scene*> sceneMapper = window_p->renderPipeline->sceneMapper;
+			std::map<std::string, Scene*> sceneMapper = p_window->m_render_pipeline->m_scene_mapper;
 			std::map<std::string, Object*> objectMapper;
 			std::map<std::string, std::map<std::string, Object*>> sceneObjectMapper;
 			for (std::map<std::string, Scene*>::iterator it_scene = sceneMapper.begin(); it_scene != sceneMapper.end(); it_scene++)
 			{
-				objectMapper = it_scene->second->objectMapper;
+				objectMapper = it_scene->second->m_object_mapper;
 				sceneObjectMapper.insert(std::make_pair(it_scene->first, objectMapper));
 			}
-			if (selectedSceneIdentifier != "")
+			if (m_selected_scene_identifier != "")
 			{
-				selectedScene = sceneMapper.find(selectedSceneIdentifier)->second;
-				if (selectedObjectIdentifier != "")
+				m_selected_scene = sceneMapper.find(m_selected_scene_identifier)->second;
+				if (m_selected_object_identifier != "")
 				{
-					selectedObject = selectedScene->objectMapper.find(selectedObjectIdentifier)->second;
-					selectedObject->selected = true;
+					m_selected_object = m_selected_scene->m_object_mapper.find(m_selected_object_identifier)->second;
+					m_selected_object->m_selected = true;
 				}
 			}
 			for (std::map<std::string, Scene*>::iterator it_scene = sceneMapper.begin(); it_scene != sceneMapper.end(); it_scene++)
 			{
-				if (ImGui::CollapsingHeader(it_scene->second->identifier.c_str(), true))
+				if (ImGui::CollapsingHeader(it_scene->second->m_identifier.c_str(), true))
 				{
 					if (ImGui::BeginPopupContextItem())
 					{
@@ -390,7 +390,7 @@ namespace Spore
 								if (ImGui::MenuItem("Model", NULL, false, true))
 								{
 									std::string name = "model";
-									ModelObject* object = new ModelObject("obj_" + std::to_string(it_scene->second->objIndex++) + "_" + name);
+									ModelObject* object = new ModelObject("obj_" + std::to_string(it_scene->second->m_object_index++) + "_" + name);
 									//object->AddModel(modelMapper [name]);
 									it_scene->second->AddObject(object);
 									//modelMapper [name]->AddObserver(object);
@@ -417,30 +417,30 @@ namespace Spore
 						}
 						ImGui::EndPopup();
 					}
-					objectMapper = it_scene->second->objectMapper;
+					objectMapper = it_scene->second->m_object_mapper;
 					for (std::map<std::string, Object*>::iterator it_object = objectMapper.begin(); it_object != objectMapper.end(); it_object++)
 					{
-						if (ImGui::Selectable(it_object->second->identifier.c_str(), selectedObjectIdentifier == it_object->second->identifier))
+						if (ImGui::Selectable(it_object->second->m_identifier.c_str(), m_selected_object_identifier == it_object->second->m_identifier))
 						{
 							/*if (ImGui::IsItemClicked())
 							{
 								selectedSceneIdentifier = it_scene->second->identifier;
 								std::cout << selectedSceneIdentifier << std::endl;
 							}*/
-							selectedObjectIdentifier = it_object->second->identifier;
-							selectedObject = it_scene->second->objectMapper.find(selectedObjectIdentifier)->second;
-							selectedObject->selected = true;
+							m_selected_object_identifier = it_object->second->m_identifier;
+							m_selected_object = it_scene->second->m_object_mapper.find(m_selected_object_identifier)->second;
+							m_selected_object->m_selected = true;
 						}
 						if (ImGui::BeginPopupContextItem())
 						{
-							selectedObjectIdentifier = it_object->second->identifier;
-							ImGui::Text("%s", selectedObjectIdentifier.c_str());
+							m_selected_object_identifier = it_object->second->m_identifier;
+							ImGui::Text("%s", m_selected_object_identifier.c_str());
 							ImGui::Separator();
 							ImGui::MenuItem("Rename", NULL, false, true);
 							ImGui::MenuItem("Duplicate", NULL, false, true);
 							if (ImGui::MenuItem("Delete", NULL, false, true))
 							{
-								std::string name = selectedObjectIdentifier;
+								std::string name = m_selected_object_identifier;
 								std::string subName = "";
 								uint64 startPos = name.find("_");
 								if (startPos != std::string::npos)
@@ -451,12 +451,12 @@ namespace Spore
 										subName = name.substr(endPos + 1);
 									}
 								}
-								AssetsManager::GetInstance().modelCounter [subName]--;
+								AssetsManager::GetInstance().m_model_counter [subName]--;
 								//scene->objectMapper.erase(name);
 								objectMapper.erase(name);
-								it_scene->second->objectMapper.erase(name);
+								it_scene->second->m_object_mapper.erase(name);
 								it_object = objectMapper.begin();
-								selectedObjectIdentifier = "";
+								m_selected_object_identifier = "";
 							}
 							ImGui::Separator();
 							if (ImGui::MenuItem("Close", NULL, false, true))
@@ -472,17 +472,17 @@ namespace Spore
 		}
 	}
 
-	void UI::RenderScenePanel(MainWindow* window_p)
+	void UI::RenderScenePanel(MainWindow* p_window)
 	{
 
 	}
 
-	void UI::RenderInspectorPanel(MainWindow* window_p)
+	void UI::RenderInspectorPanel(MainWindow* p_window)
 	{
-		int32 width = window_p->width / 6 > 200 ? window_p->width / 6 : 200;
-		int32 height = window_p->height / 3 * 2 > 400 ? window_p->height / 3 * 2 : 400;
+		int32 width = p_window->m_width / 6 > 200 ? p_window->m_width / 6 : 200;
+		int32 height = p_window->m_height / 3 * 2 > 400 ? p_window->m_height / 3 * 2 : 400;
 		int32 height1 = (int32) (ImGui::GetTextLineHeightWithSpacing() + ImGui::GetStyle().FramePadding.y * 0.5f);
-		ImGui::SetNextWindowPos(ImVec2((float32) (window_p->width - width), (float32) height1), ImGuiCond_Always);
+		ImGui::SetNextWindowPos(ImVec2((float32) (p_window->m_width - width), (float32) height1), ImGuiCond_Always);
 		ImGui::SetNextWindowSize(ImVec2((float32) width, (float32) (height - height1)), ImGuiCond_Always);
 		ImGuiWindowFlags windowFlags = 0;
 		static bool pOpen = true;
@@ -490,16 +490,16 @@ namespace Spore
 		{
 			ImGui::Begin("Inspector", &pOpen, windowFlags);
 
-			if (selectedObject != nullptr)
+			if (m_selected_object != nullptr)
 			{
-				if (ImGui::CollapsingHeader(selectedObject->identifier.c_str(), true))
+				if (ImGui::CollapsingHeader(m_selected_object->m_identifier.c_str(), true))
 				{
-					ImGui::Text("Type: %s", selectedObject->type.c_str());
+					ImGui::Text("Type: %s", m_selected_object->m_type.c_str());
 					ImGui::Separator();
 					ImGui::Text("Models");
-					for (std::pair<std::string, Model*> it_model : selectedObject->modelMapper)
+					for (std::pair<std::string, Model*> it_model : m_selected_object->m_model_mapper)
 					{
-						ImGui::Text(it_model.second->identifier.c_str());
+						ImGui::Text(it_model.second->m_identifier.c_str());
 						ImGui::Separator();
 					}
 					const char* layers [] = {
@@ -528,9 +528,9 @@ namespace Spore
 						}
 						ImGui::EndCombo();
 					}
-					postProcessMapper = *window_p->renderPipeline->GetPostProcesser()->GetPostProcesses();
+					m_post_process_mapper = *p_window->m_render_pipeline->GetPostProcesser()->GetPostProcesses();
 					std::vector<std::string> postProcesses;
-					for (const std::pair<std::string, PostProcess*> it_postProcess : postProcessMapper)
+					for (const std::pair<std::string, PostProcess*> it_postProcess : m_post_process_mapper)
 					{
 						postProcesses.push_back(it_postProcess.first);
 					}
@@ -544,8 +544,8 @@ namespace Spore
 							if (ImGui::Selectable(postProcesses [i].c_str(), isSelected))
 							{
 								currentPostProcess = i;
-								window_p->renderPipeline->postProcess = postProcesses [currentPostProcess];
-								window_p->renderPipeline->GetPostProcesser()->SetPostProcess(postProcesses [currentPostProcess]);
+								p_window->m_render_pipeline->m_post_process = postProcesses [currentPostProcess];
+								p_window->m_render_pipeline->GetPostProcesser()->SetPostProcess(postProcesses [currentPostProcess]);
 							}
 							if (isSelected)
 							{
@@ -557,7 +557,7 @@ namespace Spore
 				}
 				if (ImGui::CollapsingHeader("Transform", true))
 				{
-					vec3f pos = selectedObject->GetPosition();
+					vec3f pos = m_selected_object->GetPosition();
 					float position [3] = { pos.x, pos.y, pos.z };
 					ImGui::Text("Position");
 					ImGui::PushID("Inspector:Transform:Position");
@@ -565,7 +565,7 @@ namespace Spore
 					ImGui::PopID();
 					ImGui::SameLine();
 					ImGui::PushID("Inspector:Transform:ImageButtonResetPosition");
-					if (ImGui::ImageButton((ImTextureID) (intptr_t) btnImgReset->ID, ImVec2(13, 13)))
+					if (ImGui::ImageButton((ImTextureID) (intptr_t) m_button_image_reset->m_ID, ImVec2(13, 13)))
 					{	
 					}
 					if (ImGui::IsItemClicked())
@@ -575,8 +575,8 @@ namespace Spore
 						position [2] = 0.0f;
 					}
 					ImGui::PopID();
-					selectedObject->SetPosition(vec3f(position [0], position [1], position [2]));
-					vec3f rot = selectedObject->GetRotation();
+					m_selected_object->SetPosition(vec3f(position [0], position [1], position [2]));
+					vec3f rot = m_selected_object->GetRotation();
 					float rotation [3] = { rot.x, rot.y, rot.z };
 					ImGui::Text("Rotation");
 					ImGui::PushID("Inspector:Transform:Rotation");
@@ -584,7 +584,7 @@ namespace Spore
 					ImGui::PopID();
 					ImGui::SameLine();
 					ImGui::PushID("Inspector:Transform:ImageButtonResetRotation");
-					if (ImGui::ImageButton((ImTextureID) (intptr_t) btnImgReset->ID, ImVec2(13, 13)))
+					if (ImGui::ImageButton((ImTextureID) (intptr_t) m_button_image_reset->m_ID, ImVec2(13, 13)))
 					{
 					}
 					if (ImGui::IsItemClicked())
@@ -594,8 +594,8 @@ namespace Spore
 						rotation [2] = 0.0f;
 					}
 					ImGui::PopID();
-					selectedObject->SetRotation(vec3f(rotation [0], rotation [1], rotation [2]));
-					vec3f sca = selectedObject->GetScale();
+					m_selected_object->SetRotation(vec3f(rotation [0], rotation [1], rotation [2]));
+					vec3f sca = m_selected_object->GetScale();
 					float scale [3] = { sca.x, sca.y, sca.z };
 					ImGui::Text("Scale");
 					ImGui::PushID("Inspector:Transform:Scale");
@@ -603,7 +603,7 @@ namespace Spore
 					ImGui::PopID();
 					ImGui::SameLine();
 					ImGui::PushID("Inspector:Transform:ImageButtonResetScale");
-					if (ImGui::ImageButton((ImTextureID) (intptr_t) btnImgReset->ID, ImVec2(13, 13)))
+					if (ImGui::ImageButton((ImTextureID) (intptr_t) m_button_image_reset->m_ID, ImVec2(13, 13)))
 					{
 					}
 					if (ImGui::IsItemClicked())
@@ -613,17 +613,17 @@ namespace Spore
 						scale [2] = 1.0f;
 					}
 					ImGui::PopID();
-					selectedObject->SetScale(vec3f(scale [0], scale [1], scale [2]));
+					m_selected_object->SetScale(vec3f(scale [0], scale [1], scale [2]));
 				}
-				std::unordered_map<std::string, Component*> components = selectedObject->GetComponents();
+				std::unordered_map<std::string, Component*> components = m_selected_object->GetComponents();
 				if (ImGui::CollapsingHeader("Shader", true))
 				{
 					ShaderComponent* shaderComponent = dynamic_cast<ShaderComponent*>(components.find("Shader")->second);
 					for (std::pair<std::string, ShaderNode*> it_shader : shaderComponent->GetShaders())
 					{
-						ImGui::Text(it_shader.second->shader->identifier.c_str());
-						ImGui::Checkbox("Is dLoading", &it_shader.second->isLoading);
-						ImGui::Checkbox("Alpha Filter", &it_shader.second->shader->alphaFilterFlag);
+						ImGui::Text(it_shader.second->m_shader->m_identifier.c_str());
+						ImGui::Checkbox("Is dLoading", &it_shader.second->m_is_loading);
+						ImGui::Checkbox("Alpha Filter", &it_shader.second->m_shader->m_alpha_filter_flag);
 						ImGui::Separator();
 					}
 				}
@@ -634,11 +634,11 @@ namespace Spore
 		}
 	}
 
-	void UI::RenderProjectPanel(MainWindow* window_p)
+	void UI::RenderProjectPanel(MainWindow* p_window)
 	{
-		int32 width = window_p->width / 10 * 6 > 200 ? window_p->width / 10 * 6 : 200;
-		int32 height = window_p->height / 3 > 300 ? window_p->height / 3 : 300;
-		ImGui::SetNextWindowPos(ImVec2(0.0f, (float32) (window_p->height - height)), ImGuiCond_Always);
+		int32 width = p_window->m_width / 10 * 6 > 200 ? p_window->m_width / 10 * 6 : 200;
+		int32 height = p_window->m_height / 3 > 300 ? p_window->m_height / 3 : 300;
+		ImGui::SetNextWindowPos(ImVec2(0.0f, (float32) (p_window->m_height - height)), ImGuiCond_Always);
 		ImGui::SetNextWindowSize(ImVec2((float32) width, (float32) height), ImGuiCond_Always);
 		ImGuiWindowFlags windowFlags = 0;
 		static bool pOpen = true;
@@ -648,17 +648,17 @@ namespace Spore
 			std::vector<std::string> shaderIdentifiers;
 			std::vector<std::string> textureIdentifiers;
 			std::vector<std::string> modelIdentifiers;
-			std::map<std::string, Shader*> shaderMapper = AssetsManager::GetInstance().shaderMapper;
+			std::map<std::string, Shader*> shaderMapper = AssetsManager::GetInstance().m_shader_mapper;
 			for (std::map<std::string, Shader*>::iterator it = shaderMapper.begin(); it != shaderMapper.end(); it++)
 			{
 				shaderIdentifiers.push_back(it->first);
 			}
-			std::map<std::string, Texture*> textureMapper = AssetsManager::GetInstance().textureMapper;
+			std::map<std::string, Texture*> textureMapper = AssetsManager::GetInstance().m_texture_mapper;
 			for (std::map<std::string, Texture*>::iterator it = textureMapper.begin(); it != textureMapper.end(); it++)
 			{
 				textureIdentifiers.push_back(it->first);
 			}
-			std::map<std::string, Model*> modelMapper = AssetsManager::GetInstance().modelMapper;
+			std::map<std::string, Model*> modelMapper = AssetsManager::GetInstance().m_model_mapper;
 			for (std::map<std::string, Model*>::iterator it = modelMapper.begin(); it != modelMapper.end(); it++)
 			{
 				modelIdentifiers.push_back(it->first);
@@ -679,10 +679,10 @@ namespace Spore
 							if (ImGui::Button("Create Object"))
 							{
 								std::string name = modelIdentifiers [n];
-								Scene* scene = window_p->renderPipeline->sceneMapper.find("scene_1")->second;
+								Scene* scene = p_window->m_render_pipeline->m_scene_mapper.find("scene_1")->second;
 								//std::shared_ptr<Object> object = std::make_shared<Object>("obj_" + std::to_string(modelCount) + "_" + modelMapper [name]->identifier);
 								//std::shared_ptr<ModelObject> object = std::make_shared<ModelObject>("obj_" + std::to_string(modelCount) + "_" + modelMapper [name]->identifier);
-								ModelObject* object = new ModelObject("obj_" + std::to_string(scene->objIndex++) + "_" + modelMapper [name]->identifier);
+								ModelObject* object = new ModelObject("obj_" + std::to_string(scene->m_object_index++) + "_" + modelMapper [name]->m_identifier);
 								object->AddModel(modelMapper [name]);
 								scene->AddObject(object);
 								//modelMapper [name]->AddObserver(object);
@@ -692,12 +692,12 @@ namespace Spore
 							if (ImGui::Button("Remove"))
 							{
 								selected_model = -1;
-								selectedObjectIdentifier = "";
-								selectedObject = nullptr;
+								m_selected_object_identifier = "";
+								m_selected_object = nullptr;
 								std::string name = modelIdentifiers [n];
-								Model* modelTemp = AssetsManager::GetInstance().modelMapper [name];
+								Model* modelTemp = AssetsManager::GetInstance().m_model_mapper [name];
 								delete modelTemp;
-								AssetsManager::GetInstance().modelMapper.erase(name);
+								AssetsManager::GetInstance().m_model_mapper.erase(name);
 							}
 							if (ImGui::Button("Close"))
 								ImGui::CloseCurrentPopup();
@@ -724,7 +724,7 @@ namespace Spore
 							}
 							if (ImGui::Button("Remove"))
 							{
-								Shader* tmp = AssetsManager::GetInstance().shaderMapper [shaderIdentifiers [n]];
+								Shader* tmp = AssetsManager::GetInstance().m_shader_mapper [shaderIdentifiers [n]];
 								/*if (!tmp->IsEditor())
 								{
 									selected_shader = -1;
@@ -756,7 +756,7 @@ namespace Spore
 								ImGui::Text("%s", textureIdentifiers [n].c_str());
 								if (ImGui::Button("Remove"))
 								{
-									Texture* tmp = AssetsManager::GetInstance().textureMapper [textureIdentifiers [n]];
+									Texture* tmp = AssetsManager::GetInstance().m_texture_mapper [textureIdentifiers [n]];
 									/*if (!tmp->is_editor)
 									{
 										selected_tex = -1;
@@ -980,17 +980,17 @@ namespace Spore
 			//}
 			ImGui::End();
 		}
-		ImportShaderPanel(window_p);
-		ImportTexturePanel(window_p);
-		ImportModelPanel(window_p);
-		FileBrowser(window_p, &filePath);
+		ImportShaderPanel(p_window);
+		ImportTexturePanel(p_window);
+		ImportModelPanel(p_window);
+		FileBrowser(p_window, &m_file_path);
 	}
 
-	void UI::RenderConsolePanel(MainWindow* window_p)
+	void UI::RenderConsolePanel(MainWindow* p_window)
 	{
-		int32 width = window_p->width / 10 * 4 > 200 ? window_p->width / 10 * 4 : 200;
-		int32 height = window_p->height / 3 > 300 ? window_p->height / 3 : 300;
-		ImGui::SetNextWindowPos(ImVec2((float32) (window_p->width - width), (float32) (window_p->height - height)), ImGuiCond_Always);
+		int32 width = p_window->m_width / 10 * 4 > 200 ? p_window->m_width / 10 * 4 : 200;
+		int32 height = p_window->m_height / 3 > 300 ? p_window->m_height / 3 : 300;
+		ImGui::SetNextWindowPos(ImVec2((float32) (p_window->m_width - width), (float32) (p_window->m_height - height)), ImGuiCond_Always);
 		ImGui::SetNextWindowSize(ImVec2((float32) width, (float32) height), ImGuiCond_Always);
 		ImGuiWindowFlags windowFlags = 0;
 		static bool pOpen = true;
@@ -1012,7 +1012,7 @@ namespace Spore
 			style.Colors [ImGuiCol_ButtonActive] = ImVec4(0.511f, 0.511f, 0.511f, 1.0f);
 			style.Colors [ImGuiCol_ButtonHovered] = ImVec4(0.422f, 0.422f, 0.422f, 1.0f);
 
-			ImGui::Text("Camera Position: %.2f, %.2f, %.2f", window_p->camera->Position.x, window_p->camera->Position.y, window_p->camera->Position.z);
+			ImGui::Text("Camera Position: %.2f, %.2f, %.2f", p_window->m_camera->m_position.x, p_window->m_camera->m_position.y, p_window->m_camera->m_position.z);
 			ImGui::Text(" %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
 
 			ImGui::End();
@@ -1021,16 +1021,16 @@ namespace Spore
 
 	void UI::InitImages()
 	{
-		btnImgReset = new Texture("./Assets/Utils/Images/reset.png");
+		m_button_image_reset = new Texture("./Assets/Utils/Images/reset.png");
 	}
 
 	void UI::ShowDemoWindow()
 	{
 		ImVec4 backgroungColor(0.725f, 0.725f, 0.725f, 1.0f);
 
-		if (show_demo_window)
+		if (m_show_demo_window)
 		{
-			ImGui::ShowDemoWindow(&show_demo_window);
+			ImGui::ShowDemoWindow(&m_show_demo_window);
 		}
 
 		// show a simple window
@@ -1057,48 +1057,48 @@ namespace Spore
 		//}
 	}
 
-	void UI::ImportModelPanel(MainWindow* window_p)
+	void UI::ImportModelPanel(MainWindow* p_window)
 	{
-		if (!showImportModelPanel)
+		if (!m_show_import_model_panel)
 			return;
 		int32 width = 700;
 		int32 height = 400;
-		ImGui::SetNextWindowPos(ImVec2((float32) ((window_p->width - width) / 2), (float32) ((window_p->height - height) / 2)), ImGuiCond_Appearing);
+		ImGui::SetNextWindowPos(ImVec2((float32) ((p_window->m_width - width) / 2), (float32) ((p_window->m_height - height) / 2)), ImGuiCond_Appearing);
 		ImGui::SetNextWindowSize(ImVec2((float32) width, (float32) height), ImGuiCond_Appearing);
 		{
 			ImGui::Begin("Import Model");
 			static char model_path [128];
-			strcpy_s(model_path, importAssetsPath.string().c_str());
+			strcpy_s(model_path, m_import_assets_path.string().c_str());
 			static std::string info = "";
 			
 			ImGui::InputText("Path", model_path, IM_ARRAYSIZE(model_path));
 			ImGui::SameLine();
 			if (ImGui::Button("..."))
 			{
-				importAssetsPath = Files::GetInstance().GetAssetsPath() / "Models";
-				filePath = importAssetsPath;
+				m_import_assets_path = Files::GetInstance().GetAssetsPath() / "Models";
+				m_file_path = m_import_assets_path;
 				//showFileBrowser = true;
-				FileExplorer(window_p, &filePath);
+				FileExplorer(p_window, &m_file_path);
 			}
 			if (ImGui::Button("Cancel"))
 			{
-				showImportModelPanel = false;
-				strcpy_s(model_path, importAssetsPath.string().c_str());
+				m_show_import_model_panel = false;
+				strcpy_s(model_path, m_import_assets_path.string().c_str());
 			}
 			ImGui::SameLine();
 			if (ImGui::Button("Confirm"))
 			{
-				std::lock_guard<std::mutex> lock(gMutex);
+				std::lock_guard<std::mutex> lock(g_global_mutex);
 				std::string path_s = model_path;
 				Model* new_model = new Model(std::filesystem::path(path_s));
-				if (new_model->meshes.size() == 0)
+				if (new_model->m_meshes.size() == 0)
 				{
 					info = "Load failed";
 				}
 				else
 				{
-					showImportModelPanel = false;
-					strcpy_s(model_path, importAssetsPath.string().c_str());
+					m_show_import_model_panel = false;
+					strcpy_s(model_path, m_import_assets_path.string().c_str());
 				}
 			}
 			ImGui::Text(info.c_str());
@@ -1106,15 +1106,15 @@ namespace Spore
 		}
 	}
 
-	void UI::ImportShaderPanel(MainWindow* window_p)
+	void UI::ImportShaderPanel(MainWindow* p_window)
 	{
-		if (!showImportShaderPanel)
+		if (!m_show_import_shader_panel)
 		{
 			return;
 		}
 		int32 width = 500;
 		int32 height = 200;
-		ImGui::SetNextWindowPos(ImVec2((float32) ((window_p->width - width) / 2), (float32) ((window_p->height - height) / 2)), ImGuiCond_Appearing);
+		ImGui::SetNextWindowPos(ImVec2((float32) ((p_window->m_width - width) / 2), (float32) ((p_window->m_height - height) / 2)), ImGuiCond_Appearing);
 		ImGui::SetNextWindowSize(ImVec2((float32) width, (float32) height), ImGuiCond_Appearing);
 		ImGui::SetNextWindowSize(ImVec2(400, 200), ImGuiCond_FirstUseEver);
 		{
@@ -1130,7 +1130,7 @@ namespace Spore
 
 			if (ImGui::Button("Cancel"))
 			{
-				showImportShaderPanel = false;
+				m_show_import_shader_panel = false;
 				strcpy_s(vertex_path, "vertex path..");
 				strcpy_s(frag_path, "frag path..");
 			}
@@ -1146,7 +1146,7 @@ namespace Spore
 				}
 				else
 				{
-					showImportShaderPanel = false;
+					m_show_import_shader_panel = false;
 					strcpy_s(vertex_path, "vert path..");
 					strcpy_s(frag_path, "frag path..");
 				}
@@ -1156,33 +1156,33 @@ namespace Spore
 		}
 	}
 
-	void UI::ImportTexturePanel(MainWindow* window_p)
+	void UI::ImportTexturePanel(MainWindow* p_window)
 	{
-		if (!showImportTexturePanel)
+		if (!m_show_import_texture_panel)
 		{
 			return;
 		}
 		int32 width = 500;
 		int32 height = 200;
-		ImGui::SetNextWindowPos(ImVec2((float32) ((window_p->width - width) / 2), (float32) ((window_p->height - height) / 2)), ImGuiCond_Appearing);
+		ImGui::SetNextWindowPos(ImVec2((float32) ((p_window->m_width - width) / 2), (float32) ((p_window->m_height - height) / 2)), ImGuiCond_Appearing);
 		ImGui::SetNextWindowSize(ImVec2((float32) width, (float32) height), ImGuiCond_Appearing);
 		ImGui::Begin("Import Texture");
 		static char tex_path [128];
-		strcpy_s(tex_path, importAssetsPath.string().c_str());
+		strcpy_s(tex_path, m_import_assets_path.string().c_str());
 		static std::string info = "";
 		ImGui::InputText("Texture Path", tex_path, IM_ARRAYSIZE(tex_path));
 		ImGui::SameLine();
 		if (ImGui::Button("..."))
 		{
-			importAssetsPath = Files::GetInstance().GetAssetsPath() / "Textures";
-			filePath = importAssetsPath;
+			m_import_assets_path = Files::GetInstance().GetAssetsPath() / "Textures";
+			m_file_path = m_import_assets_path;
 			//showFileBrowser = true;
-			FileExplorer(window_p, &filePath);
+			FileExplorer(p_window, &m_file_path);
 		}
 		if (ImGui::Button("Cancel"))
 		{
-			showImportTexturePanel = false;
-			strcpy_s(tex_path, importAssetsPath.string().c_str());
+			m_show_import_texture_panel = false;
+			strcpy_s(tex_path, m_import_assets_path.string().c_str());
 		}
 		ImGui::SameLine();
 		if (ImGui::Button("Confirm"))
@@ -1195,25 +1195,25 @@ namespace Spore
 			}
 			else
 			{
-				showImportTexturePanel = false;
-				strcpy_s(tex_path, importAssetsPath.string().c_str());
+				m_show_import_texture_panel = false;
+				strcpy_s(tex_path, m_import_assets_path.string().c_str());
 			}
 		}
 		ImGui::Text(info.c_str());
 		ImGui::End();
 	}
 
-	void UI::FileBrowser(MainWindow* window_p, std::filesystem::path* path_p)
+	void UI::FileBrowser(MainWindow* p_window, std::filesystem::path* p_path)
 	{
 		try
 		{
-			if (!showFileBrowser)
+			if (!m_show_file_browser)
 			{
 				return;
 			}
 			int32 width = 500;
 			int32 height = 300;
-			ImGui::SetNextWindowPos(ImVec2((float32) ((window_p->width - width) / 2), (float32) ((window_p->height - height) / 2)), ImGuiCond_Appearing);
+			ImGui::SetNextWindowPos(ImVec2((float32) ((p_window->m_width - width) / 2), (float32) ((p_window->m_height - height) / 2)), ImGuiCond_Appearing);
 			ImGui::SetNextWindowSize(ImVec2((float32) width, (float32) height), ImGuiCond_Appearing);
 
 			ImGui::Begin("File Browser");
@@ -1221,13 +1221,13 @@ namespace Spore
 
 			if (ImGui::Button(".."))
 			{
-				*path_p = path_p->parent_path();
+				*p_path = p_path->parent_path();
 			}
 			ImGui::SameLine();
 			std::vector<fs::path> roots = Files::GetInstance().GetRootPaths();
 			int32 rootNum = (int32) roots.size();
 			static int32 rootIndex = 0;
-			if (ImGui::BeginCombo("root paths", path_p->string().c_str()))
+			if (ImGui::BeginCombo("root paths", p_path->string().c_str()))
 			{
 				for (int32 n = 0; n < rootNum; n++)
 				{
@@ -1235,7 +1235,7 @@ namespace Spore
 					if (ImGui::Selectable(roots [n].string().c_str(), isSelected))
 					{
 						rootIndex = n;
-						*path_p = fs::path(roots [n].string().c_str());
+						*p_path = fs::path(roots [n].string().c_str());
 					}
 					if (isSelected)
 						ImGui::SetItemDefaultFocus();
@@ -1243,7 +1243,7 @@ namespace Spore
 				ImGui::EndCombo();
 			}
 			std::vector<fs::directory_entry> files;
-			for (auto const& dir_entry : fs::directory_iterator { *path_p })
+			for (auto const& dir_entry : fs::directory_iterator { *p_path })
 			{
 				files.push_back(dir_entry);
 			}
@@ -1271,12 +1271,12 @@ namespace Spore
 					{
 						if (fs::is_directory(files [selectedFile]))
 						{
-							*path_p = files [selectedFile].path();
+							*p_path = files [selectedFile].path();
 						}
 						else
 						{
-							*path_p = files [selectedFile].path();
-							showFileBrowser = false;
+							*p_path = files [selectedFile].path();
+							m_show_file_browser = false;
 						}
 						selectedFile = -1;
 					}
@@ -1289,7 +1289,7 @@ namespace Spore
 			ImGui::EndChild();
 			if (ImGui::Button("Cancel"))
 			{
-				showFileBrowser = false;
+				m_show_file_browser = false;
 			}
 			ImGui::SameLine();
 			if (ImGui::Button("Confirm"))
@@ -1298,18 +1298,18 @@ namespace Spore
 				{
 					if (fs::is_directory(files [selectedFile]))
 					{
-						*path_p = files [selectedFile].path();
+						*p_path = files [selectedFile].path();
 					}
 					else
 					{
-						*path_p = files [selectedFile].path();
-						showFileBrowser = false;
+						*p_path = files [selectedFile].path();
+						m_show_file_browser = false;
 					}
 					selectedFile = -1;
 				}
 				else
 				{
-					showFileBrowser = false;
+					m_show_file_browser = false;
 				}
 			}
 			ImGui::PopStyleVar();
@@ -1322,7 +1322,7 @@ namespace Spore
 
 	}
 
-	void UI::FileExplorer(MainWindow* window_p, std::filesystem::path* path_p)
+	void UI::FileExplorer(MainWindow* p_window, std::filesystem::path* p_path)
 	{
 		try
 		{
@@ -1340,8 +1340,8 @@ namespace Spore
 
 			if (GetOpenFileName(&ofn) == TRUE)
 			{
-				std::filesystem::path filePath(ofn.lpstrFile);
-				*path_p = filePath;
+				std::filesystem::path m_file_path(ofn.lpstrFile);
+				*p_path = m_file_path;
 			}
 		}
 		catch (const std::filesystem::filesystem_error& ex)

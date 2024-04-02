@@ -12,34 +12,32 @@ namespace Spore
 {
 	struct Vertex
 	{
-		vec3f Position;
-		vec3f Normal;
-		vec2f TexCoords;
-		vec3f Tangent;
-		vec3f Bitangent;
+		vec3f m_position;
+		vec3f m_normal;
+		vec2f m_tex_coords;
+		vec3f m_tangent;
+		vec3f m_bitangent;
 		// bone indexes which will influence this vertex
-		int16 m_BoneIDs [MAX_BONE_INFLUENCE] = {};
+		int16 m_bone_IDs [MAX_BONE_INFLUENCE] = {};
 		// weights from each bone
-		float32 m_Weights [MAX_BONE_INFLUENCE] = {};
+		float32 m_weights [MAX_BONE_INFLUENCE] = {};
 	};
 
 	class Mesh
 	{
 	public:
-		Mesh(std::vector<Vertex> vertices_p, std::vector<uint32> indices_p, std::vector<Texture> textures_p);
+		Mesh(std::vector<Vertex> p_vertices, std::vector<uint32> p_indices, std::vector<Texture> p_textures);
 		
-		std::vector<Vertex> vertices;
-		std::vector<uint32> indices;
-		std::vector<Texture> textures;
-		uint32 VAO;
+		std::vector<Vertex> m_vertices;
+		std::vector<uint32> m_indices;
+		std::vector<Texture> m_textures;
+		uint32 m_VAO;
 
-		void Draw(Shader& shader_p);
+		void Draw(Shader& p_shader);
 
 	private:
-		// render data
-		uint32 VBO, EBO;
+		uint32 m_VBO, m_EBO;
 
-		// initializes all the buffer objects/arrays
 		void SetupMesh();
 	};
 }

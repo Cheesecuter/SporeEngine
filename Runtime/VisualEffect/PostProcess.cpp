@@ -2,8 +2,8 @@
 
 namespace Spore
 {
-	PostProcess::PostProcess(std::string const& identifier_p, Shader* shader_p) :
-		identifier(identifier_p), shader(shader_p)
+	PostProcess::PostProcess(std::string const& p_identifier, Shader* p_shader) :
+		m_identifier(p_identifier), m_shader(p_shader)
 	{
 
 	}
@@ -13,21 +13,21 @@ namespace Spore
 
 	}
 
-	void PostProcess::SetShader(Shader* shader_p)
+	void PostProcess::SetShader(Shader* p_shader)
 	{
-		shader = shader_p;
-		shader->Use();
-		shader->SetInt("screenTexture", 0);
+		m_shader = p_shader;
+		m_shader->Use();
+		m_shader->SetInt("screenTexture", 0);
 	}
 
 	Shader* PostProcess::GetShader()
 	{
-		return shader;
+		return m_shader;
 	}
 
-	void PostProcess::RenderToFBO(uint32 fbo_p)
+	void PostProcess::RenderToFBO(uint32 p_fbo)
 	{
-		glBindFramebuffer(GL_FRAMEBUFFER, fbo_p);
+		glBindFramebuffer(GL_FRAMEBUFFER, p_fbo);
 		glEnable(GL_DEPTH_TEST);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	}

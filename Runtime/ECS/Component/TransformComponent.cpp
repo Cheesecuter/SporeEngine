@@ -4,66 +4,66 @@ namespace Spore
 {
 	TransformComponent::TransformComponent()
 	{
-		name = "Transform";
+		m_name = "Transform";
 	}
 
-	void TransformComponent::SetPosition(const vec3f& position_p)
+	void TransformComponent::SetPosition(const vec3f& p_position)
 	{
 		//transformBuffer [nextIndex].position = position_p;
-		transformBuffer [currentIndex].position = position_p;
-		transform.position = position_p;
-		isDirty = true;
+		m_transformBuffer [m_currentIndex].m_position = p_position;
+		m_transform.m_position = p_position;
+		m_is_dirty = true;
 	}
 
-	void TransformComponent::SetRotation(const vec3f& rotation_p)
+	void TransformComponent::SetRotation(const vec3f& p_rotation)
 	{
 		//transformBuffer [nextIndex].rotation = rotation_p;
-		transformBuffer [currentIndex].rotation = rotation_p;
-		transform.rotation = rotation_p;
-		isDirty = true;
+		m_transformBuffer [m_currentIndex].m_rotation = p_rotation;
+		m_transform.m_rotation = p_rotation;
+		m_is_dirty = true;
 	}
 
-	void TransformComponent::SetScale(const vec3f& scale_p)
+	void TransformComponent::SetScale(const vec3f& p_scale)
 	{
 		//transformBuffer [nextIndex].scale = scale_p;
-		transformBuffer [currentIndex].scale = scale_p;
-		transform.scale = scale_p;
-		isDirty = true;
-		isScaleDirty = true;
+		m_transformBuffer [m_currentIndex].m_scale = p_scale;
+		m_transform.m_scale = p_scale;
+		m_is_dirty = true;
+		m_is_scale_dirty = true;
 	}
 	
 	vec3f TransformComponent::GetPosition() const
 	{
-		return transformBuffer [currentIndex].position;
+		return m_transformBuffer [m_currentIndex].m_position;
 	}
 	
 	vec3f TransformComponent::GetRotation() const
 	{
-		return transformBuffer [currentIndex].rotation;
+		return m_transformBuffer [m_currentIndex].m_rotation;
 	}
 	
 	vec3f TransformComponent::GetScale() const
 	{
-		return transformBuffer [currentIndex].scale;
+		return m_transformBuffer [m_currentIndex].m_scale;
 	}
 
 	vec3f TransformComponent::GetFront() const
 	{
-		return transformBuffer [currentIndex].front;
+		return m_transformBuffer [m_currentIndex].m_front;
 	}
 
 	vec3f TransformComponent::GetRight() const
 	{
-		return transformBuffer [currentIndex].right;
+		return m_transformBuffer [m_currentIndex].m_right;
 	}
 
 	vec3f TransformComponent::GetUp() const
 	{
-		return transformBuffer [currentIndex].up;
+		return m_transformBuffer [m_currentIndex].m_up;
 	}
 
 	mat4x4f TransformComponent::GetMatrix() const
 	{
-		return transform.GetMatrix();
+		return m_transform.GetMatrix();
 	}
 }

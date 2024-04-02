@@ -3,126 +3,126 @@
 
 namespace Spore
 {
-	Object::Object(const std::string& identifier_p, const bool light_p) : identifier(identifier_p)
+	Object::Object(const std::string& p_identifier, const bool p_light) : m_identifier(p_identifier)
 	{
 		TransformComponent* transformComponent = new TransformComponent();
-		modelMapper = std::map<std::string, Model*>();
-		components [transformComponent->GetName()] = transformComponent;
-		if (!light_p)
+		m_model_mapper = std::map<std::string, Model*>();
+		m_components [transformComponent->GetName()] = transformComponent;
+		if (!p_light)
 		{
 			ShaderComponent* shaderComponent = new ShaderComponent();
-			Shader* shader = AssetsManager::GetInstance().shaderMapper.find("ModelLoadingFragment.glsl")->second;
-			modelShader = shader;
-			shaderComponent->AddShader(modelShader);
+			Shader* shader = AssetsManager::GetInstance().m_shader_mapper.find("ModelLoadingFragment.glsl")->second;
+			m_model_shader = shader;
+			shaderComponent->AddShader(m_model_shader);
 			//Shader* lightingShader = AssetsManager::GetInstance().shaderMapper.find("LightingFragment.glsl")->second;
 			//shaderComponent->AddShader(lightingShader);
-			components [shaderComponent->GetName()] = shaderComponent;
+			m_components [shaderComponent->GetName()] = shaderComponent;
 		}
 	}
 
 	Object::~Object()
 	{
-		for (std::map<std::string, Model*>::iterator it_model = modelMapper.begin(); it_model != modelMapper.end(); it_model++)
+		for (std::map<std::string, Model*>::iterator it_model = m_model_mapper.begin(); it_model != m_model_mapper.end(); it_model++)
 		{
 			it_model->second->RemoveObserver(this);
 		}
-		components.clear();
-		modelMapper.clear();
+		m_components.clear();
+		m_model_mapper.clear();
 		DeleteObject();
 	}
 
-	void Object::AddModel(Model* model_p)
+	void Object::AddModel(Model* p_model)
 	{
-		modelMapper.insert(std::make_pair(model_p->identifier, model_p));
-		modelMapper [model_p->identifier]->AddObserver(this);
+		m_model_mapper.insert(std::make_pair(p_model->m_identifier, p_model));
+		m_model_mapper [p_model->m_identifier]->AddObserver(this);
 	}
 
-	void Object::DeleteModel(Model* model_p)
+	void Object::DeleteModel(Model* p_model)
 	{
-		modelMapper.erase(model_p->identifier);
-		modelMapper [model_p->identifier]->RemoveObserver(this);
+		m_model_mapper.erase(p_model->m_identifier);
+		m_model_mapper [p_model->m_identifier]->RemoveObserver(this);
 	}
 
-	void Object::DeleteModel(std::string identifier_p)
+	void Object::DeleteModel(std::string p_identifier)
 	{
-		modelMapper.erase(identifier_p);
-		modelMapper [identifier_p]->RemoveObserver(this);
+		m_model_mapper.erase(p_identifier);
+		m_model_mapper [p_identifier]->RemoveObserver(this);
 	}
 
-	void Object::OnModelDeleted(Model* model)
+	void Object::OnModelDeleted(Model* p_model)
 	{
-		modelMapper.erase(model->identifier);
+		m_model_mapper.erase(p_model->m_identifier);
 		Object::~Object();
 	}
 
-	void Object::AddObserver(ObjectObserver* observer_p)
+	void Object::AddObserver(ObjectObserver* p_observer)
 	{
-		observerList.push_back(observer_p);
+		m_observer_list.push_back(p_observer);
 	}
 
-	void Object::RemoveObserver(ObjectObserver* observer_p)
+	void Object::RemoveObserver(ObjectObserver* p_observer)
 	{
-		const std::vector<ObjectObserver*>::iterator it = std::find(observerList.begin(), observerList.end(), observer_p);
-		if (it != observerList.end())
+		const std::vector<ObjectObserver*>::iterator it = std::find(m_observer_list.begin(), m_observer_list.end(), p_observer);
+		if (it != m_observer_list.end())
 		{
-			observerList.erase(it);
+			m_observer_list.erase(it);
 		}
 	}
 
 	void Object::DeleteObject()
 	{
-		for (ObjectObserver* observer : observerList)
+		for (ObjectObserver* observer : m_observer_list)
 		{
 			observer->OnObjectDeleted(this);
 		}
 	}
 
-	void Object::Update(float32 deltaTime)
+	void Object::Update(float32 p_deltaTime)
 	{
 
 	}
 
-	void Object::Render(std::vector<Shader*> shaders_p, Camera* camera_p,
-						uint32 scrWidth_p, uint32 scrHeight_p,
-						mat4f projection_p, mat4f view_p, mat4f model_p)
+	void Object::Render(std::vector<Shader*> p_shaders, Camera* p_camera,
+						uint32 p_screen_width, uint32 p_screen_height,
+						mat4f p_projection, mat4f p_view, mat4f p_model)
 	{
-		projection_p = glm::perspective(glm::radians(camera_p->Zoom),
-										(float32) scrWidth_p / (float32) scrHeight_p, 0.1f, 10000.0f);
-		view_p = camera_p->GetViewMatrix();
+		p_projection = glm::perspective(glm::radians(p_camera->m_zoom),
+										(float32) p_screen_width / (float32) p_screen_height, 0.1f, 10000.0f);
+		p_view = p_camera->GetViewMatrix();
 
-		TransformComponent* transformComponent = dynamic_cast<TransformComponent*>(components.find("Transform")->second);
+		TransformComponent* transformComponent = dynamic_cast<TransformComponent*>(m_components.find("Transform")->second);
 		ShaderComponent* shaderComponent = nullptr;
 		Model* model = nullptr;
-		model_p = transformComponent->GetMatrix();
-		for (std::map<std::string, Model*>::iterator it_model = modelMapper.begin(); it_model != modelMapper.end(); it_model++)
+		p_model = transformComponent->GetMatrix();
+		for (std::map<std::string, Model*>::iterator it_model = m_model_mapper.begin(); it_model != m_model_mapper.end(); it_model++)
 		{
 			model = it_model->second;
-			shaderComponent = dynamic_cast<ShaderComponent*>(components.find("Shader")->second);
-			for (uint32 i = 0; i < shaders_p.size(); i++)
+			shaderComponent = dynamic_cast<ShaderComponent*>(m_components.find("Shader")->second);
+			for (uint32 i = 0; i < p_shaders.size(); i++)
 			{
-				shaderComponent->AddShader(shaders_p [i]);
+				shaderComponent->AddShader(p_shaders [i]);
 			}
 
 			for (std::pair<std::string, ShaderNode*> it_shader : shaderComponent->GetShaders())
 			{
-				if (it_shader.second->isLoading)
+				if (it_shader.second->m_is_loading)
 				{
-					it_shader.second->shader->Use();
-					it_shader.second->shader->SetBool("alphaFilterFlag", it_shader.second->shader->alphaFilterFlag);
-					it_shader.second->shader->SetMat4("projection", projection_p);
-					it_shader.second->shader->SetMat4("view", view_p);
-					it_shader.second->shader->SetMat4("model", model_p);
-					model->Draw(*(it_shader.second->shader));
+					it_shader.second->m_shader->Use();
+					it_shader.second->m_shader->SetBool("alphaFilterFlag", it_shader.second->m_shader->m_alpha_filter_flag);
+					it_shader.second->m_shader->SetMat4("projection", p_projection);
+					it_shader.second->m_shader->SetMat4("view", p_view);
+					it_shader.second->m_shader->SetMat4("model", p_model);
+					model->Draw(*(it_shader.second->m_shader));
 				}
 			}
 		}
 	}
 
-	bool Object::HasComponent(const std::string& componentName_p) const
+	bool Object::HasComponent(const std::string& p_component_name) const
 	{
-		for (const std::pair<const std::string, Component*>& it_component : components)
+		for (const std::pair<const std::string, Component*>& it_component : m_components)
 		{
-			if (it_component.second->GetName() == componentName_p)
+			if (it_component.second->GetName() == p_component_name)
 			{
 				return true;
 			}
@@ -133,15 +133,15 @@ namespace Spore
 
 	std::unordered_map<std::string, Component*> Object::GetComponents()
 	{
-		return components;
+		return m_components;
 	}
 
 	template<typename TComponent>
-	TComponent* Object::TryGetComponent(const std::string& componentName_p)
+	TComponent* Object::TryGetComponent(const std::string& p_component_name)
 	{
-		for (Component& component : components)
+		for (Component& component : m_components)
 		{
-			if (component.GetName() == componentName_p)
+			if (component.GetName() == p_component_name)
 			{
 				return component;
 			}
@@ -154,57 +154,57 @@ namespace Spore
 
 	}*/
 
-	void Object::SetPosition(const vec3f& position_p)
+	void Object::SetPosition(const vec3f& p_position)
 	{
-		TransformComponent* transformComponent = dynamic_cast<TransformComponent*>(components.find("Transform")->second);
-		transformComponent->SetPosition(position_p);
+		TransformComponent* transformComponent = dynamic_cast<TransformComponent*>(m_components.find("Transform")->second);
+		transformComponent->SetPosition(p_position);
 	}
 
-	void Object::SetRotation(const vec3f& rotation_p)
+	void Object::SetRotation(const vec3f& p_rotation)
 	{
-		TransformComponent* transformComponent = dynamic_cast<TransformComponent*>(components.find("Transform")->second);
-		transformComponent->SetRotation(rotation_p);
+		TransformComponent* transformComponent = dynamic_cast<TransformComponent*>(m_components.find("Transform")->second);
+		transformComponent->SetRotation(p_rotation);
 	}
 
-	void Object::SetScale(const vec3f& scale_p)
+	void Object::SetScale(const vec3f& p_scale)
 	{
-		TransformComponent* transformComponent = dynamic_cast<TransformComponent*>(components.find("Transform")->second);
-		transformComponent->SetScale(scale_p);
+		TransformComponent* transformComponent = dynamic_cast<TransformComponent*>(m_components.find("Transform")->second);
+		transformComponent->SetScale(p_scale);
 	}
 
 	vec3f Object::GetPosition() const
 	{
-		TransformComponent* transformComponent = dynamic_cast<TransformComponent*>(components.find("Transform")->second);
+		TransformComponent* transformComponent = dynamic_cast<TransformComponent*>(m_components.find("Transform")->second);
 		return transformComponent->GetPosition();
 	}
 
 	vec3f Object::GetRotation() const
 	{
-		TransformComponent* transformComponent = dynamic_cast<TransformComponent*>(components.find("Transform")->second);
+		TransformComponent* transformComponent = dynamic_cast<TransformComponent*>(m_components.find("Transform")->second);
 		return transformComponent->GetRotation();
 	}
 
 	vec3f Object::GetScale() const
 	{
-		TransformComponent* transformComponent = dynamic_cast<TransformComponent*>(components.find("Transform")->second);
+		TransformComponent* transformComponent = dynamic_cast<TransformComponent*>(m_components.find("Transform")->second);
 		return transformComponent->GetScale();
 	}
 
 	vec3f Object::GetFront() const
 	{
-		TransformComponent* transformComponent = dynamic_cast<TransformComponent*>(components.find("Transform")->second);
+		TransformComponent* transformComponent = dynamic_cast<TransformComponent*>(m_components.find("Transform")->second);
 		return transformComponent->GetFront();
 	}
 
 	vec3f Object::GetRight() const
 	{
-		TransformComponent* transformComponent = dynamic_cast<TransformComponent*>(components.find("Transform")->second);
+		TransformComponent* transformComponent = dynamic_cast<TransformComponent*>(m_components.find("Transform")->second);
 		return transformComponent->GetRight();
 	}
 
 	vec3f Object::GetUp() const
 	{
-		TransformComponent* transformComponent = dynamic_cast<TransformComponent*>(components.find("Transform")->second);
+		TransformComponent* transformComponent = dynamic_cast<TransformComponent*>(m_components.find("Transform")->second);
 		return transformComponent->GetUp();
 	}
 }

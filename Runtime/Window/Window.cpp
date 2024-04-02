@@ -3,13 +3,13 @@
 
 namespace Spore
 {
-	std::map<GLFWwindow*, Camera*> MainWindow::cameraMapper;
-	std::map<std::string, Scene*> MainWindow::sceneMapper;
-	bool MainWindow::cameraLock = false;
-	bool MainWindow::firstMouse = true;
-	bool MainWindow::hideCursor = false;
+	std::map<GLFWwindow*, Camera*> MainWindow::m_camera_mapper;
+	std::map<std::string, Scene*> MainWindow::m_scene_mapper;
+	bool MainWindow::m_camera_lock = false;
+	bool MainWindow::m_first_mouse = true;
+	bool MainWindow::m_hide_cursor = false;
 
-	static void FrameBufferSizeCallback(GLFWwindow* window_p, int32 width_p, int32 height_p)
+	static void FrameBufferSizeCallback(GLFWwindow* p_window, int32 p_width, int32 p_height)
 	{
 		//glViewport(0, 0, width_p, height_p);
 		//glViewport(width_p / 6, height_p / 3, width_p / 6 * 4, height_p / 3 * 2);
@@ -23,66 +23,66 @@ namespace Spore
 		glViewport(displayW / 6, displayH / 3, displayW / 6 * 4, displayH / 3 * 2);*/
 	}
 
-	static void MouseMoveCallback(GLFWwindow* window_p, float64 xPos_p, float64 yPos_p)
+	static void MouseMoveCallback(GLFWwindow* p_window, float64 p_x_pos, float64 p_y_pos)
 	{
-		if (!MainWindow::cameraLock)
+		if (!MainWindow::m_camera_lock)
 		{
-			float32 xpos = static_cast<float32>(xPos_p);
-			float32 ypos = static_cast<float32>(yPos_p);
-			if (MainWindow::firstMouse)
+			float32 xpos = static_cast<float32>(p_x_pos);
+			float32 ypos = static_cast<float32>(p_y_pos);
+			if (MainWindow::m_first_mouse)
 			{
-				Mouse::GetInstance().xPos = xpos;
-				Mouse::GetInstance().yPos = ypos;
-				MainWindow::firstMouse = false;
+				Mouse::GetInstance().m_x_pos = xpos;
+				Mouse::GetInstance().m_y_pos = ypos;
+				MainWindow::m_first_mouse = false;
 			}
 
-			Mouse::GetInstance().xOffset = xpos - Mouse::GetInstance().lastX;
-			Mouse::GetInstance().yOffset = Mouse::GetInstance().lastY - ypos;
+			Mouse::GetInstance().m_x_offset = xpos - Mouse::GetInstance().m_last_x;
+			Mouse::GetInstance().m_y_offset = Mouse::GetInstance().m_last_y - ypos;
 
-			Mouse::GetInstance().lastX = xpos;
-			Mouse::GetInstance().lastY = ypos;
+			Mouse::GetInstance().m_last_x = xpos;
+			Mouse::GetInstance().m_last_y = ypos;
 
-			if (Mouse::GetInstance().buttonRight)
+			if (Mouse::GetInstance().m_button_right)
 			{
-				MainWindow::cameraMapper [window_p]->ProcessMouseMovement(Mouse::GetInstance().xOffset,
-																		  Mouse::GetInstance().yOffset);
+				MainWindow::m_camera_mapper [p_window]->ProcessMouseMovement(Mouse::GetInstance().m_x_offset,
+																		  Mouse::GetInstance().m_y_offset);
 			}
 		}
 	}
 
-	static void MouseClickCallback(GLFWwindow* window_p, int32 button_p, int32 state_p, int32 mod_p)
+	static void MouseClickCallback(GLFWwindow* p_window, int32 p_button, int32 p_state, int32 p_mod)
 	{
-		if (button_p == GLFW_MOUSE_BUTTON_LEFT && state_p == GLFW_PRESS)
-			Mouse::GetInstance().buttonLeft = true;
-		if (button_p == GLFW_MOUSE_BUTTON_LEFT && state_p == GLFW_RELEASE)
-			Mouse::GetInstance().buttonLeft = false;
-		if (button_p == GLFW_MOUSE_BUTTON_RIGHT && state_p == GLFW_PRESS)
-			Mouse::GetInstance().buttonRight = true;
-		if (button_p == GLFW_MOUSE_BUTTON_RIGHT && state_p == GLFW_RELEASE)
-			Mouse::GetInstance().buttonRight = false;
+		if (p_button == GLFW_MOUSE_BUTTON_LEFT && p_state == GLFW_PRESS)
+			Mouse::GetInstance().m_button_left = true;
+		if (p_button == GLFW_MOUSE_BUTTON_LEFT && p_state == GLFW_RELEASE)
+			Mouse::GetInstance().m_button_left = false;
+		if (p_button == GLFW_MOUSE_BUTTON_RIGHT && p_state == GLFW_PRESS)
+			Mouse::GetInstance().m_button_right = true;
+		if (p_button == GLFW_MOUSE_BUTTON_RIGHT && p_state == GLFW_RELEASE)
+			Mouse::GetInstance().m_button_right = false;
 
 	}
 
-	void MouseScrollCallback(GLFWwindow* window_p, float64 xOffset_p, float64 yOffset_p)
+	void MouseScrollCallback(GLFWwindow* p_window, float64 p_x_offset, float64 p_y_offset)
 	{
-		MainWindow::cameraMapper [window_p]->ProcessMouseScroll(static_cast<float32>(yOffset_p));
+		MainWindow::m_camera_mapper [p_window]->ProcessMouseScroll(static_cast<float32>(p_y_offset));
 	}
 
-	static void ErrorCallBack(int32 error_p, const char* description_p)
+	static void ErrorCallBack(int32 p_error, const char* p_description)
 	{
-		std::cout << "GLFW Error " << error_p << ": " << description_p << std::endl;
+		std::cout << "GLFW Error " << p_error << ": " << p_description << std::endl;
 	}
 
-	MainWindow::MainWindow(uint32 width_p, uint32 height_p, const char* windowID_p,
-						   Camera* camera_p, RenderPipeline* renderPipeline_p) :
-		width(width_p), height(height_p), windowID(windowID_p), camera(camera_p), renderPipeline(renderPipeline_p)
+	MainWindow::MainWindow(uint32 p_width, uint32 p_height, const char* p_windowID,
+						   Camera* p_camera, RenderPipeline* p_render_pipeline) :
+		m_width(p_width), m_height(p_height), m_windowID(p_windowID), m_camera(p_camera), m_render_pipeline(p_render_pipeline)
 	{
-		camera = camera_p;
-		windowID = windowID_p;
-		width = width_p; height = height_p;
-		renderPipeline = renderPipeline_p;
-		window = InitWindow();
-		cameraMapper.insert({ window, camera });
+		m_camera = p_camera;
+		m_windowID = p_windowID;
+		m_width = p_width; m_height = p_height;
+		m_render_pipeline = p_render_pipeline;
+		m_window = InitWindow();
+		m_camera_mapper.insert({ m_window, m_camera });
 	}
 
 	MainWindow::~MainWindow()
@@ -91,24 +91,24 @@ namespace Spore
 
 	void MainWindow::WindowTerminate()
 	{
-		if (window != nullptr)
-			glfwDestroyWindow(window);
+		if (m_window != nullptr)
+			glfwDestroyWindow(m_window);
 		glfwTerminate();
 	}
 
 	uint32 MainWindow::GetWindowWidth()
 	{
-		return width;
+		return m_width;
 	}
 
 	uint32 MainWindow::GetWindowHeight()
 	{
-		return height;
+		return m_height;
 	}
 
-	void MainWindow::SetWindowSize(uint32 width_p, uint32 height_p)
+	void MainWindow::SetWindowSize(uint32 p_width, uint32 p_height)
 	{
-		width = width_p; height = height_p;
+		m_width = p_width; m_height = p_height;
 	}
 
 	GLFWwindow* MainWindow::InitWindow()
@@ -141,20 +141,20 @@ namespace Spore
 		glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);            // 3.0+ only
 	#endif
 
-		GLFWwindow* window = glfwCreateWindow(width, height, windowID, nullptr, nullptr);
-		if (window == nullptr)
+		GLFWwindow* m_window = glfwCreateWindow(m_width, m_height, m_windowID, nullptr, nullptr);
+		if (m_window == nullptr)
 		{
 			std::cout << "Failed to create GLFW window" << std::endl;
 			glfwTerminate();
 			return NULL;
 		}
-		glfwMakeContextCurrent(window);
-		glfwSetFramebufferSizeCallback(window, FrameBufferSizeCallback);
-		glfwSetCursorPosCallback(window, MouseMoveCallback);
-		glfwSetMouseButtonCallback(window, MouseClickCallback);
-		glfwSetScrollCallback(window, MouseScrollCallback);
+		glfwMakeContextCurrent(m_window);
+		glfwSetFramebufferSizeCallback(m_window, FrameBufferSizeCallback);
+		glfwSetCursorPosCallback(m_window, MouseMoveCallback);
+		glfwSetMouseButtonCallback(m_window, MouseClickCallback);
+		glfwSetScrollCallback(m_window, MouseScrollCallback);
 
-		glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+		glfwSetInputMode(m_window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
 		//glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
 		if (!gladLoadGLLoader((GLADloadproc) glfwGetProcAddress))
@@ -165,6 +165,6 @@ namespace Spore
 
 		glEnable(GL_DEPTH_TEST);
 
-		return window;
+		return m_window;
 	}
 }

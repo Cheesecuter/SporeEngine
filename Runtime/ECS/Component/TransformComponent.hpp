@@ -12,9 +12,9 @@ namespace Spore
 	{
 	public:
 		TransformComponent();
-		void SetPosition(const vec3f& position_p);
-		void SetRotation(const vec3f& rotation_p);
-		void SetScale(const vec3f& scale_p);
+		void SetPosition(const vec3f& p_position);
+		void SetRotation(const vec3f& p_rotation);
+		void SetScale(const vec3f& p_scale);
 		vec3f GetPosition() const;
 		vec3f GetRotation() const;
 		vec3f GetScale() const;
@@ -24,10 +24,10 @@ namespace Spore
 		mat4x4f GetMatrix() const;
 
 	protected:
-		Transform transform;
-		Transform transformBuffer [2];
-		uint64 currentIndex { 0 };
-		uint64 nextIndex { 1 };
+		Transform m_transform;
+		Transform m_transformBuffer [2];
+		uint64 m_currentIndex { 0 };
+		uint64 m_nextIndex { 1 };
 
 	private:
 

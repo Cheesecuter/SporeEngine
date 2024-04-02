@@ -3,23 +3,22 @@
 
 namespace Spore
 {
-	Texture::Texture(const char* path)
+	Texture::Texture(const char* p_path)
 	{
-		LoadTexture(path);
+		LoadTexture(p_path);
 	}
 
 	Texture::~Texture()
 	{
-		AssetsManager::GetInstance().textureMapper.erase(identifier);
+		AssetsManager::GetInstance().m_texture_mapper.erase(m_identifier);
 	}
 
-	// utility function for loading a 2D texture from file
-	uint32 Texture::LoadTexture(const char* path)
+	uint32 Texture::LoadTexture(const char* p_path)
 	{
-		glGenTextures(1, &ID);
+		glGenTextures(1, &m_ID);
 
 		int32 width, height, nrComponents;
-		unsigned char* data = stbi_load(path, &width, &height, &nrComponents, 0);
+		unsigned char* data = stbi_load(p_path, &width, &height, &nrComponents, 0);
 		if (data)
 		{
 			uint32 format = GL_RED;
@@ -30,7 +29,7 @@ namespace Spore
 			else if (nrComponents == 4)
 				format = GL_RGBA;
 
-			glBindTexture(GL_TEXTURE_2D, ID);
+			glBindTexture(GL_TEXTURE_2D, m_ID);
 			glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, format, GL_UNSIGNED_BYTE, data);
 			glGenerateMipmap(GL_TEXTURE_2D);
 
@@ -43,15 +42,15 @@ namespace Spore
 		}
 		else
 		{
-			std::cout << "Texture failed to load at path: " << path << std::endl;
+			std::cout << "Texture failed to load at path: " << p_path << std::endl;
 			stbi_image_free(data);
 		}
 
-		this->path = path;
-		std::replace(this->path.begin(), this->path.end(), '\\', '/');
-		identifier = this->path.substr(this->path.find_last_of('/') + 1, this->path.size());
-		AssetsManager::GetInstance().textureMapper.insert(std::make_pair(identifier, this));
+		this->m_path = p_path;
+		std::replace(this->m_path.begin(), this->m_path.end(), '\\', '/');
+		m_identifier = this->m_path.substr(this->m_path.find_last_of('/') + 1, this->m_path.size());
+		AssetsManager::GetInstance().m_texture_mapper.insert(std::make_pair(m_identifier, this));
 
-		return ID;
+		return m_ID;
 	}
 }

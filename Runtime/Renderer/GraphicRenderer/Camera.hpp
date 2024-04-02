@@ -6,8 +6,6 @@
 
 namespace Spore
 {
-	// Defines several possible options for camera movement.
-		// Used as abstraction to stay away from window-system specific input methods.
 	enum Camera_Movement
 	{
 		FORWARD = 0,
@@ -18,61 +16,48 @@ namespace Spore
 		DOWN = 5
 	};
 
-	// Default camera values.
 	const float32 YAW = -90.0f;
 	const float32 PITCH = 0.0f;
 	const float32 SPEED = 2.5f;
 	const float32 SENSITIVITY = 0.1f;
 	const float32 ZOOM = 45.0f;
 
-	// An abstract camera class that processes input and calculates the corresponding Euler Angles, Vectors
-	// and Matrices for use in OpenGL.
 	class Camera
 	{
 	public:
 		// camera attributes
-		vec3f Position;
-		vec3f Front;
-		vec3f Up;
-		vec3f Right;
-		vec3f WorldUp;
+		vec3f m_position;
+		vec3f m_front;
+		vec3f m_up;
+		vec3f m_right;
+		vec3f m_world_up;
 		// euler angles
-		float32 Yaw;
-		float32 Pitch;
+		float32 m_yaw;
+		float32 m_pitch;
 		// camera options
-		float32 MovementSpeed;
-		float32 MouseSensitivity;
-		float32 Zoom;
+		float32 m_movement_speed;
+		float32 m_mouse_sensitivity;
+		float32 m_zoom;
 
-		// constructor with vectors
-		Camera(vec3f position_p = vec3f(0.0f, 0.0f, 0.0f),
-			   vec3f up_p = vec3f(0.0f, 1.0f, 0.0f),
-			   float32 yaw_p = YAW, float32 pitch_p = PITCH);
+		Camera(vec3f p_position = vec3f(0.0f, 0.0f, 0.0f),
+			   vec3f p_up = vec3f(0.0f, 1.0f, 0.0f),
+			   float32 p_yaw = YAW, float32 p_pitch = PITCH);
 
-		// constructor with scalar values
-		Camera(float32 posX_p, float32 posY_p, float32 posZ_p,
-			   float32 upX_p, float32 upY_p, float32 upZ_p,
-			   float32 yaw_p, float32 pitch_p);
+		Camera(float32 p_pos_x, float32 p_pos_y, float32 p_pos_z,
+			   float32 p_up_x, float32 p_up_y, float32 p_up_z,
+			   float32 p_yaw, float32 p_pitch);
 
-		// Return the view matrix calculated using Euler Angles and the LookAt Matrix.
 		mat4f GetViewMatrix();
 
-		// Processes input received from any keyboard-like input system.
-		// Accepts input parameter in the form of camera defined ENUM (to abstract it from windowing systems).
-		void ProcessKeyboard(Camera_Movement direction_p, float32 deltaTime_p);
+		void ProcessKeyboard(Camera_Movement p_direction, float32 p_delta_time);
 
-		// Processes input received from a mouse input system.
-		// Excepts the offset value in both the x and y direction.
-		void ProcessMouseMovement(float32 xOffset_p, float32 yOffset_p, GLboolean constrainPitch_p = true);
+		void ProcessMouseMovement(float32 p_x_offset, float32 p_y_offset, GLboolean p_constrain_pitch = true);
 
-		// Processes input received from a mouse scroll-wheel event.
-		// Only requires input in the vertical wheel-axis.
-		void ProcessMouseScroll(float32 yOffset_p);
+		void ProcessMouseScroll(float32 p_y_offset);
 
 	protected:
 
 	private:
-		// Calculates the front vector from the Camera's (updated) Euler Angles.
 		void UpdateCameraVectors();
 	};
 }

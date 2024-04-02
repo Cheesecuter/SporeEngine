@@ -20,8 +20,9 @@ namespace Spore
 	protected:
 
 	private:
-		static std::vector<fs::path> rootPaths;
-		static const fs::path runPath;
+		static std::vector<fs::path> m_root_paths;
+		static const fs::path m_run_path;
+
 		Files();
 		~Files();
 		friend class Singleton<Files>;

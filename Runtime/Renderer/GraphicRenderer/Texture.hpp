@@ -10,15 +10,15 @@ namespace Spore
 	{
 	public:
 		Texture() = default;
-		Texture(const char* path_p);
+		Texture(const char* p_path);
 		~Texture();
 
-		uint32 ID = NULL;
-		std::string identifier;
-		std::string type;
-		std::string path;
+		uint32 m_ID = NULL;
+		std::string m_identifier;
+		std::string m_type;
+		std::string m_path;
 
-		uint32 LoadTexture(const char* path_p);
+		uint32 LoadTexture(const char* p_path);
 
 	protected:
 

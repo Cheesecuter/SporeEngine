@@ -4,30 +4,30 @@ namespace Spore
 {
 	ShaderComponent::ShaderComponent()
 	{
-		name = "Shader";
+		m_name = "Shader";
 	}
 
-	void ShaderComponent::AddShader(Shader* shader_p)
+	void ShaderComponent::AddShader(Shader* p_shader)
 	{
-		if (shaders.find(shader_p->identifier) != shaders.end())
+		if (m_shaders.find(p_shader->m_identifier) != m_shaders.end())
 		{
-			shaders [shader_p->identifier]->shader = shader_p;
+			m_shaders [p_shader->m_identifier]->m_shader = p_shader;
 		}
 		else
 		{
 			ShaderNode* shaderNode = new ShaderNode();
-			shaderNode->shader = shader_p;
-			shaders [shader_p->identifier] = shaderNode;
+			shaderNode->m_shader = p_shader;
+			m_shaders [p_shader->m_identifier] = shaderNode;
 		}
 	}
 
-	void ShaderComponent::RemoveShader(Shader* shader_p)
+	void ShaderComponent::RemoveShader(Shader* p_shader)
 	{
-		shaders.erase(shader_p->identifier);
+		m_shaders.erase(p_shader->m_identifier);
 	}
 
 	std::unordered_map<std::string, ShaderNode*> ShaderComponent::GetShaders() const
 	{
-		return shaders;
+		return m_shaders;
 	}
 }

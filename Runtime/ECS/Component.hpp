@@ -7,6 +7,7 @@
 namespace Spore
 {
 	class Object;
+
 	class Component
 	{
 	public:
@@ -14,14 +15,14 @@ namespace Spore
 		virtual ~Component();
 
 		bool IsDirty() const;
-		void SetDirtyFlag(bool isDirty_p);
+		void SetDirtyFlag(bool p_is_dirty);
 		std::string GetName() const;
 
 	protected:
-		std::string name = "";
-		std::weak_ptr<Object> parents;
-		bool isDirty { false };
-		bool isScaleDirty { false };
+		std::string m_name = "";
+		std::weak_ptr<Object> m_parents;
+		bool m_is_dirty { false };
+		bool m_is_scale_dirty { false };
 
 	private:
 
