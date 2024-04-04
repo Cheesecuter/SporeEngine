@@ -79,6 +79,12 @@
     <Filter Include="资源文件\Assets\Shaders\PostProcesses">
       <UniqueIdentifier>{5814a216-2e04-47ff-a2e3-4b94370b8636}</UniqueIdentifier>
     </Filter>
+    <Filter Include="源文件\Physics">
+      <UniqueIdentifier>{cb6de989-83cb-4f79-8391-03ab67bea11b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\JoltPhysics">
+      <UniqueIdentifier>{56b9ba27-14ab-479c-99d2-82e132e5141f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Runtime\Debug\AddvantageRenderTest.cpp">
@@ -246,6 +252,420 @@
     <ClCompile Include="Runtime\Core\Base\Global.cpp">
       <Filter>源文件\Core\Base</Filter>
     </ClCompile>
+    <ClCompile Include="Runtime\Physics\physicsTest.cpp">
+      <Filter>源文件\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\AABBTree\AABBTreeBuilder.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Core\Color.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Core\Factory.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Core\IssueReporting.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Core\JobSystemSingleThreaded.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Core\JobSystemThreadPool.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Core\JobSystemWithBarrier.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Core\LinearCurve.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Core\Memory.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Core\Profiler.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Core\RTTI.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Core\Semaphore.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Core\StringTools.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Core\TickCounter.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Geometry\ConvexHullBuilder.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Geometry\ConvexHullBuilder2D.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Geometry\Indexify.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Geometry\OrientedBox.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Math\Vec3.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\ObjectStream\ObjectStream.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\ObjectStream\ObjectStreamBinaryIn.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\ObjectStream\ObjectStreamBinaryOut.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\ObjectStream\ObjectStreamIn.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\ObjectStream\ObjectStreamOut.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\ObjectStream\ObjectStreamTextIn.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\ObjectStream\ObjectStreamTextOut.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\ObjectStream\SerializableObject.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\ObjectStream\TypeDeclarations.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Physics\Body\Body.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Physics\Body\BodyAccess.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Physics\Body\BodyCreationSettings.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Physics\Body\BodyInterface.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Physics\Body\BodyManager.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Physics\Body\MassProperties.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Physics\Body\MotionProperties.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Physics\Character\Character.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Physics\Character\CharacterBase.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Physics\Character\CharacterVirtual.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Physics\Collision\BroadPhase\BroadPhase.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Physics\Collision\BroadPhase\BroadPhaseBruteForce.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Physics\Collision\BroadPhase\BroadPhaseQuadTree.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Physics\Collision\BroadPhase\QuadTree.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Physics\Collision\CastConvexVsTriangles.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Physics\Collision\CastSphereVsTriangles.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Physics\Collision\CollideConvexVsTriangles.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Physics\Collision\CollideSphereVsTriangles.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Physics\Collision\CollisionDispatch.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Physics\Collision\CollisionGroup.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Physics\Collision\EstimateCollisionResponse.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Physics\Collision\GroupFilter.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Physics\Collision\GroupFilterTable.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Physics\Collision\ManifoldBetweenTwoFaces.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Physics\Collision\NarrowPhaseQuery.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Physics\Collision\NarrowPhaseStats.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Physics\Collision\PhysicsMaterial.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Physics\Collision\PhysicsMaterialSimple.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Physics\Collision\Shape\BoxShape.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Physics\Collision\Shape\CapsuleShape.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Physics\Collision\Shape\CompoundShape.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Physics\Collision\Shape\ConvexHullShape.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Physics\Collision\Shape\ConvexShape.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Physics\Collision\Shape\CylinderShape.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Physics\Collision\Shape\DecoratedShape.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Physics\Collision\Shape\HeightFieldShape.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Physics\Collision\Shape\MeshShape.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Physics\Collision\Shape\MutableCompoundShape.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Physics\Collision\Shape\OffsetCenterOfMassShape.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Physics\Collision\Shape\RotatedTranslatedShape.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Physics\Collision\Shape\ScaledShape.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Physics\Collision\Shape\Shape.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Physics\Collision\Shape\SphereShape.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Physics\Collision\Shape\StaticCompoundShape.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Physics\Collision\Shape\TaperedCapsuleShape.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Physics\Collision\Shape\TriangleShape.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Physics\Collision\TransformedShape.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Physics\Constraints\ConeConstraint.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Physics\Constraints\Constraint.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Physics\Constraints\ConstraintManager.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Physics\Constraints\ContactConstraintManager.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Physics\Constraints\DistanceConstraint.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Physics\Constraints\FixedConstraint.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Physics\Constraints\GearConstraint.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Physics\Constraints\HingeConstraint.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Physics\Constraints\MotorSettings.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Physics\Constraints\PathConstraint.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Physics\Constraints\PathConstraintPath.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Physics\Constraints\PathConstraintPathHermite.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Physics\Constraints\PointConstraint.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Physics\Constraints\PulleyConstraint.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Physics\Constraints\RackAndPinionConstraint.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Physics\Constraints\SixDOFConstraint.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Physics\Constraints\SliderConstraint.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Physics\Constraints\SpringSettings.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Physics\Constraints\SwingTwistConstraint.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Physics\Constraints\TwoBodyConstraint.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Physics\DeterminismLog.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Physics\IslandBuilder.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Physics\LargeIslandSplitter.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Physics\PhysicsLock.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Physics\PhysicsScene.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Physics\PhysicsSystem.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Physics\PhysicsUpdateContext.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Physics\Ragdoll\Ragdoll.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Physics\SoftBody\SoftBodyCreationSettings.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Physics\SoftBody\SoftBodyMotionProperties.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Physics\SoftBody\SoftBodyShape.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Physics\SoftBody\SoftBodySharedSettings.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Physics\StateRecorderImpl.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Physics\Vehicle\MotorcycleController.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Physics\Vehicle\TrackedVehicleController.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Physics\Vehicle\VehicleAntiRollBar.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Physics\Vehicle\VehicleCollisionTester.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Physics\Vehicle\VehicleConstraint.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Physics\Vehicle\VehicleController.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Physics\Vehicle\VehicleDifferential.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Physics\Vehicle\VehicleEngine.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Physics\Vehicle\VehicleTrack.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Physics\Vehicle\VehicleTransmission.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Physics\Vehicle\Wheel.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Physics\Vehicle\WheeledVehicleController.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Renderer\DebugRenderer.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Renderer\DebugRendererPlayback.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Renderer\DebugRendererRecorder.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Renderer\DebugRendererSimple.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Skeleton\SkeletalAnimation.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Skeleton\Skeleton.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Skeleton\SkeletonMapper.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\Skeleton\SkeletonPose.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\TriangleGrouper\TriangleGrouperClosestCentroid.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\TriangleGrouper\TriangleGrouperMorton.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\TriangleSplitter\TriangleSplitter.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\TriangleSplitter\TriangleSplitterBinning.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\TriangleSplitter\TriangleSplitterFixedLeafSize.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\TriangleSplitter\TriangleSplitterLongestAxis.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\TriangleSplitter\TriangleSplitterMean.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\TriangleSplitter\TriangleSplitterMorton.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\RegisterTypes.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Runtime\Core\Base\Types.hpp">
@@ -373,6 +793,867 @@
     </ClInclude>
     <ClInclude Include="Runtime\Core\Base\Global.hpp">
       <Filter>源文件\Core\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\AABBTree\AABBTreeBuilder.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\AABBTree\AABBTreeToBuffer.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\AABBTree\NodeCodec\NodeCodecQuadTreeHalfFloat.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\AABBTree\TriangleCodec\TriangleCodecIndexed8BitPackSOA4Flags.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Core\ARMNeon.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Core\Atomics.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Core\ByteBuffer.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Core\Color.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Core\Core.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Core\Factory.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Core\FixedSizeFreeList.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Core\FPControlWord.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Core\FPException.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Core\FPFlushDenormals.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Core\HashCombine.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Core\InsertionSort.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Core\IssueReporting.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Core\JobSystem.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Core\JobSystemSingleThreaded.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Core\JobSystemThreadPool.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Core\JobSystemWithBarrier.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Core\LinearCurve.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Core\LockFreeHashMap.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Core\Memory.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Core\Mutex.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Core\MutexArray.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Core\NonCopyable.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Core\Profiler.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Core\QuickSort.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Core\Reference.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Core\Result.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Core\RTTI.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Core\Semaphore.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Core\StaticArray.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Core\STLAlignedAllocator.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Core\STLAllocator.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Core\STLTempAllocator.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Core\StreamIn.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Core\StreamOut.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Core\StreamUtils.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Core\StreamWrapper.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Core\StringTools.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Core\TempAllocator.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Core\TickCounter.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Core\UnorderedMap.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Core\UnorderedSet.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Geometry\AABox.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Geometry\AABox4.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Geometry\ClipPoly.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Geometry\ClosestPoint.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Geometry\ConvexHullBuilder.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Geometry\ConvexHullBuilder2D.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Geometry\ConvexSupport.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Geometry\Ellipse.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Geometry\EPAConvexHullBuilder.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Geometry\EPAPenetrationDepth.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Geometry\GJKClosestPoint.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Geometry\IndexedTriangle.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Geometry\Indexify.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Geometry\MortonCode.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Geometry\OrientedBox.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Geometry\Plane.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Geometry\RayAABox.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Geometry\RayAABox8.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Geometry\RayCapsule.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Geometry\RayCylinder.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Geometry\RaySphere.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Geometry\RayTriangle.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Geometry\RayTriangle8.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Geometry\Sphere.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Geometry\Triangle.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Math\DMat44.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Math\Double3.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Math\DVec3.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Math\DynMatrix.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Math\EigenValueSymmetric.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Math\FindRoot.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Math\Float2.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Math\Float3.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Math\Float4.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Math\GaussianElimination.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Math\HalfFloat.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Math\Mat44.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Math\Math.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Math\MathTypes.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Math\Matrix.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Math\Quat.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Math\Real.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Math\Swizzle.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Math\Trigonometry.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Math\UVec4.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Math\UVec8.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Math\Vec3.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Math\Vec4.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Math\Vec8.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Math\Vector.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\ObjectStream\GetPrimitiveTypeOfType.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\ObjectStream\ObjectStream.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\ObjectStream\ObjectStreamBinaryIn.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\ObjectStream\ObjectStreamBinaryOut.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\ObjectStream\ObjectStreamIn.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\ObjectStream\ObjectStreamOut.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\ObjectStream\ObjectStreamTextIn.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\ObjectStream\ObjectStreamTextOut.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\ObjectStream\ObjectStreamTypes.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\ObjectStream\SerializableAttribute.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\ObjectStream\SerializableAttributeEnum.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\ObjectStream\SerializableAttributeTyped.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\ObjectStream\SerializableObject.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\ObjectStream\TypeDeclarations.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Body\AllowedDOFs.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Body\Body.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Body\BodyAccess.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Body\BodyActivationListener.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Body\BodyCreationSettings.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Body\BodyFilter.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Body\BodyID.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Body\BodyInterface.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Body\BodyLock.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Body\BodyLockInterface.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Body\BodyLockMulti.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Body\BodyManager.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Body\BodyPair.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Body\BodyType.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Body\MassProperties.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Body\MotionProperties.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Body\MotionQuality.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Body\MotionType.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Character\Character.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Character\CharacterBase.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Character\CharacterVirtual.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Collision\AABoxCast.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Collision\ActiveEdgeMode.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Collision\ActiveEdges.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Collision\BackFaceMode.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Collision\BroadPhase\BroadPhase.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Collision\BroadPhase\BroadPhaseBruteForce.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Collision\BroadPhase\BroadPhaseLayer.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Collision\BroadPhase\BroadPhaseLayerInterfaceMask.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Collision\BroadPhase\BroadPhaseLayerInterfaceTable.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Collision\BroadPhase\BroadPhaseQuadTree.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Collision\BroadPhase\BroadPhaseQuery.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Collision\BroadPhase\ObjectVsBroadPhaseLayerFilterMask.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Collision\BroadPhase\ObjectVsBroadPhaseLayerFilterTable.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Collision\BroadPhase\QuadTree.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Collision\CastConvexVsTriangles.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Collision\CastResult.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Collision\CastSphereVsTriangles.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Collision\CollectFacesMode.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Collision\CollideConvexVsTriangles.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Collision\CollidePointResult.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Collision\CollideShape.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Collision\CollideSoftBodyVerticesVsTriangles.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Collision\CollideSphereVsTriangles.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Collision\CollisionCollector.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Collision\CollisionCollectorImpl.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Collision\CollisionDispatch.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Collision\CollisionGroup.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Collision\ContactListener.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Collision\EstimateCollisionResponse.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Collision\GroupFilter.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Collision\GroupFilterTable.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Collision\InternalEdgeRemovingCollector.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Collision\ManifoldBetweenTwoFaces.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Collision\NarrowPhaseQuery.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Collision\NarrowPhaseStats.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Collision\ObjectLayer.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Collision\ObjectLayerPairFilterMask.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Collision\ObjectLayerPairFilterTable.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Collision\PhysicsMaterial.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Collision\PhysicsMaterialSimple.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Collision\RayCast.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Collision\Shape\BoxShape.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Collision\Shape\CapsuleShape.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Collision\Shape\CompoundShape.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Collision\Shape\CompoundShapeVisitors.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Collision\Shape\ConvexHullShape.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Collision\Shape\ConvexShape.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Collision\Shape\CylinderShape.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Collision\Shape\DecoratedShape.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Collision\Shape\GetTrianglesContext.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Collision\Shape\HeightFieldShape.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Collision\Shape\MeshShape.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Collision\Shape\MutableCompoundShape.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Collision\Shape\OffsetCenterOfMassShape.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Collision\Shape\PolyhedronSubmergedVolumeCalculator.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Collision\Shape\RotatedTranslatedShape.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Collision\Shape\ScaledShape.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Collision\Shape\ScaleHelpers.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Collision\Shape\Shape.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Collision\Shape\SphereShape.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Collision\Shape\StaticCompoundShape.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Collision\Shape\SubShapeID.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Collision\Shape\SubShapeIDPair.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Collision\Shape\TaperedCapsuleShape.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Collision\Shape\TriangleShape.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Collision\ShapeCast.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Collision\ShapeFilter.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Collision\SortReverseAndStore.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Collision\TransformedShape.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Constraints\CalculateSolverSteps.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Constraints\ConeConstraint.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Constraints\Constraint.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Constraints\ConstraintManager.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Constraints\ConstraintPart\AngleConstraintPart.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Constraints\ConstraintPart\AxisConstraintPart.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Constraints\ConstraintPart\DualAxisConstraintPart.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Constraints\ConstraintPart\GearConstraintPart.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Constraints\ConstraintPart\HingeRotationConstraintPart.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Constraints\ConstraintPart\IndependentAxisConstraintPart.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Constraints\ConstraintPart\PointConstraintPart.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Constraints\ConstraintPart\RackAndPinionConstraintPart.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Constraints\ConstraintPart\RotationEulerConstraintPart.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Constraints\ConstraintPart\RotationQuatConstraintPart.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Constraints\ConstraintPart\SpringPart.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Constraints\ConstraintPart\SwingTwistConstraintPart.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Constraints\ContactConstraintManager.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Constraints\DistanceConstraint.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Constraints\FixedConstraint.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Constraints\GearConstraint.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Constraints\HingeConstraint.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Constraints\MotorSettings.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Constraints\PathConstraint.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Constraints\PathConstraintPath.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Constraints\PathConstraintPathHermite.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Constraints\PointConstraint.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Constraints\PulleyConstraint.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Constraints\RackAndPinionConstraint.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Constraints\SixDOFConstraint.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Constraints\SliderConstraint.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Constraints\SpringSettings.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Constraints\SwingTwistConstraint.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Constraints\TwoBodyConstraint.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\DeterminismLog.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\EActivation.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\EPhysicsUpdateError.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\IslandBuilder.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\LargeIslandSplitter.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\PhysicsLock.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\PhysicsScene.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\PhysicsSettings.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\PhysicsStepListener.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\PhysicsSystem.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\PhysicsUpdateContext.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Ragdoll\Ragdoll.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\SoftBody\SoftBodyContactListener.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\SoftBody\SoftBodyCreationSettings.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\SoftBody\SoftBodyManifold.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\SoftBody\SoftBodyMotionProperties.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\SoftBody\SoftBodyShape.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\SoftBody\SoftBodySharedSettings.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\SoftBody\SoftBodyUpdateContext.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\SoftBody\SoftBodyVertex.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\StateRecorder.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\StateRecorderImpl.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Vehicle\MotorcycleController.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Vehicle\TrackedVehicleController.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Vehicle\VehicleAntiRollBar.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Vehicle\VehicleCollisionTester.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Vehicle\VehicleConstraint.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Vehicle\VehicleController.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Vehicle\VehicleDifferential.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Vehicle\VehicleEngine.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Vehicle\VehicleTrack.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Vehicle\VehicleTransmission.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Vehicle\Wheel.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Physics\Vehicle\WheeledVehicleController.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Renderer\DebugRenderer.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Renderer\DebugRendererPlayback.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Renderer\DebugRendererRecorder.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Renderer\DebugRendererSimple.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Skeleton\SkeletalAnimation.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Skeleton\Skeleton.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Skeleton\SkeletonMapper.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Skeleton\SkeletonPose.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\TriangleGrouper\TriangleGrouper.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\TriangleGrouper\TriangleGrouperClosestCentroid.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\TriangleGrouper\TriangleGrouperMorton.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\TriangleSplitter\TriangleSplitter.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\TriangleSplitter\TriangleSplitterBinning.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\TriangleSplitter\TriangleSplitterFixedLeafSize.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\TriangleSplitter\TriangleSplitterLongestAxis.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\TriangleSplitter\TriangleSplitterMean.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\TriangleSplitter\TriangleSplitterMorton.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\ConfigurationString.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Jolt.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\RegisterTypes.h">
+      <Filter>头文件\JoltPhysics</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -574,10 +1855,61 @@
     <None Include="Assets\Shaders\PostProcesses\EdgeDetectionPostProcessFS.glsl">
       <Filter>资源文件\Assets\Shaders\PostProcesses</Filter>
     </None>
+    <None Include="SDKs\JoltPhysics\Jolt\Core\FixedSizeFreeList.inl">
+      <Filter>头文件\JoltPhysics</Filter>
+    </None>
+    <None Include="SDKs\JoltPhysics\Jolt\Core\JobSystem.inl">
+      <Filter>头文件\JoltPhysics</Filter>
+    </None>
+    <None Include="SDKs\JoltPhysics\Jolt\Core\LockFreeHashMap.inl">
+      <Filter>头文件\JoltPhysics</Filter>
+    </None>
+    <None Include="SDKs\JoltPhysics\Jolt\Core\Profiler.inl">
+      <Filter>头文件\JoltPhysics</Filter>
+    </None>
+    <None Include="SDKs\JoltPhysics\Jolt\Math\DMat44.inl">
+      <Filter>头文件\JoltPhysics</Filter>
+    </None>
+    <None Include="SDKs\JoltPhysics\Jolt\Math\DVec3.inl">
+      <Filter>头文件\JoltPhysics</Filter>
+    </None>
+    <None Include="SDKs\JoltPhysics\Jolt\Math\Mat44.inl">
+      <Filter>头文件\JoltPhysics</Filter>
+    </None>
+    <None Include="SDKs\JoltPhysics\Jolt\Math\Quat.inl">
+      <Filter>头文件\JoltPhysics</Filter>
+    </None>
+    <None Include="SDKs\JoltPhysics\Jolt\Math\UVec4.inl">
+      <Filter>头文件\JoltPhysics</Filter>
+    </None>
+    <None Include="SDKs\JoltPhysics\Jolt\Math\UVec8.inl">
+      <Filter>头文件\JoltPhysics</Filter>
+    </None>
+    <None Include="SDKs\JoltPhysics\Jolt\Math\Vec3.inl">
+      <Filter>头文件\JoltPhysics</Filter>
+    </None>
+    <None Include="SDKs\JoltPhysics\Jolt\Math\Vec4.inl">
+      <Filter>头文件\JoltPhysics</Filter>
+    </None>
+    <None Include="SDKs\JoltPhysics\Jolt\Math\Vec8.inl">
+      <Filter>头文件\JoltPhysics</Filter>
+    </None>
+    <None Include="SDKs\JoltPhysics\Jolt\Physics\Body\Body.inl">
+      <Filter>头文件\JoltPhysics</Filter>
+    </None>
+    <None Include="SDKs\JoltPhysics\Jolt\Physics\Body\MotionProperties.inl">
+      <Filter>头文件\JoltPhysics</Filter>
+    </None>
+    <None Include="SDKs\JoltPhysics\Jolt\Jolt.cmake">
+      <Filter>头文件\JoltPhysics</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Natvis Include="SDKs\imgui\misc\debuggers\imgui.natvis">
       <Filter>头文件\imgui</Filter>
+    </Natvis>
+    <Natvis Include="SDKs\JoltPhysics\Jolt\Jolt.natvis">
+      <Filter>头文件\JoltPhysics</Filter>
     </Natvis>
   </ItemGroup>
 </Project>
