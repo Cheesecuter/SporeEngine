@@ -78,7 +78,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>D:\SporeEngine\master\SporeEngine\Runtime\Asset;D:\SporeEngine\master\SporeEngine\Runtime\Core\Base;D:\SporeEngine\master\SporeEngine\Runtime\Core\Reflection;D:\SporeEngine\master\SporeEngine\Runtime\Core\Serializer;D:\SporeEngine\master\SporeEngine\Runtime\ECS\Component;D:\SporeEngine\master\SporeEngine\Runtime\ECS\Objects;D:\SporeEngine\master\SporeEngine\Runtime\ECS;D:\SporeEngine\master\SporeEngine\Runtime\Input;D:\SporeEngine\master\SporeEngine\Runtime\Physics;D:\SporeEngine\master\SporeEngine\Runtime\Renderer\GraphicRenderer;D:\SporeEngine\master\SporeEngine\Runtime\Utils;D:\SporeEngine\master\SporeEngine\Runtime\VisualEffect;D:\SporeEngine\master\SporeEngine\Runtime\Window\UI;D:\SporeEngine\master\SporeEngine\Runtime\Window;$(IncludePath)</IncludePath>
+    <IncludePath>D:\SporeEngine\master\SporeEngine\Runtime\Asset;D:\SporeEngine\master\SporeEngine\Runtime\Core\Base;D:\SporeEngine\master\SporeEngine\Runtime\Core\Reflection;D:\SporeEngine\master\SporeEngine\Runtime\Core\Serializer;D:\SporeEngine\master\SporeEngine\Runtime\ECS;D:\SporeEngine\master\SporeEngine\Runtime\ECS\Component;D:\SporeEngine\master\SporeEngine\Runtime\ECS\Objects;D:\SporeEngine\master\SporeEngine\Runtime\Input;D:\SporeEngine\master\SporeEngine\Runtime\Physics;D:\SporeEngine\master\SporeEngine\Runtime\Physics\Test;D:\SporeEngine\master\SporeEngine\Runtime\Renderer\GraphicRenderer;D:\SporeEngine\master\SporeEngine\Runtime\Utils;D:\SporeEngine\master\SporeEngine\Runtime\VisualEffect;D:\SporeEngine\master\SporeEngine\Runtime\Window;D:\SporeEngine\master\SporeEngine\Runtime\Window\UI;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -150,24 +150,6 @@
     <ClCompile Include="Runtime\Asset\Files.cpp" />
     <ClCompile Include="Runtime\Core\Base\Global.cpp" />
     <ClCompile Include="Runtime\Core\Reflection\Reflection.cpp" />
-    <ClCompile Include="Runtime\Debug\AddvantageRenderTest.cpp" />
-    <ClCompile Include="Runtime\Debug\BasicLightingTest.cpp" />
-    <ClCompile Include="Runtime\Debug\DeferredShaderingTest.cpp" />
-    <ClCompile Include="Runtime\Debug\DepthTest.cpp" />
-    <ClCompile Include="Runtime\Debug\FrameBufferTest.cpp" />
-    <ClCompile Include="Runtime\Debug\HDRTest.cpp" />
-    <ClCompile Include="Runtime\Debug\ImGuiTest.cpp" />
-    <ClCompile Include="Runtime\Debug\LightingTest.cpp" />
-    <ClCompile Include="Runtime\Debug\ModelTest.cpp" />
-    <ClCompile Include="Runtime\Debug\NamespaceTest.cpp" />
-    <ClCompile Include="Runtime\Debug\NormalMappingTest.cpp" />
-    <ClCompile Include="Runtime\Debug\ParallaxMappingTest.cpp" />
-    <ClCompile Include="Runtime\Debug\PbrTest.cpp" />
-    <ClCompile Include="Runtime\Debug\RendererDemo.cpp" />
-    <ClCompile Include="Runtime\Debug\PointShadowTest.cpp" />
-    <ClCompile Include="Runtime\Debug\ShadowTest.cpp" />
-    <ClCompile Include="Runtime\Debug\SSAOTest.cpp" />
-    <ClCompile Include="Runtime\Debug\StencilTest.cpp" />
     <ClCompile Include="Runtime\ECS\Component.cpp" />
     <ClCompile Include="Runtime\ECS\Component\ShaderComponent.cpp" />
     <ClCompile Include="Runtime\ECS\Component\TransformComponent.cpp" />
@@ -181,6 +163,7 @@
     <ClCompile Include="Runtime\Input\Keyboard.cpp" />
     <ClCompile Include="Runtime\Input\Mouse.cpp" />
     <ClCompile Include="Runtime\Physics\physicsTest.cpp" />
+    <ClCompile Include="Runtime\Physics\PhysicSystem.cpp" />
     <ClCompile Include="Runtime\Renderer\GraphicRenderer\Camera.cpp" />
     <ClCompile Include="Runtime\Renderer\GraphicRenderer\glad.c" />
     <ClCompile Include="Runtime\Renderer\GraphicRenderer\Grid.cpp" />
@@ -191,6 +174,24 @@
     <ClCompile Include="Runtime\Renderer\GraphicRenderer\SkyBox.cpp" />
     <ClCompile Include="Runtime\Renderer\GraphicRenderer\stb_image.cpp" />
     <ClCompile Include="Runtime\Renderer\GraphicRenderer\Texture.cpp" />
+    <ClCompile Include="Runtime\Test\AddvantageRenderTest.cpp" />
+    <ClCompile Include="Runtime\Test\BasicLightingTest.cpp" />
+    <ClCompile Include="Runtime\Test\DeferredShaderingTest.cpp" />
+    <ClCompile Include="Runtime\Test\DepthTest.cpp" />
+    <ClCompile Include="Runtime\Test\FrameBufferTest.cpp" />
+    <ClCompile Include="Runtime\Test\HDRTest.cpp" />
+    <ClCompile Include="Runtime\Test\ImGuiTest.cpp" />
+    <ClCompile Include="Runtime\Test\LightingTest.cpp" />
+    <ClCompile Include="Runtime\Test\ModelTest.cpp" />
+    <ClCompile Include="Runtime\Test\NamespaceTest.cpp" />
+    <ClCompile Include="Runtime\Test\NormalMappingTest.cpp" />
+    <ClCompile Include="Runtime\Test\ParallaxMappingTest.cpp" />
+    <ClCompile Include="Runtime\Test\PbrTest.cpp" />
+    <ClCompile Include="Runtime\Test\PointShadowTest.cpp" />
+    <ClCompile Include="Runtime\Test\RendererDemo.cpp" />
+    <ClCompile Include="Runtime\Test\ShadowTest.cpp" />
+    <ClCompile Include="Runtime\Test\SSAOTest.cpp" />
+    <ClCompile Include="Runtime\Test\StencilTest.cpp" />
     <ClCompile Include="Runtime\VisualEffect\PostProcess.cpp" />
     <ClCompile Include="Runtime\VisualEffect\PostProcesser.cpp" />
     <ClCompile Include="Runtime\Window\UI\UI.cpp" />
@@ -359,6 +360,8 @@
     <ClInclude Include="Runtime\Input\InputDevices.hpp" />
     <ClInclude Include="Runtime\Input\Keyboard.hpp" />
     <ClInclude Include="Runtime\Input\Mouse.hpp" />
+    <ClInclude Include="Runtime\Physics\PhysicSyetemHeaders.hpp" />
+    <ClInclude Include="Runtime\Physics\PhysicSystem.hpp" />
     <ClInclude Include="Runtime\Renderer\GraphicRenderer\Camera.hpp" />
     <ClInclude Include="Runtime\Renderer\GraphicRenderer\Mesh.hpp" />
     <ClInclude Include="Runtime\Renderer\GraphicRenderer\Model.hpp" />

@@ -22,9 +22,6 @@
     <Filter Include="源文件\Core\Base">
       <UniqueIdentifier>{5ee6e396-d357-4609-ac69-55c847bf8dc1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="源文件\Debug">
-      <UniqueIdentifier>{528a03d8-8cc3-4c46-a9e3-a1138e930ce6}</UniqueIdentifier>
-    </Filter>
     <Filter Include="源文件\ECS">
       <UniqueIdentifier>{1b770808-553b-457d-8f80-8479a20490c8}</UniqueIdentifier>
     </Filter>
@@ -85,53 +82,14 @@
     <Filter Include="头文件\JoltPhysics">
       <UniqueIdentifier>{56b9ba27-14ab-479c-99d2-82e132e5141f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="源文件\Test">
+      <UniqueIdentifier>{7383f39e-05d9-4f0a-8f29-d2574b056269}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Physics\Test">
+      <UniqueIdentifier>{b9750e0b-b87d-4bee-8bd6-f300b4a69380}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Runtime\Debug\AddvantageRenderTest.cpp">
-      <Filter>源文件\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="Runtime\Debug\BasicLightingTest.cpp">
-      <Filter>源文件\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="Runtime\Debug\DeferredShaderingTest.cpp">
-      <Filter>源文件\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="Runtime\Debug\DepthTest.cpp">
-      <Filter>源文件\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="Runtime\Debug\HDRTest.cpp">
-      <Filter>源文件\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="Runtime\Debug\ImGuiTest.cpp">
-      <Filter>源文件\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="Runtime\Debug\LightingTest.cpp">
-      <Filter>源文件\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="Runtime\Debug\ModelTest.cpp">
-      <Filter>源文件\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="Runtime\Debug\NamespaceTest.cpp">
-      <Filter>源文件\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="Runtime\Debug\NormalMappingTest.cpp">
-      <Filter>源文件\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="Runtime\Debug\ParallaxMappingTest.cpp">
-      <Filter>源文件\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="Runtime\Debug\PbrTest.cpp">
-      <Filter>源文件\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="Runtime\Debug\PointShadowTest.cpp">
-      <Filter>源文件\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="Runtime\Debug\SSAOTest.cpp">
-      <Filter>源文件\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="Runtime\Debug\StencilTest.cpp">
-      <Filter>源文件\Debug</Filter>
-    </ClCompile>
     <ClCompile Include="Runtime\ECS\Component.cpp">
       <Filter>源文件\ECS</Filter>
     </ClCompile>
@@ -225,14 +183,8 @@
     <ClCompile Include="Runtime\Renderer\GraphicRenderer\SkyBox.cpp">
       <Filter>源文件\Renderer\GraphicRenderer</Filter>
     </ClCompile>
-    <ClCompile Include="Runtime\Debug\RendererDemo.cpp">
-      <Filter>源文件\Debug</Filter>
-    </ClCompile>
     <ClCompile Include="Runtime\ECS\Light.cpp">
       <Filter>源文件\VisualEffect</Filter>
-    </ClCompile>
-    <ClCompile Include="Runtime\Debug\ShadowTest.cpp">
-      <Filter>源文件\Debug</Filter>
     </ClCompile>
     <ClCompile Include="Runtime\ECS\Objects\Plane.cpp">
       <Filter>源文件\ECS\Objects</Filter>
@@ -242,9 +194,6 @@
     </ClCompile>
     <ClCompile Include="Runtime\VisualEffect\PostProcesser.cpp">
       <Filter>源文件\VisualEffect</Filter>
-    </ClCompile>
-    <ClCompile Include="Runtime\Debug\FrameBufferTest.cpp">
-      <Filter>源文件\Debug</Filter>
     </ClCompile>
     <ClCompile Include="Runtime\ECS\Objects\ModelObject.cpp">
       <Filter>源文件\ECS\Objects</Filter>
@@ -665,6 +614,63 @@
     </ClCompile>
     <ClCompile Include="SDKs\JoltPhysics\Jolt\RegisterTypes.cpp">
       <Filter>头文件\JoltPhysics</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Physics\PhysicSystem.cpp">
+      <Filter>源文件\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Test\AddvantageRenderTest.cpp">
+      <Filter>源文件\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Test\BasicLightingTest.cpp">
+      <Filter>源文件\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Test\DeferredShaderingTest.cpp">
+      <Filter>源文件\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Test\DepthTest.cpp">
+      <Filter>源文件\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Test\FrameBufferTest.cpp">
+      <Filter>源文件\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Test\HDRTest.cpp">
+      <Filter>源文件\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Test\ImGuiTest.cpp">
+      <Filter>源文件\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Test\LightingTest.cpp">
+      <Filter>源文件\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Test\ModelTest.cpp">
+      <Filter>源文件\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Test\NamespaceTest.cpp">
+      <Filter>源文件\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Test\NormalMappingTest.cpp">
+      <Filter>源文件\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Test\ParallaxMappingTest.cpp">
+      <Filter>源文件\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Test\PbrTest.cpp">
+      <Filter>源文件\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Test\PointShadowTest.cpp">
+      <Filter>源文件\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Test\RendererDemo.cpp">
+      <Filter>源文件\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Test\ShadowTest.cpp">
+      <Filter>源文件\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Test\SSAOTest.cpp">
+      <Filter>源文件\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Test\StencilTest.cpp">
+      <Filter>源文件\Test</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1654,6 +1660,12 @@
     </ClInclude>
     <ClInclude Include="SDKs\JoltPhysics\Jolt\RegisterTypes.h">
       <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\Physics\PhysicSyetemHeaders.hpp">
+      <Filter>源文件\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\Physics\PhysicSystem.hpp">
+      <Filter>源文件\Physics</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

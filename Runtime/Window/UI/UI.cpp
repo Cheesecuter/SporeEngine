@@ -13,12 +13,17 @@ namespace Spore
 	UI::UI(MainWindow* p_window)
 	{
 		InitImages();
-		InitImGui(p_window);
+		m_window = p_window;
 	}
 
 	UI::~UI()
 	{
 
+	}
+
+	void UI::Init()
+	{
+		InitImGui(m_window);
 	}
 
 	void UI::InitImGui(MainWindow* p_window)
@@ -62,7 +67,7 @@ namespace Spore
 	#endif
 	}
 
-	void UI::UITerminate()
+	void UI::Terminate()
 	{
 		ImGui_ImplOpenGL3_Shutdown();
 		ImGui_ImplGlfw_Shutdown();

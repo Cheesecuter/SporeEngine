@@ -25,7 +25,8 @@ namespace Spore
 		UI(MainWindow* p_window);
 		~UI();
 		void InitImGui(MainWindow* p_window);
-		void UITerminate();
+		void Init();
+		void Terminate();
 		void RenderPanels(MainWindow* p_window);
 		void ShowDemoWindow();
 		void FileBrowser(MainWindow* p_window, std::filesystem::path* p_path);

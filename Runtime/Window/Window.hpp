@@ -33,7 +33,7 @@ namespace Spore
 		static std::map<GLFWwindow*, Camera*> m_camera_mapper;
 		static std::map<std::string, Scene*> m_scene_mapper;
 
-		void WindowTerminate();
+		void Terminate();
 		uint32 GetWindowWidth();
 		uint32 GetWindowHeight();
 		void SetWindowSize(uint32 p_width, uint32 p_height);

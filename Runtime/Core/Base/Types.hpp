@@ -34,6 +34,8 @@
 #include <sstream>
 #include <iostream>
 #include <filesystem>
+#include <cstdarg>
+#include <thread>
 #include <mutex>
 //#include <Windows.h>
 
