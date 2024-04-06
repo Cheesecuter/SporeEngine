@@ -88,6 +88,12 @@
     <Filter Include="源文件\Physics\Test">
       <UniqueIdentifier>{b9750e0b-b87d-4bee-8bd6-f300b4a69380}</UniqueIdentifier>
     </Filter>
+    <Filter Include="源文件\Physics\Utils">
+      <UniqueIdentifier>{934dae39-b817-405b-ba0d-7fee29bf7d11}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Core\Math">
+      <UniqueIdentifier>{2f877576-aaf4-490a-b9b3-7569b4827c9c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Runtime\ECS\Component.cpp">
@@ -201,7 +207,7 @@
     <ClCompile Include="Runtime\Core\Base\Global.cpp">
       <Filter>源文件\Core\Base</Filter>
     </ClCompile>
-    <ClCompile Include="Runtime\Physics\physicsTest.cpp">
+    <ClCompile Include="Runtime\Physics\PhysicsHelloWorld.cpp">
       <Filter>源文件\Physics</Filter>
     </ClCompile>
     <ClCompile Include="SDKs\JoltPhysics\Jolt\AABBTree\AABBTreeBuilder.cpp">
@@ -671,6 +677,21 @@
     </ClCompile>
     <ClCompile Include="Runtime\Test\StencilTest.cpp">
       <Filter>源文件\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Physics\Test\PTSimpleTest.cpp">
+      <Filter>源文件\Physics\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Core\Math\SDKMath.cpp">
+      <Filter>源文件\Core\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Core\Math\Math.cpp">
+      <Filter>源文件\Core\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Physics\Test\PhysicsTest.cpp">
+      <Filter>源文件\Physics\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Physics\Utils\ContactListenerImpl.cpp">
+      <Filter>源文件\Physics\Utils</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1661,11 +1682,32 @@
     <ClInclude Include="SDKs\JoltPhysics\Jolt\RegisterTypes.h">
       <Filter>头文件\JoltPhysics</Filter>
     </ClInclude>
-    <ClInclude Include="Runtime\Physics\PhysicSyetemHeaders.hpp">
+    <ClInclude Include="Runtime\Physics\PhysicSyetemHeaders.h">
       <Filter>源文件\Physics</Filter>
     </ClInclude>
     <ClInclude Include="Runtime\Physics\PhysicSystem.hpp">
       <Filter>源文件\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\Physics\Layers.hpp">
+      <Filter>源文件\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\Physics\Utils\ContactListenerImpl.hpp">
+      <Filter>源文件\Physics\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\Physics\PhysicsSettings.h">
+      <Filter>源文件\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\Core\Math\Math.hpp">
+      <Filter>源文件\Core\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\Core\Math\SDKMath.hpp">
+      <Filter>源文件\Core\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\Physics\Test\PhysicsTest.hpp">
+      <Filter>源文件\Physics\Test</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\Physics\Test\PTSimpleTest.hpp">
+      <Filter>源文件\Physics\Test</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

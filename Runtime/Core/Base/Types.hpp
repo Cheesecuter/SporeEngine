@@ -22,6 +22,8 @@
 #include <stb_image.h>
 
 #include <Global.hpp>
+#include <Math.hpp>
+#include <SDKMath.hpp>
 
 #include <map>
 #include <functional>

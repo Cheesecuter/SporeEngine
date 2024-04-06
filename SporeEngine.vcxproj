@@ -78,7 +78,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>D:\SporeEngine\master\SporeEngine\Runtime\Asset;D:\SporeEngine\master\SporeEngine\Runtime\Core\Base;D:\SporeEngine\master\SporeEngine\Runtime\Core\Reflection;D:\SporeEngine\master\SporeEngine\Runtime\Core\Serializer;D:\SporeEngine\master\SporeEngine\Runtime\ECS;D:\SporeEngine\master\SporeEngine\Runtime\ECS\Component;D:\SporeEngine\master\SporeEngine\Runtime\ECS\Objects;D:\SporeEngine\master\SporeEngine\Runtime\Input;D:\SporeEngine\master\SporeEngine\Runtime\Physics;D:\SporeEngine\master\SporeEngine\Runtime\Physics\Test;D:\SporeEngine\master\SporeEngine\Runtime\Renderer\GraphicRenderer;D:\SporeEngine\master\SporeEngine\Runtime\Utils;D:\SporeEngine\master\SporeEngine\Runtime\VisualEffect;D:\SporeEngine\master\SporeEngine\Runtime\Window;D:\SporeEngine\master\SporeEngine\Runtime\Window\UI;$(IncludePath)</IncludePath>
+    <IncludePath>D:\SporeEngine\master\SporeEngine\Runtime\Asset;D:\SporeEngine\master\SporeEngine\Runtime\Core\Base;D:\SporeEngine\master\SporeEngine\Runtime\Core\Math;D:\SporeEngine\master\SporeEngine\Runtime\Core\Reflection;D:\SporeEngine\master\SporeEngine\Runtime\Core\Serializer;D:\SporeEngine\master\SporeEngine\Runtime\ECS;D:\SporeEngine\master\SporeEngine\Runtime\ECS\Component;D:\SporeEngine\master\SporeEngine\Runtime\ECS\Objects;D:\SporeEngine\master\SporeEngine\Runtime\Input;D:\SporeEngine\master\SporeEngine\Runtime\Physics;D:\SporeEngine\master\SporeEngine\Runtime\Physics\Test;D:\SporeEngine\master\SporeEngine\Runtime\Physics\Utils;D:\SporeEngine\master\SporeEngine\Runtime\Renderer\GraphicRenderer;D:\SporeEngine\master\SporeEngine\Runtime\Utils;D:\SporeEngine\master\SporeEngine\Runtime\VisualEffect;D:\SporeEngine\master\SporeEngine\Runtime\Window;D:\SporeEngine\master\SporeEngine\Runtime\Window\UI;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -149,6 +149,8 @@
     <ClCompile Include="Runtime\Asset\AssetsManager.cpp" />
     <ClCompile Include="Runtime\Asset\Files.cpp" />
     <ClCompile Include="Runtime\Core\Base\Global.cpp" />
+    <ClCompile Include="Runtime\Core\Math\Math.cpp" />
+    <ClCompile Include="Runtime\Core\Math\SDKMath.cpp" />
     <ClCompile Include="Runtime\Core\Reflection\Reflection.cpp" />
     <ClCompile Include="Runtime\ECS\Component.cpp" />
     <ClCompile Include="Runtime\ECS\Component\ShaderComponent.cpp" />
@@ -162,8 +164,11 @@
     <ClCompile Include="Runtime\ECS\Transform.cpp" />
     <ClCompile Include="Runtime\Input\Keyboard.cpp" />
     <ClCompile Include="Runtime\Input\Mouse.cpp" />
-    <ClCompile Include="Runtime\Physics\physicsTest.cpp" />
+    <ClCompile Include="Runtime\Physics\PhysicsHelloWorld.cpp" />
     <ClCompile Include="Runtime\Physics\PhysicSystem.cpp" />
+    <ClCompile Include="Runtime\Physics\Test\PhysicsTest.cpp" />
+    <ClCompile Include="Runtime\Physics\Test\PTSimpleTest.cpp" />
+    <ClCompile Include="Runtime\Physics\Utils\ContactListenerImpl.cpp" />
     <ClCompile Include="Runtime\Renderer\GraphicRenderer\Camera.cpp" />
     <ClCompile Include="Runtime\Renderer\GraphicRenderer\glad.c" />
     <ClCompile Include="Runtime\Renderer\GraphicRenderer\Grid.cpp" />
@@ -346,6 +351,8 @@
     <ClInclude Include="Runtime\Asset\Files.hpp" />
     <ClInclude Include="Runtime\Core\Base\Global.hpp" />
     <ClInclude Include="Runtime\Core\Base\Types.hpp" />
+    <ClInclude Include="Runtime\Core\Math\Math.hpp" />
+    <ClInclude Include="Runtime\Core\Math\SDKMath.hpp" />
     <ClInclude Include="Runtime\Core\Reflection\Reflection.hpp" />
     <ClInclude Include="Runtime\ECS\Component.hpp" />
     <ClInclude Include="Runtime\ECS\Component\ShaderComponent.hpp" />
@@ -360,8 +367,13 @@
     <ClInclude Include="Runtime\Input\InputDevices.hpp" />
     <ClInclude Include="Runtime\Input\Keyboard.hpp" />
     <ClInclude Include="Runtime\Input\Mouse.hpp" />
-    <ClInclude Include="Runtime\Physics\PhysicSyetemHeaders.hpp" />
+    <ClInclude Include="Runtime\Physics\Layers.hpp" />
+    <ClInclude Include="Runtime\Physics\PhysicsSettings.h" />
+    <ClInclude Include="Runtime\Physics\PhysicSyetemHeaders.h" />
     <ClInclude Include="Runtime\Physics\PhysicSystem.hpp" />
+    <ClInclude Include="Runtime\Physics\Test\PhysicsTest.hpp" />
+    <ClInclude Include="Runtime\Physics\Test\PTSimpleTest.hpp" />
+    <ClInclude Include="Runtime\Physics\Utils\ContactListenerImpl.hpp" />
     <ClInclude Include="Runtime\Renderer\GraphicRenderer\Camera.hpp" />
     <ClInclude Include="Runtime\Renderer\GraphicRenderer\Mesh.hpp" />
     <ClInclude Include="Runtime\Renderer\GraphicRenderer\Model.hpp" />

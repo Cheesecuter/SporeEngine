@@ -1,27 +1,19 @@
 #include <PhysicSystem.hpp>
 
-namespace Layers
-{
-	static constexpr JPH::ObjectLayer NON_MOVING = 0;
-	static constexpr JPH::ObjectLayer MOVING = 1;
-	static constexpr JPH::ObjectLayer NUM_LAYERS = 2;
-}
-
-namespace BroadPhaseLayers
-{
-	static constexpr JPH::BroadPhaseLayer NON_MOVING(0);
-	static constexpr JPH::BroadPhaseLayer MOVING(1);
-	static constexpr Spore::uint32 NUM_LAYERS(2);
-}
-
 namespace Spore
 {
 	static void TraceImpl(const char* p_FMT, ...);
+
 #ifdef JPH_ENABLE_ASSERTS
 
 	static bool AssertFailedImpl(const char* p_expression, const char* p_message, const char* p_file, uint32 p_line);
 
 #endif
+
+	static constexpr uint32 c_num_bodies = 10240;
+	static constexpr uint32 c_num_body_mutexes = 0;
+	static constexpr uint32 c_max_body_pairs = 65536;
+	static constexpr uint32 c_max_contact_constraints = 20480;
 
 	PhysicSystem::PhysicSystem()
 	{
@@ -44,10 +36,62 @@ namespace Spore
 
 		JPH::RegisterTypes();
 
+		SetRenderFrequency(m_update_frequency);
+
+	#ifdef JPH_DISABLE_TEMP_ALLOCATOR
+		m_temp_allocator = new JPH::TempAllocatorMalloc();
+	#else
+		m_temp_allocator = new JPH::TempAllocatorImpl(32 * 1024 * 1024);
+	#endif
+
+		m_job_system = new JPH::JobSystemThreadPool(c_max_physics_jobs, c_max_physics_barriers, m_max_concurrent_jobs - 1);
+
+		m_job_system_validating = new JPH::JobSystemSingleThreaded(c_max_physics_jobs);
 
 	}
 
 	void PhysicSystem::Terminate()
+	{
+
+	}
+
+	void PhysicSystem::Start(const JPH::RTTI* p_RTTI)
+	{
+		vec3f old_gravity = m_physics_system != nullptr ? Vec3f(m_physics_system->GetGravity()) : vec3f(0.0f, -9.81f, 0.0f);
+
+		m_physics_system = new JPH::PhysicsSystem();
+		m_physics_system->Init(c_num_bodies, c_num_body_mutexes, c_max_body_pairs, c_max_contact_constraints,
+							   m_broad_phase_layer_interface, m_object_vs_broad_phase_layer_filter, m_object_vs_object_layer_filter);
+		m_physics_system->SetPhysicsSettings(m_physics_settings);
+		m_physics_system->SetGravity(JPHVec3(old_gravity));
+
+		m_test_class = p_RTTI;
+		m_test = static_cast<PhysicsTest*>(p_RTTI->CreateObject());
+		m_test->SetPhysicsSystem(m_physics_system);
+		m_test->SetJobSystem(m_job_system);
+		m_test->SetTempAllocator(m_temp_allocator);
+		if (m_install_contact_listener)
+		{
+			m_contact_listener = new ContactListenerImpl;
+			m_contact_listener->SetNextListener(m_test->GetContactListener());
+			m_physics_system->SetContactListener(m_contact_listener);
+		}
+		else
+		{
+			m_contact_listener = nullptr;
+			m_physics_system->SetContactListener(m_test->GetContactListener());
+		}
+		m_test->Init();
+		m_physics_system->OptimizeBroadPhase();
+
+	}
+
+	void PhysicSystem::DrawPhysics()
+	{
+
+	}
+
+	void PhysicSystem::StepPhysics(JPH::JobSystem* p_job_stream)
 	{
 
 	}
