@@ -364,7 +364,6 @@
     <ClInclude Include="Runtime\ECS\Scene.hpp" />
     <ClInclude Include="Runtime\ECS\Tick.hpp" />
     <ClInclude Include="Runtime\ECS\Transform.hpp" />
-    <ClInclude Include="Runtime\Input\InputDevices.hpp" />
     <ClInclude Include="Runtime\Input\Keyboard.hpp" />
     <ClInclude Include="Runtime\Input\Mouse.hpp" />
     <ClInclude Include="Runtime\Physics\Layers.hpp" />

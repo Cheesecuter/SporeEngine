@@ -716,9 +716,6 @@
     <ClInclude Include="Runtime\ECS\Transform.hpp">
       <Filter>源文件\ECS</Filter>
     </ClInclude>
-    <ClInclude Include="Runtime\Input\InputDevices.hpp">
-      <Filter>源文件\Input</Filter>
-    </ClInclude>
     <ClInclude Include="Runtime\Input\Keyboard.hpp">
       <Filter>源文件\Input</Filter>
     </ClInclude>
