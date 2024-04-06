@@ -9,6 +9,7 @@ Assets/Shaders/
 Assets/Textures/
 Runtime/Debug
 SDKs/
+*.sln
 
 # User-specific files
 *.rsuser
