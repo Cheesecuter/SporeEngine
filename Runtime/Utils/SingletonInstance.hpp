@@ -1,6 +1,4 @@
 #pragma once
-#ifndef SINGLETONINSTANCE_HPP
-#define SINGLETONINSTANCE_HPP
 
 #include <Types.hpp>
 
@@ -21,8 +19,7 @@ namespace Spore
 	protected:
 		Singleton()
 		{
+
 		}
 	};
 }
-
-#endif
