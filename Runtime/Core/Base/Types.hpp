@@ -1,6 +1,4 @@
 #pragma once
-#ifndef TYPES_HPP
-#define TYPES_HPP
 
 #ifndef SE_TYPE
 #define SE_TYPE
@@ -115,7 +113,5 @@ namespace Spore
 
 	using quat = glm::quat;
 }
-
-#endif
 
 #endif
