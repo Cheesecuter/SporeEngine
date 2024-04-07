@@ -1,6 +1,4 @@
 #pragma once
-#ifndef MESH_HPP
-#define MESH_HPP
 
 #include <Types.hpp>
 #include <Shader.hpp>
@@ -41,5 +39,3 @@ namespace Spore
 		void SetupMesh();
 	};
 }
-
-#endif

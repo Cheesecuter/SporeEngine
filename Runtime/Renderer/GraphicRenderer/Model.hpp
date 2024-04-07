@@ -1,6 +1,4 @@
 #pragma once
-#ifndef MODEL_HPP
-#define MODEL_HPP
 
 #include <Types.hpp>
 #include <Mesh.hpp>
@@ -50,6 +48,3 @@ namespace Spore
 		std::vector<Texture> LoadMaterialTextures(aiMaterial* p_material, aiTextureType p_type, std::string p_type_name);
 	};
 }
-
-#endif
-

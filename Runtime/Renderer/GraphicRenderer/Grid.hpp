@@ -1,6 +1,4 @@
 #pragma once
-#ifndef GRID_HPP
-#define GRID_HPP
 
 #include <Types.hpp>
 #include <Shader.hpp>
@@ -32,5 +30,3 @@ namespace Spore
 		void Init();
 	};
 }
-
-#endif

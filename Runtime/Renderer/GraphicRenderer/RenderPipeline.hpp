@@ -1,6 +1,4 @@
 #pragma once
-#ifndef RENDERPIPELINE_HPP
-#define RENDERPIPELINE_HPP
 
 #include <Types.hpp>
 #include <Scene.hpp>
@@ -85,5 +83,3 @@ namespace Spore
 		mat4x4f m_light_projection, m_light_view, m_light_space_matrix;
 	};
 }
-
-#endif

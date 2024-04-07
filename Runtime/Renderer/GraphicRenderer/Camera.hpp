@@ -1,6 +1,4 @@
 #pragma once
-#ifndef CAMERA_HPP
-#define CAMERA_HPP
 
 #include <Types.hpp>
 
@@ -61,5 +59,3 @@ namespace Spore
 		void UpdateCameraVectors();
 	};
 }
-
-#endif

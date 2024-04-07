@@ -1,6 +1,4 @@
 #pragma once
-#ifndef SHADER_HPP
-#define SHADER_HPP
 
 #include <Types.hpp>
 
@@ -50,5 +48,3 @@ namespace Spore
 		void CheckCompileErrors(uint32 p_shader, std::string p_type);
 	};
 }
-
-#endif
