@@ -1,6 +1,4 @@
 #pragma once
-#ifndef MODEL_OBJECT_HPP
-#define MODEL_OBJECT_HPP
 
 #include <Types.hpp>
 #include <Object.hpp>
@@ -34,5 +32,3 @@ namespace Spore
 
 	};
 }
-
-#endif

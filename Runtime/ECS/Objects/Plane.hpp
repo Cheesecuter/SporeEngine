@@ -1,6 +1,4 @@
 #pragma once
-#ifndef PLANE_HPP
-#define PLANE_HPP
 
 #include <Types.hpp>
 #include <Texture.hpp>
@@ -34,5 +32,3 @@ namespace Spore
 		void Init();
 	};
 }
-
-#endif
