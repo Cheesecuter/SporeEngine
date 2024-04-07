@@ -1,6 +1,4 @@
 #pragma once
-#ifndef SHADER_COMPONENT_HPP
-#define SHADER_COMPONENT_HPP
 
 #include <Types.hpp>
 #include <Component.hpp>
@@ -28,5 +26,3 @@ namespace Spore
 		std::unordered_map<std::string, ShaderNode*> m_shaders;
 	};
 }
-
-#endif

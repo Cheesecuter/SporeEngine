@@ -1,6 +1,4 @@
 #pragma once
-#ifndef TRANSFORM_COMPONENT_HPP
-#define TRANSFORM_COMPONENT_HPP
 
 #include <Types.hpp>
 #include <Component.hpp>
@@ -34,5 +32,3 @@ namespace Spore
 
 	};
 }
-
-#endif
