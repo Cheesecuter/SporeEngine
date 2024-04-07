@@ -1,6 +1,4 @@
 #pragma once
-#ifndef SCENE_HPP
-#define SCENE_HPP
 
 #include <Types.hpp>
 #include <Object.hpp>
@@ -68,5 +66,3 @@ namespace Spore
 		Listener m_body_activation_listener;
 	};
 }
-
-#endif

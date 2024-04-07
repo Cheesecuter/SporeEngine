@@ -1,6 +1,4 @@
 #pragma once
-#ifndef TICK_HPP
-#define TICK_HPP
 
 namespace Spore
 {
@@ -14,5 +12,3 @@ namespace Spore
 
 	};
 }
-
-#endif

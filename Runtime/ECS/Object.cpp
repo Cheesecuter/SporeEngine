@@ -1,5 +1,4 @@
 #include <Object.hpp>
-#include <IMGUI_GLFW_OPENGL3.hpp>
 
 namespace Spore
 {

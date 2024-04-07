@@ -1,6 +1,4 @@
 #pragma once
-#ifndef OBJECT_HPP
-#define OBJECT_HPP
 
 #include <Types.hpp>
 #include <Model.hpp>
@@ -73,5 +71,3 @@ namespace Spore
 		std::vector<ObjectObserver*> m_observer_list;
 	};
 }
-
-#endif
