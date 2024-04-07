@@ -1,6 +1,4 @@
 #pragma once
-#ifndef FILES_HPP
-#define FILES_HPP
 
 #include <Types.hpp>
 #include <SingletonInstance.hpp>
@@ -29,5 +27,3 @@ namespace Spore
 
 	};
 }
-
-#endif

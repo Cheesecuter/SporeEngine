@@ -1,6 +1,4 @@
 #pragma once
-#ifndef ASSETS_MANAGER_HPP
-#define ASSETS_MANAGER_HPP
 
 #include <Types.hpp>
 #include <SingletonInstance.hpp>
@@ -27,5 +25,3 @@ namespace Spore
 		friend class Singleton<AssetsManager>;
 	};
 }
-
-#endif
