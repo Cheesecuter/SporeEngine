@@ -173,13 +173,18 @@ void Runtime(MainWindow* p_window, UI* p_ui, PhysicSystem* p_physic_system)
 
         Keyboard::GetInstance().processInput(p_window, editorCamera, deltaTime);
 
-        if (scene1->IsActive(step))
+        if (scene1->m_flag_run)
         {
-            ++step;
+            if (scene1->IsActive(step))
+            {
+                ++step;
 
-            const int cCollisionSteps = 1;
-            scene1->m_physics_system->Update(1.0f / 60.0f, cCollisionSteps, scene1->m_temp_allocator, scene1->m_job_system);
+                const int cCollisionSteps = 1;
+                scene1->m_physics_system->Update(1.0f / 360.0f, cCollisionSteps, scene1->m_temp_allocator, scene1->m_job_system);
+            }
         }
+
+        
 
         mat4f projection = glm::perspective(glm::radians(editorCamera.m_zoom),
                                             (float32) p_window->GetWindowWidth() / (float32) p_window->GetWindowHeight(),

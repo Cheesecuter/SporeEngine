@@ -17,6 +17,8 @@ namespace Spore
 
 		std::map<std::string, Model*> m_model_mapper;
 		uint32 m_VAO, m_VBO, m_EBO;
+		bool m_flag_run = false;
+		bool m_flag_stop = true;
 
 		void AddModel(Model* p_model);
 		void DeleteModel(Model* p_model);

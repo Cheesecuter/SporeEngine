@@ -17,13 +17,19 @@ namespace Spore
 		if (p_object->m_type == "model")
 		{
 			ModelObject* modelObject = dynamic_cast<ModelObject*>(p_object);
-			PhysicsComponent* physicsComponent = dynamic_cast<PhysicsComponent*>(p_object->GetComponents().find("Physics")->second);
+			TransformComponent* transformComponent = dynamic_cast<TransformComponent*>(
+				modelObject->GetComponents().find("Transform")->second);
+			PhysicsComponent* physicsComponent = dynamic_cast<PhysicsComponent*>(
+				modelObject->GetComponents().find("Physics")->second);
+			physicsComponent->SetBodyInterface(m_body_interface);
+
+			JPH::RVec3 position = JPHVec3(transformComponent->GetPosition());
+			JPH::Quat quaternion = JPHQuat(quat(glm::radians(transformComponent->GetRotation())));
 
 			JPH::RefConst<JPH::Shape> box_shape = new JPH::BoxShape(JPH::Vec3(1.0f, 1.0f, 1.0f));
-			physicsComponent->SetBodyCreationSettings(box_shape, JPH::RVec3(0, 36, 0),
-													  JPH::Quat::sIdentity(), JPH::EMotionType::Dynamic,
-													  Layers::MOVING);
-			physicsComponent->CreateAndAddBody(m_body_interface);
+			physicsComponent->SetBodyCreationSettings(box_shape, position, quaternion, 
+													  JPH::EMotionType::Dynamic, Layers::MOVING);
+			physicsComponent->CreateAndAddBody();
 		}
 		m_object_mapper.insert(std::make_pair(p_object->m_identifier, p_object));
 		p_object->AddObserver(this);
@@ -75,6 +81,8 @@ namespace Spore
 			else if (object->m_type == "model")
 			{
 				ModelObject* modelObject = dynamic_cast<ModelObject*>(object);
+				modelObject->m_flag_run = m_flag_run;
+				modelObject->m_flag_stop = m_flag_stop;
 				if (!modelObject->m_model_mapper.empty())
 				{
 					modelObject->Render(p_shaders, p_camera, p_screen_width, p_screen_height,
@@ -141,7 +149,7 @@ namespace Spore
 				if (m_body_interface->IsActive(physicsComponent->GetBody()->GetID()))
 				{
 					flag = true;
-					physicsComponent->Tick(p_step, m_body_interface);
+					physicsComponent->Tick(p_step);
 				}
 			}
 		}
@@ -153,6 +161,23 @@ namespace Spore
 
 	}
 
+	void Scene::Active()
+	{
+		for (const std::pair<std::string, Object*> it : m_object_mapper)
+		{
+			Object* object = it.second;
+			if (object->m_type == "model")
+			{
+				ModelObject* modelObject = dynamic_cast<ModelObject*>(object);
+				PhysicsComponent* physicsComponent = dynamic_cast<PhysicsComponent*>(object->GetComponents().find("Physics")->second);
+				if (!m_body_interface->IsActive(physicsComponent->GetBody()->GetID()))
+				{
+					m_body_interface->ActivateBody(physicsComponent->GetBody()->GetID());
+				}
+			}
+		}
+	}
+
 	JPH::Body& Scene::CreateFloor(float32 p_size)
 	{
 		const float scale = 1.0f;
@@ -160,7 +185,7 @@ namespace Spore
 		JPH::Body& floor = *m_body_interface->CreateBody(
 			JPH::BodyCreationSettings(
 				new JPH::BoxShape(scale * JPH::Vec3(0.5f * p_size, 1.0f, 0.5f * p_size), 0.0f),
-				JPH::RVec3(scale * JPH::Vec3(0.0f, -1.0f, 0.0f)),
+				JPH::RVec3(scale * JPH::Vec3(0.0f, 0.0f, 0.0f)),
 				JPH::Quat::sIdentity(), JPH::EMotionType::Static, Layers::NON_MOVING));
 		m_body_interface->AddBody(floor.GetID(), JPH::EActivation::DontActivate);
 		return floor;

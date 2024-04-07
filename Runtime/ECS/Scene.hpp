@@ -22,6 +22,8 @@ namespace Spore
 		std::map<std::string, Object*> m_object_mapper;
 		vec4f m_enviroment_color = vec4f(0.725f, 0.725f, 0.725f, 1.0f);
 		int m_object_index = 0;
+		bool m_flag_run = false;
+		bool m_flag_stop = true;
 
 		JPH::JobSystem* m_job_system = nullptr;
 		JPH::PhysicsSystem* m_physics_system = nullptr;
@@ -46,6 +48,7 @@ namespace Spore
 		JPH::Body& CreateFloor(float32 p_size = 200.0f);
 		bool IsActive(uint32 p_step);
 		void Tick(uint32 step);
+		void Active();
 
 	private:
 		class Listener : public JPH::BodyActivationListener

@@ -382,6 +382,7 @@ namespace Spore
 					m_selected_object->m_selected = true;
 				}
 			}
+			m_selected_scene = p_window->m_render_pipeline->m_scene_mapper.find("scene_1")->second;
 			for (std::map<std::string, Scene*>::iterator it_scene = sceneMapper.begin(); it_scene != sceneMapper.end(); it_scene++)
 			{
 				if (ImGui::CollapsingHeader(it_scene->second->m_identifier.c_str(), true))
@@ -1020,6 +1021,24 @@ namespace Spore
 
 			ImGui::Text("Camera Position: %.2f, %.2f, %.2f", p_window->m_camera->m_position.x, p_window->m_camera->m_position.y, p_window->m_camera->m_position.z);
 			ImGui::Text(" %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
+
+			if (ImGui::Button("Run"))
+			{
+				m_selected_scene->m_flag_stop = false;
+				m_selected_scene->m_flag_run = true;
+				m_selected_scene->Active();
+			}
+			ImGui::SameLine();
+			if (ImGui::Button("Pause"))
+			{
+				m_selected_scene->m_flag_run = false;
+			}
+			ImGui::SameLine();
+			if (ImGui::Button("Stop"))
+			{
+				m_selected_scene->m_flag_run = false;
+				m_selected_scene->m_flag_stop = true;
+			}
 
 			ImGui::End();
 		}

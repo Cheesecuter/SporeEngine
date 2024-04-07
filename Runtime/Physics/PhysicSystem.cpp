@@ -62,7 +62,7 @@ namespace Spore
 	void PhysicSystem::AddScene(Scene* p_scene)
 	{
 		vec3f old_gravity = m_physics_system != nullptr ? Vec3f(m_physics_system->GetGravity()) : vec3f(0.0f, -9.81f, 0.0f);
-
+		old_gravity = vec3f(0.0f, -2.0f, 0.0f);
 		m_physics_system = new JPH::PhysicsSystem();
 		m_physics_system->Init(c_num_bodies, c_num_body_mutexes, c_max_body_pairs, c_max_contact_constraints,
 							   m_broad_phase_layer_interface, m_object_vs_broad_phase_layer_filter, m_object_vs_object_layer_filter);

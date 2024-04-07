@@ -63,7 +63,16 @@ namespace Spore
 		TransformComponent* transformComponent = dynamic_cast<TransformComponent*>(m_components.find("Transform")->second);
 		ShaderComponent* shaderComponent = nullptr;
 		Model* model = nullptr;
-		transformComponent->SetPosition(physicsComponent->GetPosition());
+		if (m_flag_run)
+		{
+			transformComponent->SetPosition(physicsComponent->GetPosition());
+			transformComponent->SetRotation(physicsComponent->GetRotation());
+		}
+		if (m_flag_stop)
+		{
+			physicsComponent->SetPosition(transformComponent->GetPosition());
+			physicsComponent->SetRotation(transformComponent->GetRotation());
+		}
 		p_model = transformComponent->GetMatrix();
 		for (std::map<std::string, Model*>::iterator it_model = m_model_mapper.begin(); it_model != m_model_mapper.end(); it_model++)
 		{
