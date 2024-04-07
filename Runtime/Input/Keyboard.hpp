@@ -1,6 +1,4 @@
 #pragma once
-#ifndef KEYBOARD_HPP
-#define KEYBOARD_HPP
 
 #include <Types.hpp>
 #include <SingletonInstance.hpp>
@@ -23,5 +21,3 @@ namespace Spore
 		friend class Singleton<Keyboard>;
 	};
 }
-
-#endif

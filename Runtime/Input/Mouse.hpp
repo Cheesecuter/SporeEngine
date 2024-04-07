@@ -1,6 +1,4 @@
 #pragma once
-#ifndef MOUSE_HPP
-#define MOUSE_HPP
 
 #include <Types.hpp>
 #include <SingletonInstance.hpp>
@@ -29,5 +27,3 @@ namespace Spore
 		friend class Singleton<Mouse>;
 	};
 }
-
-#endif
