@@ -1,6 +1,4 @@
 #pragma once
-#ifndef WINDOW_HPP
-#define WINDOW_HPP
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
@@ -44,5 +42,3 @@ namespace Spore
 		GLFWwindow* InitWindow();
 	};
 }
-
-#endif

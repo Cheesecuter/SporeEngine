@@ -1,6 +1,4 @@
 #pragma once
-#ifndef UI_HPP
-#define UI_HPP
 
 #include <Types.hpp>
 #include <Window.hpp>
@@ -64,5 +62,3 @@ namespace Spore
 		void RenderConsolePanel(MainWindow* p_window);
 	};
 }
-
-#endif
