@@ -20,7 +20,7 @@ namespace Spore
 			PhysicsComponent* physicsComponent = dynamic_cast<PhysicsComponent*>(p_object->GetComponents().find("Physics")->second);
 
 			JPH::RefConst<JPH::Shape> box_shape = new JPH::BoxShape(JPH::Vec3(1.0f, 1.0f, 1.0f));
-			physicsComponent->SetBodyCreationSettings(box_shape, JPH::RVec3(0, 10, 0),
+			physicsComponent->SetBodyCreationSettings(box_shape, JPH::RVec3(0, 36, 0),
 													  JPH::Quat::sIdentity(), JPH::EMotionType::Dynamic,
 													  Layers::MOVING);
 			physicsComponent->CreateAndAddBody(m_body_interface);

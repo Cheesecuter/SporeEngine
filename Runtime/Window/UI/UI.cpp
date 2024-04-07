@@ -676,7 +676,9 @@ namespace Spore
 					for (uint32 n = 0; n < modelIdentifiers.size(); n++)
 					{
 						if (ImGui::Selectable(modelIdentifiers [n].c_str(), selected_model == n))
+						{
 							selected_model = n;
+						}
 						if (ImGui::BeginPopupContextItem())
 						{
 							selected_model = n;
@@ -708,7 +710,6 @@ namespace Spore
 								ImGui::CloseCurrentPopup();
 							ImGui::EndPopup();
 						}
-						ImGui::SetItemTooltip("Right-click to open popup");
 					}
 				}
 				if (ImGui::CollapsingHeader("Shaders", true))
