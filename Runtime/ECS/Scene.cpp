@@ -137,9 +137,20 @@ namespace Spore
 			if (object->m_type == "model")
 			{
 				ModelObject* modelObject = dynamic_cast<ModelObject*>(object);
-				if(modelObject.)
+				PhysicsComponent* physicsComponent = dynamic_cast<PhysicsComponent*>(object->GetComponents().find("Physics")->second);
+				if (m_body_interface->IsActive(physicsComponent->GetBody()->GetID()))
+				{
+					flag = true;
+					physicsComponent->Tick(p_step, m_body_interface);
+				}
 			}
 		}
+		return flag;
+	}
+
+	void Scene::Tick(uint32 step)
+	{
+
 	}
 
 	JPH::Body& Scene::CreateFloor(float32 p_size)

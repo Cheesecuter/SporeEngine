@@ -45,6 +45,7 @@ namespace Spore
 		JPH::ContactListener* GetContactListener();
 		JPH::Body& CreateFloor(float32 p_size = 200.0f);
 		bool IsActive(uint32 p_step);
+		void Tick(uint32 step);
 
 	private:
 		class Listener : public JPH::BodyActivationListener

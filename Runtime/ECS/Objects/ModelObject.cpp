@@ -59,9 +59,11 @@ namespace Spore
 										(float32) p_screen_width / (float32) p_screen_height, 0.1f, 10000.0f);
 		p_view = p_camera->GetViewMatrix();
 
+		PhysicsComponent* physicsComponent = dynamic_cast<PhysicsComponent*>(m_components.find("Physics")->second);
 		TransformComponent* transformComponent = dynamic_cast<TransformComponent*>(m_components.find("Transform")->second);
 		ShaderComponent* shaderComponent = nullptr;
 		Model* model = nullptr;
+		transformComponent->SetPosition(physicsComponent->GetPosition());
 		p_model = transformComponent->GetMatrix();
 		for (std::map<std::string, Model*>::iterator it_model = m_model_mapper.begin(); it_model != m_model_mapper.end(); it_model++)
 		{

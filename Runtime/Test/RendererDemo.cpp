@@ -61,11 +61,6 @@ int main()
 
 void Runtime(MainWindow* p_window, UI* p_ui, PhysicSystem* p_physic_system)
 {
-
-    uint32 step = 0;
-
-    p_physic_system->Tick(step);
-
     //Shader blendingShader("./Assets/Shaders/BlendingVertex.glsl", "./Assets/Shaders/BlendingFragment.glsl");
     //Shader gBufferShader("./Assets/Shaders/GBufferVertex.glsl", "./Assets/Shaders/GBufferFragment.glsl");
     Shader modelShader("./Assets/Shaders/ModelLoadingVertex.glsl", "./Assets/Shaders/ModelLoadingFragment.glsl");
@@ -131,6 +126,7 @@ void Runtime(MainWindow* p_window, UI* p_ui, PhysicSystem* p_physic_system)
     scene1->AddObject(light);
     scene1->AddObject(plane);
 
+    uint32 step = 0;
     p_physic_system->AddScene(scene1);
 
     p_window->m_render_pipeline->AddScene(scene1);
@@ -176,6 +172,14 @@ void Runtime(MainWindow* p_window, UI* p_ui, PhysicSystem* p_physic_system)
         p_ui->RenderPanels(p_window);
 
         Keyboard::GetInstance().processInput(p_window, editorCamera, deltaTime);
+
+        if (scene1->IsActive(step))
+        {
+            ++step;
+
+            const int cCollisionSteps = 1;
+            scene1->m_physics_system->Update(1.0f / 60.0f, cCollisionSteps, scene1->m_temp_allocator, scene1->m_job_system);
+        }
 
         mat4f projection = glm::perspective(glm::radians(editorCamera.m_zoom),
                                             (float32) p_window->GetWindowWidth() / (float32) p_window->GetWindowHeight(),
