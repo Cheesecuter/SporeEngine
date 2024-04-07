@@ -38,6 +38,21 @@ namespace Spore
 		return nullptr;
 	}
 
+	JPH::BodyInterface* PhysicsTest::GetBodyInterface()
+	{
+		return m_body_interface;
+	}
+
+	bool PhysicsTest::IsActive()
+	{
+		return false;
+	}
+
+	void PhysicsTest::Tick(uint32 step)
+	{
+
+	}
+
 	JPH::Body& PhysicsTest::CreateFloor(float32 p_size)
 	{
 		const float scale = GetWorldScale();

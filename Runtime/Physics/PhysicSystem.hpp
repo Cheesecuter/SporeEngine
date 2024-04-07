@@ -5,6 +5,7 @@
 #include <ContactListenerImpl.hpp>
 #include <PhysicsTest.hpp>
 #include <Layers.hpp>
+#include <Scene.hpp>
 
 JPH_SUPPRESS_WARNINGS_STD_BEGIN
 #include <chrono>
@@ -18,9 +19,13 @@ namespace Spore
 		PhysicSystem();
 		~PhysicSystem();
 
+		PhysicsTest* m_test = nullptr;
+
 		void Init();
 		void Terminate();
 		bool Update(float32 p_delta_time);
+		void Tick(uint32 step);
+		void AddScene(Scene* p_scene);
 
 		void SetRenderFrequency(float32 p_frequency)
 		{
@@ -44,7 +49,6 @@ namespace Spore
 		JPH::PhysicsSettings m_physics_settings;
 
 		const JPH::RTTI* m_test_class = nullptr;
-		PhysicsTest* m_test = nullptr;
 		bool m_install_contact_listener = false;
 		bool m_record_state = false;
 		bool m_check_determinism = false;
@@ -54,7 +58,7 @@ namespace Spore
 
 		float32 m_requested_delta_time = 0.0f;
 
-		void Start(const JPH::RTTI* p_RTTI);
+		void Start(PhysicsTest* p_test);
 		void DrawPhysics();
 		void StepPhysics(JPH::JobSystem* p_job_stream);
 		

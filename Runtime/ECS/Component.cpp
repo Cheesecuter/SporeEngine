@@ -2,7 +2,10 @@
 
 namespace Spore
 {
-	Component::~Component() { }
+	Component::~Component()
+	{
+
+	}
 
 	bool Component::IsDirty() const
 	{

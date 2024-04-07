@@ -1,4 +1,5 @@
 #include <PhysicSystem.hpp>
+#include <PTSimpleTest.hpp>
 
 namespace Spore
 {
@@ -48,6 +49,9 @@ namespace Spore
 
 		m_job_system_validating = new JPH::JobSystemSingleThreaded(c_max_physics_jobs);
 
+		//Start(JPH_RTTI(PTSimpleTest));
+		//PTSimpleTest* ptsimpleTest = new PTSimpleTest();
+		//Start(ptsimpleTest);
 	}
 
 	void PhysicSystem::Terminate()
@@ -55,7 +59,7 @@ namespace Spore
 
 	}
 
-	void PhysicSystem::Start(const JPH::RTTI* p_RTTI)
+	void PhysicSystem::AddScene(Scene* p_scene)
 	{
 		vec3f old_gravity = m_physics_system != nullptr ? Vec3f(m_physics_system->GetGravity()) : vec3f(0.0f, -9.81f, 0.0f);
 
@@ -65,8 +69,37 @@ namespace Spore
 		m_physics_system->SetPhysicsSettings(m_physics_settings);
 		m_physics_system->SetGravity(JPHVec3(old_gravity));
 
-		m_test_class = p_RTTI;
-		m_test = static_cast<PhysicsTest*>(p_RTTI->CreateObject());
+		p_scene->SetPhysicsSystem(m_physics_system);
+		p_scene->SetJobSystem(m_job_system);
+		p_scene->SetTempAllocator(m_temp_allocator);
+		if (m_install_contact_listener)
+		{
+			m_contact_listener = new ContactListenerImpl;
+			m_contact_listener->SetNextListener(p_scene->GetContactListener());
+			m_physics_system->SetContactListener(m_contact_listener);
+		}
+		else
+		{
+			m_contact_listener = nullptr;
+			m_physics_system->SetContactListener(p_scene->GetContactListener());
+		}
+		p_scene->InitPhysics();
+		m_physics_system->OptimizeBroadPhase();
+	}
+
+	void PhysicSystem::Start(PhysicsTest* p_test)
+	{
+		vec3f old_gravity = m_physics_system != nullptr ? Vec3f(m_physics_system->GetGravity()) : vec3f(0.0f, -9.81f, 0.0f);
+
+		m_physics_system = new JPH::PhysicsSystem();
+		m_physics_system->Init(c_num_bodies, c_num_body_mutexes, c_max_body_pairs, c_max_contact_constraints,
+							   m_broad_phase_layer_interface, m_object_vs_broad_phase_layer_filter, m_object_vs_object_layer_filter);
+		m_physics_system->SetPhysicsSettings(m_physics_settings);
+		m_physics_system->SetGravity(JPHVec3(old_gravity));
+
+		//m_test_class = p_RTTI;
+		//m_test = static_cast<PhysicsTest*>(p_RTTI->CreateObject());
+		m_test = dynamic_cast<PTSimpleTest*>(p_test);
 		m_test->SetPhysicsSystem(m_physics_system);
 		m_test->SetJobSystem(m_job_system);
 		m_test->SetTempAllocator(m_temp_allocator);
@@ -84,6 +117,30 @@ namespace Spore
 		m_test->Init();
 		m_physics_system->OptimizeBroadPhase();
 
+	}
+
+	bool PhysicSystem::Update(float32 p_delta_time)
+	{
+		if (m_max_concurrent_jobs != m_job_system->GetMaxConcurrency())
+		{
+			static_cast<JPH::JobSystemThreadPool*>(m_job_system)->SetNumThreads(m_max_concurrent_jobs - 1);
+		}
+
+		DrawPhysics();
+		StepPhysics(m_job_system);
+
+		return true;
+	}
+
+	void PhysicSystem::Tick(uint32 step)
+	{
+		while (m_test->IsActive())
+		{
+			++step;
+			m_test->Tick(step);
+			const int cCollisionSteps = 1;
+			m_physics_system->Update(1.0f / 60.0f, cCollisionSteps, m_temp_allocator, m_job_system);
+		}
 	}
 
 	void PhysicSystem::DrawPhysics()

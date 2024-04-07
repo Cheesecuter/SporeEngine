@@ -18,7 +18,7 @@
 
 using namespace Spore;
 
-void RenderFunc(MainWindow* p_window, UI* p_ui);
+void Runtime(MainWindow* p_window, UI* p_ui, PhysicSystem* p_physic_system);
 
 uint32 SCR_WIDTH = 1200;
 uint32 SCR_HEIGHT = 900;
@@ -50,7 +50,7 @@ int main()
 
     stbi_set_flip_vertically_on_load(false);
 
-    RenderFunc(&m_window, &ui);
+    Runtime(&m_window, &ui, &physicSystem);
 
     ui.Terminate();
     physicSystem.Terminate();
@@ -59,8 +59,13 @@ int main()
     return 0;
 }
 
-void RenderFunc(MainWindow* p_window, UI* p_ui)
+void Runtime(MainWindow* p_window, UI* p_ui, PhysicSystem* p_physic_system)
 {
+
+    uint32 step = 0;
+
+    p_physic_system->Tick(step);
+
     //Shader blendingShader("./Assets/Shaders/BlendingVertex.glsl", "./Assets/Shaders/BlendingFragment.glsl");
     //Shader gBufferShader("./Assets/Shaders/GBufferVertex.glsl", "./Assets/Shaders/GBufferFragment.glsl");
     Shader modelShader("./Assets/Shaders/ModelLoadingVertex.glsl", "./Assets/Shaders/ModelLoadingFragment.glsl");
@@ -125,6 +130,9 @@ void RenderFunc(MainWindow* p_window, UI* p_ui)
     Plane* plane = new Plane("obj_plane");
     scene1->AddObject(light);
     scene1->AddObject(plane);
+
+    p_physic_system->AddScene(scene1);
+
     p_window->m_render_pipeline->AddScene(scene1);
     p_window->m_render_pipeline->AddScene(scene2);
 

@@ -12,6 +12,7 @@ namespace Spore
 	{
 	public:
 		TransformComponent();
+		virtual ~TransformComponent();
 		void SetPosition(const vec3f& p_position);
 		void SetRotation(const vec3f& p_rotation);
 		void SetScale(const vec3f& p_scale);

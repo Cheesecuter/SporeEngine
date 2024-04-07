@@ -11,6 +11,9 @@ namespace Spore
 		m_model_shader = shader;
 		shaderComponent->AddShader(m_model_shader);
 		m_components [shaderComponent->GetName()] = shaderComponent;
+
+		PhysicsComponent* physicsComponent = new PhysicsComponent();
+		m_components [physicsComponent->GetName()] = physicsComponent;
 	}
 
 	ModelObject::~ModelObject()

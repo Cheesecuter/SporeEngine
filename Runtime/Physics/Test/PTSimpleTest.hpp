@@ -1,7 +1,6 @@
 #pragma once
 
 #include <PhysicsTest.hpp>
-#include <JoltPhysics/Jolt/Physics/Body/BodyActivationListener.h>
 
 namespace Spore
 {
@@ -10,6 +9,8 @@ namespace Spore
 	public:
 		virtual ~PTSimpleTest() override;
 		virtual void Init() override;
+		bool IsActive() override;
+		void Tick(uint32 step) override;
 
 	private:
 		class Listener : public JPH::BodyActivationListener
@@ -27,5 +28,6 @@ namespace Spore
 		};
 
 		Listener m_body_activation_listener;
+		std::vector<JPH::Body*> bodys;
 	};
 }

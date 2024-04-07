@@ -7,6 +7,11 @@ namespace Spore
 		m_name = "Transform";
 	}
 
+	TransformComponent::~TransformComponent()
+	{
+
+	}
+
 	void TransformComponent::SetPosition(const vec3f& p_position)
 	{
 		//transformBuffer [nextIndex].position = position_p;

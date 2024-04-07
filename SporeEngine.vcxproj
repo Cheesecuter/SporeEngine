@@ -153,12 +153,14 @@
     <ClCompile Include="Runtime\Core\Math\SDKMath.cpp" />
     <ClCompile Include="Runtime\Core\Reflection\Reflection.cpp" />
     <ClCompile Include="Runtime\ECS\Component.cpp" />
+    <ClCompile Include="Runtime\ECS\Component\PhysicsComponent.cpp" />
     <ClCompile Include="Runtime\ECS\Component\ShaderComponent.cpp" />
     <ClCompile Include="Runtime\ECS\Component\TransformComponent.cpp" />
     <ClCompile Include="Runtime\ECS\Light.cpp" />
     <ClCompile Include="Runtime\ECS\Object.cpp" />
     <ClCompile Include="Runtime\ECS\Objects\ModelObject.cpp" />
     <ClCompile Include="Runtime\ECS\Objects\Plane.cpp" />
+    <ClCompile Include="Runtime\ECS\Objects\RigidObject.cpp" />
     <ClCompile Include="Runtime\ECS\Scene.cpp" />
     <ClCompile Include="Runtime\ECS\Tick.cpp" />
     <ClCompile Include="Runtime\ECS\Transform.cpp" />
@@ -355,12 +357,14 @@
     <ClInclude Include="Runtime\Core\Math\SDKMath.hpp" />
     <ClInclude Include="Runtime\Core\Reflection\Reflection.hpp" />
     <ClInclude Include="Runtime\ECS\Component.hpp" />
+    <ClInclude Include="Runtime\ECS\Component\PhysicsComponent.hpp" />
     <ClInclude Include="Runtime\ECS\Component\ShaderComponent.hpp" />
     <ClInclude Include="Runtime\ECS\Component\TransformComponent.hpp" />
     <ClInclude Include="Runtime\ECS\Light.hpp" />
     <ClInclude Include="Runtime\ECS\Object.hpp" />
     <ClInclude Include="Runtime\ECS\Objects\ModelObject.hpp" />
     <ClInclude Include="Runtime\ECS\Objects\Plane.hpp" />
+    <ClInclude Include="Runtime\ECS\Objects\RigidObject.hpp" />
     <ClInclude Include="Runtime\ECS\Scene.hpp" />
     <ClInclude Include="Runtime\ECS\Tick.hpp" />
     <ClInclude Include="Runtime\ECS\Transform.hpp" />
@@ -751,6 +755,7 @@
     <None Include="Assets\Shaders\StencilFragment.glsl" />
     <None Include="Assets\Shaders\StencilSingleColorFragment.glsl" />
     <None Include="Assets\Shaders\StencilVertex.glsl" />
+    <None Include="cpp.hint" />
     <None Include="SDKs\imgui\misc\debuggers\imgui.natstepfilter" />
     <None Include="SDKs\JoltPhysics\Jolt\Core\FixedSizeFreeList.inl" />
     <None Include="SDKs\JoltPhysics\Jolt\Core\JobSystem.inl" />

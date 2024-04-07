@@ -1,5 +1,7 @@
 #include <Math.hpp>
 #include <algorithm>
+#include <cmath>
+#include <limits>
 
 namespace Spore
 {

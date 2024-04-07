@@ -1,15 +1,6 @@
 #pragma once
-#ifndef PHYSICS_TEST_HPP
-#define PHYSICS_TEST_HPP
 
-#include <JoltPhysics/Jolt/Jolt.h>
-#include <JoltPhysics/Jolt/Physics/PhysicsSystem.h>
-#include <JoltPhysics/Jolt/Physics/Body/BodyCreationSettings.h>
-#include <JoltPhysics/Jolt/Physics/Collision/Shape/BoxShape.h>
-#include <JoltPhysics/Jolt/Physics/Collision/Shape/MeshShape.h>
-#include <JoltPhysics/Jolt/Physics/Collision/Shape/HeightFieldShape.h>
-#include <JoltPhysics/Jolt/Core/RTTI.h>
-
+#include <PhysicSyetemHeaders.h>
 #include <Types.hpp>
 #include <Layers.hpp>
 
@@ -18,6 +9,8 @@ namespace Spore
 	class PhysicsTest
 	{
 	public:
+		//JPH_DECLARE_RTTI_VIRTUAL_BASE(JPH_NO_EXPORT, PhysicsTest)
+
 		virtual ~PhysicsTest();
 		virtual void SetPhysicsSystem(JPH::PhysicsSystem* p_physics_system);
 		void SetJobSystem(JPH::JobSystem* p_job_system);
@@ -25,6 +18,9 @@ namespace Spore
 		virtual void Init();
 		virtual float32 GetWorldScale() const;
 		virtual JPH::ContactListener* GetContactListener();
+		JPH::BodyInterface* GetBodyInterface();
+		virtual bool IsActive();
+		virtual void Tick(uint32 step);
 
 	protected:
 		JPH::JobSystem* m_job_system = nullptr;
@@ -41,5 +37,3 @@ namespace Spore
 		
 	};
 }
-
-#endif

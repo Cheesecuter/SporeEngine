@@ -693,6 +693,12 @@
     <ClCompile Include="Runtime\Physics\Utils\ContactListenerImpl.cpp">
       <Filter>源文件\Physics\Utils</Filter>
     </ClCompile>
+    <ClCompile Include="Runtime\ECS\Objects\RigidObject.cpp">
+      <Filter>源文件\ECS\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\ECS\Component\PhysicsComponent.cpp">
+      <Filter>源文件\ECS\Component</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Runtime\Core\Base\Types.hpp">
@@ -1706,6 +1712,12 @@
     <ClInclude Include="Runtime\Physics\Test\PTSimpleTest.hpp">
       <Filter>源文件\Physics\Test</Filter>
     </ClInclude>
+    <ClInclude Include="Runtime\ECS\Objects\RigidObject.hpp">
+      <Filter>源文件\ECS\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\ECS\Component\PhysicsComponent.hpp">
+      <Filter>源文件\ECS\Component</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="SDKs\imgui\misc\debuggers\imgui.natstepfilter">
@@ -1954,6 +1966,7 @@
     <None Include="SDKs\JoltPhysics\Jolt\Jolt.cmake">
       <Filter>头文件\JoltPhysics</Filter>
     </None>
+    <None Include="cpp.hint" />
   </ItemGroup>
   <ItemGroup>
     <Natvis Include="SDKs\imgui\misc\debuggers\imgui.natvis">
