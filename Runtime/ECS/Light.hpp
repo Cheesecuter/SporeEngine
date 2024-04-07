@@ -1,6 +1,4 @@
 #pragma once
-#ifndef LIGHT_HPP
-#define LIGHT_HPP
 
 #include <Types.hpp>
 #include <Object.hpp>
@@ -23,5 +21,3 @@ namespace Spore
 		std::map<std::string, Model*> m_model_mapper;
 	};
 }
-
-#endif

@@ -1,6 +1,4 @@
 #pragma once
-#ifndef POST_PROCESS_HPP
-#define POST_PROCESS_HPP
 
 #include <Types.hpp>
 #include <Shader.hpp>
@@ -28,5 +26,3 @@ namespace Spore
 
 	};
 }
-
-#endif

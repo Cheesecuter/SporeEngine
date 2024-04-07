@@ -1,6 +1,4 @@
 #pragma once
-#ifndef POST_PROCESSER_HPP
-#define POST_PROCESSER_HPP
 
 #include <Types.hpp>
 #include <PostProcess.hpp>
@@ -43,5 +41,3 @@ namespace Spore
 		};
 	};
 }
-
-#endif
