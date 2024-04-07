@@ -1,8 +1,5 @@
 #pragma once
 
-#ifndef PHYSICSYSTEM_HEADERS_HPP
-#define PHYSICSYSTEM_HEADERS_HPP
-
 #include <JoltPhysics/Jolt/Jolt.h>
 #include <JoltPhysics/Jolt/RegisterTypes.h>
 #include <JoltPhysics/Jolt/Core/Core.h>
@@ -24,5 +21,3 @@
 #include <Types.hpp>
 
 JPH_SUPPRESS_WARNINGS
-
-#endif

@@ -1,6 +1,4 @@
 #pragma once
-#ifndef LAYERS_HPP
-#define LAYERS_HPP
 
 #include <JoltPhysics/Jolt/Jolt.h>
 #include <JoltPhysics/Jolt/Physics/Collision/ObjectLayer.h>
@@ -129,5 +127,3 @@ namespace Spore
 		}
 	};
 }
-
-#endif
