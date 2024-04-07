@@ -28,10 +28,10 @@ namespace Spore
 	/**
 	 * @brief Clamp a value to a specified range.
 	 *
-	 * This function limits the p_value to the specified range [p_min, p_max].
-	 * If the value is less than p_min, it returns p_min.
-	 * If the value is greater than p_max, it returns p_max.
-	 * Otherwise, it returns the p_value itself.
+	 * This function limits the `p_value` to the specified range [p_min, p_max].
+	 * If the value is less than `p_min`, it returns `p_min`.
+	 * If the value is greater than `p_max`, it returns `p_max`.
+	 * Otherwise, it returns the `p_value` itself.
 	 *
 	 * @tparam T The type of the input value.
 	 * @param p_value The value to be clamped.
