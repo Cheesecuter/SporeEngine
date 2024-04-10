@@ -103,6 +103,15 @@
     <Filter Include="源文件\Scripts">
       <UniqueIdentifier>{8e1232d0-18e4-4c9b-8e0c-c6fc5b03277f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="源文件\Renderer\AudioRenderer">
+      <UniqueIdentifier>{08e559cb-119b-4788-a043-1e23dfd8b2e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Renderer\GraphicRenderer\glad">
+      <UniqueIdentifier>{0cda2e32-4155-49c4-b536-ccba97403bf6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Renderer\GraphicRenderer\stb_image">
+      <UniqueIdentifier>{18775f3d-5def-4f28-b02f-b28c569a61aa}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Runtime\ECS\Component.cpp">
@@ -129,9 +138,6 @@
     <ClCompile Include="Runtime\Renderer\GraphicRenderer\Camera.cpp">
       <Filter>源文件\Renderer\GraphicRenderer</Filter>
     </ClCompile>
-    <ClCompile Include="Runtime\Renderer\GraphicRenderer\glad.c">
-      <Filter>源文件\Renderer\GraphicRenderer</Filter>
-    </ClCompile>
     <ClCompile Include="Runtime\Renderer\GraphicRenderer\Mesh.cpp">
       <Filter>源文件\Renderer\GraphicRenderer</Filter>
     </ClCompile>
@@ -142,9 +148,6 @@
       <Filter>源文件\Renderer\GraphicRenderer</Filter>
     </ClCompile>
     <ClCompile Include="Runtime\Renderer\GraphicRenderer\Shader.cpp">
-      <Filter>源文件\Renderer\GraphicRenderer</Filter>
-    </ClCompile>
-    <ClCompile Include="Runtime\Renderer\GraphicRenderer\stb_image.cpp">
       <Filter>源文件\Renderer\GraphicRenderer</Filter>
     </ClCompile>
     <ClCompile Include="Runtime\Renderer\GraphicRenderer\Texture.cpp">
@@ -714,6 +717,15 @@
     <ClCompile Include="Runtime\Scripts\MonoTest_2.cpp">
       <Filter>源文件\Scripts</Filter>
     </ClCompile>
+    <ClCompile Include="Runtime\Renderer\AudioRenderer\AudioRenderTest.cpp">
+      <Filter>源文件\Renderer\AudioRenderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Renderer\GraphicRenderer\glad\glad.c">
+      <Filter>源文件\Renderer\GraphicRenderer\glad</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Renderer\GraphicRenderer\stb_image\stb_image.cpp">
+      <Filter>源文件\Renderer\GraphicRenderer\stb_image</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Runtime\Core\Base\Types.hpp">
@@ -756,9 +768,6 @@
       <Filter>源文件\Renderer\GraphicRenderer</Filter>
     </ClInclude>
     <ClInclude Include="Runtime\Renderer\GraphicRenderer\Shader.hpp">
-      <Filter>源文件\Renderer\GraphicRenderer</Filter>
-    </ClInclude>
-    <ClInclude Include="Runtime\Renderer\GraphicRenderer\stb_image.h">
       <Filter>源文件\Renderer\GraphicRenderer</Filter>
     </ClInclude>
     <ClInclude Include="Runtime\Renderer\GraphicRenderer\Texture.hpp">
@@ -1736,6 +1745,9 @@
     <ClInclude Include="Runtime\Scripts\MonoTest.h">
       <Filter>源文件\Scripts</Filter>
     </ClInclude>
+    <ClInclude Include="Runtime\Renderer\GraphicRenderer\stb_image\stb_image.h">
+      <Filter>源文件\Renderer\GraphicRenderer\stb_image</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="SDKs\imgui\misc\debuggers\imgui.natstepfilter">
@@ -1984,7 +1996,6 @@
     <None Include="SDKs\JoltPhysics\Jolt\Jolt.cmake">
       <Filter>头文件\JoltPhysics</Filter>
     </None>
-    <None Include="cpp.hint" />
   </ItemGroup>
   <ItemGroup>
     <Natvis Include="SDKs\imgui\misc\debuggers\imgui.natvis">
