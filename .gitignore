@@ -4,7 +4,9 @@
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
 # Assets and SDKs
+Assets/Audios/
 Assets/Models/
+Assets/Scripts/
 Assets/Shaders/
 Assets/Textures/
 Runtime/Debug
