@@ -180,7 +180,7 @@ void Runtime(MainWindow* p_window, UI* p_ui, PhysicSystem* p_physic_system)
                 ++step;
 
                 const int cCollisionSteps = 1;
-                scene1->m_physics_system->Update(1.0f / 360.0f, cCollisionSteps, scene1->m_temp_allocator, scene1->m_job_system);
+                scene1->m_physics_system->Update(1.0f / 60.0f, cCollisionSteps, scene1->m_temp_allocator, scene1->m_job_system);
             }
         }
 

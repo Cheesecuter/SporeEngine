@@ -20,9 +20,11 @@ namespace Spore
 		void SetBodyInterface(JPH::BodyInterface* p_body_interface);
 		void SetPosition(const vec3f& p_potision);
 		void SetRotation(const vec3f& p_rotation);
+		//void SetScale(const vec3f& p_scale);
 		void SetTransform(const Transform p_transform);
 		vec3f GetPosition();
 		vec3f GetRotation();
+		//vec3f GetScale();
 		mat4x4f GetTransform();
 		vec3f GetVelocity();
 
@@ -37,6 +39,7 @@ namespace Spore
 		mat4x4f m_transform;
 		vec3f m_position = vec3f(0.0f, 0.0f, 0.0f);
 		vec3f m_rotation = vec3f(0.0f, 0.0f, 0.0f);
+		vec3f m_scale = vec3f(1.0f, 1.0f, 1.0f);
 		vec3f m_velocity = vec3f(0.0f, 0.0f, 0.0f);
 	};
 }

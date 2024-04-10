@@ -94,6 +94,15 @@
     <Filter Include="源文件\Core\Math">
       <UniqueIdentifier>{2f877576-aaf4-490a-b9b3-7569b4827c9c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="资源文件\Assets\Scripts">
+      <UniqueIdentifier>{1f7f7b9e-4a94-4f15-8602-7c4d3e0aae1e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\Assets\Utils">
+      <UniqueIdentifier>{3177c617-b8c5-452c-b722-15f7883d4f55}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Scripts">
+      <UniqueIdentifier>{8e1232d0-18e4-4c9b-8e0c-c6fc5b03277f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Runtime\ECS\Component.cpp">
@@ -698,6 +707,12 @@
     </ClCompile>
     <ClCompile Include="Runtime\ECS\Component\PhysicsComponent.cpp">
       <Filter>源文件\ECS\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Scripts\MonoTest.cpp">
+      <Filter>源文件\Scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Scripts\MonoTest_2.cpp">
+      <Filter>源文件\Scripts</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1717,6 +1732,9 @@
     </ClInclude>
     <ClInclude Include="Runtime\ECS\Component\PhysicsComponent.hpp">
       <Filter>源文件\ECS\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\Scripts\MonoTest.h">
+      <Filter>源文件\Scripts</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

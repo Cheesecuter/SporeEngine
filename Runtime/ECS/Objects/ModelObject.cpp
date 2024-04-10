@@ -67,6 +67,7 @@ namespace Spore
 		{
 			transformComponent->SetPosition(physicsComponent->GetPosition());
 			transformComponent->SetRotation(physicsComponent->GetRotation());
+
 		}
 		if (m_flag_stop)
 		{
