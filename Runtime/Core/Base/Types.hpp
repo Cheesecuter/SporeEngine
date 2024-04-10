@@ -3,6 +3,22 @@
 #ifndef SE_TYPE
 #define SE_TYPE
 
+#include <map>
+#include <functional>
+#include <unordered_map>
+#include <unordered_set>
+#include <string>
+#include <vector>
+#include <memory>
+#include <fstream>
+#include <sstream>
+#include <iostream>
+#include <filesystem>
+#include <cstdarg>
+#include <thread>
+#include <mutex>
+#include <Windows.h>
+
 #include <glad/glad.h>
 #define GLFW_INCLUDE_NONE
 #include <GLFW/glfw3.h>
@@ -22,22 +38,6 @@
 #include <Global.hpp>
 #include <Math.hpp>
 #include <SDKMath.hpp>
-
-#include <map>
-#include <functional>
-#include <unordered_map>
-#include <unordered_set>
-#include <string>
-#include <vector>
-#include <memory>
-#include <fstream>
-#include <sstream>
-#include <iostream>
-#include <filesystem>
-#include <cstdarg>
-#include <thread>
-#include <mutex>
-//#include <Windows.h>
 
 namespace Spore
 {
