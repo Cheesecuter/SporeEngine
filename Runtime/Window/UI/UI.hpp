@@ -4,9 +4,11 @@
 #include <Window.hpp>
 #include <Files.hpp>
 #include <AssetsManager.hpp>
+#include <FileExplorer.hpp>
 #include <Shader.hpp>
 #include <Texture.hpp>
 #include <Model.hpp>
+#include <Audio.hpp>
 #include <Scene.hpp>
 
 namespace Spore

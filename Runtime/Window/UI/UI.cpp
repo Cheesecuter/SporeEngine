@@ -138,7 +138,8 @@ namespace Spore
 						//showImportModelPanel = true;
 
 						m_import_assets_path = Files::GetInstance().GetAssetsPath() / "Models";
-						FileExplorer(p_window, &m_import_assets_path);
+						//FileExplorer(p_window, &m_import_assets_path);
+						FileExplorer::GetInstance().Explorer(p_window, &m_import_assets_path, AssetsType::MODEL);
 						//importAssetsPath = Files::GetInstance().GetAssetsPath() / "Models/cube.fbx";
 						static char model_path [512];
 						strcpy_s(model_path, m_import_assets_path.string().c_str());
@@ -152,6 +153,15 @@ namespace Spore
 					if (ImGui::MenuItem("Import Texture"))
 					{
 						m_show_import_texture_panel = true;
+					}
+					if (ImGui::MenuItem("Import Audio"))
+					{
+						m_import_assets_path = Files::GetInstance().GetAssetsPath() / "Audios";
+						FileExplorer(p_window, &m_import_assets_path);
+						static char audio_path [512];
+						strcpy_s(audio_path, m_import_assets_path.string().c_str());
+						std::string path_s = audio_path;
+						Audio* new_audio = new Audio(std::filesystem::path(path_s));
 					}
 					ImGui::SeparatorText("General Setting");
 					ImGui::Checkbox("Show Skybox", &p_window->m_render_pipeline->m_skybox_on);
