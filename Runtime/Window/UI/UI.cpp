@@ -157,7 +157,7 @@ namespace Spore
 					if (ImGui::MenuItem("Import Audio"))
 					{
 						m_import_assets_path = Files::GetInstance().GetAssetsPath() / "Audios";
-						FileExplorer(p_window, &m_import_assets_path);
+						FileExplorer::GetInstance().Explorer(p_window, &m_import_assets_path, AssetsType::AUDIO);
 						static char audio_path [512];
 						strcpy_s(audio_path, m_import_assets_path.string().c_str());
 						std::string path_s = audio_path;
@@ -597,6 +597,7 @@ namespace Spore
 			std::vector<std::string> shaderIdentifiers;
 			std::vector<std::string> textureIdentifiers;
 			std::vector<std::string> modelIdentifiers;
+			std::vector<std::string> audioIdentifiers;
 			std::map<std::string, Shader*> shaderMapper = AssetsManager::GetInstance().m_shader_mapper;
 			for (std::map<std::string, Shader*>::iterator it = shaderMapper.begin(); it != shaderMapper.end(); it++)
 			{
@@ -611,6 +612,11 @@ namespace Spore
 			for (std::map<std::string, Model*>::iterator it = modelMapper.begin(); it != modelMapper.end(); it++)
 			{
 				modelIdentifiers.push_back(it->first);
+			}
+			std::map<std::string, Audio*> audioMapper = AssetsManager::GetInstance().m_audio_mapper;
+			for (std::map<std::string, Audio*>::iterator it = audioMapper.begin(); it != audioMapper.end(); it++)
+			{
+				audioIdentifiers.push_back(it->first);
 			}
 			if (ImGui::CollapsingHeader("Assets", true))
 			{
@@ -722,6 +728,41 @@ namespace Spore
 								ImGui::EndPopup();
 							}
 							ImGui::SetItemTooltip("Right-click to open popup");
+						}
+					}
+				}
+				if (ImGui::CollapsingHeader("Audios", true))
+				{
+					static int32 selected_audio = -1;
+					for (uint32 n = 0; n < audioIdentifiers.size(); n++)
+					{
+						if (ImGui::Selectable(audioIdentifiers [n].c_str(), selected_audio == n))
+						{
+							selected_audio = n;
+						}
+						if (ImGui::BeginPopupContextItem())
+						{
+							selected_audio = n;
+							ImGui::Text("%s", audioIdentifiers [n].c_str());
+							if (ImGui::Button("Copy"))
+							{
+								std::string name = audioIdentifiers [n];
+								Audio* audio = AssetsManager::GetInstance().m_audio_mapper [name];
+								AssetsManager::GetInstance().m_selected_audio = audio;
+								ImGui::CloseCurrentPopup();
+							}
+							if (ImGui::Button("Remove"))
+							{
+								selected_audio = -1;
+								AssetsManager::GetInstance().m_selected_audio = nullptr;
+								std::string name = audioIdentifiers [n];
+								Audio* audioTemp = AssetsManager::GetInstance().m_audio_mapper [name];
+								delete audioTemp;
+								AssetsManager::GetInstance().m_audio_mapper.erase(name);
+							}
+							if (ImGui::Button("Close"))
+								ImGui::CloseCurrentPopup();
+							ImGui::EndPopup();
 						}
 					}
 				}
