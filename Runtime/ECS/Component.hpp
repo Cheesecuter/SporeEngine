@@ -1,6 +1,7 @@
 #pragma once
 
 #include <Types.hpp>
+#include <IMGUI_GLFW_OPENGL3.hpp>
 
 namespace Spore
 {
@@ -15,6 +16,7 @@ namespace Spore
 		bool IsDirty() const;
 		void SetDirtyFlag(bool p_is_dirty);
 		std::string GetName() const;
+		virtual void InspectorPanel();
 
 	protected:
 		std::string m_name = "";

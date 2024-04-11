@@ -633,7 +633,30 @@ namespace Spore
 						ImGui::Separator();
 					}
 				}
-
+				for (std::pair<std::string, Component*> it_component : components)
+				{
+					std::string componentName = it_component.second->GetName();
+					if (componentName != "Transform" && componentName != "Shader")
+					{
+						it_component.second->InspectorPanel();
+					}
+				}
+				/*if (ImGui::CollapsingHeader("Audio", true))
+				{
+					AudioComponent* audioComponent = dynamic_cast<AudioComponent*>(components.find("Audio")->second);
+					if (ImGui::Button("Play"))
+					{
+						audioComponent->Play();
+					}
+					if (ImGui::Button("Pause"))
+					{
+						audioComponent->Pause();
+					}
+					if (ImGui::Button("Stop"))
+					{
+						audioComponent->Stop();
+					}
+				}*/
 			}
 
 			ImGui::End();

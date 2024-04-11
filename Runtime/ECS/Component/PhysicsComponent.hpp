@@ -13,6 +13,7 @@ namespace Spore
 	public:
 		PhysicsComponent();
 		virtual ~PhysicsComponent();
+		virtual void InspectorPanel() override;
 		void SetBodyCreationSettings(const JPH::Shape* p_shape, JPH::RVec3 p_position, JPH::Quat p_rotation,
 									 JPH::EMotionType p_motion_type, JPH::ObjectLayer p_object_layer);
 		void CreateAndAddBody();

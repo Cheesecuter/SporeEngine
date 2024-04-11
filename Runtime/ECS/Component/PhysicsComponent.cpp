@@ -12,6 +12,14 @@ namespace Spore
 		delete m_body;
 	}
 
+	void PhysicsComponent::InspectorPanel()
+	{
+		if (ImGui::CollapsingHeader(m_name.c_str(), true))
+		{
+			ImGui::Text("Physics Component UI");
+		}
+	}
+
 	void PhysicsComponent::SetBodyCreationSettings(const JPH::Shape* p_shape,
 												   JPH::RVec3 p_position,
 												   JPH::Quat p_rotation,

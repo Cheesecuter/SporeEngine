@@ -21,4 +21,12 @@ namespace Spore
 	{
 		return m_name;
 	}
+
+	void Component::InspectorPanel()
+	{
+		if (ImGui::CollapsingHeader("Empty", true))
+		{
+
+		}
+	}
 }

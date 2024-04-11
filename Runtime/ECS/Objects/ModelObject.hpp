@@ -4,6 +4,7 @@
 #include <Object.hpp>
 #include <Model.hpp>
 #include <PhysicsComponent.hpp>
+#include <AudioComponent.hpp>
 
 namespace Spore
 {
