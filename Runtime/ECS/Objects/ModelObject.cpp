@@ -16,10 +16,6 @@ namespace Spore
 		m_components [physicsComponent->GetName()] = physicsComponent;
 
 		AudioComponent* audioComponent = new AudioComponent();
-		ALuint source = 0;
-		audioComponent->SetSource(source);
-		audioComponent->SetBuffer(alutCreateBufferFromFile("./Assets/Audios/Accidents_Will_Happen.wav"));
-		alSourcei(audioComponent->GetSource(), AL_BUFFER, audioComponent->GetBuffer());
 		m_components [audioComponent->GetName()] = audioComponent;
 	}
 
