@@ -19,6 +19,11 @@ namespace Spore
 		static std::map<std::string, Audio*> m_audio_mapper;
 		static std::unordered_map<std::string, int32> m_model_counter;
 
+		static Shader* m_selected_shader;
+		static Texture* m_selected_texture;
+		static Model* m_selected_model;
+		static Audio* m_selected_audio;
+
 	protected:
 
 	private:
