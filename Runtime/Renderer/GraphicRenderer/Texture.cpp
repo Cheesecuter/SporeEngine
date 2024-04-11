@@ -1,5 +1,4 @@
 #include <Texture.hpp>
-#include <AssetsManager.hpp>
 
 namespace Spore
 {
