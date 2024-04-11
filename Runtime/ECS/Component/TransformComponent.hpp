@@ -3,6 +3,7 @@
 #include <Types.hpp>
 #include <Component.hpp>
 #include <Transform.hpp>
+#include <Texture.hpp>
 
 namespace Spore
 {
@@ -11,6 +12,7 @@ namespace Spore
 	public:
 		TransformComponent();
 		virtual ~TransformComponent();
+		virtual void InspectorPanel() override;
 		void SetPosition(const vec3f& p_position);
 		void SetRotation(const vec3f& p_rotation);
 		void SetScale(const vec3f& p_scale);
@@ -27,6 +29,7 @@ namespace Spore
 		Transform m_transformBuffer [2];
 		uint64 m_currentIndex { 0 };
 		uint64 m_nextIndex { 1 };
+		Texture* m_button_image_reset;
 
 	private:
 

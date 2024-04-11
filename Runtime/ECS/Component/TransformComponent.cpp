@@ -5,11 +5,78 @@ namespace Spore
 	TransformComponent::TransformComponent()
 	{
 		m_name = "Transform";
+		m_button_image_reset = new Texture("./Assets/Utils/Images/reset.png");
 	}
 
 	TransformComponent::~TransformComponent()
 	{
 
+	}
+
+	void TransformComponent::InspectorPanel()
+	{
+		if (ImGui::CollapsingHeader(m_name.c_str(), true))
+		{
+			vec3f positionTemp = GetPosition();
+			float position [3] = { positionTemp.x, positionTemp.y, positionTemp.z };
+			ImGui::Text("Position");
+			ImGui::PushID("Inspector::Transform::Position");
+			ImGui::DragFloat3("##Inspector::Transform::Position", position, 0.1f);
+			ImGui::PopID();
+			ImGui::SameLine();
+			ImGui::PushID("Inspector::Transform::ImageButtonResetPosition");
+			if (ImGui::ImageButton((ImTextureID) (intptr_t) m_button_image_reset->m_ID, ImVec2(13, 13)))
+			{
+			}
+			if (ImGui::IsItemClicked())
+			{
+				position [0] = 0.0f;
+				position [1] = 0.0f;
+				position [2] = 0.0f;
+			}
+			ImGui::PopID();
+			SetPosition(vec3f(position [0], position [1], position [2]));
+
+			vec3f rotationTemp = GetRotation();
+			float rotation [3] = { rotationTemp.x, rotationTemp.y, rotationTemp.z };
+			ImGui::Text("Rotation");
+			ImGui::PushID("Inspector::Transform::Rotation");
+			ImGui::DragFloat3("##Inspector::Transform::Rotation", rotation, 0.1f);
+			ImGui::PopID();
+			ImGui::SameLine();
+			ImGui::PushID("Inspector::Transform::ImageButtonResetRotation");
+			if (ImGui::ImageButton((ImTextureID) (intptr_t) m_button_image_reset->m_ID, ImVec2(13, 13)))
+			{
+			}
+			if (ImGui::IsItemClicked())
+			{
+				rotation [0] = 0.0f;
+				rotation [1] = 0.0f;
+				rotation [2] = 0.0f;
+			}
+			ImGui::PopID();
+			SetRotation(vec3f(rotation [0], rotation [1], rotation [2]));
+
+			vec3f scaleTemp = GetScale();
+			float scale [3] = { scaleTemp.x, scaleTemp.y, scaleTemp.z };
+			ImGui::Text("Scale");
+			ImGui::PushID("Inspector::Transform::Scale");
+			ImGui::DragFloat3("##Inspector::Transform::Scale", scale, 0.1f);
+			ImGui::PopID();
+			ImGui::SameLine();
+			ImGui::PushID("Inspector::Transform::ImageButtonResetScale");
+			if (ImGui::ImageButton((ImTextureID) (intptr_t) m_button_image_reset->m_ID, ImVec2(13, 13)))
+			{
+			}
+			if (ImGui::IsItemClicked())
+			{
+				scale [0] = 1.0f;
+				scale [1] = 1.0f;
+				scale [2] = 1.0f;
+			}
+			ImGui::PopID();
+			SetScale(vec3f(scale [0], scale [1], scale [2]));
+		}
 	}
 
 	void TransformComponent::SetPosition(const vec3f& p_position)
