@@ -732,6 +732,12 @@
     <ClCompile Include="Runtime\ECS\Component\AudioComponent.cpp">
       <Filter>源文件\ECS\Component</Filter>
     </ClCompile>
+    <ClCompile Include="Runtime\Renderer\AudioRenderer\Audio.cpp">
+      <Filter>源文件\Renderer\AudioRenderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Asset\FileExplorer.cpp">
+      <Filter>源文件\Asset</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Runtime\Core\Base\Types.hpp">
@@ -1759,6 +1765,12 @@
     </ClInclude>
     <ClInclude Include="Runtime\ECS\Component\AudioComponent.hpp">
       <Filter>源文件\ECS\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\Renderer\AudioRenderer\Audio.hpp">
+      <Filter>源文件\Renderer\AudioRenderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\Asset\FileExplorer.hpp">
+      <Filter>源文件\Asset</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

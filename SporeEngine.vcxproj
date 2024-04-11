@@ -147,6 +147,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Runtime\Asset\AssetsManager.cpp" />
+    <ClCompile Include="Runtime\Asset\FileExplorer.cpp" />
     <ClCompile Include="Runtime\Asset\Files.cpp" />
     <ClCompile Include="Runtime\Core\Base\Global.cpp" />
     <ClCompile Include="Runtime\Core\Math\Math.cpp" />
@@ -172,6 +173,7 @@
     <ClCompile Include="Runtime\Physics\Test\PhysicsTest.cpp" />
     <ClCompile Include="Runtime\Physics\Test\PTSimpleTest.cpp" />
     <ClCompile Include="Runtime\Physics\Utils\ContactListenerImpl.cpp" />
+    <ClCompile Include="Runtime\Renderer\AudioRenderer\Audio.cpp" />
     <ClCompile Include="Runtime\Renderer\AudioRenderer\AudioRenderTest.cpp" />
     <ClCompile Include="Runtime\Renderer\AudioRenderer\AudioSystem.cpp" />
     <ClCompile Include="Runtime\Renderer\GraphicRenderer\Camera.cpp" />
@@ -355,6 +357,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Runtime\Asset\AssetsManager.hpp" />
+    <ClInclude Include="Runtime\Asset\FileExplorer.hpp" />
     <ClInclude Include="Runtime\Asset\Files.hpp" />
     <ClInclude Include="Runtime\Core\Base\Global.hpp" />
     <ClInclude Include="Runtime\Core\Base\Types.hpp" />
@@ -383,6 +386,7 @@
     <ClInclude Include="Runtime\Physics\Test\PhysicsTest.hpp" />
     <ClInclude Include="Runtime\Physics\Test\PTSimpleTest.hpp" />
     <ClInclude Include="Runtime\Physics\Utils\ContactListenerImpl.hpp" />
+    <ClInclude Include="Runtime\Renderer\AudioRenderer\Audio.hpp" />
     <ClInclude Include="Runtime\Renderer\AudioRenderer\AudioSystem.hpp" />
     <ClInclude Include="Runtime\Renderer\GraphicRenderer\Camera.hpp" />
     <ClInclude Include="Runtime\Renderer\GraphicRenderer\Mesh.hpp" />
