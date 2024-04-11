@@ -561,66 +561,6 @@ namespace Spore
 						ImGui::EndCombo();
 					}
 				}
-				/*if (ImGui::CollapsingHeader("Transform", true))
-				{
-					vec3f pos = m_selected_object->GetPosition();
-					float position [3] = { pos.x, pos.y, pos.z };
-					ImGui::Text("Position");
-					ImGui::PushID("Inspector:Transform:Position");
-					ImGui::DragFloat3("##Inspector:Transform:Position", position, 0.1f);
-					ImGui::PopID();
-					ImGui::SameLine();
-					ImGui::PushID("Inspector:Transform:ImageButtonResetPosition");
-					if (ImGui::ImageButton((ImTextureID) (intptr_t) m_button_image_reset->m_ID, ImVec2(13, 13)))
-					{	
-					}
-					if (ImGui::IsItemClicked())
-					{
-						position [0] = 0.0f;
-						position [1] = 0.0f;
-						position [2] = 0.0f;
-					}
-					ImGui::PopID();
-					m_selected_object->SetPosition(vec3f(position [0], position [1], position [2]));
-					vec3f rot = m_selected_object->GetRotation();
-					float rotation [3] = { rot.x, rot.y, rot.z };
-					ImGui::Text("Rotation");
-					ImGui::PushID("Inspector:Transform:Rotation");
-					ImGui::DragFloat3("##Inspector:Transform:Rotation", rotation, 0.1f);
-					ImGui::PopID();
-					ImGui::SameLine();
-					ImGui::PushID("Inspector:Transform:ImageButtonResetRotation");
-					if (ImGui::ImageButton((ImTextureID) (intptr_t) m_button_image_reset->m_ID, ImVec2(13, 13)))
-					{
-					}
-					if (ImGui::IsItemClicked())
-					{
-						rotation [0] = 0.0f;
-						rotation [1] = 0.0f;
-						rotation [2] = 0.0f;
-					}
-					ImGui::PopID();
-					m_selected_object->SetRotation(vec3f(rotation [0], rotation [1], rotation [2]));
-					vec3f sca = m_selected_object->GetScale();
-					float scale [3] = { sca.x, sca.y, sca.z };
-					ImGui::Text("Scale");
-					ImGui::PushID("Inspector:Transform:Scale");
-					ImGui::DragFloat3("##Inspector:Transform:Scale", scale, 0.1f);
-					ImGui::PopID();
-					ImGui::SameLine();
-					ImGui::PushID("Inspector:Transform:ImageButtonResetScale");
-					if (ImGui::ImageButton((ImTextureID) (intptr_t) m_button_image_reset->m_ID, ImVec2(13, 13)))
-					{
-					}
-					if (ImGui::IsItemClicked())
-					{
-						scale [0] = 1.0f;
-						scale [1] = 1.0f;
-						scale [2] = 1.0f;
-					}
-					ImGui::PopID();
-					m_selected_object->SetScale(vec3f(scale [0], scale [1], scale [2]));
-				}*/
 				std::unordered_map<std::string, Component*> components = m_selected_object->GetComponents();
 				for (std::pair<std::string, Component*> it_component : components)
 				{
