@@ -2,9 +2,9 @@
 
 namespace Spore
 {
-	Audio::Audio(std::filesystem::path p_path)
+	Audio::Audio(const char* p_path)
 	{
-		m_path = p_path.string();
+		m_path = p_path;
 	}
 
 	Audio::~Audio()

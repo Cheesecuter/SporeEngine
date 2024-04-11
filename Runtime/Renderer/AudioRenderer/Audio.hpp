@@ -9,7 +9,7 @@ namespace Spore
 	{
 	public:
 		Audio() = default;
-		Audio(std::filesystem::path p_path);
+		Audio(const char* p_path);
 		virtual ~Audio();
 
 		std::string GetIdentifier();
