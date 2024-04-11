@@ -622,7 +622,7 @@ namespace Spore
 					m_selected_object->SetScale(vec3f(scale [0], scale [1], scale [2]));
 				}
 				std::unordered_map<std::string, Component*> components = m_selected_object->GetComponents();
-				if (ImGui::CollapsingHeader("Shader", true))
+				/*if (ImGui::CollapsingHeader("Shader", true))
 				{
 					ShaderComponent* shaderComponent = dynamic_cast<ShaderComponent*>(components.find("Shader")->second);
 					for (std::pair<std::string, ShaderNode*> it_shader : shaderComponent->GetShaders())
@@ -632,31 +632,15 @@ namespace Spore
 						ImGui::Checkbox("Alpha Filter", &it_shader.second->m_shader->m_alpha_filter_flag);
 						ImGui::Separator();
 					}
-				}
+				}*/
 				for (std::pair<std::string, Component*> it_component : components)
 				{
 					std::string componentName = it_component.second->GetName();
-					if (componentName != "Transform" && componentName != "Shader")
+					if (componentName != "Transform")
 					{
 						it_component.second->InspectorPanel();
 					}
 				}
-				/*if (ImGui::CollapsingHeader("Audio", true))
-				{
-					AudioComponent* audioComponent = dynamic_cast<AudioComponent*>(components.find("Audio")->second);
-					if (ImGui::Button("Play"))
-					{
-						audioComponent->Play();
-					}
-					if (ImGui::Button("Pause"))
-					{
-						audioComponent->Pause();
-					}
-					if (ImGui::Button("Stop"))
-					{
-						audioComponent->Stop();
-					}
-				}*/
 			}
 
 			ImGui::End();

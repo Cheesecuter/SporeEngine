@@ -16,6 +16,8 @@ namespace Spore
 	{
 	public:
 		ShaderComponent();
+		virtual ~ShaderComponent();
+		virtual void InspectorPanel() override;
 		void AddShader(Shader* p_shader);
 		void RemoveShader(Shader* p_shader);
 		std::unordered_map<std::string, ShaderNode*> GetShaders() const;
