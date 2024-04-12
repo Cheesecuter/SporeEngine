@@ -3,6 +3,7 @@
 #include <Types.hpp>
 #include <Mesh.hpp>
 #include <Shader.hpp>
+#include <Files.hpp>
 
 namespace Spore
 {

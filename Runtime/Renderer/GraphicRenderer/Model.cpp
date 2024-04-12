@@ -233,10 +233,11 @@ namespace Spore
 		if (textures.size() == 0)
 		{
 			Texture texture;
-			std::string path = "default.png";
-			texture.m_ID = TextureFromFile(path.c_str(), this->m_directory);
+			const char* path = "default.png";
+			std::string directory = "./Assets/Textures/_basic textures";
+			texture.m_ID = TextureFromFile(path, directory);
 			texture.m_type = "texture_default";
-			texture.m_path = path.c_str();
+			texture.m_path = path;
 			textures.insert(textures.end(), texture);
 		}
 
