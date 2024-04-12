@@ -29,11 +29,6 @@ namespace Spore
 		void Terminate();
 		void RenderPanels(MainWindow* p_window);
 		void ShowDemoWindow();
-		void FileBrowser(MainWindow* p_window, std::filesystem::path* p_path);
-		void FileExplorer(MainWindow* p_window, std::filesystem::path* p_path);
-		void ImportShaderPanel(MainWindow* p_window);
-		void ImportTexturePanel(MainWindow* p_window);
-		void ImportModelPanel(MainWindow* p_window);
 
 	protected:
 
