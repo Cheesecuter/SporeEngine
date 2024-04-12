@@ -133,14 +133,8 @@ namespace Spore
 					ImGui::SeparatorText("============");
 					if (ImGui::MenuItem("Import Model"))
 					{
-						/*importAssetsPath = Files::GetInstance().GetAssetsPath() / "Models";
-						filePath = &importAssetsPath;*/
-						//showImportModelPanel = true;
-
 						m_import_assets_path = Files::GetInstance().GetAssetsPath() / "Models";
-						//FileExplorer(p_window, &m_import_assets_path);
 						FileExplorer::GetInstance().Explorer(p_window, &m_import_assets_path, AssetsType::MODEL);
-						//importAssetsPath = Files::GetInstance().GetAssetsPath() / "Models/cube.fbx";
 						static char model_path [512];
 						strcpy_s(model_path, m_import_assets_path.string().c_str());
 						std::string path_s = model_path;
@@ -148,11 +142,21 @@ namespace Spore
 					}
 					if (ImGui::MenuItem("Import Shader"))
 					{
-						m_show_import_shader_panel = true;
+						m_import_assets_path = Files::GetInstance().GetAssetsPath() / "Shaders";
+						FileExplorer::GetInstance().Explorer(p_window, &m_import_assets_path, AssetsType::SHADER);
+						static char shader_path [512];
+						strcpy_s(shader_path, m_import_assets_path.string().c_str());
+						std::string path_s = shader_path;
+						Model* new_model = new Model(std::filesystem::path(path_s));
 					}
 					if (ImGui::MenuItem("Import Texture"))
 					{
-						m_show_import_texture_panel = true;
+						m_import_assets_path = Files::GetInstance().GetAssetsPath() / "Textures";
+						FileExplorer::GetInstance().Explorer(p_window, &m_import_assets_path, AssetsType::TEXTURE);
+						static char texture_path [512];
+						strcpy_s(texture_path, m_import_assets_path.string().c_str());
+						std::string path_s = texture_path;
+						Texture* new_texture = new Texture(std::filesystem::path(path_s).string().c_str());
 					}
 					if (ImGui::MenuItem("Import Audio"))
 					{
@@ -412,10 +416,42 @@ namespace Spore
 									//modelMapper [name]->AddObserver(object);
 									object->AddObserver(it_scene->second);
 								}
-								ImGui::MenuItem("Cube", NULL, false, true);
-								ImGui::MenuItem("Sphere", NULL, false, true);
-								ImGui::MenuItem("Capsule", NULL, false, true);
-								ImGui::MenuItem("Cylinder", NULL, false, true);
+								if (ImGui::MenuItem("Cube", NULL, false, true))
+								{
+									std::string name = "cube";
+									ModelObject* object = new ModelObject("obj_" + std::to_string(it_scene->second->m_object_index++) + "_" + name);
+									object->SetModelType(ModelType::CUBE);
+									object->AddModel(AssetsManager::GetInstance().m_model_mapper["cube.fbx"]);
+									it_scene->second->AddObject(object);
+									object->AddObserver(it_scene->second);
+								}
+								if (ImGui::MenuItem("Sphere", NULL, false, true))
+								{
+									std::string name = "sphere";
+									ModelObject* object = new ModelObject("obj_" + std::to_string(it_scene->second->m_object_index++) + "_" + name);
+									object->SetModelType(ModelType::SPHERE);
+									object->AddModel(AssetsManager::GetInstance().m_model_mapper ["sphere.fbx"]);
+									it_scene->second->AddObject(object);
+									object->AddObserver(it_scene->second);
+								}
+								if (ImGui::MenuItem("Capsule", NULL, false, true))
+								{
+									std::string name = "capsule";
+									ModelObject* object = new ModelObject("obj_" + std::to_string(it_scene->second->m_object_index++) + "_" + name);
+									object->SetModelType(ModelType::CAPSULE);
+									object->AddModel(AssetsManager::GetInstance().m_model_mapper ["capsule.fbx"]);
+									it_scene->second->AddObject(object);
+									object->AddObserver(it_scene->second);
+								}
+								if (ImGui::MenuItem("Cylinder", NULL, false, true))
+								{
+									std::string name = "cylinder";
+									ModelObject* object = new ModelObject("obj_" + std::to_string(it_scene->second->m_object_index++) + "_" + name);
+									object->SetModelType(ModelType::CYLINDER);
+									object->AddModel(AssetsManager::GetInstance().m_model_mapper ["cylinder.fbx"]);
+									it_scene->second->AddObject(object);
+									object->AddObserver(it_scene->second);
+								}
 								ImGui::MenuItem("Plane", NULL, false, true);
 								ImGui::MenuItem("Quad", NULL, false, true);
 								ImGui::EndMenu();

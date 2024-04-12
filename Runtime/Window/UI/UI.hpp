@@ -33,14 +33,9 @@ namespace Spore
 	protected:
 
 	private:
-		bool m_show_import_model_panel = false;
-		bool m_show_import_shader_panel = false;
-		bool m_show_import_texture_panel = false;
-		bool m_show_file_browser = false;
 		bool m_show_console = false;
 		bool m_show_demo_window = false;
 		bool m_show_another_window = false;
-		std::filesystem::path m_file_path;
 		std::filesystem::path m_import_assets_path = Files::GetInstance().GetAssetsPath();
 		MainWindow* m_window;
 		std::string m_selected_scene_identifier = "";
