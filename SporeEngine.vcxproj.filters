@@ -112,6 +112,9 @@
     <Filter Include="源文件\Renderer\GraphicRenderer\stb_image">
       <UniqueIdentifier>{18775f3d-5def-4f28-b02f-b28c569a61aa}</UniqueIdentifier>
     </Filter>
+    <Filter Include="源文件\Test\Projects">
+      <UniqueIdentifier>{b268d086-1f21-4a11-a810-3b56082524a0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Runtime\ECS\Component.cpp">

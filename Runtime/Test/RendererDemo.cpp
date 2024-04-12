@@ -122,6 +122,11 @@ void Runtime(MainWindow* p_window, UI* p_ui, PhysicSystem* p_physic_system)
     glReadBuffer(GL_NONE);
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
+    Model* cubeModel = new Model(std::string("./Assets/Models/_basic models/cube.fbx"));
+    Model* sphereModel = new Model(std::string("./Assets/Models/_basic models/sphere.fbx"));
+    Model* capsuleModel = new Model(std::string("./Assets/Models/_basic models/capsule.fbx"));
+    Model* cylinderModel = new Model(std::string("./Assets/Models/_basic models/cylinder.fbx"));
+
     std::vector<Shader*> shaders;
     Scene* scene1 = new Scene("scene_1");
     Scene* scene2 = new Scene("scene_2");
