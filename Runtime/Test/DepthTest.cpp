@@ -147,6 +147,8 @@
 //	// build and compile our shader program
 //	// ------------------------------------
 //	Shader depthShader("./Assets/Shaders/DepthVertex.glsl", "./Assets/Shaders/DepthFragment.glsl");
+//	//Shader depthShader("./Assets/Shaders/BlendingVertex.glsl", "./Assets/Shaders/BlendingFragment.glsl");
+//	Shader blendShader("./Assets/Shaders/BlendingVertex.glsl", "./Assets/Shaders/BlendingFragment.glsl");
 //
 //	// cube VAO
 //	glGenVertexArrays(1, &cubeVAO);
@@ -173,6 +175,7 @@
 //
 //	// load textures
 //	unsigned int cubeTexture = loadTexture("./Assets/Textures/elem2.png");
+//	unsigned int windowTexuture = loadTexture("./Assets/Textures/window.png");
 //	unsigned int floorTexuture = loadTexture("./Assets/Textures/cobblestone.png");
 //
 //	// render container
@@ -201,18 +204,18 @@
 //		depthShader.Use();
 //		model = glm::mat4(1.0f);
 //		view = camera.GetViewMatrix();
-//		projection = glm::perspective(glm::radians(camera.Zoom), (float) SCR_WIDTH / (float) SCR_HEIGHT, 0.1f, 100.0f);
+//		projection = glm::perspective(glm::radians(camera.m_zoom), (float) SCR_WIDTH / (float) SCR_HEIGHT, 0.1f, 100.0f);
 //		depthShader.SetMat4("view", view);
 //		depthShader.SetMat4("projection", projection);
 //		// cubes
 //		glBindVertexArray(cubeVAO);
 //		glActiveTexture(GL_TEXTURE0);
-//		glBindTexture(GL_TEXTURE_2D, cubeTexture);
-//		model = glm::translate(model, glm::vec3(-1.0f, 0.0f, -1.0f));
+//		glBindTexture(GL_TEXTURE_2D, windowTexuture);
+//		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f));
 //		depthShader.SetMat4("model", model);
 //		glDrawArrays(GL_TRIANGLES, 0, 36);
 //		model = glm::mat4(1.0f);
-//		model = glm::translate(model, glm::vec3(2.0f, 0.0f, 0.0f));
+//		model = glm::translate(model, glm::vec3(0.0f, 1.0f, 0.0f));
 //		depthShader.SetMat4("model", model);
 //		glDrawArrays(GL_TRIANGLES, 0, 36);
 //		// floor

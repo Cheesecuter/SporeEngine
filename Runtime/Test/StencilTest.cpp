@@ -210,6 +210,7 @@
 //    unsigned int cubeTexture = loadTexture("./Assets/Textures/elem2.png");
 //    unsigned int floorTexture = loadTexture("./Assets/Textures/cobblestone.png");
 //    unsigned int transparentTexture = loadTexture("./Assets/Textures/stained_glass.png");
+//    unsigned int windowTexuture = loadTexture("./Assets/Textures/window.png");
 //
 //    // transparent window locations
 //    // --------------------------------
@@ -272,7 +273,7 @@
 //        std::map<float, glm::vec3> sorted;
 //        for (unsigned int i = 0; i < windows.size(); i++)
 //        {
-//            float distance = glm::length(camera.Position - windows [i]);
+//            float distance = glm::length(camera.m_position - windows [i]);
 //            sorted [distance] = windows [i];
 //        }
 //
@@ -286,22 +287,22 @@
 //
 //        // draw objects
 //        shader.Use();
-//        glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float) SCR_WIDTH / (float) SCR_HEIGHT, 0.1f, 100.0f);
+//        glm::mat4 projection = glm::perspective(glm::radians(camera.m_zoom), (float) SCR_WIDTH / (float) SCR_HEIGHT, 0.1f, 100.0f);
 //        glm::mat4 view = camera.GetViewMatrix();
 //        glm::mat4 model = glm::mat4(1.0f);
 //        shader.SetMat4("projection", projection);
 //        shader.SetMat4("view", view);
 //        // cubes
-//        /*glBindVertexArray(cubeVAO);
+//        glBindVertexArray(cubeVAO);
 //        glActiveTexture(GL_TEXTURE0);
-//        glBindTexture(GL_TEXTURE_2D, cubeTexture);
+//        glBindTexture(GL_TEXTURE_2D, transparentTexture);
 //        model = glm::translate(model, glm::vec3(-1.0f, 0.0f, -1.0f));
-//        shader.setMat4("model", model);
+//        shader.SetMat4("model", model);
 //        glDrawArrays(GL_TRIANGLES, 0, 36);
 //        model = glm::mat4(1.0f);
 //        model = glm::translate(model, glm::vec3(2.0f, 0.0f, 0.0f));
-//        shader.setMat4("model", model);
-//        glDrawArrays(GL_TRIANGLES, 0, 36);*/
+//        shader.SetMat4("model", model);
+//        glDrawArrays(GL_TRIANGLES, 0, 36);
 //        // floor
 //        glBindVertexArray(planeVAO);
 //        glBindTexture(GL_TEXTURE_2D, floorTexture);
