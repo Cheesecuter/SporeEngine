@@ -3,7 +3,8 @@
 namespace Spore
 {
 	std::vector<fs::path> Files::m_root_paths;
-	const fs::path Files::m_run_path = std::filesystem::current_path();
+	fs::path Files::m_project_path = std::filesystem::current_path();
+	const fs::path Files::m_root_path = std::filesystem::current_path();
 
 	Files::Files()
 	{
@@ -13,22 +14,36 @@ namespace Spore
 	{
 	}
 
-	const fs::path Files::GetProjectPath()
+	const fs::path Files::GetRootPath()
 	{
-		return m_run_path;
+		return m_root_path;
 	}
+
 	const fs::path Files::GetAssetsPath()
 	{
-		return GetProjectPath() / "Assets";
+		return GetRootPath() / "Assets";
 	}
+
 	const fs::path Files::GetShadersPath()
 	{
-		return GetProjectPath() / "Assets/Shaders";
+		return GetRootPath() / "Assets/Shaders";
 	}
+
 	const fs::path Files::GetEditorPath()
 	{
-		return GetProjectPath() / "Assets";
+		return GetRootPath() / "Assets";
 	}
+
+	void Files::SetProjectPath(fs::path p_path)
+	{
+		m_project_path = p_path;
+	}
+	
+	const fs::path Files::GetProjectPath()
+	{
+		return m_project_path;
+	}
+	
 	std::vector<fs::path> Files::GetRootPaths()
 	{
 		if (m_root_paths.size() == 0)
