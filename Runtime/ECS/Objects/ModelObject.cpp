@@ -101,4 +101,14 @@ namespace Spore
 			}
 		}
 	}
+
+	void ModelObject::SetModelType(ModelType p_model_type)
+	{
+		m_model_type = p_model_type;
+	}
+	
+	ModelType ModelObject::GetModelType()
+	{
+		return m_model_type;
+	}
 }
