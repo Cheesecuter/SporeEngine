@@ -11,7 +11,7 @@ namespace Spore
 		//shaderComponent->AddShader(lightingShader);
 		shaderComponent->AddShader(modelShader);
 		m_components [shaderComponent->GetName()] = shaderComponent;
-		Model* model = new Model(std::string("./Assets/Models/cube.fbx"));
+		Model* model = new Model(std::string("./Assets/Models/_basic models/cube.fbx"));
 		m_model_mapper.insert(std::make_pair(model->m_identifier, model));
 	}
 
