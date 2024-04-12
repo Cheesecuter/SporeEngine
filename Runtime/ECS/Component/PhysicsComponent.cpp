@@ -17,6 +17,40 @@ namespace Spore
 		if (ImGui::CollapsingHeader(m_name.c_str(), true))
 		{
 			ImGui::Text("Physics Component UI");
+			const char* EMotionTypesIndexs [] = {
+				"Dynamic",
+				"Kinematic",
+				"Static"
+			};
+			JPH::EMotionType EMotionTypes [] = {
+				JPH::EMotionType::Dynamic,
+				JPH::EMotionType::Kinematic,
+				JPH::EMotionType::Static
+			};
+			static int currentEMotionType = 0;
+			if (ImGui::BeginCombo("##Inspector::Physics::EMotionType", EMotionTypesIndexs [currentEMotionType]))
+			{
+				for (uint32 i = 0; i < IM_ARRAYSIZE(EMotionTypesIndexs); i++)
+				{
+					const bool isSelected = (currentEMotionType == i);
+					if (ImGui::Selectable(EMotionTypesIndexs [i], isSelected))
+					{
+						currentEMotionType = i;
+						JPH::EActivation isActive = JPH::EActivation::DontActivate;
+						if (m_body_interface->IsActive(m_body->GetID()))
+						{
+							isActive = JPH::EActivation::Activate;
+						}
+						m_body_interface->SetMotionType(m_body->GetID(), EMotionTypes[i], isActive);
+					}
+					if (isSelected)
+					{
+						ImGui::SetItemDefaultFocus();
+					}
+				}
+				ImGui::EndCombo();
+			}
+			
 		}
 	}
 
