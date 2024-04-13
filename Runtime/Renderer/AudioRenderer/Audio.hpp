@@ -22,6 +22,6 @@ namespace Spore
 		std::string m_type;
 		std::string m_path;
 
-		void LoadAsset();
+		void LoadAsset(const char* p_path);
 	};
 }
