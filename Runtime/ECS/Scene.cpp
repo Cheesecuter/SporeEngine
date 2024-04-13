@@ -44,11 +44,11 @@ namespace Spore
 			}
 			else if (modelObject->GetModelType() == ModelType::PLANE)
 			{
-				model_shape = new JPH::BoxShape(JPH::Vec3(1.0f, 1.0f, 1.0f));
+				model_shape = new JPH::BoxShape(JPH::Vec3(1.0f, 0.1f, 1.0f));
 			}
 			else if (modelObject->GetModelType() == ModelType::QUAD)
 			{
-				model_shape = new JPH::BoxShape(JPH::Vec3(1.0f, 1.0f, 1.0f));
+				model_shape = new JPH::BoxShape(JPH::Vec3(1.0f, 0.1f, 1.0f));
 			}
 
 			physicsComponent->SetBodyCreationSettings(model_shape, position, quaternion,
