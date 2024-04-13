@@ -23,7 +23,7 @@ namespace Spore
 	class Model
 	{
 	public:
-		Model(std::string const& p_path, bool p_gamma = false);
+		Model(const char* p_path, bool p_gamma = false);
 		Model(std::filesystem::path p_path, bool p_gamma = false);
 		~Model();
 
@@ -43,7 +43,7 @@ namespace Spore
 	private:
 		std::vector<ModelObserver*> m_observer_list;
 
-		void LoadModel(std::string const& p_path);
+		void LoadModel(const char* p_path);
 		void ProcessNode(aiNode* p_node, const aiScene* p_scene);
 		Mesh ProcessMesh(aiMesh* p_mesh, const aiScene* p_scene);
 		std::vector<Texture> LoadMaterialTextures(aiMaterial* p_material, aiTextureType p_type, std::string p_type_name);

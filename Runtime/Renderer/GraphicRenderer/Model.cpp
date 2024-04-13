@@ -3,7 +3,7 @@
 
 namespace Spore
 {
-	Model::Model(std::string const& p_path, bool p_gamma) : m_gamma_correction(p_gamma)
+	Model::Model(const char* p_path, bool p_gamma) : m_gamma_correction(p_gamma)
 	{
 		LoadModel(p_path);
 	}
@@ -46,7 +46,7 @@ namespace Spore
 			m_meshes [i].Draw(p_shader);
 	}
 
-	void Model::LoadModel(std::string const& p_path)
+	void Model::LoadModel(const char* p_path)
 	{
 		// read file via ASSIMP
 		Assimp::Importer importer;

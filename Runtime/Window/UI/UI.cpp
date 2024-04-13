@@ -138,7 +138,7 @@ namespace Spore
 						static char model_path [512];
 						strcpy_s(model_path, m_import_assets_path.string().c_str());
 						std::string path_s = model_path;
-						Model* new_model = new Model(std::filesystem::path(path_s));
+						Model* new_model = new Model(std::filesystem::path(path_s).string().c_str());
 					}
 					if (ImGui::MenuItem("Import Shader"))
 					{
@@ -147,7 +147,7 @@ namespace Spore
 						static char shader_path [512];
 						strcpy_s(shader_path, m_import_assets_path.string().c_str());
 						std::string path_s = shader_path;
-						Model* new_model = new Model(std::filesystem::path(path_s));
+						Model* new_model = new Model(std::filesystem::path(path_s).string().c_str());
 					}
 					if (ImGui::MenuItem("Import Texture"))
 					{
