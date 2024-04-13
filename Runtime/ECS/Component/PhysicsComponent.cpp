@@ -27,15 +27,28 @@ namespace Spore
 				JPH::EMotionType::Kinematic,
 				JPH::EMotionType::Static
 			};
-			static int currentEMotionType = 0;
-			if (ImGui::BeginCombo("##Inspector::Physics::EMotionType", EMotionTypesIndexs [currentEMotionType]))
+			static int currentEMotionTypeIndex = 0;
+			JPH::EMotionType currentEMotionType = m_body_interface->GetMotionType(m_body->GetID());
+			if (currentEMotionType == EMotionTypes [0])
+			{
+				currentEMotionTypeIndex = 0;
+			}
+			else if (currentEMotionType == EMotionTypes [1])
+			{
+				currentEMotionTypeIndex = 1;
+			}
+			else if (currentEMotionType == EMotionTypes [2])
+			{
+				currentEMotionTypeIndex = 2;
+			}
+			if (ImGui::BeginCombo("##Inspector::Physics::EMotionType", EMotionTypesIndexs [currentEMotionTypeIndex]))
 			{
 				for (uint32 i = 0; i < IM_ARRAYSIZE(EMotionTypesIndexs); i++)
 				{
-					const bool isSelected = (currentEMotionType == i);
+					const bool isSelected = (currentEMotionTypeIndex == i);
 					if (ImGui::Selectable(EMotionTypesIndexs [i], isSelected))
 					{
-						currentEMotionType = i;
+						currentEMotionTypeIndex = i;
 						JPH::EActivation isActive = JPH::EActivation::DontActivate;
 						if (m_body_interface->IsActive(m_body->GetID()))
 						{
