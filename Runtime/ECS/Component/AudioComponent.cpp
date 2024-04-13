@@ -12,7 +12,7 @@ namespace Spore
 
 	AudioComponent::~AudioComponent()
 	{
-
+		m_audio_mapper.clear();
 	}
 
 	void AudioComponent::InspectorPanel()
