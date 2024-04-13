@@ -452,8 +452,24 @@ namespace Spore
 									it_scene->second->AddObject(object);
 									object->AddObserver(it_scene->second);
 								}
-								ImGui::MenuItem("Plane", NULL, false, true);
-								ImGui::MenuItem("Quad", NULL, false, true);
+								if (ImGui::MenuItem("Plane", NULL, false, true))
+								{
+									std::string name = "plane";
+									ModelObject* object = new ModelObject("obj_" + std::to_string(it_scene->second->m_object_index++) + "_" + name);
+									object->SetModelType(ModelType::PLANE);
+									object->AddModel(AssetsManager::GetInstance().m_model_mapper ["plane.fbx"]);
+									it_scene->second->AddObject(object);
+									object->AddObserver(it_scene->second);
+								}
+								if (ImGui::MenuItem("Quad", NULL, false, true))
+								{
+									std::string name = "quad";
+									ModelObject* object = new ModelObject("obj_" + std::to_string(it_scene->second->m_object_index++) + "_" + name);
+									object->SetModelType(ModelType::QUAD);
+									object->AddModel(AssetsManager::GetInstance().m_model_mapper ["quad.fbx"]);
+									it_scene->second->AddObject(object);
+									object->AddObserver(it_scene->second);
+								}
 								ImGui::EndMenu();
 							}
 							if (ImGui::BeginMenu("Light"))
@@ -677,6 +693,7 @@ namespace Spore
 								//std::shared_ptr<ModelObject> object = std::make_shared<ModelObject>("obj_" + std::to_string(modelCount) + "_" + modelMapper [name]->identifier);
 								ModelObject* object = new ModelObject("obj_" + std::to_string(scene->m_object_index++) + "_" + modelMapper [name]->m_identifier);
 								object->AddModel(modelMapper [name]);
+								object->SetModelType(ModelType::QUAD);
 								scene->AddObject(object);
 								//modelMapper [name]->AddObserver(object);
 								//object->AddObserver(scene);
