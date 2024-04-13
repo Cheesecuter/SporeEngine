@@ -5,12 +5,12 @@ namespace Spore
 {
 	Model::Model(const char* p_path, bool p_gamma) : m_gamma_correction(p_gamma)
 	{
-		LoadModel(p_path);
+		LoadAsset(p_path);
 	}
 
 	Model::Model(std::filesystem::path p_path, bool p_gamma) : m_gamma_correction(p_gamma)
 	{
-		LoadModel(p_path.string().c_str());
+		LoadAsset(p_path.string().c_str());
 	}
 
 	Model::~Model()
@@ -46,7 +46,7 @@ namespace Spore
 			m_meshes [i].Draw(p_shader);
 	}
 
-	void Model::LoadModel(const char* p_path)
+	void Model::LoadAsset(const char* p_path)
 	{
 		// read file via ASSIMP
 		Assimp::Importer importer;

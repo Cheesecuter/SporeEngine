@@ -43,7 +43,7 @@ namespace Spore
 	private:
 		std::vector<ModelObserver*> m_observer_list;
 
-		void LoadModel(const char* p_path);
+		void LoadAsset(const char* p_path);
 		void ProcessNode(aiNode* p_node, const aiScene* p_scene);
 		Mesh ProcessMesh(aiMesh* p_mesh, const aiScene* p_scene);
 		std::vector<Texture> LoadMaterialTextures(aiMaterial* p_material, aiTextureType p_type, std::string p_type_name);
