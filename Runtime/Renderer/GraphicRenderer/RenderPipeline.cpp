@@ -287,10 +287,10 @@ namespace Spore
 		Shader* gridShader = AssetsManager::GetInstance().m_shader_mapper.find("GridFragment.glsl")->second;
 		Shader* shadowMappingShader = AssetsManager::GetInstance().m_shader_mapper.find("ShadowMappingFragment.glsl")->second;
 		Shader* shadowMappingDepthShader = AssetsManager::GetInstance().m_shader_mapper.find("ShadowMappingDepthFragment.glsl")->second;
-		std::vector<Shader*> shaders;
-		shaders.push_back(shadowMappingShader);
-		shaders.push_back(shadowMappingDepthShader);
-		mat4f model = mat4f(1.0f);
+		//std::vector<Shader*> shaders;
+		//shaders.push_back(shadowMappingShader);
+		//shaders.push_back(shadowMappingDepthShader);
+		//mat4f model = mat4f(1.0f);
 		//for (uint32 i = 0; i < shaders.size(); i++)
 		//{
 		//	shaders [i]->Use();
