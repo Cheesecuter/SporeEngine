@@ -91,11 +91,21 @@ namespace Spore
 			glfwTerminate();
 			return NULL;
 		}
+
 		glfwMakeContextCurrent(m_window);
 		glfwSetFramebufferSizeCallback(m_window, FrameBufferSizeCallback);
 		glfwSetCursorPosCallback(m_window, MouseMoveCallback);
 		glfwSetMouseButtonCallback(m_window, MouseClickCallback);
 		glfwSetScrollCallback(m_window, MouseScrollCallback);
+
+		int32 width, height, nrComponents;
+		unsigned char* data = stbi_load("./Assets/Utils/Icons/Spore_32.png", &width, &height, &nrComponents, 0);
+		GLFWimage icon;
+		icon.width = width;
+		icon.height = height;
+		icon.pixels = data;
+		const GLFWimage& constIcon = icon;
+		glfwSetWindowIcon(m_window, 1, &constIcon);
 
 		glfwSetInputMode(m_window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
 		//glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
