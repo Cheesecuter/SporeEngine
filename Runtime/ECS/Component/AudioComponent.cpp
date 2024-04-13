@@ -60,15 +60,6 @@ namespace Spore
 					alSourcei(m_source, AL_BUFFER, m_buffer);
 				}
 				ImGui::PopID();
-				/*ImGui::SameLine();
-				imguiID = "Inspector::Audio::" + it_audio.second->GetIdentifier() + "::Delete from Buffer";
-				ImGui::PushID(imguiID.c_str());
-				if (ImGui::Button("Delete from Buffer"))
-				{
-					m_buffer = alutCreateBufferFromFile(it_audio.second->GetPath().c_str());
-					alSourcei(m_source, AL_BUFFER, m_buffer);
-				}
-				ImGui::PopID();*/
 				ImGui::Separator();
 			}
 		}
