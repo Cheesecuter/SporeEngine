@@ -16,6 +16,7 @@
 #include <UI.hpp>
 #include <PhysicSystem.hpp>
 #include <AudioSystem.hpp>
+#include <BasicModelsRegister.hpp>
 
 using namespace Spore;
 
@@ -46,6 +47,7 @@ int main()
     AudioSystem audioSystem;
     PhysicSystem physicSystem;
     UI ui(&m_window);
+    BasicModelsRegister basicModelsRegister;
 
     audioSystem.Init();
     physicSystem.Init();
@@ -121,11 +123,6 @@ void Runtime(MainWindow* p_window, UI* p_ui, PhysicSystem* p_physic_system)
     glDrawBuffer(GL_NONE);
     glReadBuffer(GL_NONE);
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
-
-    Model* cubeModel = new Model(std::string("./Assets/Models/_basic models/cube.fbx"));
-    Model* sphereModel = new Model(std::string("./Assets/Models/_basic models/sphere.fbx"));
-    Model* capsuleModel = new Model(std::string("./Assets/Models/_basic models/capsule.fbx"));
-    Model* cylinderModel = new Model(std::string("./Assets/Models/_basic models/cylinder.fbx"));
 
     std::vector<Shader*> shaders;
     Scene* scene1 = new Scene("scene_1");

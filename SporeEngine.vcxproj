@@ -174,8 +174,8 @@
     <ClCompile Include="Runtime\Physics\Test\PTSimpleTest.cpp" />
     <ClCompile Include="Runtime\Physics\Utils\ContactListenerImpl.cpp" />
     <ClCompile Include="Runtime\Renderer\AudioRenderer\Audio.cpp" />
-    <ClCompile Include="Runtime\Renderer\AudioRenderer\AudioRenderTest.cpp" />
     <ClCompile Include="Runtime\Renderer\AudioRenderer\AudioSystem.cpp" />
+    <ClCompile Include="Runtime\Renderer\GraphicRenderer\BasicModelsRegister.cpp" />
     <ClCompile Include="Runtime\Renderer\GraphicRenderer\Camera.cpp" />
     <ClCompile Include="Runtime\Renderer\GraphicRenderer\glad\glad.c" />
     <ClCompile Include="Runtime\Renderer\GraphicRenderer\Grid.cpp" />
@@ -388,6 +388,7 @@
     <ClInclude Include="Runtime\Physics\Utils\ContactListenerImpl.hpp" />
     <ClInclude Include="Runtime\Renderer\AudioRenderer\Audio.hpp" />
     <ClInclude Include="Runtime\Renderer\AudioRenderer\AudioSystem.hpp" />
+    <ClInclude Include="Runtime\Renderer\GraphicRenderer\BasicModelsRegister.hpp" />
     <ClInclude Include="Runtime\Renderer\GraphicRenderer\Camera.hpp" />
     <ClInclude Include="Runtime\Renderer\GraphicRenderer\Mesh.hpp" />
     <ClInclude Include="Runtime\Renderer\GraphicRenderer\Model.hpp" />

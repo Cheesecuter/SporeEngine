@@ -720,9 +720,6 @@
     <ClCompile Include="Runtime\Scripts\MonoTest_2.cpp">
       <Filter>源文件\Scripts</Filter>
     </ClCompile>
-    <ClCompile Include="Runtime\Renderer\AudioRenderer\AudioRenderTest.cpp">
-      <Filter>源文件\Renderer\AudioRenderer</Filter>
-    </ClCompile>
     <ClCompile Include="Runtime\Renderer\GraphicRenderer\glad\glad.c">
       <Filter>源文件\Renderer\GraphicRenderer\glad</Filter>
     </ClCompile>
@@ -740,6 +737,9 @@
     </ClCompile>
     <ClCompile Include="Runtime\Asset\FileExplorer.cpp">
       <Filter>源文件\Asset</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Renderer\GraphicRenderer\BasicModelsRegister.cpp">
+      <Filter>源文件\Renderer\GraphicRenderer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1774,6 +1774,9 @@
     </ClInclude>
     <ClInclude Include="Runtime\Asset\FileExplorer.hpp">
       <Filter>源文件\Asset</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\Renderer\GraphicRenderer\BasicModelsRegister.hpp">
+      <Filter>源文件\Renderer\GraphicRenderer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
