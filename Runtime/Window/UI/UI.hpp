@@ -1,6 +1,7 @@
 #pragma once
 
 #include <Types.hpp>
+#include <IMGUI_GLFW_OPENGL3.hpp>
 #include <Window.hpp>
 #include <Files.hpp>
 #include <AssetsManager.hpp>
@@ -10,6 +11,9 @@
 #include <Model.hpp>
 #include <Audio.hpp>
 #include <Scene.hpp>
+#include <Gizmos.hpp>
+
+#include <Windows.h>
 
 namespace Spore
 {
@@ -27,6 +31,8 @@ namespace Spore
 		void InitImGui(MainWindow* p_window);
 		void Init();
 		void Terminate();
+		void NewFrame();
+		void Render();
 		void RenderPanels(MainWindow* p_window);
 		void ShowDemoWindow();
 
@@ -36,6 +42,8 @@ namespace Spore
 		bool m_show_console = false;
 		bool m_show_demo_window = false;
 		bool m_show_another_window = false;
+		bool m_show_scene_panel = false;
+		Gizmos* m_gizmos;
 		std::filesystem::path m_import_assets_path = Files::GetInstance().GetAssetsPath();
 		MainWindow* m_window;
 		std::string m_selected_scene_identifier = "";
@@ -52,5 +60,6 @@ namespace Spore
 		void RenderInspectorPanel(MainWindow* p_window);
 		void RenderProjectPanel(MainWindow* p_window);
 		void RenderConsolePanel(MainWindow* p_window);
+		void RenderGizmos(MainWindow* p_window);
 	};
 }

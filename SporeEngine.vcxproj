@@ -118,7 +118,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;_USING_V110_SDK71_;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>.\SDKs;.\SDKs\GL;.\SDKs\glad\include;.\SDKs\glm;.\SDKs\OpenAL\include;.\SDKs\alut\include;.\SDKs\assimp-master\include;.\SDKs\imgui;.\SDKs\imgui\backends;.\SDKs\JoltPhysics\Jolt\..;.\SDKs\Mono\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\SDKs;.\SDKs\GL;.\SDKs\glad\include;.\SDKs\glm;.\SDKs\OpenAL\include;.\SDKs\alut\include;.\SDKs\assimp-master\include;.\SDKs\imgui;.\SDKs\ImGuizmo;.\SDKs\imgui\backends;.\SDKs\JoltPhysics\Jolt\..;.\SDKs\Mono\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -153,6 +153,8 @@
     <ClCompile Include="Runtime\Core\Math\Math.cpp" />
     <ClCompile Include="Runtime\Core\Math\SDKMath.cpp" />
     <ClCompile Include="Runtime\Core\Reflection\Reflection.cpp" />
+    <ClCompile Include="Runtime\Core\Serializer\JsonParser.cpp" />
+    <ClCompile Include="Runtime\Core\Serializer\Serializer.cpp" />
     <ClCompile Include="Runtime\ECS\Component.cpp" />
     <ClCompile Include="Runtime\ECS\Component\AudioComponent.cpp" />
     <ClCompile Include="Runtime\ECS\Component\PhysicsComponent.cpp" />
@@ -206,10 +208,16 @@
     <ClCompile Include="Runtime\Test\ShadowTest.cpp" />
     <ClCompile Include="Runtime\Test\SSAOTest.cpp" />
     <ClCompile Include="Runtime\Test\StencilTest.cpp" />
+    <ClCompile Include="Runtime\Utils\Gizmos.cpp" />
     <ClCompile Include="Runtime\VisualEffect\PostProcess.cpp" />
     <ClCompile Include="Runtime\VisualEffect\PostProcesser.cpp" />
     <ClCompile Include="Runtime\Window\UI\UI.cpp" />
     <ClCompile Include="Runtime\Window\Window.cpp" />
+    <ClCompile Include="SDKs\ImGuizmo\GraphEditor.cpp" />
+    <ClCompile Include="SDKs\ImGuizmo\ImCurveEdit.cpp" />
+    <ClCompile Include="SDKs\ImGuizmo\ImGradient.cpp" />
+    <ClCompile Include="SDKs\ImGuizmo\ImGuizmo.cpp" />
+    <ClCompile Include="SDKs\ImGuizmo\ImSequencer.cpp" />
     <ClCompile Include="SDKs\imgui\backends\imgui_impl_glfw.cpp" />
     <ClCompile Include="SDKs\imgui\backends\imgui_impl_opengl3.cpp" />
     <ClCompile Include="SDKs\imgui\imgui.cpp" />
@@ -364,6 +372,8 @@
     <ClInclude Include="Runtime\Core\Math\Math.hpp" />
     <ClInclude Include="Runtime\Core\Math\SDKMath.hpp" />
     <ClInclude Include="Runtime\Core\Reflection\Reflection.hpp" />
+    <ClInclude Include="Runtime\Core\Serializer\JsonParser.hpp" />
+    <ClInclude Include="Runtime\Core\Serializer\Serializer.hpp" />
     <ClInclude Include="Runtime\ECS\Component.hpp" />
     <ClInclude Include="Runtime\ECS\Component\AudioComponent.hpp" />
     <ClInclude Include="Runtime\ECS\Component\PhysicsComponent.hpp" />
@@ -399,12 +409,19 @@
     <ClInclude Include="Runtime\Renderer\GraphicRenderer\stb_image\stb_image.h" />
     <ClInclude Include="Runtime\Renderer\GraphicRenderer\Texture.hpp" />
     <ClInclude Include="Runtime\Scripts\MonoTest.h" />
+    <ClInclude Include="Runtime\Utils\Gizmos.hpp" />
     <ClInclude Include="Runtime\Utils\SingletonInstance.hpp" />
     <ClInclude Include="Runtime\VisualEffect\PostProcess.hpp" />
     <ClInclude Include="Runtime\VisualEffect\PostProcesser.hpp" />
     <ClInclude Include="Runtime\Window\UI\IMGUI_GLFW_OPENGL3.hpp" />
     <ClInclude Include="Runtime\Window\UI\UI.hpp" />
     <ClInclude Include="Runtime\Window\Window.hpp" />
+    <ClInclude Include="SDKs\ImGuizmo\GraphEditor.h" />
+    <ClInclude Include="SDKs\ImGuizmo\ImCurveEdit.h" />
+    <ClInclude Include="SDKs\ImGuizmo\ImGradient.h" />
+    <ClInclude Include="SDKs\ImGuizmo\ImGuizmo.h" />
+    <ClInclude Include="SDKs\ImGuizmo\ImSequencer.h" />
+    <ClInclude Include="SDKs\ImGuizmo\ImZoomSlider.h" />
     <ClInclude Include="SDKs\imgui\backends\imgui_impl_glfw.h" />
     <ClInclude Include="SDKs\imgui\backends\imgui_impl_opengl3.h" />
     <ClInclude Include="SDKs\imgui\backends\imgui_impl_opengl3_loader.h" />

@@ -49,6 +49,11 @@ namespace Spore
 		PostProcesser* GetPostProcesser();
 		void PostProcessRenderToFBO();
 		void PostProcessFBO();
+		void InitSceneFramebuffer(int32 p_window_width, int32 p_window_height);
+		void RenderSceneFramebufferBegin(int32 p_window_width, int32 p_window_height);
+		void RenderSceneFramebufferEnd();
+		uint32 GetSceneFramebuffer();
+		uint32 GetSceneTexture();
 		void InitShadowMap();
 		void ShadowMapRender(std::shared_ptr<Light> p_light,
 							 std::vector<Shader*> p_shaders, Camera* p_camera,
@@ -70,6 +75,8 @@ namespace Spore
 		uint32 m_attachments [3];
 		uint32 m_RBO_depth;
 		PostProcesser* m_post_processer;
+		uint32 m_scene_framebuffer;
+		uint32 m_scene_texture;
 		SkyBox* m_skybox;
 		Grid* m_grid;
 		const uint32 SHADOW_WIDTH = 1024, SHADOW_HEIGHT = 1024;

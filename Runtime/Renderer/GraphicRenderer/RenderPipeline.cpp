@@ -215,6 +215,42 @@ namespace Spore
 		m_post_processer->RenderFBO();
 	}
 
+	void RenderPipeline::InitSceneFramebuffer(int32 p_window_width, int32 p_window_height)
+	{
+		glGenFramebuffers(1, &m_scene_framebuffer);
+		glBindFramebuffer(GL_FRAMEBUFFER, m_scene_framebuffer);
+		glGenTextures(1, &m_scene_texture);
+		glBindTexture(GL_TEXTURE_2D, m_scene_texture);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, p_window_width, p_window_height, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
+		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, m_scene_texture, 0);
+		if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
+		{
+			std::cout << "Scene Framebuffer is not complete!" << std::endl;
+		}
+		glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	}
+
+	void RenderPipeline::RenderSceneFramebufferBegin(int32 p_window_width, int32 p_window_height)
+	{
+		glBindFramebuffer(GL_FRAMEBUFFER, m_scene_framebuffer);
+		glViewport(0, 0, p_window_width, p_window_height);
+	}
+
+	void RenderPipeline::RenderSceneFramebufferEnd()
+	{
+		glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	}
+
+	uint32 RenderPipeline::GetSceneFramebuffer()
+	{
+		return m_scene_framebuffer;
+	}
+
+	uint32 RenderPipeline::GetSceneTexture()
+	{
+		return m_scene_texture;
+	}
+
 	void RenderPipeline::InitShadowMap()
 	{
 		m_shadow_mapping_shader = AssetsManager::GetInstance().m_shader_mapper.find("ShadowMappingFragment.glsl")->second;

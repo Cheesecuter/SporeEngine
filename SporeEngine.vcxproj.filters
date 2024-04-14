@@ -46,9 +46,6 @@
     <Filter Include="源文件\Window\UI">
       <UniqueIdentifier>{1f6b5331-aee6-4b8b-81bf-da0af17bbfee}</UniqueIdentifier>
     </Filter>
-    <Filter Include="头文件\imgui">
-      <UniqueIdentifier>{b9fa9278-ba8b-46a6-a281-6f2ce29c4f7e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="源文件\Core\Reflection">
       <UniqueIdentifier>{cf1a2215-280f-488e-9e1f-739559b6a1e3}</UniqueIdentifier>
     </Filter>
@@ -78,9 +75,6 @@
     </Filter>
     <Filter Include="源文件\Physics">
       <UniqueIdentifier>{cb6de989-83cb-4f79-8391-03ab67bea11b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="头文件\JoltPhysics">
-      <UniqueIdentifier>{56b9ba27-14ab-479c-99d2-82e132e5141f}</UniqueIdentifier>
     </Filter>
     <Filter Include="源文件\Test">
       <UniqueIdentifier>{7383f39e-05d9-4f0a-8f29-d2574b056269}</UniqueIdentifier>
@@ -114,6 +108,15 @@
     </Filter>
     <Filter Include="源文件\Test\Projects">
       <UniqueIdentifier>{b268d086-1f21-4a11-a810-3b56082524a0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\imgui">
+      <UniqueIdentifier>{565d2fcd-8bff-4770-847f-7e61ce7e95bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\JoltPhysics">
+      <UniqueIdentifier>{f9277a08-fee0-44e5-9c54-56b1e485a070}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\ImGuizmo">
+      <UniqueIdentifier>{505ebc1c-802a-48bb-801f-2e44b468f07d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -162,32 +165,11 @@
     <ClCompile Include="Runtime\Window\Window.cpp">
       <Filter>源文件\Window</Filter>
     </ClCompile>
-    <ClCompile Include="SDKs\imgui\imgui.cpp">
-      <Filter>头文件\imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="SDKs\imgui\imgui_demo.cpp">
-      <Filter>头文件\imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="SDKs\imgui\imgui_draw.cpp">
-      <Filter>头文件\imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="SDKs\imgui\imgui_tables.cpp">
-      <Filter>头文件\imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="SDKs\imgui\imgui_widgets.cpp">
-      <Filter>头文件\imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="SDKs\imgui\backends\imgui_impl_opengl3.cpp">
-      <Filter>头文件\imgui</Filter>
-    </ClCompile>
     <ClCompile Include="Runtime\Asset\AssetsManager.cpp">
       <Filter>源文件\Asset</Filter>
     </ClCompile>
     <ClCompile Include="Runtime\Asset\Files.cpp">
       <Filter>源文件\Asset</Filter>
-    </ClCompile>
-    <ClCompile Include="SDKs\imgui\backends\imgui_impl_glfw.cpp">
-      <Filter>头文件\imgui</Filter>
     </ClCompile>
     <ClCompile Include="Runtime\ECS\Component\TransformComponent.cpp">
       <Filter>源文件\ECS\Component</Filter>
@@ -224,6 +206,141 @@
     </ClCompile>
     <ClCompile Include="Runtime\Physics\PhysicsHelloWorld.cpp">
       <Filter>源文件\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Physics\PhysicSystem.cpp">
+      <Filter>源文件\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Test\AddvantageRenderTest.cpp">
+      <Filter>源文件\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Test\BasicLightingTest.cpp">
+      <Filter>源文件\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Test\DeferredShaderingTest.cpp">
+      <Filter>源文件\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Test\DepthTest.cpp">
+      <Filter>源文件\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Test\FrameBufferTest.cpp">
+      <Filter>源文件\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Test\HDRTest.cpp">
+      <Filter>源文件\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Test\ImGuiTest.cpp">
+      <Filter>源文件\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Test\LightingTest.cpp">
+      <Filter>源文件\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Test\ModelTest.cpp">
+      <Filter>源文件\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Test\NamespaceTest.cpp">
+      <Filter>源文件\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Test\NormalMappingTest.cpp">
+      <Filter>源文件\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Test\ParallaxMappingTest.cpp">
+      <Filter>源文件\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Test\PbrTest.cpp">
+      <Filter>源文件\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Test\PointShadowTest.cpp">
+      <Filter>源文件\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Test\RendererDemo.cpp">
+      <Filter>源文件\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Test\ShadowTest.cpp">
+      <Filter>源文件\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Test\SSAOTest.cpp">
+      <Filter>源文件\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Test\StencilTest.cpp">
+      <Filter>源文件\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Physics\Test\PTSimpleTest.cpp">
+      <Filter>源文件\Physics\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Core\Math\SDKMath.cpp">
+      <Filter>源文件\Core\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Core\Math\Math.cpp">
+      <Filter>源文件\Core\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Physics\Test\PhysicsTest.cpp">
+      <Filter>源文件\Physics\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Physics\Utils\ContactListenerImpl.cpp">
+      <Filter>源文件\Physics\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\ECS\Objects\RigidObject.cpp">
+      <Filter>源文件\ECS\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\ECS\Component\PhysicsComponent.cpp">
+      <Filter>源文件\ECS\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Scripts\MonoTest.cpp">
+      <Filter>源文件\Scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Scripts\MonoTest_2.cpp">
+      <Filter>源文件\Scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Renderer\GraphicRenderer\glad\glad.c">
+      <Filter>源文件\Renderer\GraphicRenderer\glad</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Renderer\GraphicRenderer\stb_image\stb_image.cpp">
+      <Filter>源文件\Renderer\GraphicRenderer\stb_image</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Renderer\AudioRenderer\AudioSystem.cpp">
+      <Filter>源文件\Renderer\AudioRenderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\ECS\Component\AudioComponent.cpp">
+      <Filter>源文件\ECS\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Renderer\AudioRenderer\Audio.cpp">
+      <Filter>源文件\Renderer\AudioRenderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Asset\FileExplorer.cpp">
+      <Filter>源文件\Asset</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Renderer\GraphicRenderer\BasicModelsRegister.cpp">
+      <Filter>源文件\Renderer\GraphicRenderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Core\Serializer\Serializer.cpp">
+      <Filter>源文件\Core\Serializer</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Core\Serializer\JsonParser.cpp">
+      <Filter>源文件\Core\Serializer</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\imgui\imgui.cpp">
+      <Filter>头文件\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\imgui\imgui_demo.cpp">
+      <Filter>头文件\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\imgui\imgui_draw.cpp">
+      <Filter>头文件\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\imgui\imgui_tables.cpp">
+      <Filter>头文件\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\imgui\imgui_widgets.cpp">
+      <Filter>头文件\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\imgui\backends\imgui_impl_glfw.cpp">
+      <Filter>头文件\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\imgui\backends\imgui_impl_opengl3.cpp">
+      <Filter>头文件\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKs\JoltPhysics\Jolt\RegisterTypes.cpp">
+      <Filter>头文件\JoltPhysics</Filter>
     </ClCompile>
     <ClCompile Include="SDKs\JoltPhysics\Jolt\AABBTree\AABBTreeBuilder.cpp">
       <Filter>头文件\JoltPhysics</Filter>
@@ -633,113 +750,23 @@
     <ClCompile Include="SDKs\JoltPhysics\Jolt\TriangleSplitter\TriangleSplitterMorton.cpp">
       <Filter>头文件\JoltPhysics</Filter>
     </ClCompile>
-    <ClCompile Include="SDKs\JoltPhysics\Jolt\RegisterTypes.cpp">
-      <Filter>头文件\JoltPhysics</Filter>
+    <ClCompile Include="SDKs\ImGuizmo\GraphEditor.cpp">
+      <Filter>头文件\ImGuizmo</Filter>
     </ClCompile>
-    <ClCompile Include="Runtime\Physics\PhysicSystem.cpp">
-      <Filter>源文件\Physics</Filter>
+    <ClCompile Include="SDKs\ImGuizmo\ImCurveEdit.cpp">
+      <Filter>头文件\ImGuizmo</Filter>
     </ClCompile>
-    <ClCompile Include="Runtime\Test\AddvantageRenderTest.cpp">
-      <Filter>源文件\Test</Filter>
+    <ClCompile Include="SDKs\ImGuizmo\ImGradient.cpp">
+      <Filter>头文件\ImGuizmo</Filter>
     </ClCompile>
-    <ClCompile Include="Runtime\Test\BasicLightingTest.cpp">
-      <Filter>源文件\Test</Filter>
+    <ClCompile Include="SDKs\ImGuizmo\ImGuizmo.cpp">
+      <Filter>头文件\ImGuizmo</Filter>
     </ClCompile>
-    <ClCompile Include="Runtime\Test\DeferredShaderingTest.cpp">
-      <Filter>源文件\Test</Filter>
+    <ClCompile Include="SDKs\ImGuizmo\ImSequencer.cpp">
+      <Filter>头文件\ImGuizmo</Filter>
     </ClCompile>
-    <ClCompile Include="Runtime\Test\DepthTest.cpp">
-      <Filter>源文件\Test</Filter>
-    </ClCompile>
-    <ClCompile Include="Runtime\Test\FrameBufferTest.cpp">
-      <Filter>源文件\Test</Filter>
-    </ClCompile>
-    <ClCompile Include="Runtime\Test\HDRTest.cpp">
-      <Filter>源文件\Test</Filter>
-    </ClCompile>
-    <ClCompile Include="Runtime\Test\ImGuiTest.cpp">
-      <Filter>源文件\Test</Filter>
-    </ClCompile>
-    <ClCompile Include="Runtime\Test\LightingTest.cpp">
-      <Filter>源文件\Test</Filter>
-    </ClCompile>
-    <ClCompile Include="Runtime\Test\ModelTest.cpp">
-      <Filter>源文件\Test</Filter>
-    </ClCompile>
-    <ClCompile Include="Runtime\Test\NamespaceTest.cpp">
-      <Filter>源文件\Test</Filter>
-    </ClCompile>
-    <ClCompile Include="Runtime\Test\NormalMappingTest.cpp">
-      <Filter>源文件\Test</Filter>
-    </ClCompile>
-    <ClCompile Include="Runtime\Test\ParallaxMappingTest.cpp">
-      <Filter>源文件\Test</Filter>
-    </ClCompile>
-    <ClCompile Include="Runtime\Test\PbrTest.cpp">
-      <Filter>源文件\Test</Filter>
-    </ClCompile>
-    <ClCompile Include="Runtime\Test\PointShadowTest.cpp">
-      <Filter>源文件\Test</Filter>
-    </ClCompile>
-    <ClCompile Include="Runtime\Test\RendererDemo.cpp">
-      <Filter>源文件\Test</Filter>
-    </ClCompile>
-    <ClCompile Include="Runtime\Test\ShadowTest.cpp">
-      <Filter>源文件\Test</Filter>
-    </ClCompile>
-    <ClCompile Include="Runtime\Test\SSAOTest.cpp">
-      <Filter>源文件\Test</Filter>
-    </ClCompile>
-    <ClCompile Include="Runtime\Test\StencilTest.cpp">
-      <Filter>源文件\Test</Filter>
-    </ClCompile>
-    <ClCompile Include="Runtime\Physics\Test\PTSimpleTest.cpp">
-      <Filter>源文件\Physics\Test</Filter>
-    </ClCompile>
-    <ClCompile Include="Runtime\Core\Math\SDKMath.cpp">
-      <Filter>源文件\Core\Math</Filter>
-    </ClCompile>
-    <ClCompile Include="Runtime\Core\Math\Math.cpp">
-      <Filter>源文件\Core\Math</Filter>
-    </ClCompile>
-    <ClCompile Include="Runtime\Physics\Test\PhysicsTest.cpp">
-      <Filter>源文件\Physics\Test</Filter>
-    </ClCompile>
-    <ClCompile Include="Runtime\Physics\Utils\ContactListenerImpl.cpp">
-      <Filter>源文件\Physics\Utils</Filter>
-    </ClCompile>
-    <ClCompile Include="Runtime\ECS\Objects\RigidObject.cpp">
-      <Filter>源文件\ECS\Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="Runtime\ECS\Component\PhysicsComponent.cpp">
-      <Filter>源文件\ECS\Component</Filter>
-    </ClCompile>
-    <ClCompile Include="Runtime\Scripts\MonoTest.cpp">
-      <Filter>源文件\Scripts</Filter>
-    </ClCompile>
-    <ClCompile Include="Runtime\Scripts\MonoTest_2.cpp">
-      <Filter>源文件\Scripts</Filter>
-    </ClCompile>
-    <ClCompile Include="Runtime\Renderer\GraphicRenderer\glad\glad.c">
-      <Filter>源文件\Renderer\GraphicRenderer\glad</Filter>
-    </ClCompile>
-    <ClCompile Include="Runtime\Renderer\GraphicRenderer\stb_image\stb_image.cpp">
-      <Filter>源文件\Renderer\GraphicRenderer\stb_image</Filter>
-    </ClCompile>
-    <ClCompile Include="Runtime\Renderer\AudioRenderer\AudioSystem.cpp">
-      <Filter>源文件\Renderer\AudioRenderer</Filter>
-    </ClCompile>
-    <ClCompile Include="Runtime\ECS\Component\AudioComponent.cpp">
-      <Filter>源文件\ECS\Component</Filter>
-    </ClCompile>
-    <ClCompile Include="Runtime\Renderer\AudioRenderer\Audio.cpp">
-      <Filter>源文件\Renderer\AudioRenderer</Filter>
-    </ClCompile>
-    <ClCompile Include="Runtime\Asset\FileExplorer.cpp">
-      <Filter>源文件\Asset</Filter>
-    </ClCompile>
-    <ClCompile Include="Runtime\Renderer\GraphicRenderer\BasicModelsRegister.cpp">
-      <Filter>源文件\Renderer\GraphicRenderer</Filter>
+    <ClCompile Include="Runtime\Utils\Gizmos.cpp">
+      <Filter>源文件\Utils</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -800,38 +827,11 @@
     <ClInclude Include="Runtime\Window\Window.hpp">
       <Filter>源文件\Window</Filter>
     </ClInclude>
-    <ClInclude Include="SDKs\imgui\imconfig.h">
-      <Filter>头文件\imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="SDKs\imgui\imgui.h">
-      <Filter>头文件\imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="SDKs\imgui\imgui_internal.h">
-      <Filter>头文件\imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="SDKs\imgui\imstb_rectpack.h">
-      <Filter>头文件\imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="SDKs\imgui\imstb_textedit.h">
-      <Filter>头文件\imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="SDKs\imgui\imstb_truetype.h">
-      <Filter>头文件\imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="SDKs\imgui\backends\imgui_impl_opengl3.h">
-      <Filter>头文件\imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="SDKs\imgui\backends\imgui_impl_opengl3_loader.h">
-      <Filter>头文件\imgui</Filter>
-    </ClInclude>
     <ClInclude Include="Runtime\Asset\AssetsManager.hpp">
       <Filter>源文件\Asset</Filter>
     </ClInclude>
     <ClInclude Include="Runtime\Asset\Files.hpp">
       <Filter>源文件\Asset</Filter>
-    </ClInclude>
-    <ClInclude Include="SDKs\imgui\backends\imgui_impl_glfw.h">
-      <Filter>头文件\imgui</Filter>
     </ClInclude>
     <ClInclude Include="Runtime\Core\Reflection\Reflection.hpp">
       <Filter>源文件\Core\Reflection</Filter>
@@ -862,6 +862,102 @@
     </ClInclude>
     <ClInclude Include="Runtime\Core\Base\Global.hpp">
       <Filter>源文件\Core\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\Physics\PhysicSyetemHeaders.h">
+      <Filter>源文件\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\Physics\PhysicSystem.hpp">
+      <Filter>源文件\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\Physics\Layers.hpp">
+      <Filter>源文件\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\Physics\Utils\ContactListenerImpl.hpp">
+      <Filter>源文件\Physics\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\Physics\PhysicsSettings.h">
+      <Filter>源文件\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\Core\Math\Math.hpp">
+      <Filter>源文件\Core\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\Core\Math\SDKMath.hpp">
+      <Filter>源文件\Core\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\Physics\Test\PhysicsTest.hpp">
+      <Filter>源文件\Physics\Test</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\Physics\Test\PTSimpleTest.hpp">
+      <Filter>源文件\Physics\Test</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\ECS\Objects\RigidObject.hpp">
+      <Filter>源文件\ECS\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\ECS\Component\PhysicsComponent.hpp">
+      <Filter>源文件\ECS\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\Scripts\MonoTest.h">
+      <Filter>源文件\Scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\Renderer\GraphicRenderer\stb_image\stb_image.h">
+      <Filter>源文件\Renderer\GraphicRenderer\stb_image</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\Renderer\AudioRenderer\AudioSystem.hpp">
+      <Filter>源文件\Renderer\AudioRenderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\ECS\Component\AudioComponent.hpp">
+      <Filter>源文件\ECS\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\Renderer\AudioRenderer\Audio.hpp">
+      <Filter>源文件\Renderer\AudioRenderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\Asset\FileExplorer.hpp">
+      <Filter>源文件\Asset</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\Renderer\GraphicRenderer\BasicModelsRegister.hpp">
+      <Filter>源文件\Renderer\GraphicRenderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\Core\Serializer\Serializer.hpp">
+      <Filter>源文件\Core\Serializer</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\Core\Serializer\JsonParser.hpp">
+      <Filter>源文件\Core\Serializer</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\imgui\imconfig.h">
+      <Filter>头文件\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\imgui\imgui.h">
+      <Filter>头文件\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\imgui\imgui_internal.h">
+      <Filter>头文件\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\imgui\imstb_rectpack.h">
+      <Filter>头文件\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\imgui\imstb_textedit.h">
+      <Filter>头文件\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\imgui\imstb_truetype.h">
+      <Filter>头文件\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\imgui\backends\imgui_impl_glfw.h">
+      <Filter>头文件\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\imgui\backends\imgui_impl_opengl3.h">
+      <Filter>头文件\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\imgui\backends\imgui_impl_opengl3_loader.h">
+      <Filter>头文件\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\ConfigurationString.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\Jolt.h">
+      <Filter>头文件\JoltPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKs\JoltPhysics\Jolt\RegisterTypes.h">
+      <Filter>头文件\JoltPhysics</Filter>
     </ClInclude>
     <ClInclude Include="SDKs\JoltPhysics\Jolt\AABBTree\AABBTreeBuilder.h">
       <Filter>头文件\JoltPhysics</Filter>
@@ -1715,74 +1811,29 @@
     <ClInclude Include="SDKs\JoltPhysics\Jolt\TriangleSplitter\TriangleSplitterMorton.h">
       <Filter>头文件\JoltPhysics</Filter>
     </ClInclude>
-    <ClInclude Include="SDKs\JoltPhysics\Jolt\ConfigurationString.h">
-      <Filter>头文件\JoltPhysics</Filter>
+    <ClInclude Include="SDKs\ImGuizmo\GraphEditor.h">
+      <Filter>头文件\ImGuizmo</Filter>
     </ClInclude>
-    <ClInclude Include="SDKs\JoltPhysics\Jolt\Jolt.h">
-      <Filter>头文件\JoltPhysics</Filter>
+    <ClInclude Include="SDKs\ImGuizmo\ImCurveEdit.h">
+      <Filter>头文件\ImGuizmo</Filter>
     </ClInclude>
-    <ClInclude Include="SDKs\JoltPhysics\Jolt\RegisterTypes.h">
-      <Filter>头文件\JoltPhysics</Filter>
+    <ClInclude Include="SDKs\ImGuizmo\ImGradient.h">
+      <Filter>头文件\ImGuizmo</Filter>
     </ClInclude>
-    <ClInclude Include="Runtime\Physics\PhysicSyetemHeaders.h">
-      <Filter>源文件\Physics</Filter>
+    <ClInclude Include="SDKs\ImGuizmo\ImGuizmo.h">
+      <Filter>头文件\ImGuizmo</Filter>
     </ClInclude>
-    <ClInclude Include="Runtime\Physics\PhysicSystem.hpp">
-      <Filter>源文件\Physics</Filter>
+    <ClInclude Include="SDKs\ImGuizmo\ImSequencer.h">
+      <Filter>头文件\ImGuizmo</Filter>
     </ClInclude>
-    <ClInclude Include="Runtime\Physics\Layers.hpp">
-      <Filter>源文件\Physics</Filter>
+    <ClInclude Include="SDKs\ImGuizmo\ImZoomSlider.h">
+      <Filter>头文件\ImGuizmo</Filter>
     </ClInclude>
-    <ClInclude Include="Runtime\Physics\Utils\ContactListenerImpl.hpp">
-      <Filter>源文件\Physics\Utils</Filter>
-    </ClInclude>
-    <ClInclude Include="Runtime\Physics\PhysicsSettings.h">
-      <Filter>源文件\Physics</Filter>
-    </ClInclude>
-    <ClInclude Include="Runtime\Core\Math\Math.hpp">
-      <Filter>源文件\Core\Math</Filter>
-    </ClInclude>
-    <ClInclude Include="Runtime\Core\Math\SDKMath.hpp">
-      <Filter>源文件\Core\Math</Filter>
-    </ClInclude>
-    <ClInclude Include="Runtime\Physics\Test\PhysicsTest.hpp">
-      <Filter>源文件\Physics\Test</Filter>
-    </ClInclude>
-    <ClInclude Include="Runtime\Physics\Test\PTSimpleTest.hpp">
-      <Filter>源文件\Physics\Test</Filter>
-    </ClInclude>
-    <ClInclude Include="Runtime\ECS\Objects\RigidObject.hpp">
-      <Filter>源文件\ECS\Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="Runtime\ECS\Component\PhysicsComponent.hpp">
-      <Filter>源文件\ECS\Component</Filter>
-    </ClInclude>
-    <ClInclude Include="Runtime\Scripts\MonoTest.h">
-      <Filter>源文件\Scripts</Filter>
-    </ClInclude>
-    <ClInclude Include="Runtime\Renderer\GraphicRenderer\stb_image\stb_image.h">
-      <Filter>源文件\Renderer\GraphicRenderer\stb_image</Filter>
-    </ClInclude>
-    <ClInclude Include="Runtime\Renderer\AudioRenderer\AudioSystem.hpp">
-      <Filter>源文件\Renderer\AudioRenderer</Filter>
-    </ClInclude>
-    <ClInclude Include="Runtime\ECS\Component\AudioComponent.hpp">
-      <Filter>源文件\ECS\Component</Filter>
-    </ClInclude>
-    <ClInclude Include="Runtime\Renderer\AudioRenderer\Audio.hpp">
-      <Filter>源文件\Renderer\AudioRenderer</Filter>
-    </ClInclude>
-    <ClInclude Include="Runtime\Asset\FileExplorer.hpp">
-      <Filter>源文件\Asset</Filter>
-    </ClInclude>
-    <ClInclude Include="Runtime\Renderer\GraphicRenderer\BasicModelsRegister.hpp">
-      <Filter>源文件\Renderer\GraphicRenderer</Filter>
+    <ClInclude Include="Runtime\Utils\Gizmos.hpp">
+      <Filter>源文件\Utils</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="SDKs\imgui\misc\debuggers\imgui.natstepfilter">
-      <Filter>头文件\imgui</Filter>
-    </None>
     <None Include="Assets\Shaders\BackgroundFragment.glsl">
       <Filter>资源文件\Assets\Shaders</Filter>
     </None>
@@ -1978,6 +2029,12 @@
     <None Include="Assets\Shaders\PostProcesses\EdgeDetectionPostProcessFS.glsl">
       <Filter>资源文件\Assets\Shaders\PostProcesses</Filter>
     </None>
+    <None Include="SDKs\imgui\misc\debuggers\imgui.natstepfilter">
+      <Filter>头文件\imgui</Filter>
+    </None>
+    <None Include="SDKs\JoltPhysics\Jolt\Jolt.cmake">
+      <Filter>头文件\JoltPhysics</Filter>
+    </None>
     <None Include="SDKs\JoltPhysics\Jolt\Core\FixedSizeFreeList.inl">
       <Filter>头文件\JoltPhysics</Filter>
     </None>
@@ -2021,9 +2078,6 @@
       <Filter>头文件\JoltPhysics</Filter>
     </None>
     <None Include="SDKs\JoltPhysics\Jolt\Physics\Body\MotionProperties.inl">
-      <Filter>头文件\JoltPhysics</Filter>
-    </None>
-    <None Include="SDKs\JoltPhysics\Jolt\Jolt.cmake">
       <Filter>头文件\JoltPhysics</Filter>
     </None>
   </ItemGroup>

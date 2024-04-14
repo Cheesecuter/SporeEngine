@@ -1,0 +1,193 @@
+{
+    "format_version": "0.0.1",
+    "scenes": [
+        {
+            "scene1": {
+                "identifier": "scene1",
+                "objects": [
+                    {
+                        "obj1": {
+                            "identifier": "obj1",
+                            "type": "model",
+                            "components": [
+                                {
+                                    "transform": {
+                                        "name": "Transform",
+                                        "properties": [
+                                            {
+                                                "transform": [
+                                                    {
+                                                        "position": [ 2.0, 1.0, 0.0 ]
+                                                    },
+                                                    {
+                                                        "rotation": [ 44.0, 45.0, 46.0 ]
+                                                    },
+                                                    {
+                                                        "scale": [ 1.0, 1.0, 1.0 ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                },
+                                {
+                                    "shader": {
+                                        "name": "shader",
+                                        "properties": [
+                                            {
+                                                "shaders": [
+                                                    {
+                                                        "shader1": {
+                                                            "identifier": "shader1",
+                                                            "is loading": "true"
+                                                        },
+                                                        "shader2": {
+                                                            "identifier": "shader2",
+                                                            "is loading": "true"
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                },
+                                {
+                                    "physics": {
+                                        "name": "physics",
+                                        "properties": [
+                                            {
+                                                "transform": [
+                                                    {
+                                                        "position": [ 2.0, 1.0, 0.0 ]
+                                                    },
+                                                    {
+                                                        "rotation": [ 44.0, 45.0, 46.0 ]
+                                                    },
+                                                    {
+                                                        "scale": [ 1.0, 1.0, 1.0 ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                },
+                                {
+                                    "audio": {
+                                        "name": "audio",
+                                        "properties": [
+                                            {
+                                                "buffer": "buffer1"
+                                            },
+                                            {
+                                                "source": "source1"
+                                            }
+                                        ]
+                                    }
+                                }
+                            ],
+                            "models": [
+                                {
+                                    "model1": {
+                                        "identifier": "model1"
+                                    }
+                                }
+                            ]
+                        },
+                        "obj2": {
+                            "identifier": "obj2",
+                            "type": "light",
+                            "components": [
+                                {
+                                    "transform": {
+                                        "name": "Transform",
+                                        "properties": [
+                                            {
+                                                "transform": [
+                                                    {
+                                                        "front": [ 0.0, 0.0, 1.0 ]
+                                                    },
+                                                    {
+                                                        "right": [ 1.0, 0.0, 1.0 ]
+                                                    },
+                                                    {
+                                                        "up": [ 0.0, 1.0, 0.0 ]
+                                                    },
+                                                    {
+                                                        "position": [ 0.0, 0.0, 0.0 ]
+                                                    },
+                                                    {
+                                                        "rotation": [ 0.0, 0.0, 0.0 ]
+                                                    },
+                                                    {
+                                                        "scale": [ 1.0, 1.0, 1.0 ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                },
+                                {
+                                    "shader": {
+                                        "name": "shader",
+                                        "properties": [
+                                            {
+                                                "shaders": [
+                                                    {
+                                                        "shader1": {
+                                                            "identifier": "shader1",
+                                                            "is loading": "true"
+                                                        },
+                                                        "shader2": {
+                                                            "identifier": "shader2",
+                                                            "is loading": "true"
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                },
+                                {
+                                    "physics": {
+                                        "name": "physics",
+                                        "properties": [
+                                            {
+                                                "position": [ 0.0, 0.0, 0.0 ]
+                                            },
+                                            {
+                                                "rotation": [ 0.0, 0.0, 0.0 ]
+                                            },
+                                            {
+                                                "scale": [ 1.0, 1.0, 1.0 ]
+                                            }
+                                        ]
+                                    }
+                                },
+                                {
+                                    "audio": {
+                                        "name": "audio",
+                                        "properties": [
+                                            {
+                                                "buffer": "buffer1"
+                                            },
+                                            {
+                                                "source": "source1"
+                                            }
+                                        ]
+                                    }
+                                }
+                            ],
+                            "models": [
+                                {
+                                    "model1": {
+                                        "identifier": "model2"
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        }
+    ]
+}

@@ -18,6 +18,8 @@
 #include <AudioSystem.hpp>
 #include <BasicModelsRegister.hpp>
 
+#include <JsonParser.hpp>
+
 using namespace Spore;
 
 void Runtime(MainWindow* p_window, UI* p_ui, PhysicSystem* p_physic_system);
@@ -36,6 +38,8 @@ float32 deltaTime = 0.0f;
 float32 lastFrame = 0.0f;
 
 int32 displayW, displayH;
+
+bool firstjson = true;
 
 int main()
 {
@@ -67,6 +71,8 @@ int main()
 
 void Runtime(MainWindow* p_window, UI* p_ui, PhysicSystem* p_physic_system)
 {
+    p_window->m_render_pipeline->InitSceneFramebuffer(p_window->m_width, p_window->m_height);
+
     //Shader blendingShader("./Assets/Shaders/BlendingVertex.glsl", "./Assets/Shaders/BlendingFragment.glsl");
     //Shader gBufferShader("./Assets/Shaders/GBufferVertex.glsl", "./Assets/Shaders/GBufferFragment.glsl");
     Shader modelShader("./Assets/Shaders/ModelLoadingVertex.glsl", "./Assets/Shaders/ModelLoadingFragment.glsl");
@@ -143,7 +149,8 @@ void Runtime(MainWindow* p_window, UI* p_ui, PhysicSystem* p_physic_system)
     p_window->m_render_pipeline->InitShadowMap();
 
     PostProcess* postProcessDefault = new PostProcess("Default", &postProcessDefaultShader);
-    p_window->m_render_pipeline->InitPostProcesser(p_window->m_width / 6 * 4, p_window->m_height / 3 * 2, postProcessDefault);
+    //p_window->m_render_pipeline->InitPostProcesser(p_window->m_width / 6 * 4, p_window->m_height / 3 * 2, postProcessDefault);
+    p_window->m_render_pipeline->InitPostProcesser(p_window->m_width, p_window->m_height, postProcessDefault);
 
     p_window->m_render_pipeline->GetPostProcesser()->AddPostProcess(postProcessDefault);
     PostProcess* postProcessInversion = new PostProcess("Inversion", &postProcessInversionShader);
@@ -171,9 +178,7 @@ void Runtime(MainWindow* p_window, UI* p_ui, PhysicSystem* p_physic_system)
         glClearColor(backgroungColor.x, backgroungColor.y, backgroungColor.z, backgroungColor.w);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        ImGui_ImplOpenGL3_NewFrame();
-        ImGui_ImplGlfw_NewFrame();
-        ImGui::NewFrame();
+        p_ui->NewFrame();
 
         p_ui->RenderPanels(p_window);
 
@@ -190,8 +195,6 @@ void Runtime(MainWindow* p_window, UI* p_ui, PhysicSystem* p_physic_system)
             }
         }
 
-        
-
         mat4f projection = glm::perspective(glm::radians(editorCamera.m_zoom),
                                             (float32) p_window->GetWindowWidth() / (float32) p_window->GetWindowHeight(),
                                             0.1f, 10000.0f);
@@ -206,8 +209,11 @@ void Runtime(MainWindow* p_window, UI* p_ui, PhysicSystem* p_physic_system)
                                                   (uint32) window_p->GetWindowWidth(), (uint32) window_p->GetWindowHeight(),
                                                   projection, view, model);*/
 
-        p_window->m_render_pipeline->SetScenePos(displayW / 6, displayH / 3);
-        p_window->m_render_pipeline->SetSceneSize(displayW / 6 * 4, displayH / 3 * 2);
+        //p_window->m_render_pipeline->SetScenePos(displayW / 6, displayH / 3);
+        //p_window->m_render_pipeline->SetSceneSize(displayW / 6 * 4, displayH / 3 * 2);
+
+        p_window->m_render_pipeline->SetScenePos(0, 0);
+        p_window->m_render_pipeline->SetSceneSize(displayW, displayH);
 
         if (p_window->m_render_pipeline->m_post_process_on)
         {
@@ -283,7 +289,8 @@ void Runtime(MainWindow* p_window, UI* p_ui, PhysicSystem* p_physic_system)
             p_window->m_render_pipeline->PostProcessFBO();
         }
 
-        glViewport(displayW / 6, displayH / 3, displayW / 6 * 4, displayH / 3 * 2);
+        //glViewport(displayW / 6, displayH / 3, displayW / 6 * 4, displayH / 3 * 2);
+        glViewport(0, 0, displayW, displayH);
 
         /*window_p->renderPipeline->DeferredRender(shaders, &camera,
                                                  (float32) window_p->GetWindowWidth(), (float32) window_p->GetWindowHeight(),
@@ -294,10 +301,20 @@ void Runtime(MainWindow* p_window, UI* p_ui, PhysicSystem* p_physic_system)
         glfwGetWindowSize(p_window->m_window, &displayW, &displayH);
         p_window->SetWindowSize(displayW, displayH);
 
-        ImGui::Render();
-        ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+        /*p_window->m_render_pipeline->RenderSceneFramebufferBegin(p_window->m_width, p_window->m_height);
+        glBindFramebuffer(GL_FRAMEBUFFER, p_window->m_render_pipeline->GetSceneFramebuffer());
+        p_window->m_render_pipeline->PostProcessFBO();
+        glBindFramebuffer(GL_FRAMEBUFFER, 0);*/
+
+        p_ui->Render();
         
         glfwSwapBuffers(p_window->m_window);
         glfwPollEvents();
+        /*if (firstjson)
+        {
+            JsonParserTest jsontest;
+            jsontest.runtest();
+            firstjson = false;
+        }*/
     }
 }

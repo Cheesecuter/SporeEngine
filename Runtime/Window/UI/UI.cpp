@@ -1,9 +1,6 @@
 #define GLFW_INCLUDE_NONE
 
-#include <Types.hpp>
 #include <UI.hpp>
-#include <IMGUI_GLFW_OPENGL3.hpp>
-#include <Windows.h>
 
 namespace fs = std::filesystem;
 namespace Spore
@@ -13,6 +10,7 @@ namespace Spore
 	UI::UI(MainWindow* p_window)
 	{
 		InitImages();
+		m_gizmos = new Gizmos();
 		m_window = p_window;
 	}
 
@@ -74,6 +72,19 @@ namespace Spore
 		ImGui::DestroyContext();
 	}
 
+	void UI::NewFrame()
+	{
+		ImGui_ImplOpenGL3_NewFrame();
+		ImGui_ImplGlfw_NewFrame();
+		ImGui::NewFrame();
+	}
+
+	void UI::Render()
+	{
+		ImGui::Render();
+		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+	}
+
 	void UI::RenderPanels(MainWindow* p_window)
 	{
 		/*int32 displayW, displayH;
@@ -84,7 +95,10 @@ namespace Spore
 
 		RenderMenuBar(p_window);
 		RenderHierarchyPanel(p_window);
-		//RenderScenePanel(window);
+		if (m_show_scene_panel)
+		{
+			RenderScenePanel(p_window);
+		}
 		RenderInspectorPanel(p_window);
 		RenderProjectPanel(p_window);
 		RenderConsolePanel(p_window);
@@ -173,6 +187,7 @@ namespace Spore
 					ImGui::Checkbox("Gamma Correction", &p_window->m_render_pipeline->m_gamma_correction_on);
 					ImGui::Checkbox("Shadow Mapping", &p_window->m_render_pipeline->m_shadow_map_on);
 					ImGui::Checkbox("Post Process", &p_window->m_render_pipeline->m_post_process_on);
+					ImGui::Checkbox("Scene Panel", &m_show_scene_panel);
 					ImGui::Separator();
 					ImGui::SliderFloat("Camera Speed", &p_window->m_camera->m_movement_speed, 0.0f, 50.0f);
 					static int32 windowSizeIndex = -1;
@@ -542,7 +557,29 @@ namespace Spore
 
 	void UI::RenderScenePanel(MainWindow* p_window)
 	{
+		int32 width = p_window->m_width / 6 * 4 > 200 ? p_window->m_width / 6 * 4 : 200;
+		int32 height = p_window->m_height / 3 * 2 > 400 ? p_window->m_height / 3 * 2 : 400;
+		int32 height1 = (int32) (ImGui::GetTextLineHeightWithSpacing() + ImGui::GetStyle().FramePadding.y * 0.5f);
+		ImGui::SetNextWindowPos(ImVec2((float32) (p_window->m_width - p_window->m_width / 6 * 5), (float32) height1), ImGuiCond_Always);
+		ImGui::SetNextWindowSize(ImVec2((float32) width, (float32) (height - height1)), ImGuiCond_Always);
+		ImGuiWindowFlags windowFlags = 0;
+		static bool pOpen = true;
+		windowFlags = ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoCollapse;
+		{
+			ImGui::Begin("Scene", &pOpen, windowFlags);
 
+			ImVec2 size = ImGui::GetContentRegionAvail();
+			//std::cout << size.x << " " << size.y << std::endl;
+
+			ImGuizmo::SetDrawlist();
+			RenderGizmos(p_window);
+			//p_window->m_render_pipeline->RenderSceneFramebufferEnd();
+			//uint32 framebufferTexture = p_window->m_render_pipeline->GetSceneTexture();
+			uint32 framebufferTexture = p_window->m_render_pipeline->GetPostProcesser()->GetFrameBufferTexture();
+			ImGui::Image((void*) (intptr_t) framebufferTexture, size, ImVec2(0, 1), ImVec2(1, 0));
+
+			ImGui::End();
+		}
 	}
 
 	void UI::RenderInspectorPanel(MainWindow* p_window)
@@ -872,6 +909,27 @@ namespace Spore
 			}
 
 			ImGui::End();
+		}
+	}
+
+	void UI::RenderGizmos(MainWindow* p_window)
+	{
+		ImGuizmo::SetOrthographic(false);
+		ImGuizmo::BeginFrame();
+		if (m_selected_object != nullptr)
+		{
+			float32* cameraView = const_cast<float32*>(glm::value_ptr(m_window->m_camera->GetViewMatrix()));
+			vec2f sceneSize = p_window->m_render_pipeline->GetSceneSize();
+			mat4f projection = glm::perspective(glm::radians(m_window->m_camera->m_zoom),
+												(float32) sceneSize.x / (float32) sceneSize.y,
+												0.1f, 10000.0f);
+			float32* cameraProjection = const_cast<float32*>(glm::value_ptr(projection));
+			TransformComponent* transformComponent = dynamic_cast<TransformComponent*>(m_selected_object->GetComponents().find("Transform")->second);
+			float32* objectModelMatrix = const_cast<float32*>(glm::value_ptr(transformComponent->GetMatrix()));
+			m_gizmos->EditTransform(p_window, cameraView, cameraProjection, objectModelMatrix, true);
+			transformComponent->SetPosition(m_gizmos->GetPosition());
+			transformComponent->SetRotation(m_gizmos->GetRotation());
+			transformComponent->SetScale(m_gizmos->GetScale());
 		}
 	}
 
