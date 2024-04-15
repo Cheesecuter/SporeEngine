@@ -1,5 +1,8 @@
 #include <Gizmos.hpp>
 
+#include <Headers.hpp>
+
+
 namespace Spore
 {
 	ImGuizmo::OPERATION Gizmos::m_current_gizmo_operation;
@@ -19,7 +22,7 @@ namespace Spore
 							   float32* p_camera_view, float32* p_camera_projection,
 							   float32* p_matrix, bool p_edit_transform_decomposition)
 	{
-		static ImGuizmo::MODE currentGizmoMode(ImGuizmo::LOCAL);
+		static ImGuizmo::MODE currentGizmoMode(ImGuizmo::WORLD);
 		static bool useSnap = false;
 		static float snap [3] = { 1.0f, 1.0f, 1.0f };
 		static float bounds [] = { -0.5f, -0.5f, -0.5f, 0.5f, 0.5f, 0.5f };
@@ -53,38 +56,19 @@ namespace Spore
 			{
 				m_current_gizmo_operation = ImGuizmo::SCALE;
 			}*/
-			//float position [3], rotation [3], scale [3];
 			ImGuizmo::DecomposeMatrixToComponents(p_matrix, glm::value_ptr(m_position), glm::value_ptr(m_rotation), glm::value_ptr(m_scale));
-			//position [1] += 5;
-			int32 width = 200;
-			int32 height = 300;
-			ImGui::SetNextWindowPos(ImVec2((float32) (200), (float32) (100)), ImGuiCond_Always);
-			ImGui::SetNextWindowSize(ImVec2((float32) width, (float32) height), ImGuiCond_Always);
-			{
-				float position [3] = { m_position.x, m_position.y, m_position.z };
-				float rotation [3] = { m_rotation.x, m_rotation.y, m_rotation.z };
-				float scale [3] = { m_scale.x, m_scale.y, m_scale.z };
-				ImGui::Begin("gizmo");
-				ImGui::InputFloat3("Tr", position);
-				ImGui::InputFloat3("Rt", rotation);
-				ImGui::InputFloat3("Sc", scale);
-				ImGui::End();
-			}
-			ImGuizmo::RecomposeMatrixFromComponents(glm::value_ptr(m_position), glm::value_ptr(m_rotation), glm::value_ptr(m_scale), p_matrix);
 		}
-		//ImGuiIO& io = ImGui::GetIO();
-		//float viewManipulateRight = io.DisplaySize.x;
-		//float viewManipulateTop = 0;
-		//ImGuizmo::SetRect(0, 0, io.DisplaySize.x, io.DisplaySize.y);
+
 		vec2f scenePos = p_window->m_render_pipeline->GetScenePos();
 		vec2f sceneSize = p_window->m_render_pipeline->GetSceneSize();
-		ImGuizmo::SetRect(scenePos.x, scenePos.y, sceneSize.x, sceneSize.y);
+		ImGuizmo::SetRect(scenePos.x, 0.0f, sceneSize.x, sceneSize.y);
 
 		//ImGuizmo::DrawCubes(p_camera_view, p_camera_projection, &objectMatrix [0][0], gizmoCount);
 		ImGuizmo::Manipulate(p_camera_view, p_camera_projection, m_current_gizmo_operation, currentGizmoMode, p_matrix, NULL, useSnap ? &snap [0] : NULL, boundSizing ? bounds : NULL, boundSizingSnap ? boundsSnap : NULL);
 
 		//ImGuizmo::ViewManipulate(p_camera_view, 8.0f, ImVec2(viewManipulateRight - 128, viewManipulateTop), ImVec2(128, 128), 0x10101010);
-		ImGuizmo::ViewManipulate(p_camera_view, 1.0f, ImVec2(scenePos.x, 0), ImVec2(128, 128), 0x10101010);
+		ImGuizmo::ViewManipulate(p_camera_view, 1.0f, ImVec2(scenePos.x, 0.0f), ImVec2(128, 128), 0x10101010);
+		ImGuizmo::RecomposeMatrixFromComponents(glm::value_ptr(m_position), glm::value_ptr(m_rotation), glm::value_ptr(m_scale), p_matrix);
 	}
 
 	vec3f Gizmos::GetPosition()
