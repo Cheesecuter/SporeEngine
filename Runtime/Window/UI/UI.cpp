@@ -97,10 +97,8 @@ namespace Spore
 		RenderHierarchyPanel(p_window);
 		if (m_show_scene_panel)
 		{
-			//RenderScenePanel(p_window);
+			RenderScenePanel(p_window);
 		}
-
-		RenderGizmos(p_window);
 		RenderInspectorPanel(p_window);
 		RenderProjectPanel(p_window);
 		RenderConsolePanel(p_window);
