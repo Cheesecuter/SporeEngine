@@ -149,8 +149,8 @@ void Runtime(MainWindow* p_window, UI* p_ui, PhysicSystem* p_physic_system)
     p_window->m_render_pipeline->InitShadowMap();
 
     PostProcess* postProcessDefault = new PostProcess("Default", &postProcessDefaultShader);
-    //p_window->m_render_pipeline->InitPostProcesser(p_window->m_width / 6 * 4, p_window->m_height / 3 * 2, postProcessDefault);
-    p_window->m_render_pipeline->InitPostProcesser(p_window->m_width, p_window->m_height, postProcessDefault);
+    p_window->m_render_pipeline->InitPostProcesser(p_window->m_width / 6 * 4, p_window->m_height / 3 * 2, postProcessDefault);
+    //p_window->m_render_pipeline->InitPostProcesser(p_window->m_width, p_window->m_height, postProcessDefault);
 
     p_window->m_render_pipeline->GetPostProcesser()->AddPostProcess(postProcessDefault);
     PostProcess* postProcessInversion = new PostProcess("Inversion", &postProcessInversionShader);
@@ -209,11 +209,11 @@ void Runtime(MainWindow* p_window, UI* p_ui, PhysicSystem* p_physic_system)
                                                   (uint32) window_p->GetWindowWidth(), (uint32) window_p->GetWindowHeight(),
                                                   projection, view, model);*/
 
-        //p_window->m_render_pipeline->SetScenePos(displayW / 6, displayH / 3);
-        //p_window->m_render_pipeline->SetSceneSize(displayW / 6 * 4, displayH / 3 * 2);
+        p_window->m_render_pipeline->SetScenePos(displayW / 6, displayH / 3);
+        p_window->m_render_pipeline->SetSceneSize(displayW / 6 * 4, displayH / 3 * 2);
 
-        p_window->m_render_pipeline->SetScenePos(0, 0);
-        p_window->m_render_pipeline->SetSceneSize(displayW, displayH);
+        //p_window->m_render_pipeline->SetScenePos(0, 0);
+        //p_window->m_render_pipeline->SetSceneSize(displayW, displayH);
 
         if (p_window->m_render_pipeline->m_post_process_on)
         {
@@ -289,8 +289,8 @@ void Runtime(MainWindow* p_window, UI* p_ui, PhysicSystem* p_physic_system)
             p_window->m_render_pipeline->PostProcessFBO();
         }
 
-        //glViewport(displayW / 6, displayH / 3, displayW / 6 * 4, displayH / 3 * 2);
-        glViewport(0, 0, displayW, displayH);
+        glViewport(displayW / 6, displayH / 3, displayW / 6 * 4, displayH / 3 * 2);
+        //glViewport(0, 0, displayW, displayH);
 
         /*window_p->renderPipeline->DeferredRender(shaders, &camera,
                                                  (float32) window_p->GetWindowWidth(), (float32) window_p->GetWindowHeight(),
