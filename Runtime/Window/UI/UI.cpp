@@ -99,6 +99,7 @@ namespace Spore
 		{
 			RenderScenePanel(p_window);
 		}
+		RenderGizmos(p_window);
 		RenderInspectorPanel(p_window);
 		RenderProjectPanel(p_window);
 		RenderConsolePanel(p_window);

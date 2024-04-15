@@ -1,8 +1,5 @@
 #include <Gizmos.hpp>
 
-#include <Headers.hpp>
-
-
 namespace Spore
 {
 	ImGuizmo::OPERATION Gizmos::m_current_gizmo_operation;
