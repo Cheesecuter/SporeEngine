@@ -570,7 +570,6 @@ namespace Spore
 			ImGui::Begin("Scene", &pOpen, windowFlags);
 
 			ImVec2 size = ImGui::GetContentRegionAvail();
-			//std::cout << size.x << " " << size.y << std::endl;
 
 			ImGuizmo::SetDrawlist();
 			RenderGizmos(p_window);
