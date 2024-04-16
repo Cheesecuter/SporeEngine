@@ -212,9 +212,9 @@ void printJsonValue(const JsonValue& jsonValue, int depth = 0)
 	}
 }
 
-int JsonParserTest::runtest(PhysicSystem* p_physic_system)
+int JsonParserTest::runtest(const char* p_path, PhysicSystem* p_physic_system)
 {
-	ifstream file("./Assets/Configs/config.json");
+	ifstream file(p_path);
 	if (!file.is_open())
 	{
 		cout << "Failed to open file" << endl;

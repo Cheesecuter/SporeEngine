@@ -22,6 +22,7 @@
 //void renderScene(const Shader& shader);
 //void renderCube();
 //void renderQuad();
+//void LightProcessKeyboard(Camera_Movement p_direction, float32 p_delta_time);
 //
 //// settings
 //const unsigned int SCR_WIDTH = 800;
@@ -39,6 +40,7 @@
 //
 //// meshes
 //unsigned int planeVAO;
+//glm::vec3 lightPos(-2.0f, 4.0f, -1.0f);
 //
 //int main()
 //{
@@ -121,7 +123,7 @@
 //
 //    // configure depth map FBO
 //    // -----------------------
-//    const unsigned int SHADOW_WIDTH = 1024, SHADOW_HEIGHT = 1024;
+//    const unsigned int SHADOW_WIDTH = 2048, SHADOW_HEIGHT = 2048;
 //    unsigned int depthMapFBO;
 //    glGenFramebuffers(1, &depthMapFBO);
 //    // create depth texture
@@ -153,7 +155,6 @@
 //
 //    // lighting info
 //    // -------------
-//    glm::vec3 lightPos(-2.0f, 4.0f, -1.0f);
 //
 //    // render loop
 //    // -----------
@@ -183,7 +184,7 @@
 //        // --------------------------------------------------------------
 //        glm::mat4 lightProjection, lightView;
 //        glm::mat4 lightSpaceMatrix;
-//        float near_plane = 1.0f, far_plane = 7.5f;
+//        float near_plane = 0.1f, far_plane = 100.0f;
 //        //lightProjection = glm::perspective(glm::radians(45.0f), (GLfloat)SHADOW_WIDTH / (GLfloat)SHADOW_HEIGHT, near_plane, far_plane); // note that if you use a perspective projection matrix you'll have to change the light position as the current light position isn't enough to reflect the whole scene
 //        lightProjection = glm::ortho(-10.0f, 10.0f, -10.0f, 10.0f, near_plane, far_plane);
 //        lightView = glm::lookAt(lightPos, glm::vec3(0.0f), glm::vec3(0.0, 0.0, 1.0));
@@ -210,12 +211,12 @@
 //        // 2. render scene as normal using the generated depth/shadow map  
 //        // --------------------------------------------------------------
 //        shader.Use();
-//        glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float) SCR_WIDTH / (float) SCR_HEIGHT, 0.1f, 100.0f);
+//        glm::mat4 projection = glm::perspective(glm::radians(camera.m_zoom), (float) SCR_WIDTH / (float) SCR_HEIGHT, 0.1f, 100.0f);
 //        glm::mat4 view = camera.GetViewMatrix();
 //        shader.SetMat4("projection", projection);
 //        shader.SetMat4("view", view);
 //        // set light uniforms
-//        shader.SetVec3("viewPos", camera.Position);
+//        shader.SetVec3("viewPos", camera.m_position);
 //        shader.SetVec3("lightPos", lightPos);
 //        shader.SetMat4("lightSpaceMatrix", lightSpaceMatrix);
 //        glActiveTexture(GL_TEXTURE0);
@@ -417,6 +418,19 @@
 //		camera.ProcessKeyboard(UP, deltaTime);
 //	if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS)
 //		camera.ProcessKeyboard(DOWN, deltaTime);
+//
+//    if (glfwGetKey(window, GLFW_KEY_T) == GLFW_PRESS)
+//        LightProcessKeyboard(FORWARD, deltaTime);
+//    if (glfwGetKey(window, GLFW_KEY_G) == GLFW_PRESS)
+//        LightProcessKeyboard(BACKWARD, deltaTime);
+//    if (glfwGetKey(window, GLFW_KEY_F) == GLFW_PRESS)
+//        LightProcessKeyboard(LEFT, deltaTime);
+//    if (glfwGetKey(window, GLFW_KEY_H) == GLFW_PRESS)
+//        LightProcessKeyboard(RIGHT, deltaTime);
+//    if (glfwGetKey(window, GLFW_KEY_Y) == GLFW_PRESS)
+//        LightProcessKeyboard(UP, deltaTime);
+//    if (glfwGetKey(window, GLFW_KEY_R) == GLFW_PRESS)
+//        LightProcessKeyboard(DOWN, deltaTime);
 //}
 //
 //// glfw: whenever the window size changed (by OS or user resize) this callback function executes
@@ -426,6 +440,26 @@
 //    // make sure the viewport matches the new window dimensions; note that width and 
 //    // height will be significantly larger than specified on retina displays.
 //    glViewport(0, 0, width, height);
+//}
+//
+//void LightProcessKeyboard(Camera_Movement p_direction, float32 p_delta_time)
+//{
+//    vec3f m_front(0, 0, -1);
+//    vec3f m_right(1, 0, 0);
+//    vec3f m_up(0, 1, 0);
+//    float32 velocity = 2.5f * p_delta_time;
+//    if (p_direction == FORWARD)
+//        lightPos += m_front * velocity;
+//    if (p_direction == BACKWARD)
+//        lightPos -= m_front * velocity;
+//    if (p_direction == LEFT)
+//        lightPos -= m_right * velocity;
+//    if (p_direction == RIGHT)
+//        lightPos += m_right * velocity;
+//    if (p_direction == UP)
+//        lightPos += m_up * velocity;
+//    if (p_direction == DOWN)
+//        lightPos -= m_up * velocity;
 //}
 //
 //// glfw: whenever the mouse moves, this callback is called

@@ -26,5 +26,5 @@ public:
 	
 	std::vector<Scene*> scenes;
 
-	int runtest(PhysicSystem* p_physic_system);
+	int runtest(const char* p_path, PhysicSystem* p_physic_system);
 };

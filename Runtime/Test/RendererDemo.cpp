@@ -136,7 +136,7 @@ void Runtime(MainWindow* p_window, UI* p_ui, PhysicSystem* p_physic_system)
     Light* light = new Light("obj_light");
     Plane* plane = new Plane("obj_plane");
     scene1->AddObject(light);
-    scene1->AddObject(plane);
+    //scene1->AddObject(plane);
 
     uint32 step = 0;
     p_physic_system->AddScene(scene1);
@@ -149,7 +149,7 @@ void Runtime(MainWindow* p_window, UI* p_ui, PhysicSystem* p_physic_system)
     if (firstjson)
     {
         JsonParserTest jsontest;
-        jsontest.runtest(p_physic_system);
+        jsontest.runtest("./Assets/Configs/config2.json", p_physic_system);
         scenesFromJson = jsontest.scenes;
         firstjson = false;
     }
@@ -226,18 +226,19 @@ void Runtime(MainWindow* p_window, UI* p_ui, PhysicSystem* p_physic_system)
         p_window->m_render_pipeline->SetScenePos(displayW / 6, displayH / 3);
         p_window->m_render_pipeline->SetSceneSize(displayW / 6 * 4, displayH / 3 * 2);
 
-        //p_window->m_render_pipeline->SetScenePos(0, 0);
-        //p_window->m_render_pipeline->SetSceneSize(displayW, displayH);
-
         if (p_window->m_render_pipeline->m_post_process_on)
         {
             p_window->m_render_pipeline->PostProcessRenderToFBO();
         }
 
-        
         if (p_window->m_render_pipeline->m_shadow_map_on)
         {
-            lightProjection = glm::ortho(-10.0f, 10.0f, -10.0f, 10.0f, nearPlane, farPlane);
+            int shadow_width = SHADOW_WIDTH;
+            int shadow_height = SHADOW_HEIGHT;
+            //lightProjection = glm::ortho(-10.0f, 10.0f, -10.0f, 10.0f, nearPlane, farPlane);
+            lightProjection = glm::perspective(glm::radians(45.0f),
+                                               (float32) shadow_width / (float32) shadow_height,
+                                               0.1f, 10000.0f);
             //lightProjection = glm::ortho(glm::radians(45.0f), (float32)SHADOW_WIDTH / (float32)SHADOW_HEIGHT, nearPlane, farPlane);
             lightView = glm::lookAt(light->GetPosition(), vec3f(0.0f), vec3f(0.0f, 1.0f, 0.0f));
             //vec3f cameraPos = camera.Position;
@@ -246,9 +247,9 @@ void Runtime(MainWindow* p_window, UI* p_ui, PhysicSystem* p_physic_system)
             shadowMappingDepthShader.Use();
             shadowMappingDepthShader.SetMat4("lightSpaceMatrix", lightSpaceMatrix);
             //glViewport(0, 0, SHADOW_WIDTH, SHADOW_HEIGHT);
-            glfwGetFramebufferSize(p_window->m_window, &displayW, &displayH);
-            p_window->SetWindowSize(displayW, displayH);
-            glViewport(displayW / 6, displayH / 3, displayW / 6 * 4, displayH / 3 * 2);
+            glfwGetFramebufferSize(p_window->m_window, &shadow_width, &shadow_height);
+            //p_window->SetWindowSize(displayW, displayH);
+            glViewport(0, 0, shadow_width, shadow_height);
             glBindFramebuffer(GL_FRAMEBUFFER, depthMapFBO);
             glClear(GL_DEPTH_BUFFER_BIT);
             glActiveTexture(GL_TEXTURE0);
@@ -257,7 +258,7 @@ void Runtime(MainWindow* p_window, UI* p_ui, PhysicSystem* p_physic_system)
             shaders.push_back(&shadowMappingDepthShader);
             plane->Render(shaders, &floorTexture, model);
             p_window->m_render_pipeline->Render(shaders, &editorCamera,
-                                             (uint32) p_window->GetWindowWidth(), (uint32) p_window->GetWindowHeight(),
+                                             (uint32) shadow_width, (uint32) shadow_height,
                                              projection, view, model);
             glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
