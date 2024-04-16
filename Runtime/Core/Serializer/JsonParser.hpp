@@ -16,6 +16,7 @@
 #include <ShaderComponent.hpp>
 #include <PhysicsComponent.hpp>
 #include <AudioComponent.hpp>
+#include <PhysicSystem.hpp>
 
 using namespace Spore;
 
@@ -25,5 +26,5 @@ public:
 	
 	std::vector<Scene*> scenes;
 
-	int runtest();
+	int runtest(PhysicSystem* p_physic_system);
 };

@@ -212,7 +212,7 @@ void printJsonValue(const JsonValue& jsonValue, int depth = 0)
 	}
 }
 
-int JsonParserTest::runtest()
+int JsonParserTest::runtest(PhysicSystem* p_physic_system)
 {
 	ifstream file("./Assets/Configs/config.json");
 	if (!file.is_open())
@@ -235,6 +235,7 @@ int JsonParserTest::runtest()
 		for (const auto& sceneValue : jsonValue.objectValue.find("scenes")->second.arrayValue)
 		{
 			Scene* scene = new Scene(sceneValue.objectValue.begin()->first);
+			p_physic_system->AddScene(scene);
 
 			for (const auto& objectValue : sceneValue.objectValue.begin()->second.objectValue.find("objects")->second.arrayValue)
 			{
@@ -306,6 +307,8 @@ int JsonParserTest::runtest()
 							rotation.z = propertyValue [1].objectValue.find("rotation")->second.arrayValue [2].numberValue;
 							scale.z = propertyValue [2].objectValue.find("scale")->second.arrayValue [2].numberValue;
 						}
+						ModelObject* modelObject = dynamic_cast<ModelObject*>(object);
+						modelObject->SetModelType(ModelType::CUBE);
 					}
 					else if (componentName == "audio")
 					{
@@ -318,7 +321,19 @@ int JsonParserTest::runtest()
 						string source = componentValue.objectValue.begin()->second.objectValue.find("properties")->second.arrayValue [1].objectValue.find("source")->second.stringValue;
 					}
 				}
-				scene->m_object_mapper.insert(std::make_pair(object->m_identifier, object));
+				const auto& modelValues = objectValue.objectValue.begin()->second.objectValue.find("models")->second.arrayValue;
+				for (const auto& modelValue : modelValues)
+				{
+					const auto& modelIdentifier = modelValue.objectValue.begin()->second.objectValue.find("identifier");
+					const auto& modelPath = modelValue.objectValue.begin()->second.objectValue.find("path")->second.stringValue;
+					Model* model = new Model(modelPath);
+					ModelObject* modelObject = dynamic_cast<ModelObject*>(object);
+					modelObject->AddModel(model);
+				}
+
+				//scene->m_object_mapper.insert(std::make_pair(object->m_identifier, object));
+				scene->AddObject(object);
+				object->AddObserver(scene);
 			}
 			scenes.push_back(scene);
 		}

@@ -138,21 +138,21 @@ void Runtime(MainWindow* p_window, UI* p_ui, PhysicSystem* p_physic_system)
     scene1->AddObject(light);
     scene1->AddObject(plane);
 
+    uint32 step = 0;
+    p_physic_system->AddScene(scene1);
+    p_physic_system->AddScene(scene2);
+    
+    p_window->m_render_pipeline->AddScene(scene1);
+    p_window->m_render_pipeline->AddScene(scene2);
 
     std::vector<Scene*> scenesFromJson;
     if (firstjson)
     {
         JsonParserTest jsontest;
-        jsontest.runtest();
+        jsontest.runtest(p_physic_system);
         scenesFromJson = jsontest.scenes;
         firstjson = false;
     }
-    uint32 step = 0;
-    p_physic_system->AddScene(scene1);
-    
-    p_window->m_render_pipeline->AddScene(scene1);
-    p_window->m_render_pipeline->AddScene(scene2);
-
     for (int i = 0; i < scenesFromJson.size(); i++)
     {
         p_window->m_render_pipeline->AddScene(scenesFromJson [i]);
