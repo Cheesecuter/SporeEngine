@@ -21,14 +21,8 @@ namespace Spore
 
 		std::string m_identifier;
 		std::string m_type = "default";
-		std::map<std::string, Model*> m_model_mapper;
 		uint32 m_VAO, m_VBO, m_EBO;
 		bool m_selected = false;
-
-		void AddModel(Model* p_model);
-		void DeleteModel(Model* p_model);
-		void DeleteModel(std::string p_identifier);
-		void OnModelDeleted(Model* p_model) override;
 		void AddObserver(ObjectObserver* p_observer);
 		void RemoveObserver(ObjectObserver* p_observer);
 		void DeleteObject();

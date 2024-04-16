@@ -96,11 +96,7 @@ namespace Spore
 			Object* object = it.second;
 			if (object->m_type == "default")
 			{
-				/*if (!object->modelMapper.empty())
-				{
-					object->Render(shaders_p, camera_p, scrWidth_p, scrHeight_p,
-								   projection_p, view_p, model_p);
-				}*/
+
 			}
 			else if (object->m_type == "model")
 			{

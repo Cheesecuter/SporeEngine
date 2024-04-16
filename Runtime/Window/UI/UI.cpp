@@ -601,11 +601,15 @@ namespace Spore
 				{
 					ImGui::Text("Type: %s", m_selected_object->m_type.c_str());
 					ImGui::Separator();
-					ImGui::Text("Models");
-					for (std::pair<std::string, Model*> it_model : m_selected_object->m_model_mapper)
+					if (m_selected_object->m_type == "model")
 					{
-						ImGui::Text(it_model.second->m_identifier.c_str());
-						ImGui::Separator();
+						ModelObject* modelObject = dynamic_cast<ModelObject*>(m_selected_object);
+						ImGui::Text("Models");
+						for (std::pair<std::string, Model*> it_model : modelObject->m_model_mapper)
+						{
+							ImGui::Text(it_model.second->m_identifier.c_str());
+							ImGui::Separator();
+						}
 					}
 					const char* layers [] = {
 						"Default",
