@@ -121,6 +121,9 @@
     <Filter Include="源文件\Renderer\GraphicRenderer\Utils">
       <UniqueIdentifier>{5d6e4a37-8a9d-459d-bbfe-8f0dae2d70e0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="源文件\ECS\Utils">
+      <UniqueIdentifier>{4a43d92a-056c-4f65-928a-60e96d6ccef7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Runtime\ECS\Component.cpp">
@@ -773,6 +776,9 @@
     </ClCompile>
     <ClCompile Include="Runtime\Renderer\GraphicRenderer\Utils\ModelObserver.cpp">
       <Filter>源文件\Renderer\GraphicRenderer\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\ECS\Utils\ObjectObserver.cpp">
+      <Filter>源文件\ECS\Utils</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1840,6 +1846,9 @@
     </ClInclude>
     <ClInclude Include="Runtime\Renderer\GraphicRenderer\Utils\ModelObserver.hpp">
       <Filter>源文件\Renderer\GraphicRenderer\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\ECS\Utils\ObjectObserver.hpp">
+      <Filter>源文件\ECS\Utils</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

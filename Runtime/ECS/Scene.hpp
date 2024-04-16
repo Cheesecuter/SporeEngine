@@ -7,6 +7,7 @@
 #include <Plane.hpp>
 #include <PhysicSyetemHeaders.h>
 #include <Layers.hpp>
+#include <ObjectObserver.hpp>
 
 namespace Spore
 {

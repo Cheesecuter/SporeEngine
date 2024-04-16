@@ -8,20 +8,11 @@
 #include <Component.hpp>
 #include <TransformComponent.hpp>
 #include <ShaderComponent.hpp>
+#include <ModelObserver.hpp>
+#include <ObjectObserver.hpp>
 
 namespace Spore
 {
-	class Object;
-
-	class ObjectObserver
-	{
-	public:
-		virtual ~ObjectObserver()
-		{
-		}
-		virtual void OnObjectDeleted(Object* p_object) = 0;
-	};
-
 	class Object : public ModelObserver
 	{
 	public:
