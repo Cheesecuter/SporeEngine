@@ -4,21 +4,11 @@
 #include <Mesh.hpp>
 #include <Shader.hpp>
 #include <Files.hpp>
+#include <ModelObserver.hpp>
 
 namespace Spore
 {
 	uint32 TextureFromFile(const char* p_path, const std::string& p_directory, bool p_gamma = false);
-
-	class Model;
-
-	class ModelObserver
-	{
-	public:
-		virtual ~ModelObserver()
-		{
-		};
-		virtual void OnModelDeleted(Model* p_model) = 0;
-	};
 
 	class Model
 	{

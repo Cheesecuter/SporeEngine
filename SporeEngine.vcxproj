@@ -78,7 +78,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>.\Runtime\Asset;.\Runtime\Core\Base;.\Runtime\Core\Math;.\Runtime\Core\Reflection;.\Runtime\Core\Serializer;.\Runtime\ECS;.\Runtime\ECS\Component;.\Runtime\ECS\Objects;.\Runtime\Input;.\Runtime\Physics;.\Runtime\Physics\Test;.\Runtime\Physics\Utils;.\Runtime\Renderer\AudioRenderer;.\Runtime\Renderer\GraphicRenderer;.\Runtime\Renderer\GraphicRenderer\glad;.\Runtime\Renderer\GraphicRenderer\stb_image;.\Runtime\Scripts;.\Runtime\Utils;.\Runtime\VisualEffect;.\Runtime\Window;.\Runtime\Window\UI;$(IncludePath)</IncludePath>
+    <IncludePath>.\Runtime\Asset;.\Runtime\Core\Base;.\Runtime\Core\Math;.\Runtime\Core\Reflection;.\Runtime\Core\Serializer;.\Runtime\ECS;.\Runtime\ECS\Component;.\Runtime\ECS\Objects;.\Runtime\Input;.\Runtime\Physics;.\Runtime\Physics\Test;.\Runtime\Physics\Utils;.\Runtime\Renderer\AudioRenderer;.\Runtime\Renderer\GraphicRenderer;.\Runtime\Renderer\GraphicRenderer\glad;.\Runtime\Renderer\GraphicRenderer\stb_image;.\Runtime\Renderer\GraphicRenderer\Utils;.\Runtime\Scripts;.\Runtime\Utils;.\Runtime\VisualEffect;.\Runtime\Window;.\Runtime\Window\UI;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -188,6 +188,7 @@
     <ClCompile Include="Runtime\Renderer\GraphicRenderer\SkyBox.cpp" />
     <ClCompile Include="Runtime\Renderer\GraphicRenderer\stb_image\stb_image.cpp" />
     <ClCompile Include="Runtime\Renderer\GraphicRenderer\Texture.cpp" />
+    <ClCompile Include="Runtime\Renderer\GraphicRenderer\Utils\ModelObserver.cpp" />
     <ClCompile Include="Runtime\Scripts\MonoTest.cpp" />
     <ClCompile Include="Runtime\Scripts\MonoTest_2.cpp" />
     <ClCompile Include="Runtime\Test\AddvantageRenderTest.cpp" />
@@ -408,6 +409,7 @@
     <ClInclude Include="Runtime\Renderer\GraphicRenderer\SkyBox.hpp" />
     <ClInclude Include="Runtime\Renderer\GraphicRenderer\stb_image\stb_image.h" />
     <ClInclude Include="Runtime\Renderer\GraphicRenderer\Texture.hpp" />
+    <ClInclude Include="Runtime\Renderer\GraphicRenderer\Utils\ModelObserver.hpp" />
     <ClInclude Include="Runtime\Scripts\MonoTest.h" />
     <ClInclude Include="Runtime\Utils\Gizmos.hpp" />
     <ClInclude Include="Runtime\Utils\SingletonInstance.hpp" />
