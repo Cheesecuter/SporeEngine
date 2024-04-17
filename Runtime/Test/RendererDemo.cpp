@@ -71,7 +71,10 @@ int main()
 
 void Runtime(MainWindow* p_window, UI* p_ui, PhysicSystem* p_physic_system)
 {
-    p_window->m_render_pipeline->InitSceneFramebuffer(p_window->m_width, p_window->m_height);
+    //p_window->m_render_pipeline->InitSceneFramebuffer(p_window->m_width, p_window->m_height);
+
+    p_window->m_render_pipeline->SetScenePos(p_window->m_width / 6, p_window->m_height / 3);
+    p_window->m_render_pipeline->SetSceneSize(p_window->m_width / 6 * 4, p_window->m_height / 3 * 2);
 
     //Shader blendingShader("./Assets/Shaders/BlendingVertex.glsl", "./Assets/Shaders/BlendingFragment.glsl");
     //Shader gBufferShader("./Assets/Shaders/GBufferVertex.glsl", "./Assets/Shaders/GBufferFragment.glsl");
@@ -168,8 +171,7 @@ void Runtime(MainWindow* p_window, UI* p_ui, PhysicSystem* p_physic_system)
     p_window->m_render_pipeline->InitShadowMap();
 
     PostProcess* postProcessDefault = new PostProcess("Default", &postProcessDefaultShader);
-    p_window->m_render_pipeline->InitPostProcesser(p_window->m_width / 6 * 4, p_window->m_height / 3 * 2, postProcessDefault);
-    //p_window->m_render_pipeline->InitPostProcesser(p_window->m_width, p_window->m_height, postProcessDefault);
+    p_window->m_render_pipeline->InitPostProcesser((uint32) p_window->m_render_pipeline->GetSceneSize().x, (uint32) p_window->m_render_pipeline->GetSceneSize().y, postProcessDefault);
 
     p_window->m_render_pipeline->GetPostProcesser()->AddPostProcess(postProcessDefault);
     PostProcess* postProcessInversion = new PostProcess("Inversion", &postProcessInversionShader);
@@ -183,7 +185,8 @@ void Runtime(MainWindow* p_window, UI* p_ui, PhysicSystem* p_physic_system)
     PostProcess* postProcessEdgeDetection = new PostProcess("Edge Detection", &postProcessEdgeDetectionShader);
     p_window->m_render_pipeline->GetPostProcesser()->AddPostProcess(postProcessEdgeDetection);
 
-    //window_p->renderPipeline->InitGBuffer((float32) window_p->GetWindowWidth(), (float32) window_p->GetWindowHeight());
+    p_window->m_render_pipeline->InitGBuffer((uint32) p_window->m_render_pipeline->GetSceneSize().x, (uint32) p_window->m_render_pipeline->GetSceneSize().y);
+
     glfwPollEvents();
     glClearColor(backgroungColor.x, backgroungColor.y, backgroungColor.z, backgroungColor.w);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -210,7 +213,6 @@ void Runtime(MainWindow* p_window, UI* p_ui, PhysicSystem* p_physic_system)
                 ;
                 if (sceneMapper [i]->IsActive(step))
                 {
-                    //++step;
                     ++sceneMapper [i]->step;
 
                     const int cCollisionSteps = 1;
@@ -233,8 +235,11 @@ void Runtime(MainWindow* p_window, UI* p_ui, PhysicSystem* p_physic_system)
                                                   (uint32) window_p->GetWindowWidth(), (uint32) window_p->GetWindowHeight(),
                                                   projection, view, model);*/
 
-        p_window->m_render_pipeline->SetScenePos(displayW / 6, displayH / 3);
-        p_window->m_render_pipeline->SetSceneSize(displayW / 6 * 4, displayH / 3 * 2);
+        /*p_window->m_render_pipeline->SetScenePos(displayW / 6, displayH / 3);
+        p_window->m_render_pipeline->SetSceneSize(displayW / 6 * 4, displayH / 3 * 2);*/
+
+        p_window->m_render_pipeline->SetScenePos(p_window->m_width / 6, p_window->m_height / 3);
+        p_window->m_render_pipeline->SetSceneSize(p_window->m_width / 6 * 4, p_window->m_height / 3 * 2);
 
         if (p_window->m_render_pipeline->m_post_process_on)
         {
@@ -301,11 +306,15 @@ void Runtime(MainWindow* p_window, UI* p_ui, PhysicSystem* p_physic_system)
         }
         
 
-        p_window->m_render_pipeline->Render(shaders, &editorCamera,
+        /*p_window->m_render_pipeline->Render(shaders, &editorCamera,
                                          (uint32) p_window->GetWindowWidth(), (uint32) p_window->GetWindowHeight(),
-                                         projection, view, model);
-        p_window->m_render_pipeline->RenderSkyBox(&editorCamera, projection, view);
-        p_window->m_render_pipeline->RenderGrid(&editorCamera, projection, view);
+                                         projection, view, model);*/
+        //p_window->m_render_pipeline->RenderSkyBox(&editorCamera, projection, view);
+        //p_window->m_render_pipeline->RenderGrid(&editorCamera, projection, view);
+
+        p_window->m_render_pipeline->DeferredRender(shaders, &editorCamera,
+                                                    (uint32) p_window->m_render_pipeline->GetSceneSize().x, (uint32) p_window->m_render_pipeline->GetSceneSize().y,
+                                                    projection, view, model);
         
         if (p_window->m_render_pipeline->m_post_process_on)
         {
@@ -316,11 +325,6 @@ void Runtime(MainWindow* p_window, UI* p_ui, PhysicSystem* p_physic_system)
 
         glViewport(displayW / 6, displayH / 3, displayW / 6 * 4, displayH / 3 * 2);
         //glViewport(0, 0, displayW, displayH);
-
-        /*window_p->renderPipeline->DeferredRender(shaders, &camera,
-                                                 (float32) window_p->GetWindowWidth(), (float32) window_p->GetWindowHeight(),
-                                                 projection, view, model);*/
-
 
         //glfwGetFramebufferSize(window_p->window, &displayW, &displayH);
         glfwGetWindowSize(p_window->m_window, &displayW, &displayH);
