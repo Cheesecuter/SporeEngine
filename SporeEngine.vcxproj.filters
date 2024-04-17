@@ -124,6 +124,15 @@
     <Filter Include="源文件\ECS\Utils">
       <UniqueIdentifier>{4a43d92a-056c-4f65-928a-60e96d6ccef7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="源文件\Sandbox">
+      <UniqueIdentifier>{41f564a1-0ac2-4709-b1cd-0234006449c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Spore">
+      <UniqueIdentifier>{679f26b2-8f85-4097-a45e-ccd24d266ef4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Spore\Utils">
+      <UniqueIdentifier>{3bc1b5a8-fa1e-4b2e-92c5-8ab4a0a49792}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Runtime\ECS\Component.cpp">
@@ -779,6 +788,15 @@
     </ClCompile>
     <ClCompile Include="Runtime\ECS\Utils\ObjectObserver.cpp">
       <Filter>源文件\ECS\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Spore\Spore.cpp">
+      <Filter>源文件\Spore</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Spore\Utils\GraphicRenderer.cpp">
+      <Filter>源文件\Spore\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Spore\Utils\AudioRenderer.cpp">
+      <Filter>源文件\Spore\Utils</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1849,6 +1867,15 @@
     </ClInclude>
     <ClInclude Include="Runtime\ECS\Utils\ObjectObserver.hpp">
       <Filter>源文件\ECS\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\Spore\Spore.hpp">
+      <Filter>源文件\Spore</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\Spore\Utils\GraphicRenderer.hpp">
+      <Filter>源文件\Spore\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\Spore\Utils\AudioRenderer.hpp">
+      <Filter>源文件\Spore\Utils</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
