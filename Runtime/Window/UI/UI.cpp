@@ -385,8 +385,8 @@ namespace Spore
 
 	void UI::RenderHierarchyPanel(MainWindow* p_window)
 	{
-		int32 width = p_window->m_width / 6 > 200 ? p_window->m_width / 6 : 200;
-		int32 height = p_window->m_height / 3 * 2 > 400 ? p_window->m_height / 3 * 2 : 400;
+		int32 width = p_window->m_width / 6;
+		int32 height = p_window->m_height / 3 * 2;
 		int32 height1 = (int32) (ImGui::GetTextLineHeightWithSpacing() + ImGui::GetStyle().FramePadding.y * 0.5f);
 		ImGui::SetNextWindowPos(ImVec2(0.0f, (float32) height1), ImGuiCond_Always);
 		ImGui::SetNextWindowSize(ImVec2((float32) width, (float32) (height - height1)), ImGuiCond_Always);
@@ -437,7 +437,7 @@ namespace Spore
 									std::string name = "cube";
 									ModelObject* object = new ModelObject("obj_" + std::to_string(it_scene->second->m_object_index++) + "_" + name);
 									object->SetModelType(ModelType::CUBE);
-									object->AddModel(AssetsManager::GetInstance().m_model_mapper["cube.fbx"]);
+									object->AddModel(AssetsManager::GetInstance().m_model_mapper ["cube.fbx"]);
 									it_scene->second->AddObject(object);
 									object->AddObserver(it_scene->second);
 								}
@@ -558,8 +558,8 @@ namespace Spore
 
 	void UI::RenderScenePanel(MainWindow* p_window)
 	{
-		int32 width = p_window->m_width / 6 * 4 > 200 ? p_window->m_width / 6 * 4 : 200;
-		int32 height = p_window->m_height / 3 * 2 > 400 ? p_window->m_height / 3 * 2 : 400;
+		int32 width = p_window->m_width / 6 * 4;
+		int32 height = p_window->m_height / 3 * 2;
 		int32 height1 = (int32) (ImGui::GetTextLineHeightWithSpacing() + ImGui::GetStyle().FramePadding.y * 0.5f);
 		ImGui::SetNextWindowPos(ImVec2((float32) (p_window->m_width - p_window->m_width / 6 * 5), (float32) height1), ImGuiCond_Always);
 		ImGui::SetNextWindowSize(ImVec2((float32) width, (float32) (height - height1)), ImGuiCond_Always);
@@ -621,7 +621,7 @@ namespace Spore
 					};
 					static int currentLayer = 0;
 					ImGui::Text("Layer");
-					if (ImGui::BeginCombo("##Layer", layers[currentLayer]))
+					if (ImGui::BeginCombo("##Layer", layers [currentLayer]))
 					{
 						for (uint32 i = 0; i < IM_ARRAYSIZE(layers); i++)
 						{
@@ -678,8 +678,8 @@ namespace Spore
 
 	void UI::RenderProjectPanel(MainWindow* p_window)
 	{
-		int32 width = p_window->m_width / 10 * 6 > 200 ? p_window->m_width / 10 * 6 : 200;
-		int32 height = p_window->m_height / 3 > 300 ? p_window->m_height / 3 : 300;
+		int32 width = p_window->m_width / 10 * 6;
+		int32 height = p_window->m_height / 3;
 		ImGui::SetNextWindowPos(ImVec2(0.0f, (float32) (p_window->m_height - height)), ImGuiCond_Always);
 		ImGui::SetNextWindowSize(ImVec2((float32) width, (float32) height), ImGuiCond_Always);
 		ImGuiWindowFlags windowFlags = 0;
@@ -711,110 +711,81 @@ namespace Spore
 			{
 				audioIdentifiers.push_back(it->first);
 			}
-			if (ImGui::CollapsingHeader("Assets", true))
 			{
-				if (ImGui::CollapsingHeader("Models", true))
+				ImGui::BeginChild("Assets Folders", ImVec2((float32) (width / 5 * 2), (float32) height));
+
+				if (ImGui::CollapsingHeader("Assets", true))
 				{
-					static int32 selected_model = -1;
-					for (uint32 n = 0; n < modelIdentifiers.size(); n++)
+					if (ImGui::CollapsingHeader("Models", true))
 					{
-						if (ImGui::Selectable(modelIdentifiers [n].c_str(), selected_model == n))
+						static int32 selected_model = -1;
+						for (uint32 n = 0; n < modelIdentifiers.size(); n++)
 						{
-							selected_model = n;
-						}
-						if (ImGui::BeginPopupContextItem())
-						{
-							selected_model = n;
-							ImGui::Text("%s", modelIdentifiers [n].c_str());
-							if (ImGui::Button("Create Object"))
+							if (ImGui::Selectable(modelIdentifiers [n].c_str(), selected_model == n))
 							{
-								std::string name = modelIdentifiers [n];
-								Scene* scene = p_window->m_render_pipeline->m_scene_mapper.find("scene_1")->second;
-								//std::shared_ptr<Object> object = std::make_shared<Object>("obj_" + std::to_string(modelCount) + "_" + modelMapper [name]->identifier);
-								//std::shared_ptr<ModelObject> object = std::make_shared<ModelObject>("obj_" + std::to_string(modelCount) + "_" + modelMapper [name]->identifier);
-								ModelObject* object = new ModelObject("obj_" + std::to_string(scene->m_object_index++) + "_" + modelMapper [name]->m_identifier);
-								object->AddModel(modelMapper [name]);
-								object->SetModelType(ModelType::QUAD);
-								scene->AddObject(object);
-								//modelMapper [name]->AddObserver(object);
-								//object->AddObserver(scene);
-								ImGui::CloseCurrentPopup();
+								selected_model = n;
 							}
-							if (ImGui::Button("Remove"))
-							{
-								selected_model = -1;
-								m_selected_object_identifier = "";
-								m_selected_object = nullptr;
-								std::string name = modelIdentifiers [n];
-								Model* modelTemp = AssetsManager::GetInstance().m_model_mapper [name];
-								delete modelTemp;
-								AssetsManager::GetInstance().m_model_mapper.erase(name);
-							}
-							if (ImGui::Button("Close"))
-								ImGui::CloseCurrentPopup();
-							ImGui::EndPopup();
-						}
-					}
-				}
-				if (ImGui::CollapsingHeader("Shaders", true))
-				{
-					static int32 selected_shader = -1;
-					for (uint32 n = 0; n < shaderIdentifiers.size(); n++)
-					{
-						if (ImGui::Selectable(shaderIdentifiers [n].c_str(), selected_shader == n))
-							selected_shader = n;
-						if (ImGui::BeginPopupContextItem())
-						{
-							selected_shader = n;
-							ImGui::Text("%s", shaderIdentifiers [n].c_str());
-							if (ImGui::Button("Refresh"))
-							{
-								//Utils::AssetsManager::GetInstance().shaderMapper [shaderID [n]]->Refresh();
-								ImGui::CloseCurrentPopup();
-							}
-							if (ImGui::Button("Remove"))
-							{
-								Shader* tmp = AssetsManager::GetInstance().m_shader_mapper [shaderIdentifiers [n]];
-								/*if (!tmp->IsEditor())
-								{
-									selected_shader = -1;
-									delete tmp;
-								}
-								else
-								{
-									RendererConsole::GetInstance()->AddError("[error] Editor Shader can not be removed!");
-								}*/
-							}
-							if (ImGui::Button("Close"))
-								ImGui::CloseCurrentPopup();
-							ImGui::EndPopup();
-						}
-						ImGui::SetItemTooltip("Right-click to open popup");
-					}
-				}
-				if (ImGui::CollapsingHeader("Textures", true))
-				{
-					static int32 selected_tex = -1;
-					{
-						for (uint32 n = 0; n < textureIdentifiers.size(); n++)
-						{
-							if (ImGui::Selectable(textureIdentifiers [n].c_str(), selected_tex == n))
-								selected_tex = n;
 							if (ImGui::BeginPopupContextItem())
 							{
-								selected_tex = n;
-								ImGui::Text("%s", textureIdentifiers [n].c_str());
+								selected_model = n;
+								ImGui::Text("%s", modelIdentifiers [n].c_str());
+								if (ImGui::Button("Create Object"))
+								{
+									std::string name = modelIdentifiers [n];
+									Scene* scene = p_window->m_render_pipeline->m_scene_mapper.find("scene_1")->second;
+									//std::shared_ptr<Object> object = std::make_shared<Object>("obj_" + std::to_string(modelCount) + "_" + modelMapper [name]->identifier);
+									//std::shared_ptr<ModelObject> object = std::make_shared<ModelObject>("obj_" + std::to_string(modelCount) + "_" + modelMapper [name]->identifier);
+									ModelObject* object = new ModelObject("obj_" + std::to_string(scene->m_object_index++) + "_" + modelMapper [name]->m_identifier);
+									object->AddModel(modelMapper [name]);
+									object->SetModelType(ModelType::QUAD);
+									scene->AddObject(object);
+									//modelMapper [name]->AddObserver(object);
+									//object->AddObserver(scene);
+									ImGui::CloseCurrentPopup();
+								}
 								if (ImGui::Button("Remove"))
 								{
-									Texture* tmp = AssetsManager::GetInstance().m_texture_mapper [textureIdentifiers [n]];
-									/*if (!tmp->is_editor)
+									selected_model = -1;
+									m_selected_object_identifier = "";
+									m_selected_object = nullptr;
+									std::string name = modelIdentifiers [n];
+									Model* modelTemp = AssetsManager::GetInstance().m_model_mapper [name];
+									delete modelTemp;
+									AssetsManager::GetInstance().m_model_mapper.erase(name);
+								}
+								if (ImGui::Button("Close"))
+									ImGui::CloseCurrentPopup();
+								ImGui::EndPopup();
+							}
+						}
+					}
+					if (ImGui::CollapsingHeader("Shaders", true))
+					{
+						static int32 selected_shader = -1;
+						for (uint32 n = 0; n < shaderIdentifiers.size(); n++)
+						{
+							if (ImGui::Selectable(shaderIdentifiers [n].c_str(), selected_shader == n))
+								selected_shader = n;
+							if (ImGui::BeginPopupContextItem())
+							{
+								selected_shader = n;
+								ImGui::Text("%s", shaderIdentifiers [n].c_str());
+								if (ImGui::Button("Refresh"))
+								{
+									//Utils::AssetsManager::GetInstance().shaderMapper [shaderID [n]]->Refresh();
+									ImGui::CloseCurrentPopup();
+								}
+								if (ImGui::Button("Remove"))
+								{
+									Shader* tmp = AssetsManager::GetInstance().m_shader_mapper [shaderIdentifiers [n]];
+									/*if (!tmp->IsEditor())
 									{
-										selected_tex = -1;
+										selected_shader = -1;
 										delete tmp;
 									}
 									else
 									{
-										RendererConsole::GetInstance()->AddError("[error] Editor Texture can not be deleted!");
+										RendererConsole::GetInstance()->AddError("[error] Editor Shader can not be removed!");
 									}*/
 								}
 								if (ImGui::Button("Close"))
@@ -824,42 +795,91 @@ namespace Spore
 							ImGui::SetItemTooltip("Right-click to open popup");
 						}
 					}
-				}
-				if (ImGui::CollapsingHeader("Audios", true))
-				{
-					static int32 selected_audio = -1;
-					for (uint32 n = 0; n < audioIdentifiers.size(); n++)
+					if (ImGui::CollapsingHeader("Textures", true))
 					{
-						if (ImGui::Selectable(audioIdentifiers [n].c_str(), selected_audio == n))
+						static int32 selected_tex = -1;
 						{
-							selected_audio = n;
+							for (uint32 n = 0; n < textureIdentifiers.size(); n++)
+							{
+								if (ImGui::Selectable(textureIdentifiers [n].c_str(), selected_tex == n))
+									selected_tex = n;
+								if (ImGui::BeginPopupContextItem())
+								{
+									selected_tex = n;
+									ImGui::Text("%s", textureIdentifiers [n].c_str());
+									if (ImGui::Button("Remove"))
+									{
+										Texture* tmp = AssetsManager::GetInstance().m_texture_mapper [textureIdentifiers [n]];
+										/*if (!tmp->is_editor)
+										{
+											selected_tex = -1;
+											delete tmp;
+										}
+										else
+										{
+											RendererConsole::GetInstance()->AddError("[error] Editor Texture can not be deleted!");
+										}*/
+									}
+									if (ImGui::Button("Close"))
+										ImGui::CloseCurrentPopup();
+									ImGui::EndPopup();
+								}
+								ImGui::SetItemTooltip("Right-click to open popup");
+							}
 						}
-						if (ImGui::BeginPopupContextItem())
+					}
+					if (ImGui::CollapsingHeader("Audios", true))
+					{
+						static int32 selected_audio = -1;
+						for (uint32 n = 0; n < audioIdentifiers.size(); n++)
 						{
-							selected_audio = n;
-							ImGui::Text("%s", audioIdentifiers [n].c_str());
-							if (ImGui::Button("Copy"))
+							if (ImGui::Selectable(audioIdentifiers [n].c_str(), selected_audio == n))
 							{
-								std::string name = audioIdentifiers [n];
-								Audio* audio = AssetsManager::GetInstance().m_audio_mapper [name];
-								AssetsManager::GetInstance().m_selected_audio = audio;
-								ImGui::CloseCurrentPopup();
+								selected_audio = n;
 							}
-							if (ImGui::Button("Remove"))
+							if (ImGui::BeginDragDropSource())
 							{
-								selected_audio = -1;
-								AssetsManager::GetInstance().m_selected_audio = nullptr;
-								std::string name = audioIdentifiers [n];
-								Audio* audioTemp = AssetsManager::GetInstance().m_audio_mapper [name];
-								delete audioTemp;
-								AssetsManager::GetInstance().m_audio_mapper.erase(name);
+								selected_audio = n;
+								const char* name = audioIdentifiers [n].c_str();
+								ImGui::SetDragDropPayload("AudioSource", name, strlen(name) + 1);
+								ImGui::Text("%s", name);
+								ImGui::EndDragDropSource();
 							}
-							if (ImGui::Button("Close"))
-								ImGui::CloseCurrentPopup();
-							ImGui::EndPopup();
+							if (ImGui::BeginPopupContextItem())
+							{
+								selected_audio = n;
+								ImGui::Text("%s", audioIdentifiers [n].c_str());
+								if (ImGui::Button("Copy"))
+								{
+									std::string name = audioIdentifiers [n];
+									Audio* audio = AssetsManager::GetInstance().m_audio_mapper [name];
+									AssetsManager::GetInstance().m_selected_audio = audio;
+									ImGui::CloseCurrentPopup();
+								}
+								if (ImGui::Button("Remove"))
+								{
+									selected_audio = -1;
+									AssetsManager::GetInstance().m_selected_audio = nullptr;
+									std::string name = audioIdentifiers [n];
+									Audio* audioTemp = AssetsManager::GetInstance().m_audio_mapper [name];
+									delete audioTemp;
+									AssetsManager::GetInstance().m_audio_mapper.erase(name);
+								}
+								if (ImGui::Button("Close"))
+									ImGui::CloseCurrentPopup();
+								ImGui::EndPopup();
+							}
 						}
 					}
 				}
+
+				ImGui::EndChild();
+			}
+			ImGui::SameLine();
+			{
+				ImGui::BeginChild("Assets Details", ImVec2((float32) (width / 5 * 3), (float32) height));
+
+				ImGui::EndChild();
 			}
 			ImGui::End();
 		}
@@ -867,8 +887,8 @@ namespace Spore
 
 	void UI::RenderConsolePanel(MainWindow* p_window)
 	{
-		int32 width = p_window->m_width / 10 * 4 > 200 ? p_window->m_width / 10 * 4 : 200;
-		int32 height = p_window->m_height / 3 > 300 ? p_window->m_height / 3 : 300;
+		int32 width = p_window->m_width / 10 * 4;
+		int32 height = p_window->m_height / 3;
 		ImGui::SetNextWindowPos(ImVec2((float32) (p_window->m_width - width), (float32) (p_window->m_height - height)), ImGuiCond_Always);
 		ImGui::SetNextWindowSize(ImVec2((float32) width, (float32) height), ImGuiCond_Always);
 		ImGuiWindowFlags windowFlags = 0;

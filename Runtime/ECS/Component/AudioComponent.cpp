@@ -19,6 +19,20 @@ namespace Spore
 	{
 		if (ImGui::CollapsingHeader(m_name.c_str(), true))
 		{
+			ImGui::Text("Audio Source");
+			if (ImGui::BeginDragDropTarget())
+			{
+				if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("AudioSource"))
+				{
+					const char* audioName = static_cast<const char*>(payload->Data);
+					Audio* audioTemp = AssetsManager::GetInstance().m_audio_mapper [audioName];
+					if (audioTemp != nullptr)
+					{
+						AddAudio(audioTemp);
+					}
+					ImGui::EndDragDropTarget();
+				}
+			}
 			if (ImGui::Button("Add Audio"))
 			{
 				Audio* audioTemp = AssetsManager::GetInstance().m_selected_audio;
