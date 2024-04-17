@@ -234,7 +234,8 @@ int JsonParserTest::runtest(const char* p_path, PhysicSystem* p_physic_system)
 		//vector<Scene*> scenes;
 		for (const auto& sceneValue : jsonValue.objectValue.find("scenes")->second.arrayValue)
 		{
-			Scene* scene = new Scene(sceneValue.objectValue.begin()->first);
+			std::string sceneIdentifier = sceneValue.objectValue.begin()->second.objectValue.find("identifier")->second.stringValue;
+			Scene* scene = new Scene(sceneIdentifier);
 			p_physic_system->AddScene(scene);
 
 			for (const auto& objectValue : sceneValue.objectValue.begin()->second.objectValue.find("objects")->second.arrayValue)
@@ -242,7 +243,7 @@ int JsonParserTest::runtest(const char* p_path, PhysicSystem* p_physic_system)
 				Object* object = nullptr;
 				if (objectValue.objectValue.begin()->second.objectValue.find("type")->second.stringValue == "model")
 				{
-					string identifier = objectValue.objectValue.begin()->first;
+					std::string identifier = objectValue.objectValue.begin()->second.objectValue.find("identifier")->second.stringValue;
 					object = new ModelObject(identifier);
 				}
 				else if (objectValue.objectValue.begin()->second.objectValue.find("type")->second.stringValue == "light")
@@ -250,90 +251,131 @@ int JsonParserTest::runtest(const char* p_path, PhysicSystem* p_physic_system)
 					string identifier = objectValue.objectValue.begin()->first;
 					object = new Light(identifier);
 				}
-				const auto& components = objectValue.objectValue.begin()->second.objectValue.find("components")->second.arrayValue;
-				for (const auto& componentValue : components)
-				{
-					const auto& componentName = componentValue.objectValue.begin()->first;
-					std::unordered_map<std::string, Component*> components = object->GetComponents();
-					if (componentName == "transform")
-					{
-						TransformComponent* transformComponent = dynamic_cast<TransformComponent*>(components.find("Transform")->second);
-						vec3f position(0.0f), rotation(0.0f), scale(1.0f);
-						const auto& properties = componentValue.objectValue.begin()->second.objectValue.find("properties")->second.arrayValue [0].objectValue;
-						for (const auto& propertyi : properties)
-						{
-							const auto& propertyName = propertyi.first;
-							const auto& propertyValue = propertyi.second.arrayValue;
-							if (propertyName == "transform")
-							{
-								position.x = propertyValue [0].objectValue.find("position")->second.arrayValue [0].numberValue;
-								rotation.x = propertyValue [1].objectValue.find("rotation")->second.arrayValue [0].numberValue;
-								scale.x = propertyValue [2].objectValue.find("scale")->second.arrayValue [0].numberValue;
-								position.y = propertyValue [0].objectValue.find("position")->second.arrayValue [1].numberValue;
-								rotation.y = propertyValue [1].objectValue.find("rotation")->second.arrayValue [1].numberValue;
-								scale.y = propertyValue [2].objectValue.find("scale")->second.arrayValue [1].numberValue;
-								position.z = propertyValue [0].objectValue.find("position")->second.arrayValue [2].numberValue;
-								rotation.z = propertyValue [1].objectValue.find("rotation")->second.arrayValue [2].numberValue;
-								scale.z = propertyValue [2].objectValue.find("scale")->second.arrayValue [2].numberValue;
-							}
-						}
-						transformComponent->SetPosition(position);
-						transformComponent->SetRotation(rotation);
-						transformComponent->SetScale(scale);
-					}
-					else if (componentName == "shader")
-					{
-						const auto& properties = componentValue.objectValue.begin()->second.objectValue.find("properties")->second.arrayValue [0].objectValue.find("shaders")->second.arrayValue;
-						for (const auto& shaderValue : properties)
-						{
-							string identifier = shaderValue.objectValue.begin()->first;
-						}
-					}
-					else if (componentName == "physics")
-					{
-						const auto& properties = componentValue.objectValue.begin()->second.objectValue.find("properties")->second.arrayValue [0].objectValue;
-						vec3f position, rotation, scale;
-						for (const auto& propertyi : properties)
-						{
-							const auto& propertyName = propertyi.first;
-							const auto& propertyValue = propertyi.second.arrayValue;
-							position.x = propertyValue [0].objectValue.find("position")->second.arrayValue [0].numberValue;
-							rotation.x = propertyValue [1].objectValue.find("rotation")->second.arrayValue [0].numberValue;
-							scale.x = propertyValue [2].objectValue.find("scale")->second.arrayValue [0].numberValue;
-							position.y = propertyValue [0].objectValue.find("position")->second.arrayValue [1].numberValue;
-							rotation.y = propertyValue [1].objectValue.find("rotation")->second.arrayValue [1].numberValue;
-							scale.y = propertyValue [2].objectValue.find("scale")->second.arrayValue [1].numberValue;
-							position.z = propertyValue [0].objectValue.find("position")->second.arrayValue [2].numberValue;
-							rotation.z = propertyValue [1].objectValue.find("rotation")->second.arrayValue [2].numberValue;
-							scale.z = propertyValue [2].objectValue.find("scale")->second.arrayValue [2].numberValue;
-						}
-						ModelObject* modelObject = dynamic_cast<ModelObject*>(object);
-						modelObject->SetModelType(ModelType::CUBE);
-					}
-					else if (componentName == "audio")
-					{
-						const auto& properties = componentValue.objectValue.begin()->second.objectValue.find("properties")->second.arrayValue [0].objectValue;
-						for (const auto& propertyi : properties)
-						{
+				const auto& componentValue = objectValue.objectValue.begin()->second.objectValue.find("components")->second.objectValue;
 
-						}
-						string buffer = componentValue.objectValue.begin()->second.objectValue.find("properties")->second.arrayValue [0].objectValue.find("buffer")->second.stringValue;
-						string source = componentValue.objectValue.begin()->second.objectValue.find("properties")->second.arrayValue [1].objectValue.find("source")->second.stringValue;
-					}
-				}
-				const auto& modelValues = objectValue.objectValue.begin()->second.objectValue.find("models")->second.arrayValue;
-				for (const auto& modelValue : modelValues)
+				std::unordered_map<std::string, Component*> components = object->GetComponents();
+
+				// Transform component
+				const auto& transformComponentValue = componentValue.find("transform");
+				TransformComponent* transformComponent = dynamic_cast<TransformComponent*>(components.find("Transform")->second);
+				vec3f position(0.0f), rotation(0.0f), scale(1.0f);
+				const auto& transformComponentProperties = transformComponentValue->second.objectValue.find("properties");
+
+				const auto& transformTransformProperty = transformComponentProperties->second.objectValue.find("transform");
+
+				const auto& positionTransformTransformProperty = transformTransformProperty->second.objectValue.find("position")->second.arrayValue;
+				position.x = positionTransformTransformProperty [0].numberValue;
+				position.y = positionTransformTransformProperty [1].numberValue;
+				position.z = positionTransformTransformProperty [2].numberValue;
+				const auto& rotationTransformTransformProperty = transformTransformProperty->second.objectValue.find("rotation")->second.arrayValue;
+				rotation.x = rotationTransformTransformProperty [0].numberValue;
+				rotation.y = rotationTransformTransformProperty [1].numberValue;
+				rotation.z = rotationTransformTransformProperty [2].numberValue;
+				const auto& scaleTransformTransformProperty = transformTransformProperty->second.objectValue.find("scale")->second.arrayValue;
+				scale.x = scaleTransformTransformProperty [0].numberValue;
+				scale.y = scaleTransformTransformProperty [1].numberValue;
+				scale.z = scaleTransformTransformProperty [2].numberValue;
+				
+				transformComponent->SetPosition(position);
+				transformComponent->SetRotation(rotation);
+				transformComponent->SetScale(scale);
+
+				// Shader component
+				const auto& shaderComponentValue = componentValue.find("shader");
+				const auto& shaderComponentProperties = shaderComponentValue->second.objectValue.find("properties");
+
+				const auto& shaderProperty = shaderComponentProperties->second.objectValue.find("shaders");
+				//std::string shaderIdentifier = shaderProperty->second.objectValue.find("identifier")->second.stringValue;
+
+				// Physics component
+				const auto& physicsComponentValue = componentValue.find("physics");
+				PhysicsComponent* physicsComponent = dynamic_cast<PhysicsComponent*>(components.find("Physics")->second);
+				ModelObject* modelObject = dynamic_cast<ModelObject*>(object);
+				const auto& physicsComponentProperties = physicsComponentValue->second.objectValue.find("properties");
+
+				const auto& physicsTransformProperty = physicsComponentProperties->second.objectValue.find("transform");
+
+				const auto& positionPhysicsTransformProperty = physicsTransformProperty->second.objectValue.find("position")->second.arrayValue;
+				position.x = positionPhysicsTransformProperty [0].numberValue;
+				position.y = positionPhysicsTransformProperty [1].numberValue;
+				position.z = positionPhysicsTransformProperty [2].numberValue;
+				const auto& rotationPhysicsTransformProperty = physicsTransformProperty->second.objectValue.find("rotation")->second.arrayValue;
+				rotation.x = rotationPhysicsTransformProperty [0].numberValue;
+				rotation.y = rotationPhysicsTransformProperty [1].numberValue;
+				rotation.z = rotationPhysicsTransformProperty [2].numberValue;
+				const auto& scalePhysicsTransformProperty = physicsTransformProperty->second.objectValue.find("scale")->second.arrayValue;
+				scale.x = scalePhysicsTransformProperty [0].numberValue;
+				scale.y = scalePhysicsTransformProperty [1].numberValue;
+				scale.z = scalePhysicsTransformProperty [2].numberValue;
+
+				const auto& physicsModelShapeProperty = physicsComponentProperties->second.objectValue.find("model_type")->second.stringValue;
+				JPH::RefConst<JPH::Shape> modelShape;
+				if (physicsModelShapeProperty == "CUBE")
 				{
-					const auto& modelIdentifier = modelValue.objectValue.begin()->second.objectValue.find("identifier");
-					const auto& modelPath = modelValue.objectValue.begin()->second.objectValue.find("path")->second.stringValue;
-					Model* model = new Model(modelPath);
-					ModelObject* modelObject = dynamic_cast<ModelObject*>(object);
-					modelObject->AddModel(model);
+					modelObject->SetModelType(ModelType::CUBE);
+				}
+				else if (physicsModelShapeProperty == "SPHERE")
+				{
+					modelObject->SetModelType(ModelType::SPHERE);
+				}
+				else if (physicsModelShapeProperty == "CAPSULE")
+				{
+					modelObject->SetModelType(ModelType::CAPSULE);
+				}
+				else if (physicsModelShapeProperty == "CYLINDER")
+				{
+					modelObject->SetModelType(ModelType::CYLINDER);
+				}
+				else if (physicsModelShapeProperty == "PLANE")
+				{
+					modelObject->SetModelType(ModelType::PLANE);
+				}
+				else if (physicsModelShapeProperty == "QUAD")
+				{
+					modelObject->SetModelType(ModelType::QUAD);
 				}
 
-				//scene->m_object_mapper.insert(std::make_pair(object->m_identifier, object));
+				const auto& physicsMotionTypeProperty = physicsComponentProperties->second.objectValue.find("motion_type")->second.stringValue;
+				JPH::EMotionType motionType = JPH::EMotionType::Dynamic;
+				if (physicsMotionTypeProperty == "Dynamic")
+				{
+					motionType = JPH::EMotionType::Dynamic;
+				}
+				else if (physicsMotionTypeProperty == "Kinematic")
+				{
+					motionType = JPH::EMotionType::Kinematic;
+				}
+				else if (physicsMotionTypeProperty == "Static")
+				{
+					motionType = JPH::EMotionType::Static;
+				}
+
+				const auto& physicsActivationProperty = physicsComponentProperties->second.objectValue.find("activation")->second.stringValue;
+				JPH::EActivation activation = JPH::EActivation::DontActivate;
+				if (physicsActivationProperty == "DontActivate")
+				{
+					activation = JPH::EActivation::DontActivate;
+				}
+				else if (physicsActivationProperty == "Activate")
+				{
+					activation = JPH::EActivation::Activate;
+				}
+
+				// Audio component
+				const auto& audioComponentValue = componentValue.find("audio");
+				const auto& audioComponentProperties = audioComponentValue->second.objectValue.find("properties");
+
+
+				const auto& modelsValue = objectValue.objectValue.begin()->second.objectValue.find("models")->second.objectValue;
+				const auto& modelvalue = modelsValue.find("model")->second.objectValue;
+				const auto& modelIdentifier = modelvalue.find("identifier")->second.stringValue;
+				const auto& modelPath = modelvalue.find("path")->second.stringValue;
+				Model* model = new Model(modelPath);
+				modelObject->AddModel(model);
+
 				scene->AddObject(object);
-				object->AddObserver(scene);
+				physicsComponent->GetBodyInterface()->SetMotionType(physicsComponent->GetBody()->GetID(), motionType, activation);
+				//object->AddObserver(scene);
 			}
 			scenes.push_back(scene);
 		}
