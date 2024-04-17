@@ -2,8 +2,8 @@
     "format_version": "0.0.1",
     "scenes": [
         {
-            "scene_4": {
-                "identifier": "scene_4",
+            "scene_1": {
+                "identifier": "scene_1",
                 "objects": [
                     {
                         "floor0": {
@@ -54,21 +54,14 @@
                                 {
                                     "physics": {
                                         "name": "Physics",
-                                        "properties": [
-                                            {
-                                                "transform": [
-                                                    {
-                                                        "position": [ 0.0, 0.0, 0.0 ]
-                                                    },
-                                                    {
-                                                        "rotation": [ 0.0, 0.0, 0.0 ]
-                                                    },
-                                                    {
-                                                        "scale": [ 1.0, 1.0, 1.0 ]
-                                                    }
-                                                ]
-                                            }
-                                        ]
+                                        "properties": {
+                                            "transform": {
+                                                "position": [ 0.0, 0.0, 0.0 ],
+                                                "rotation": [ 0.0, 0.0, 0.0 ],
+                                                "scale": [ 1.0, 1.0, 1.0]
+                                            },
+                                            "motion_type": "Static"
+                                        }
                                     }
                                 },
                                 {

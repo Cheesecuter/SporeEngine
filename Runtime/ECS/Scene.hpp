@@ -23,6 +23,7 @@ namespace Spore
 		int m_object_index = 0;
 		bool m_flag_run = false;
 		bool m_flag_stop = true;
+		double step = 0;
 
 		JPH::JobSystem* m_job_system = nullptr;
 		JPH::PhysicsSystem* m_physics_system = nullptr;

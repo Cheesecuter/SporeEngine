@@ -131,7 +131,7 @@ void Runtime(MainWindow* p_window, UI* p_ui, PhysicSystem* p_physic_system)
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
     std::vector<Shader*> shaders;
-    Scene* scene1 = new Scene("scene_1");
+    Scene* scene1 = new Scene("scene_11");
     Scene* scene2 = new Scene("scene_2");
     Light* light = new Light("obj_light");
     Plane* plane = new Plane("obj_plane");
@@ -145,17 +145,22 @@ void Runtime(MainWindow* p_window, UI* p_ui, PhysicSystem* p_physic_system)
     p_window->m_render_pipeline->AddScene(scene1);
     p_window->m_render_pipeline->AddScene(scene2);
 
+    std::vector<Scene*> sceneMapper;
+    sceneMapper.push_back(scene1);
+    sceneMapper.push_back(scene2);
+
     std::vector<Scene*> scenesFromJson;
     if (firstjson)
     {
         JsonParserTest jsontest;
-        jsontest.runtest("./Assets/Configs/config2.json", p_physic_system);
+        jsontest.runtest("./Assets/Configs/config3.json", p_physic_system);
         scenesFromJson = jsontest.scenes;
         firstjson = false;
     }
     for (int i = 0; i < scenesFromJson.size(); i++)
     {
         p_window->m_render_pipeline->AddScene(scenesFromJson [i]);
+        sceneMapper.push_back(scenesFromJson [i]);
     }
 
     p_window->m_render_pipeline->InitGrid();
@@ -198,14 +203,19 @@ void Runtime(MainWindow* p_window, UI* p_ui, PhysicSystem* p_physic_system)
 
         Keyboard::GetInstance().processInput(p_window, editorCamera, deltaTime);
 
-        if (scene1->m_flag_run)
+        for (int i = 0; i < sceneMapper.size(); i++)
         {
-            if (scene1->IsActive(step))
+            if (sceneMapper[i]->m_flag_run)
             {
-                ++step;
+                ;
+                if (sceneMapper [i]->IsActive(step))
+                {
+                    //++step;
+                    ++sceneMapper [i]->step;
 
-                const int cCollisionSteps = 1;
-                scene1->m_physics_system->Update(1.0f / 60.0f, cCollisionSteps, scene1->m_temp_allocator, scene1->m_job_system);
+                    const int cCollisionSteps = 1;
+                    sceneMapper [i]->m_physics_system->Update(1.0f / 60.0f, cCollisionSteps, sceneMapper [i]->m_temp_allocator, sceneMapper [i]->m_job_system);
+                }
             }
         }
 
