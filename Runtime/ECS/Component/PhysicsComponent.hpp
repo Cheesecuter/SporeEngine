@@ -19,6 +19,7 @@ namespace Spore
 		void CreateAndAddBody();
 		JPH::Body* GetBody();
 		void SetBodyInterface(JPH::BodyInterface* p_body_interface);
+		JPH::BodyInterface* GetBodyInterface();
 		void SetPosition(const vec3f& p_potision);
 		void SetRotation(const vec3f& p_rotation);
 		//void SetScale(const vec3f& p_scale);

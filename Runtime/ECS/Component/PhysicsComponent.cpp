@@ -93,6 +93,11 @@ namespace Spore
 		m_body_interface = p_body_interface;
 	}
 
+	JPH::BodyInterface* PhysicsComponent::GetBodyInterface()
+	{
+		return m_body_interface;
+	}
+
 	void PhysicsComponent::SetPosition(const vec3f& p_potision)
 	{
 		m_body_interface->SetPosition(m_body->GetID(), JPHVec3(p_potision), JPH::EActivation::DontActivate);
