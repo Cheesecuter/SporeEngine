@@ -18,6 +18,7 @@ namespace Spore
 		void Terminate();
 		void SetSource(uint32 p_source);
 		uint32 GetSource();
+		void SetListenerPosition(vec3f p_pos);
 
 	protected:
 

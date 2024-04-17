@@ -31,4 +31,9 @@ namespace Spore
 	{
 		return m_source;
 	}
+
+	void AudioSystem::SetListenerPosition(vec3f p_pos)
+	{
+		alListener3f(AL_POSITION, p_pos.x, p_pos.y, p_pos.z);
+	}
 }
