@@ -28,28 +28,6 @@ namespace Spore
 		return result;
 	}
 
-	unsigned char* Audio::Serialize() const
-	{
-		size_t totalSize = m_identifier.size() + m_type.size() + m_path.size();
-		unsigned char* buffer = new unsigned char [totalSize];
-		unsigned char* ptr = buffer;
-		std::string str = m_identifier + "|" + m_type + "|" + m_path;
-		memcpy(ptr, str.c_str(), str.size());
-		return buffer;
-	}
-
-	Audio* Audio::Deserialize(const unsigned char* p_buffer, size_t p_buffer_size)
-	{
-		Audio* audio = nullptr;
-		const unsigned char* ptr = p_buffer;
-		audio->m_identifier = ReadBuffer(ptr);
-		++ptr;
-		audio->m_type = ReadBuffer(ptr);
-		++ptr;
-		audio->m_path = ReadBuffer(ptr);
-		return audio;
-	}
-
 	std::string Audio::GetIdentifier()
 	{
 		return m_identifier;
