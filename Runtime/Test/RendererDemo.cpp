@@ -153,7 +153,7 @@ void Runtime(MainWindow* p_window, UI* p_ui, PhysicSystem* p_physic_system)
     if (firstjson)
     {
         JsonParserTest jsontest;
-        jsontest.runtest("./Assets/Configs/config3.json", p_physic_system);
+        jsontest.runtest("./Assets/Configs/config1.json", p_physic_system);
         scenesFromJson = jsontest.scenes;
         firstjson = false;
     }
