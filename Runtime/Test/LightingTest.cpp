@@ -217,12 +217,12 @@
 //
 //		// active shader
 //		lightingShader.Use();
-//		glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float) SCR_WIDTH / (float) SCR_HEIGHT, 0.1f, 100.0f);
+//		glm::mat4 projection = glm::perspective(glm::radians(camera.m_zoom), (float) SCR_WIDTH / (float) SCR_HEIGHT, 0.1f, 100.0f);
 //		glm::mat4 view = camera.GetViewMatrix();
 //		lightingShader.SetMat4("projection", projection);
 //		lightingShader.SetMat4("view", view);
 //		// set light uniforms
-//		lightingShader.SetVec3("viewPos", camera.Position);
+//		lightingShader.SetVec3("viewPos", camera.m_position);
 //		lightingShader.SetVec3("lightPos", lightPos);
 //		lightingShader.SetInt("blinn", blinn);
 //		// floor

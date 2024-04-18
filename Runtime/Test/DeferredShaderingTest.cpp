@@ -470,7 +470,7 @@
 //    // -----------------------------------------------------------------
 //        glBindFramebuffer(GL_FRAMEBUFFER, gBuffer);
 //        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-//        glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float) SCR_WIDTH / (float) SCR_HEIGHT, 0.1f, 100.0f);
+//        glm::mat4 projection = glm::perspective(glm::radians(camera.m_zoom), (float) SCR_WIDTH / (float) SCR_HEIGHT, 0.1f, 100.0f);
 //        glm::mat4 view = camera.GetViewMatrix();
 //        glm::mat4 model = glm::mat4(1.0f);
 //        shaderGeometryPass.Use();
@@ -512,7 +512,7 @@
 //            float radius = (-linear + std::sqrt(linear * linear - 4 * quadratic * (constant - (256.0f / 5.0f) * maxBrightness))) / (2.0f * quadratic);
 //            shaderLightingPass.SetFloat("lights[" + std::to_string(i) + "].Radius", radius);
 //        }
-//        shaderLightingPass.SetVec3("viewPos", camera.Position);
+//        shaderLightingPass.SetVec3("viewPos", camera.m_position);
 //        // finally render quad
 //        renderQuad();
 //
@@ -528,7 +528,7 @@
 //
 //        // 3. render lights on top of scene
 //        // --------------------------------
-//        shaderLightBox.Use();
+//        /*shaderLightBox.Use();
 //        shaderLightBox.SetMat4("projection", projection);
 //        shaderLightBox.SetMat4("view", view);
 //        for (unsigned int i = 0; i < lightPositions.size(); i++)
@@ -539,7 +539,7 @@
 //            shaderLightBox.SetMat4("model", model);
 //            shaderLightBox.SetVec3("lightColor", lightColors [i]);
 //            renderCube();
-//        }
+//        }*/
 //
 //        /*int displayW, displayH;
 //        glfwGetFramebufferSize(window, &displayW, &displayH);

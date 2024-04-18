@@ -798,6 +798,9 @@
     <ClCompile Include="Runtime\Spore\Utils\AudioRenderer.cpp">
       <Filter>源文件\Spore\Utils</Filter>
     </ClCompile>
+    <ClCompile Include="Runtime\ECS\Component\LightComponent.cpp">
+      <Filter>源文件\ECS\Component</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Runtime\Core\Base\Types.hpp">
@@ -1876,6 +1879,9 @@
     </ClInclude>
     <ClInclude Include="Runtime\Spore\Utils\AudioRenderer.hpp">
       <Filter>源文件\Spore\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\ECS\Component\LightComponent.hpp">
+      <Filter>源文件\ECS\Component</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -20,6 +20,8 @@ namespace Spore
 		void RenderToFBO();
 		void RenderFBO();
 
+		uint32 getquadvao();
+
 	protected:
 
 	private:

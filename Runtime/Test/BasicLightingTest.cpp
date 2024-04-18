@@ -131,9 +131,9 @@
 //        return -1;
 //    }
 //
-//    ImGui::CreateContext();
+//    /*ImGui::CreateContext();
 //    ImGui_ImplGlfw_InitForOpenGL(window, true);
-//    ImGui_ImplOpenGL3_Init("#version 130");
+//    ImGui_ImplOpenGL3_Init("#version 130");*/
 //
 //    // configure global opengl state
 //    // -----------------------------
@@ -183,7 +183,7 @@
 //        // -----
 //        processInput(window);
 //
-//        glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);
+//        //glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);
 //
 //        // render
 //        // ------
@@ -192,9 +192,9 @@
 //
 //        render(lightingShader, lightCubeShader, diffuseMap, specularMap);
 //
-//        glBindFramebuffer(GL_FRAMEBUFFER, 0);
+//        //glBindFramebuffer(GL_FRAMEBUFFER, 0);
 //
-//        ImGui_ImplOpenGL3_NewFrame();
+//        /*ImGui_ImplOpenGL3_NewFrame();
 //        ImGui_ImplGlfw_NewFrame();
 //        ImGui::NewFrame();
 //
@@ -203,7 +203,7 @@
 //        ImGui::End();
 //
 //        ImGui::Render();
-//        ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+//        ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());*/
 //
 //        // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
 //        // -------------------------------------------------------------------------------
@@ -211,9 +211,9 @@
 //        glfwPollEvents();
 //    }
 //
-//    ImGui_ImplOpenGL3_Shutdown();
+//    /*ImGui_ImplOpenGL3_Shutdown();
 //    ImGui_ImplGlfw_Shutdown();
-//    ImGui::DestroyContext();
+//    ImGui::DestroyContext();*/
 //
 //    // optional: de-allocate all resources once they've outlived their purpose:
 //    // ------------------------------------------------------------------------
@@ -408,7 +408,7 @@
 //
 //    // be sure to activate shader when setting uniforms/drawing objects
 //    lightingShader.Use();
-//    lightingShader.SetVec3("viewPos", camera.Position);
+//    lightingShader.SetVec3("viewPos", camera.m_position);
 //    lightingShader.SetFloat("material.shininess", 32.0f);
 //
 //    /*
@@ -455,8 +455,8 @@
 //    lightingShader.SetFloat("pointLights[3].linear", 0.09f);
 //    lightingShader.SetFloat("pointLights[3].quadratic", 0.032f);
 //    // spotLight
-//    lightingShader.SetVec3("spotLight.position", camera.Position);
-//    lightingShader.SetVec3("spotLight.direction", camera.Front);
+//    lightingShader.SetVec3("spotLight.position", camera.m_position);
+//    lightingShader.SetVec3("spotLight.direction", camera.m_front);
 //    lightingShader.SetVec3("spotLight.ambient", 0.0f, 0.0f, 0.0f);
 //    lightingShader.SetVec3("spotLight.diffuse", 1.0f, 1.0f, 1.0f);
 //    lightingShader.SetVec3("spotLight.specular", 1.0f, 1.0f, 1.0f);
@@ -467,7 +467,7 @@
 //    lightingShader.SetFloat("spotLight.outerCutOff", glm::cos(glm::radians(15.0f)));
 //
 //    // view/projection transformations
-//    glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float) SCR_WIDTH / (float) SCR_HEIGHT, 0.1f, 100.0f);
+//    glm::mat4 projection = glm::perspective(glm::radians(camera.m_zoom), (float) SCR_WIDTH / (float) SCR_HEIGHT, 0.1f, 100.0f);
 //    glm::mat4 view = camera.GetViewMatrix();
 //    lightingShader.SetMat4("projection", projection);
 //    lightingShader.SetMat4("view", view);
@@ -503,14 +503,14 @@
 //    lightCubeShader.SetMat4("view", view);
 //
 //    // we now draw as many light bulbs as we have point lights.
-//    glBindVertexArray(lightCubeVAO);
-//    for (unsigned int i = 0; i < 4; i++)
-//    {
-//        model = glm::mat4(1.0f);
-//        model = glm::translate(model, pointLightPositions [i]);
-//        model = glm::scale(model, glm::vec3(0.2f)); // Make it a smaller cube
-//        lightCubeShader.SetMat4("model", model);
-//        glDrawArrays(GL_TRIANGLES, 0, 36);
-//    }
+//    //glBindVertexArray(lightCubeVAO);
+//    //for (unsigned int i = 0; i < 4; i++)
+//    //{
+//    //    model = glm::mat4(1.0f);
+//    //    model = glm::translate(model, pointLightPositions [i]);
+//    //    model = glm::scale(model, glm::vec3(0.2f)); // Make it a smaller cube
+//    //    lightCubeShader.SetMat4("model", model);
+//    //    glDrawArrays(GL_TRIANGLES, 0, 36);
+//    //}
 //}
 //

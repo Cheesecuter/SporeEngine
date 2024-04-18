@@ -77,12 +77,22 @@ void Runtime(MainWindow* p_window, UI* p_ui, PhysicSystem* p_physic_system)
     p_window->m_render_pipeline->SetSceneSize(p_window->m_width / 6 * 4, p_window->m_height / 3 * 2);
 
     //Shader blendingShader("./Assets/Shaders/BlendingVertex.glsl", "./Assets/Shaders/BlendingFragment.glsl");
-    //Shader gBufferShader("./Assets/Shaders/GBufferVertex.glsl", "./Assets/Shaders/GBufferFragment.glsl");
+    Shader gBufferShader("./Assets/Shaders/GBufferVertex.glsl", "./Assets/Shaders/GBufferFragment.glsl");
     Shader modelShader("./Assets/Shaders/ModelLoadingVertex.glsl", "./Assets/Shaders/ModelLoadingFragment.glsl");
-    //Shader shaderLightingPass("./Assets/Shaders/DeferredShadingVertex.glsl", "./Assets/Shaders/DeferredShadingFragment.glsl");
-    //Shader shaderLightBox("./Assets/Shaders/DeferredLightBoxVertex.glsl", "./Assets/Shaders/DeferredLightBoxFragment.glsl");
+    Shader shaderLightingPassShader("./Assets/Shaders/DeferredShadingVertex.glsl", "./Assets/Shaders/DeferredShadingFragment.glsl");
+    shaderLightingPassShader.Use();
+    shaderLightingPassShader.SetInt("gPosition", 0);
+    shaderLightingPassShader.SetInt("gNormal", 1);
+    shaderLightingPassShader.SetInt("gAlbedoSpec", 2);
+    Shader shaderLightBoxShader("./Assets/Shaders/DeferredLightBoxVertex.glsl", "./Assets/Shaders/DeferredLightBoxFragment.glsl");
     Shader gridShader("./Assets/Shaders/GridVertex.glsl", "./Assets/Shaders/GridFragment.glsl");
     Shader lightingShader("./Assets/Shaders/LightingVertex.glsl", "./Assets/Shaders/LightingFragment.glsl");
+    lightingShader.Use();
+    lightingShader.SetInt("texture1", 0);
+    Shader multipleLightsShader("./Assets/Shaders/MultipleLightsVertex.glsl", "./Assets/Shaders/MultipleLightsFragment.glsl");
+    multipleLightsShader.Use();
+    multipleLightsShader.SetInt("material.diffuse", 1);
+    multipleLightsShader.SetInt("material.specular", 1);
     Shader skyboxShader("./Assets/Shaders/SkyboxVertex.glsl", "./Assets/Shaders/SkyboxFragment.glsl");
     Shader shadowMappingShader("./Assets/Shaders/ShadowMappingVertex.glsl", "./Assets/Shaders/ShadowMappingFragment.glsl");
     Shader shadowMappingDepthShader("./Assets/Shaders/ShadowMappingDepthVertex.glsl", "./Assets/Shaders/ShadowMappingDepthFragment.glsl");
@@ -138,7 +148,7 @@ void Runtime(MainWindow* p_window, UI* p_ui, PhysicSystem* p_physic_system)
     Scene* scene2 = new Scene("scene_2");
     Light* light = new Light("obj_light");
     Plane* plane = new Plane("obj_plane");
-    scene1->AddObject(light);
+    //scene1->AddObject(light);
     //scene1->AddObject(plane);
 
     uint32 step = 0;
@@ -190,6 +200,8 @@ void Runtime(MainWindow* p_window, UI* p_ui, PhysicSystem* p_physic_system)
     glfwPollEvents();
     glClearColor(backgroungColor.x, backgroungColor.y, backgroungColor.z, backgroungColor.w);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+    p_window->m_render_pipeline->initlightbox();
 
     while (!glfwWindowShouldClose(p_window->m_window))
     {
@@ -271,7 +283,8 @@ void Runtime(MainWindow* p_window, UI* p_ui, PhysicSystem* p_physic_system)
             glBindTexture(GL_TEXTURE_2D, floorTexture.m_ID);
             shaders.clear();
             shaders.push_back(&shadowMappingDepthShader);
-            plane->Render(shaders, &floorTexture, model);
+            plane->Render
+            (shaders, &floorTexture, model);
             p_window->m_render_pipeline->Render(shaders, &editorCamera,
                                              (uint32) shadow_width, (uint32) shadow_height,
                                              projection, view, model);
@@ -306,15 +319,21 @@ void Runtime(MainWindow* p_window, UI* p_ui, PhysicSystem* p_physic_system)
         }
         
 
-        /*p_window->m_render_pipeline->Render(shaders, &editorCamera,
+        /*p_window->m_render_pipeline->LightPass(&editorCamera,
+                                               (uint32) p_window->GetWindowWidth(), (uint32) p_window->GetWindowHeight(),
+                                               projection, view, model);*/
+        p_window->m_render_pipeline->Render(shaders, &editorCamera,
                                          (uint32) p_window->GetWindowWidth(), (uint32) p_window->GetWindowHeight(),
-                                         projection, view, model);*/
-        //p_window->m_render_pipeline->RenderSkyBox(&editorCamera, projection, view);
-        //p_window->m_render_pipeline->RenderGrid(&editorCamera, projection, view);
+                                         projection, view, model);
+        p_window->m_render_pipeline->RenderSkyBox(&editorCamera, projection, view);
+        p_window->m_render_pipeline->RenderGrid(&editorCamera, projection, view);
 
-        p_window->m_render_pipeline->DeferredRender(shaders, &editorCamera,
+        /*p_window->m_render_pipeline->DeferredRender(shaders, &editorCamera,
+                                                    (uint32) p_window->m_width, (uint32) p_window->m_height,
+                                                    projection, view, model);*/
+        /*p_window->m_render_pipeline->DeferredRender(shaders, &editorCamera,
                                                     (uint32) p_window->m_render_pipeline->GetSceneSize().x, (uint32) p_window->m_render_pipeline->GetSceneSize().y,
-                                                    projection, view, model);
+                                                    projection, view, model);*/
         
         if (p_window->m_render_pipeline->m_post_process_on)
         {
@@ -324,16 +343,9 @@ void Runtime(MainWindow* p_window, UI* p_ui, PhysicSystem* p_physic_system)
         }
 
         glViewport(displayW / 6, displayH / 3, displayW / 6 * 4, displayH / 3 * 2);
-        //glViewport(0, 0, displayW, displayH);
 
-        //glfwGetFramebufferSize(window_p->window, &displayW, &displayH);
         glfwGetWindowSize(p_window->m_window, &displayW, &displayH);
         p_window->SetWindowSize(displayW, displayH);
-
-        /*p_window->m_render_pipeline->RenderSceneFramebufferBegin(p_window->m_width, p_window->m_height);
-        glBindFramebuffer(GL_FRAMEBUFFER, p_window->m_render_pipeline->GetSceneFramebuffer());
-        p_window->m_render_pipeline->PostProcessFBO();
-        glBindFramebuffer(GL_FRAMEBUFFER, 0);*/
 
         p_ui->Render();
         
