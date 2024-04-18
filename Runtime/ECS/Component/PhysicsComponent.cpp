@@ -1,4 +1,6 @@
 #include <PhysicsComponent.hpp>
+#include <TransformComponent.hpp>
+#include <Object.hpp>
 
 namespace Spore
 {
@@ -64,6 +66,25 @@ namespace Spore
 				ImGui::EndCombo();
 			}
 			
+		}
+	}
+
+	void PhysicsComponent::Tick(float32 p_delta_time)
+	{
+		TransformComponent* transformComponent = dynamic_cast<TransformComponent*>(GetReferencedObject()->GetComponent("Transform"));
+		if (g_tick_stop && transformComponent != nullptr)
+		{
+			SetPosition(transformComponent->GetPosition());
+			SetRotation(transformComponent->GetRotation());
+
+			m_position = Vec3f(m_body_interface->GetCenterOfMassPosition(m_body->GetID()));
+			m_rotation = Vec3f(m_body_interface->GetRotation(m_body->GetID()));
+			m_velocity = Vec3f(m_body_interface->GetLinearVelocity(m_body->GetID()));
+			/*std::cout << "Step " << p_delta_time << ": " <<
+			"Position = (" << m_position.x << ", " << m_position.y << ", " << m_position.z << "), " <<
+			"Rotation = (" << m_rotation.x << ", " << m_rotation.y << ", " << m_rotation.z << "), " <<
+			"Velocity = (" << m_velocity.x << ", " << m_velocity.y << ", " << m_velocity.z << ")" <<
+			std::endl;*/
 		}
 	}
 
@@ -135,7 +156,7 @@ namespace Spore
 		return m_velocity;
 	}
 
-	void PhysicsComponent::Tick(uint32 p_step)
+	void PhysicsComponent::Tick1(uint32 p_step)
 	{
 		/*JPH::RVec3 position = JPHVec3(m_position);
 		JPH::Vec3 velocity = JPHVec3(m_velocity);*/
