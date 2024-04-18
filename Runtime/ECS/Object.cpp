@@ -12,8 +12,6 @@ namespace Spore
 			Shader* shader = AssetsManager::GetInstance().m_shader_mapper.find("ModelLoadingFragment.glsl")->second;
 			m_model_shader = shader;
 			shaderComponent->AddShader(m_model_shader);
-			//Shader* lightingShader = AssetsManager::GetInstance().shaderMapper.find("LightingFragment.glsl")->second;
-			//shaderComponent->AddShader(lightingShader);
 			m_components [shaderComponent->GetName()] = shaderComponent;
 		}
 	}

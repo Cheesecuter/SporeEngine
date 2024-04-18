@@ -21,7 +21,6 @@ namespace Spore
 
 		std::string m_identifier;
 		std::string m_type = "default";
-		uint32 m_VAO, m_VBO, m_EBO;
 		bool m_selected = false;
 		void AddObserver(ObjectObserver* p_observer);
 		void RemoveObserver(ObjectObserver* p_observer);
