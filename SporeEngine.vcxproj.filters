@@ -216,9 +216,6 @@
     <ClCompile Include="Runtime\ECS\Objects\ModelObject.cpp">
       <Filter>源文件\ECS\Objects</Filter>
     </ClCompile>
-    <ClCompile Include="Runtime\Core\Base\Global.cpp">
-      <Filter>源文件\Core\Base</Filter>
-    </ClCompile>
     <ClCompile Include="Runtime\Physics\PhysicsHelloWorld.cpp">
       <Filter>源文件\Physics</Filter>
     </ClCompile>
@@ -800,6 +797,9 @@
     </ClCompile>
     <ClCompile Include="Runtime\ECS\Component\LightComponent.cpp">
       <Filter>源文件\ECS\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Core\Base\Global.cpp">
+      <Filter>源文件\Core\Base</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
