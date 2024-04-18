@@ -6,10 +6,12 @@ namespace Spore
 	{
 		m_type = "model";
 		m_model_mapper = std::map<std::string, Model*>();
-		ShaderComponent* shaderComponent = new ShaderComponent();
-		Shader* shader = AssetsManager::GetInstance().m_shader_mapper.find("ModelLoadingFragment.glsl")->second;
+		ShaderComponent* shaderComponent = new ShaderComponent(); 
+		//Shader* shader = AssetsManager::GetInstance().m_shader_mapper.find("ModelLoadingFragment.glsl")->second;
+		Shader* shader = AssetsManager::GetInstance().m_shader_mapper.find("LightingFragment.glsl")->second;
 		m_model_shader = shader;
 		shaderComponent->AddShader(m_model_shader);
+		//shaderComponent->AddShader(shader1);
 		m_components [shaderComponent->GetName()] = shaderComponent;
 
 		PhysicsComponent* physicsComponent = new PhysicsComponent();
@@ -64,7 +66,7 @@ namespace Spore
 
 		PhysicsComponent* physicsComponent = dynamic_cast<PhysicsComponent*>(m_components.find("Physics")->second);
 		TransformComponent* transformComponent = dynamic_cast<TransformComponent*>(m_components.find("Transform")->second);
-		ShaderComponent* shaderComponent = nullptr;
+		ShaderComponent* shaderComponent = dynamic_cast<ShaderComponent*>(m_components.find("Shader")->second);
 		Model* model = nullptr;
 		if (m_flag_run)
 		{
@@ -81,11 +83,11 @@ namespace Spore
 		for (std::map<std::string, Model*>::iterator it_model = m_model_mapper.begin(); it_model != m_model_mapper.end(); it_model++)
 		{
 			model = it_model->second;
-			shaderComponent = dynamic_cast<ShaderComponent*>(m_components.find("Shader")->second);
+			/*shaderComponent = dynamic_cast<ShaderComponent*>(m_components.find("Shader")->second);
 			for (uint32 i = 0; i < p_shaders.size(); i++)
 			{
 				shaderComponent->AddShader(p_shaders [i]);
-			}
+			}*/
 
 			for (std::pair<std::string, ShaderNode*> it_shader : shaderComponent->GetShaders())
 			{

@@ -2,6 +2,7 @@
 
 #include <Types.hpp>
 #include <Object.hpp>
+#include <LightComponent.hpp>
 
 namespace Spore
 {

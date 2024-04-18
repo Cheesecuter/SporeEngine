@@ -6,10 +6,12 @@ namespace Spore
 	{
 		m_type = "light";
 		ShaderComponent* shaderComponent = new ShaderComponent();
-		Shader* lightingShader = AssetsManager::GetInstance().m_shader_mapper.find("LightingFragment.glsl")->second;
+		//Shader* lightingShader = AssetsManager::GetInstance().m_shader_mapper.find("LightingFragment.glsl")->second;
 		Shader* modelShader = AssetsManager::GetInstance().m_shader_mapper.find("ModelLoadingFragment.glsl")->second;
 		//shaderComponent->AddShader(lightingShader);
-		shaderComponent->AddShader(modelShader);
+		//shaderComponent->AddShader(lightingShader);
+		LightComponent* lightComponent = new LightComponent();
+		m_components [lightComponent->GetName()] = lightComponent;
 		m_components [shaderComponent->GetName()] = shaderComponent;
 		Model* model = new Model("./Assets/Models/_basic models/cube.fbx");
 		m_model_mapper.insert(std::make_pair(model->m_identifier, model));
@@ -37,7 +39,9 @@ namespace Spore
 		ShaderComponent* shaderComponent = dynamic_cast<ShaderComponent*>(m_components.find("Shader")->second);
 		p_model = transformComponent->GetMatrix();
 
-		for (std::pair<std::string, ShaderNode*> it_shader : shaderComponent->GetShaders())
+		LightComponent* lightComponent = dynamic_cast<LightComponent*>(m_components.find("Light")->second);
+		lightComponent->Render(p_camera, p_projection, p_view, p_model, transformComponent->GetPosition());
+		/*for (std::pair<std::string, ShaderNode*> it_shader : shaderComponent->GetShaders())
 		{
 			it_shader.second->m_shader->Use();
 			it_shader.second->m_shader->SetMat4("projection", p_projection);
@@ -46,7 +50,7 @@ namespace Spore
 			it_shader.second->m_shader->SetVec3("viewPos", p_camera->m_position);
 			it_shader.second->m_shader->SetVec3("lightPos", transformComponent->GetPosition());
 			it_shader.second->m_shader->SetInt("blinn", true);
-		}
+		}*/
 	}
 
 }
