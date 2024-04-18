@@ -32,6 +32,7 @@ namespace Spore
 		bool m_flag_stop = true;
 
 		void AddModel(Model* p_model);
+		Model* GetModel();
 		void DeleteModel(Model* p_model);
 		void DeleteModel(std::string p_identifier);
 		void OnModelDeleted(Model* p_model) override;

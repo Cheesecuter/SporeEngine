@@ -5,14 +5,15 @@ namespace Spore
 	Object::Object(const std::string& p_identifier, const bool p_light) : m_identifier(p_identifier)
 	{
 		TransformComponent* transformComponent = new TransformComponent();
-		m_components [transformComponent->GetName()] = transformComponent;
+		AddComponent(transformComponent);
+		transformComponent->SetReferencedObject(this);
 		if (!p_light)
 		{
 			ShaderComponent* shaderComponent = new ShaderComponent();
 			Shader* shader = AssetsManager::GetInstance().m_shader_mapper.find("ModelLoadingFragment.glsl")->second;
 			m_model_shader = shader;
 			shaderComponent->AddShader(m_model_shader);
-			m_components [shaderComponent->GetName()] = shaderComponent;
+			AddComponent(shaderComponent);
 		}
 	}
 
@@ -56,6 +57,22 @@ namespace Spore
 		
 	}
 
+	bool Object::AddComponent(Component* p_component)
+	{
+		bool returnFlag = true;
+		try
+		{
+			m_components [p_component->GetName()] = p_component;
+			p_component->SetReferencedObject(this);
+		}
+		catch (std::exception e)
+		{
+			returnFlag = false;
+		}
+
+		return returnFlag;
+	}
+
 	bool Object::HasComponent(const std::string& p_component_name) const
 	{
 		for (const std::pair<const std::string, Component*>& it_component : m_components)
@@ -74,6 +91,19 @@ namespace Spore
 		return m_components;
 	}
 
+	Component* Object::GetComponent(const std::string& p_component_name)
+	{
+		for (std::pair<std::string, Component*> component : m_components)
+		{
+			if (component.second->GetName() == p_component_name)
+			{
+				return component.second;
+			}
+		}
+
+		return nullptr;
+	}
+
 	template<typename TComponent>
 	TComponent* Object::TryGetComponent(const std::string& p_component_name)
 	{
@@ -85,12 +115,6 @@ namespace Spore
 			}
 		}
 	}
-
-	/*template<typename TComponent>
-	const TComponent* Object::TryGetComponentConst(const std::string& componentName) const
-	{
-
-	}*/
 
 	void Object::SetPosition(const vec3f& p_position)
 	{

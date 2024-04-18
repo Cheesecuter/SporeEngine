@@ -8,10 +8,10 @@ namespace Spore
 		TransformComponent* transformComponent = new TransformComponent();
 		ShaderComponent* shaderComponent = new ShaderComponent();
 		m_model_mapper = std::map<std::string, Model*>();
-		m_components [transformComponent->GetName()] = transformComponent;
+		AddComponent(transformComponent);
 		Shader* shadowMappingShader = AssetsManager::GetInstance().m_shader_mapper.find("ShadowMappingFragment.glsl")->second;
 		shaderComponent->AddShader(shadowMappingShader);
-		m_components [shaderComponent->GetName()] = shaderComponent;
+		AddComponent(shaderComponent);
 		Init();
 	}
 

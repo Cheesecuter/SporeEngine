@@ -30,12 +30,12 @@ namespace Spore
 					uint32 p_screen_width, uint32 p_screen_height,
 					mat4f p_projection, mat4f p_view, mat4f p_model);
 
+		bool AddComponent(Component* p_component);
 		bool HasComponent(const std::string& p_component_name) const;
 		std::unordered_map<std::string, Component*> GetComponents();
+		Component* GetComponent(const std::string& p_component_name);
 		template<typename TComponent>
 		TComponent* TryGetComponent(const std::string& p_component_name);
-		template<typename TComponent>
-		const TComponent* TryGetComponentConst(const std::string& p_component_name) const;
 
 		void SetPosition(const vec3f& p_position);
 		void SetRotation(const vec3f& p_rotation);

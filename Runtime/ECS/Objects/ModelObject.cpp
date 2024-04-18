@@ -12,13 +12,13 @@ namespace Spore
 		m_model_shader = shader;
 		shaderComponent->AddShader(m_model_shader);
 		//shaderComponent->AddShader(shader1);
-		m_components [shaderComponent->GetName()] = shaderComponent;
+		AddComponent(shaderComponent);
 
 		PhysicsComponent* physicsComponent = new PhysicsComponent();
-		m_components [physicsComponent->GetName()] = physicsComponent;
+		AddComponent(physicsComponent);
 
 		AudioComponent* audioComponent = new AudioComponent();
-		m_components [audioComponent->GetName()] = audioComponent;
+		AddComponent(audioComponent);
 	}
 
 	ModelObject::~ModelObject()
@@ -36,6 +36,11 @@ namespace Spore
 	{
 		m_model_mapper.insert(std::make_pair(p_model->m_identifier, p_model));
 		m_model_mapper [p_model->m_identifier]->AddObserver(this);
+	}
+
+	Model* ModelObject::GetModel()
+	{
+		return m_model_mapper.begin()->second;
 	}
 
 	void ModelObject::DeleteModel(Model* p_model)
@@ -56,6 +61,16 @@ namespace Spore
 		ModelObject::~ModelObject();
 	}
 
+	void ModelObject::SetModelType(ModelType p_model_type)
+	{
+		m_model_type = p_model_type;
+	}
+
+	ModelType ModelObject::GetModelType()
+	{
+		return m_model_type;
+	}
+
 	void ModelObject::Render(std::vector<Shader*> p_shaders, Camera* p_camera,
 						uint32 p_screen_width, uint32 p_screen_height,
 						mat4f p_projection, mat4f p_view, mat4f p_model)
@@ -68,27 +83,13 @@ namespace Spore
 		TransformComponent* transformComponent = dynamic_cast<TransformComponent*>(m_components.find("Transform")->second);
 		ShaderComponent* shaderComponent = dynamic_cast<ShaderComponent*>(m_components.find("Shader")->second);
 		Model* model = nullptr;
-		if (m_flag_run)
-		{
-			transformComponent->SetPosition(physicsComponent->GetPosition());
-			transformComponent->SetRotation(physicsComponent->GetRotation());
-
-		}
-		if (m_flag_stop)
-		{
-			physicsComponent->SetPosition(transformComponent->GetPosition());
-			physicsComponent->SetRotation(transformComponent->GetRotation());
-		}
+		transformComponent->Tick(10);
+		physicsComponent->Tick(10);
+		shaderComponent->Tick(10);
 		p_model = transformComponent->GetMatrix();
 		for (std::map<std::string, Model*>::iterator it_model = m_model_mapper.begin(); it_model != m_model_mapper.end(); it_model++)
 		{
 			model = it_model->second;
-			/*shaderComponent = dynamic_cast<ShaderComponent*>(m_components.find("Shader")->second);
-			for (uint32 i = 0; i < p_shaders.size(); i++)
-			{
-				shaderComponent->AddShader(p_shaders [i]);
-			}*/
-
 			for (std::pair<std::string, ShaderNode*> it_shader : shaderComponent->GetShaders())
 			{
 				if (it_shader.second->m_is_loading)
@@ -102,15 +103,5 @@ namespace Spore
 				}
 			}
 		}
-	}
-
-	void ModelObject::SetModelType(ModelType p_model_type)
-	{
-		m_model_type = p_model_type;
-	}
-	
-	ModelType ModelObject::GetModelType()
-	{
-		return m_model_type;
 	}
 }
