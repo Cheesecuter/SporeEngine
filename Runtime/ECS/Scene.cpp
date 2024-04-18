@@ -143,7 +143,6 @@ namespace Spore
 	void Scene::InitPhysics()
 	{
 		m_physics_system->SetBodyActivationListener(&m_body_activation_listener);
-		CreateFloor();
 	}
 
 	JPH::BodyInterface* Scene::GetBodyInterface()
@@ -169,7 +168,7 @@ namespace Spore
 				if (m_body_interface->IsActive(physicsComponent->GetBody()->GetID()))
 				{
 					flag = true;
-					physicsComponent->Tick(p_step);
+					physicsComponent->Tick1(p_step);
 				}
 			}
 		}
