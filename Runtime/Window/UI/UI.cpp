@@ -46,7 +46,8 @@ namespace Spore
 		style.Colors [ImGuiCol_ButtonActive] = ImVec4(0.511f, 0.511f, 0.511f, 1.0f);
 		style.Colors [ImGuiCol_ButtonHovered] = ImVec4(0.422f, 0.422f, 0.422f, 1.0f);
 		//style.Colors [ImGuiCol_PopupBg] = ImVec4(0.382f, 0.382f, 0.382f, 1.0f);
-		style.Colors [ImGuiCol_ChildBg] = ImVec4(0.382f, 0.382f, 0.382f, 1.0f);
+		//style.Colors [ImGuiCol_ChildBg] = ImVec4(0.382f, 0.382f, 0.382f, 1.0f);
+		style.Colors [ImGuiCol_ChildBg] = ImVec4(0.289f, 0.289f, 0.289f, 1.0f);
 		style.Colors [ImGuiCol_Header] = ImVec4(0.382f, 0.382f, 0.382f, 1.0f);
 		style.Colors [ImGuiCol_HeaderActive] = ImVec4(0.511f, 0.511f, 0.511f, 1.0f);
 		style.Colors [ImGuiCol_HeaderHovered] = ImVec4(0.422f, 0.422f, 0.422f, 1.0f);
@@ -423,15 +424,6 @@ namespace Spore
 						{
 							if (ImGui::BeginMenu("3D Object"))
 							{
-								if (ImGui::MenuItem("Model", NULL, false, true))
-								{
-									std::string name = "model";
-									ModelObject* object = new ModelObject("obj_" + std::to_string(it_scene->second->m_object_index++) + "_" + name);
-									//object->AddModel(modelMapper [name]);
-									it_scene->second->AddObject(object);
-									//modelMapper [name]->AddObserver(object);
-									object->AddObserver(it_scene->second);
-								}
 								if (ImGui::MenuItem("Cube", NULL, false, true))
 								{
 									std::string name = "cube";
@@ -484,6 +476,15 @@ namespace Spore
 									object->SetModelType(ModelType::QUAD);
 									object->AddModel(AssetsManager::GetInstance().m_model_mapper ["quad.fbx"]);
 									it_scene->second->AddObject(object);
+									object->AddObserver(it_scene->second);
+								}
+								if (ImGui::MenuItem("Model", NULL, false, true))
+								{
+									std::string name = "model";
+									ModelObject* object = new ModelObject("obj_" + std::to_string(it_scene->second->m_object_index++) + "_" + name);
+									//object->AddModel(modelMapper [name]);
+									it_scene->second->AddObject(object);
+									//modelMapper [name]->AddObserver(object);
 									object->AddObserver(it_scene->second);
 								}
 								ImGui::EndMenu();
@@ -680,6 +681,7 @@ namespace Spore
 	{
 		int32 width = p_window->m_width / 10 * 6;
 		int32 height = p_window->m_height / 3;
+		int32 height1 = (int32) (ImGui::GetTextLineHeightWithSpacing() + ImGui::GetStyle().FramePadding.y * 0.5f);
 		ImGui::SetNextWindowPos(ImVec2(0.0f, (float32) (p_window->m_height - height)), ImGuiCond_Always);
 		ImGui::SetNextWindowSize(ImVec2((float32) width, (float32) height), ImGuiCond_Always);
 		ImGuiWindowFlags windowFlags = 0;
@@ -712,7 +714,7 @@ namespace Spore
 				audioIdentifiers.push_back(it->first);
 			}
 			{
-				ImGui::BeginChild("Assets Folders", ImVec2((float32) (width / 5 * 2), (float32) height));
+				ImGui::BeginChild("Assets Folders", ImVec2((float32) (width / 5 * 2), (float32) height - 35));
 
 				if (ImGui::CollapsingHeader("Assets", true))
 				{
@@ -877,7 +879,7 @@ namespace Spore
 			}
 			ImGui::SameLine();
 			{
-				ImGui::BeginChild("Assets Details", ImVec2((float32) (width / 5 * 3), (float32) height));
+				ImGui::BeginChild("Assets Details", ImVec2((float32) (width / 5 * 3), (float32) height - 35));
 
 				ImGui::EndChild();
 			}
@@ -918,18 +920,23 @@ namespace Spore
 			{
 				m_selected_scene->m_flag_stop = false;
 				m_selected_scene->m_flag_run = true;
+				g_tick_stop = false;
+				g_tick_run = true;
 				m_selected_scene->Active();
 			}
 			ImGui::SameLine();
 			if (ImGui::Button("Pause"))
 			{
 				m_selected_scene->m_flag_run = false;
+				g_tick_run = false;
 			}
 			ImGui::SameLine();
 			if (ImGui::Button("Stop"))
 			{
 				m_selected_scene->m_flag_run = false;
 				m_selected_scene->m_flag_stop = true;
+				g_tick_run = false;
+				g_tick_stop = true;
 			}
 
 			ImGui::End();
@@ -970,29 +977,6 @@ namespace Spore
 		{
 			ImGui::ShowDemoWindow(&m_show_demo_window);
 		}
-
-		// show a simple window
-		//{
-		//	static float32 f = 0.0f;
-		//	static int32 counter = 0;
-
-		//	ImGui::Begin("Hello, world!");                          // Create a window called "Hello, world!" and append into it.
-
-		//	ImGui::Text("This is some useful text.");               // Display some text (you can use a format strings too)
-		//	ImGui::Checkbox("Demo Window", &show_demo_window);      // Edit bools storing our window open/close state
-		//	ImGui::Checkbox("Another Window", &show_another_window);
-
-		//	ImGui::SliderFloat("float", &f, 0.0f, 1.0f);            // Edit 1 float using a slider from 0.0f to 1.0f
-
-		//	ImGui::ColorEdit3("clear color", (float32*) &backgroungColor); // Edit 3 floats representing a color
-
-		//	if (ImGui::Button("Button"))                            // Buttons return true when clicked (most widgets return true when edited/activated)
-		//		counter++;
-		//	ImGui::SameLine();
-		//	ImGui::Text("counter = %d", counter);
-
-		//	ImGui::End();
-		//}
 	}
 }
 
