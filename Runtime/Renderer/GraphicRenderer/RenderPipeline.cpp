@@ -68,24 +68,17 @@ namespace Spore
 		return sceneSize;
 	}
 
-	void RenderPipeline::UpdateSceneFBO()
+	void RenderPipeline::LightPass(Camera* p_camera,
+								   uint32 p_screen_width, uint32 p_screen_height,
+								   mat4f p_projection, mat4f p_view, mat4f p_model)
 	{
-		uint32 frameBufferTexture = m_post_processer->GetFrameBufferTexture();
-		glBindTexture(GL_TEXTURE_2D, frameBufferTexture);
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, m_scene_width, m_scene_height, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, frameBufferTexture, 0);
-	}
-
-	void RenderPipeline::UpdateSceneRBO()
-	{
-		uint32 renderBuffer = m_post_processer->GetDepthBuffer();
-		glBindRenderbuffer(GL_RENDERBUFFER, renderBuffer);
-		glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT, m_scene_width, m_scene_height);
-		glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, renderBuffer);
-		glBindFramebuffer(GL_FRAMEBUFFER, 0);
-		glViewport(m_scene_pos_x, m_scene_pos_y, m_scene_width, m_scene_height);
+		/*Shader* lightningShader = AssetsManager::GetInstance().m_shader_mapper ["LightingFragment.glsl"];
+		lightningShader->Use();
+		lightningShader->SetMat4("projection", p_projection);
+		lightningShader->SetMat4("view", p_view);
+		lightningShader->SetVec3("viewPos", p_camera->m_position);
+		lightningShader->SetVec3("lightPos", );
+		lightingShader.SetInt("blinn", blinn);*/
 	}
 
 	void RenderPipeline::PreRender()
@@ -165,10 +158,152 @@ namespace Spore
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	}
 
+	void RenderPipeline::initlightbox()
+	{
+		const unsigned int NR_LIGHTS = 40;
+		lightPositions;
+		lightColors;
+		srand(13);
+		for (unsigned int i = 0; i < NR_LIGHTS; i++)
+		{
+			// calculate slightly random offsets
+			float xPos = static_cast<float>(((rand() % 100) / 100.0) * 6.0 - 3.0);
+			float yPos = static_cast<float>(((rand() % 100) / 100.0) * 6.0 - 4.0);
+			float zPos = static_cast<float>(((rand() % 100) / 100.0) * 6.0 - 3.0);
+			lightPositions.push_back(glm::vec3(xPos, yPos, zPos));
+			// also calculate random color
+			float rColor = static_cast<float>(((rand() % 100) / 200.0f) + 0.5); // between 0.5 and 1.)
+			float gColor = static_cast<float>(((rand() % 100) / 200.0f) + 0.5); // between 0.5 and 1.)
+			float bColor = static_cast<float>(((rand() % 100) / 200.0f) + 0.5); // between 0.5 and 1.)
+			lightColors.push_back(glm::vec3(rColor, gColor, bColor));
+		}
+	}
+
+	unsigned int cubeVAO = 0;
+	unsigned int cubeVBO = 0;
+	void renderCube()
+	{
+		// initialize (if necessary)
+		if (cubeVAO == 0)
+		{
+			float vertices [] = {
+				// back face
+				-1.0f, -1.0f, -1.0f,  0.0f,  0.0f, -1.0f, 0.0f, 0.0f, // bottom-left
+				 1.0f,  1.0f, -1.0f,  0.0f,  0.0f, -1.0f, 1.0f, 1.0f, // top-right
+				 1.0f, -1.0f, -1.0f,  0.0f,  0.0f, -1.0f, 1.0f, 0.0f, // bottom-right         
+				 1.0f,  1.0f, -1.0f,  0.0f,  0.0f, -1.0f, 1.0f, 1.0f, // top-right
+				-1.0f, -1.0f, -1.0f,  0.0f,  0.0f, -1.0f, 0.0f, 0.0f, // bottom-left
+				-1.0f,  1.0f, -1.0f,  0.0f,  0.0f, -1.0f, 0.0f, 1.0f, // top-left
+				// front face
+				-1.0f, -1.0f,  1.0f,  0.0f,  0.0f,  1.0f, 0.0f, 0.0f, // bottom-left
+				 1.0f, -1.0f,  1.0f,  0.0f,  0.0f,  1.0f, 1.0f, 0.0f, // bottom-right
+				 1.0f,  1.0f,  1.0f,  0.0f,  0.0f,  1.0f, 1.0f, 1.0f, // top-right
+				 1.0f,  1.0f,  1.0f,  0.0f,  0.0f,  1.0f, 1.0f, 1.0f, // top-right
+				-1.0f,  1.0f,  1.0f,  0.0f,  0.0f,  1.0f, 0.0f, 1.0f, // top-left
+				-1.0f, -1.0f,  1.0f,  0.0f,  0.0f,  1.0f, 0.0f, 0.0f, // bottom-left
+				// left face
+				-1.0f,  1.0f,  1.0f, -1.0f,  0.0f,  0.0f, 1.0f, 0.0f, // top-right
+				-1.0f,  1.0f, -1.0f, -1.0f,  0.0f,  0.0f, 1.0f, 1.0f, // top-left
+				-1.0f, -1.0f, -1.0f, -1.0f,  0.0f,  0.0f, 0.0f, 1.0f, // bottom-left
+				-1.0f, -1.0f, -1.0f, -1.0f,  0.0f,  0.0f, 0.0f, 1.0f, // bottom-left
+				-1.0f, -1.0f,  1.0f, -1.0f,  0.0f,  0.0f, 0.0f, 0.0f, // bottom-right
+				-1.0f,  1.0f,  1.0f, -1.0f,  0.0f,  0.0f, 1.0f, 0.0f, // top-right
+				// right face
+				 1.0f,  1.0f,  1.0f,  1.0f,  0.0f,  0.0f, 1.0f, 0.0f, // top-left
+				 1.0f, -1.0f, -1.0f,  1.0f,  0.0f,  0.0f, 0.0f, 1.0f, // bottom-right
+				 1.0f,  1.0f, -1.0f,  1.0f,  0.0f,  0.0f, 1.0f, 1.0f, // top-right         
+				 1.0f, -1.0f, -1.0f,  1.0f,  0.0f,  0.0f, 0.0f, 1.0f, // bottom-right
+				 1.0f,  1.0f,  1.0f,  1.0f,  0.0f,  0.0f, 1.0f, 0.0f, // top-left
+				 1.0f, -1.0f,  1.0f,  1.0f,  0.0f,  0.0f, 0.0f, 0.0f, // bottom-left     
+				// bottom face
+				-1.0f, -1.0f, -1.0f,  0.0f, -1.0f,  0.0f, 0.0f, 1.0f, // top-right
+				 1.0f, -1.0f, -1.0f,  0.0f, -1.0f,  0.0f, 1.0f, 1.0f, // top-left
+				 1.0f, -1.0f,  1.0f,  0.0f, -1.0f,  0.0f, 1.0f, 0.0f, // bottom-left
+				 1.0f, -1.0f,  1.0f,  0.0f, -1.0f,  0.0f, 1.0f, 0.0f, // bottom-left
+				-1.0f, -1.0f,  1.0f,  0.0f, -1.0f,  0.0f, 0.0f, 0.0f, // bottom-right
+				-1.0f, -1.0f, -1.0f,  0.0f, -1.0f,  0.0f, 0.0f, 1.0f, // top-right
+				// top face
+				-1.0f,  1.0f, -1.0f,  0.0f,  1.0f,  0.0f, 0.0f, 1.0f, // top-left
+				 1.0f,  1.0f , 1.0f,  0.0f,  1.0f,  0.0f, 1.0f, 0.0f, // bottom-right
+				 1.0f,  1.0f, -1.0f,  0.0f,  1.0f,  0.0f, 1.0f, 1.0f, // top-right     
+				 1.0f,  1.0f,  1.0f,  0.0f,  1.0f,  0.0f, 1.0f, 0.0f, // bottom-right
+				-1.0f,  1.0f, -1.0f,  0.0f,  1.0f,  0.0f, 0.0f, 1.0f, // top-left
+				-1.0f,  1.0f,  1.0f,  0.0f,  1.0f,  0.0f, 0.0f, 0.0f  // bottom-left        
+			};
+			glGenVertexArrays(1, &cubeVAO);
+			glGenBuffers(1, &cubeVBO);
+			// fill buffer
+			glBindBuffer(GL_ARRAY_BUFFER, cubeVBO);
+			glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+			// link vertex attributes
+			glBindVertexArray(cubeVAO);
+			glEnableVertexAttribArray(0);
+			glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*) 0);
+			glEnableVertexAttribArray(1);
+			glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*) (3 * sizeof(float)));
+			glEnableVertexAttribArray(2);
+			glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*) (6 * sizeof(float)));
+			glBindBuffer(GL_ARRAY_BUFFER, 0);
+			glBindVertexArray(0);
+		}
+		// render Cube
+		glBindVertexArray(cubeVAO);
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+		glBindVertexArray(0);
+	}
+
+	void RenderPipeline::renderlightbox(mat4f p_projection, mat4f p_view, mat4f p_model)
+	{
+		Shader* shaderLightBoxShader = AssetsManager::GetInstance().m_shader_mapper ["DeferredLightBoxFragment.glsl"];
+		shaderLightBoxShader->Use();
+		shaderLightBoxShader->SetMat4("projection", p_projection);
+		shaderLightBoxShader->SetMat4("view", p_view);
+		for (unsigned int i = 0; i < lightPositions.size(); i++)
+		{
+			p_model = glm::mat4(1.0f);
+			p_model = glm::translate(p_model, lightPositions [i]);
+			p_model = glm::scale(p_model, glm::vec3(0.125f));
+			shaderLightBoxShader->SetMat4("model", p_model);
+			shaderLightBoxShader->SetVec3("lightColor", lightColors [i]);
+			renderCube();
+		}
+	}
+	// renderQuad() renders a 1x1 XY quad in NDC
+	// -----------------------------------------
+	unsigned int quadVAO = 0;
+	unsigned int quadVBO;
+	void renderQuad()
+	{
+		if (quadVAO == 0)
+		{
+			float quadVertices [] = {
+				// positions        // texture Coords
+				-1.0f,  1.0f, 0.0f, 0.0f, 1.0f,
+				-1.0f, -1.0f, 0.0f, 0.0f, 0.0f,
+				 1.0f,  1.0f, 0.0f, 1.0f, 1.0f,
+				 1.0f, -1.0f, 0.0f, 1.0f, 0.0f,
+			};
+			// setup plane VAO
+			glGenVertexArrays(1, &quadVAO);
+			glGenBuffers(1, &quadVBO);
+			glBindVertexArray(quadVAO);
+			glBindBuffer(GL_ARRAY_BUFFER, quadVBO);
+			glBufferData(GL_ARRAY_BUFFER, sizeof(quadVertices), &quadVertices, GL_STATIC_DRAW);
+			glEnableVertexAttribArray(0);
+			glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*) 0);
+			glEnableVertexAttribArray(1);
+			glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*) (3 * sizeof(float)));
+		}
+		glBindVertexArray(quadVAO);
+		glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+		glBindVertexArray(0);
+	}
+
 	void RenderPipeline::DeferredRender(std::vector<Shader*> p_shaders, Camera* p_camera,
 										uint32 p_screen_width, uint32 p_screen_height,
 										mat4f p_projection, mat4f p_view, mat4f p_model)
 	{
+		//glViewport(m_scene_pos_x, m_scene_pos_y, m_scene_width, m_scene_height);
 		glBindFramebuffer(GL_FRAMEBUFFER, m_g_buffer);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		for (std::pair<std::string, Scene*> it : m_scene_mapper)
@@ -180,9 +315,10 @@ namespace Spore
 		RenderSkyBox(p_camera, p_projection, p_view);
 		RenderGrid(p_camera, p_projection, p_view);
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
-
+		
+		Shader* shaderLightingPassShader = AssetsManager::GetInstance().m_shader_mapper ["DeferredShadingFragment.glsl"];
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
+		shaderLightingPassShader->Use();
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, m_g_position);
 		glActiveTexture(GL_TEXTURE1);
@@ -190,9 +326,28 @@ namespace Spore
 		glActiveTexture(GL_TEXTURE2);
 		glBindTexture(GL_TEXTURE_2D, m_g_albedo_specular);
 
+		for (unsigned int i = 0; i < lightPositions.size(); i++)
+		{
+			shaderLightingPassShader->SetVec3("lights[" + std::to_string(i) + "].Position", lightPositions [i]);
+			shaderLightingPassShader->SetVec3("lights[" + std::to_string(i) + "].Color", lightColors [i]);
+			// update attenuation parameters and calculate radius
+			const float constant = 1.0f; // note that we don't send this to the shader, we assume it is always 1.0 (in our case)
+			const float linear = 0.7f;
+			const float quadratic = 1.8f;
+			shaderLightingPassShader->SetFloat("lights[" + std::to_string(i) + "].Linear", linear);
+			shaderLightingPassShader->SetFloat("lights[" + std::to_string(i) + "].Quadratic", quadratic);
+			// then calculate radius of light volume/sphere
+			const float maxBrightness = std::fmaxf(std::fmaxf(lightColors [i].r, lightColors [i].g), lightColors [i].b);
+			float radius = (-linear + std::sqrt(linear * linear - 4 * quadratic * (constant - (256.0f / 5.0f) * maxBrightness))) / (2.0f * quadratic);
+			shaderLightingPassShader->SetFloat("lights[" + std::to_string(i) + "].Radius", radius);
+		}
+		shaderLightingPassShader->SetVec3("viewPos", p_camera->m_position);
+
+		renderQuad();
+
 		glBindFramebuffer(GL_READ_FRAMEBUFFER, m_g_buffer);
 		glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
-		glBlitFramebuffer(0, 0, p_screen_width, p_screen_height, 0, 0, p_screen_width, p_screen_height, GL_DEPTH_BUFFER_BIT, GL_NEAREST);
+		glBlitFramebuffer(m_scene_pos_x, m_scene_pos_y, p_screen_width, p_screen_height, m_scene_pos_x, m_scene_pos_y, p_screen_width, p_screen_height, GL_DEPTH_BUFFER_BIT, GL_NEAREST);
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	}
 
@@ -215,6 +370,26 @@ namespace Spore
 	void RenderPipeline::PostProcessFBO()
 	{
 		m_post_processer->RenderFBO();
+	}
+
+	void RenderPipeline::UpdateSceneFBO()
+	{
+		uint32 frameBufferTexture = m_post_processer->GetFrameBufferTexture();
+		glBindTexture(GL_TEXTURE_2D, frameBufferTexture);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, m_scene_width, m_scene_height, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, frameBufferTexture, 0);
+	}
+
+	void RenderPipeline::UpdateSceneRBO()
+	{
+		uint32 renderBuffer = m_post_processer->GetDepthBuffer();
+		glBindRenderbuffer(GL_RENDERBUFFER, renderBuffer);
+		glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT, m_scene_width, m_scene_height);
+		glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, renderBuffer);
+		glBindFramebuffer(GL_FRAMEBUFFER, 0);
+		glViewport(m_scene_pos_x, m_scene_pos_y, m_scene_width, m_scene_height);
 	}
 
 	void RenderPipeline::InitSceneFramebuffer(int32 p_window_width, int32 p_window_height)

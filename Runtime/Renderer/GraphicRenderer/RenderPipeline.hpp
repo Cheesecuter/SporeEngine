@@ -34,6 +34,9 @@ namespace Spore
 		vec2f GetSceneSize();
 		void UpdateSceneFBO();
 		void UpdateSceneRBO();
+		void LightPass(Camera* p_camera,
+					   uint32 p_screen_width, uint32 p_screen_height,
+					   mat4f p_projection, mat4f p_view, mat4f p_model);
 		void PreRender();
 		void Render(std::vector<Shader*> p_shaders, Camera* p_camera,
 					uint32 p_screen_width, uint32 p_screen_height,
@@ -64,6 +67,11 @@ namespace Spore
 		void RenderGrid(Camera* p_camera, mat4f p_projection, mat4f p_view);
 		void InitSkyBox();
 		void RenderSkyBox(Camera* p_camera, mat4f p_projection, mat4f p_view);
+		
+		void initlightbox();
+		void renderlightbox(mat4f p_projection, mat4f p_view, mat4f p_model);
+		std::vector<glm::vec3> lightPositions;
+		std::vector<glm::vec3> lightColors;
 
 	protected:
 
