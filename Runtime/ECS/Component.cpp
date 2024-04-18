@@ -22,11 +22,28 @@ namespace Spore
 		return m_name;
 	}
 
+	void Component::SetReferencedObject(Object* p_object)
+	{
+		m_referenced_object = p_object;
+	}
+
+	Object* Component::GetReferencedObject()
+	{
+		return m_referenced_object;
+	}
+
 	void Component::InspectorPanel()
 	{
-		if (ImGui::CollapsingHeader("Empty", true))
+		// Inspector UI implement
+
+		/*if (ImGui::CollapsingHeader("Empty", true))
 		{
 
-		}
+		}*/
+	}
+
+	void Component::Tick(float32 p_delta_time)
+	{
+		// Tick implement
 	}
 }

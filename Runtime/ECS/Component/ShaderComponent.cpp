@@ -1,4 +1,6 @@
 #include <ShaderComponent.hpp>
+#include <Object.hpp>
+#include <ModelObject.hpp>
 
 namespace Spore
 {
@@ -24,6 +26,13 @@ namespace Spore
 				ImGui::Separator();
 			}
 		}
+	}
+
+	void ShaderComponent::Tick(float32 p_delta_time)
+	{
+		ModelObject* object = dynamic_cast<ModelObject*>(GetReferencedObject());
+		Model* model = object->GetModel();
+		
 	}
 
 	void ShaderComponent::AddShader(Shader* p_shader)

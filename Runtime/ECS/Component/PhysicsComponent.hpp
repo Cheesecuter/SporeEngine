@@ -14,6 +14,7 @@ namespace Spore
 		PhysicsComponent();
 		virtual ~PhysicsComponent();
 		virtual void InspectorPanel() override;
+		virtual void Tick(float32 p_delta_time) override;
 		void SetBodyCreationSettings(const JPH::Shape* p_shape, JPH::RVec3 p_position, JPH::Quat p_rotation,
 									 JPH::EMotionType p_motion_type, JPH::ObjectLayer p_object_layer);
 		void CreateAndAddBody();
@@ -30,7 +31,7 @@ namespace Spore
 		mat4x4f GetTransform();
 		vec3f GetVelocity();
 
-		void Tick(uint32 p_step);
+		void Tick1(uint32 p_step);
 
 	protected:
 

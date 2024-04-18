@@ -1,4 +1,6 @@
 #include <TransformComponent.hpp>
+#include <PhysicsComponent.hpp>
+#include <Object.hpp>
 
 namespace Spore
 {
@@ -76,6 +78,16 @@ namespace Spore
 			}
 			ImGui::PopID();
 			SetScale(vec3f(scale [0], scale [1], scale [2]));
+		}
+	}
+
+	void TransformComponent::Tick(float32 p_delta_time)
+	{
+		PhysicsComponent* physicsComponent = dynamic_cast<PhysicsComponent*>(GetReferencedObject()->GetComponent("Physics"));
+		if (g_tick_run && physicsComponent != nullptr)
+		{
+			SetPosition(physicsComponent->GetPosition());
+			SetRotation(physicsComponent->GetRotation());
 		}
 	}
 

@@ -13,6 +13,7 @@ namespace Spore
 		TransformComponent();
 		virtual ~TransformComponent();
 		virtual void InspectorPanel() override;
+		virtual void Tick(float32 p_delta_time) override;
 		void SetPosition(const vec3f& p_position);
 		void SetRotation(const vec3f& p_rotation);
 		void SetScale(const vec3f& p_scale);
