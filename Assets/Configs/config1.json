@@ -589,7 +589,7 @@
                             },
                             "models": {
                                 "model": {
-                                    "identifier": "floor_model",
+                                    "identifier": "wall_model",
                                     "path": "./Assets/Models/Project/wall.fbx"
                                 }
                             }
@@ -648,7 +648,7 @@
                             },
                             "models": {
                                 "model": {
-                                    "identifier": "floor_model",
+                                    "identifier": "wall_model",
                                     "path": "./Assets/Models/Project/wall.fbx"
                                 }
                             }
@@ -707,7 +707,7 @@
                             },
                             "models": {
                                 "model": {
-                                    "identifier": "floor_model",
+                                    "identifier": "wall_model",
                                     "path": "./Assets/Models/Project/wall.fbx"
                                 }
                             }
@@ -766,8 +766,67 @@
                             },
                             "models": {
                                 "model": {
-                                    "identifier": "floor_model",
+                                    "identifier": "sphere_model",
                                     "path": "./Assets/Models/_basic models/sphere.fbx"
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "light0": {
+                            "identifier": "light0",
+                            "type": "light",
+                            "components": {
+                                "transform": {
+                                    "name": "Transform",
+                                    "properties": {
+                                        "transform": {
+                                            "position": [ 0.0, 2.0, 0.0 ],
+                                            "rotation": [ 0.0, 0.0, 0.0 ],
+                                            "scale": [ 1.0, 1.0, 1.0 ]
+                                        }
+                                    }
+                                },
+                                "shader": {
+                                    "name": "Shader",
+                                    "properties": {
+                                        "shaders": {
+                                            "shader1": {
+                                                "identifier": "shader1",
+                                                "is_loading": "true"
+                                            },
+                                            "shader2": {
+                                                "identifier": "shader2",
+                                                "is_loading": "true"
+                                            }
+                                        }
+                                    }
+                                },
+                                "physics": {
+                                    "name": "Physics",
+                                    "properties": {
+                                        "transform": {
+                                            "position": [ 0.0, 2.0, 0.0 ],
+                                            "rotation": [ 0.0, 0.0, 0.0 ],
+                                            "scale": [ 1.0, 1.0, 1.0 ]
+                                        },
+                                        "model_type": "CUBE",
+                                        "motion_type": "Static",
+                                        "activation": "DontActivate"
+                                    }
+                                },
+                                "audio": {
+                                    "name": "Audio",
+                                    "properties": {
+                                        "buffer": "buffer1",
+                                        "source": "source1"
+                                    }
+                                }
+                            },
+                            "models": {
+                                "model": {
+                                    "identifier": "cube_model",
+                                    "path": "./Assets/Models/_basic models/cube.fbx"
                                 }
                             }
                         }
