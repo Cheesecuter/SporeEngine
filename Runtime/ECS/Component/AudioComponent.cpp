@@ -19,7 +19,7 @@ namespace Spore
 	{
 		if (ImGui::CollapsingHeader(m_name.c_str(), true))
 		{
-			ImGui::Text("Audio Source");
+			ImGui::Text("Add Audio");
 			if (ImGui::BeginDragDropTarget())
 			{
 				if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("AudioSource"))
