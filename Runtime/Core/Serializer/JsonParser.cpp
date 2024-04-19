@@ -1,41 +1,24 @@
 #include <JsonParser.hpp>
 
-using namespace std;
-using namespace Spore;
-
-enum class JsonType
+namespace Spore
 {
-	Object,
-	Array,
-	String,
-	Number,
-	True,
-	False,
-	Null
-};
+	JsonParser::JsonParser()
+	{
 
-class JsonValue
-{
-public:
-	JsonType type;
-	string stringValue;
-	float numberValue;
-	vector<JsonValue> arrayValue;
-	map<string, JsonValue> objectValue;
-};
+	}
 
-class JsonParser
-{
-public:
-	JsonValue parse(const string& jsonStr)
+	JsonParser::~JsonParser()
+	{
+
+	}
+
+	JsonValue JsonParser::parse(const std::string& jsonStr)
 	{
 		index = 0;
 		return parseValue(jsonStr);
 	}
 
-private:
-	int index;
-	JsonValue parseValue(const string& jsonStr)
+	JsonValue JsonParser::parseValue(const std::string& jsonStr)
 	{
 		skipWhilespace(jsonStr);
 		char ch = jsonStr [index];
@@ -66,27 +49,27 @@ private:
 		else if (jsonStr.substr(index, 4) == "null")
 		{
 			index += 4;
-			return{ JsonType::Null };
+			return{ JsonValue() };
 		}
-		throw runtime_error("Invalid JSON");
+		throw std::runtime_error("Invalid JSON");
 	}
 
-	JsonValue parseObject(const string& jsonStr)
+	JsonValue JsonParser::parseObject(const std::string& jsonStr)
 	{
 		JsonValue obj;
 		index++;
 		while (jsonStr [index] != '}')
 		{
 			skipWhilespace(jsonStr);
-			string key = parseString(jsonStr).stringValue;
+			std::string key = parseString(jsonStr).m_string_value;
 			skipWhilespace(jsonStr);
 			if (jsonStr [index] != ':')
 			{
-				throw runtime_error("Expected colon in object");
+				throw std::runtime_error("Expected colon in object");
 			}
 			index++;
 			JsonValue value = parseValue(jsonStr);
-			obj.objectValue [key] = value;
+			obj.m_object_value [key] = value;
 			skipWhilespace(jsonStr);
 			if (jsonStr [index] == ',')
 			{
@@ -94,22 +77,22 @@ private:
 			}
 			else if (jsonStr [index] != '}')
 			{
-				throw runtime_error("Expedted comma or closing brace in object");
+				throw std::runtime_error("Expedted comma or closing brace in object");
 			}
 		}
 		index++;
-		obj.type = JsonType::Object;
+		obj.m_type = JsonType::Object;
 		return obj;
 	}
 
-	JsonValue parseArray(const string& jsonStr)
+	JsonValue JsonParser::parseArray(const std::string& jsonStr)
 	{
 		JsonValue arr;
 		index++;
 		while (jsonStr [index] != ']')
 		{
 			skipWhilespace(jsonStr);
-			arr.arrayValue.push_back(parseValue(jsonStr));
+			arr.m_array_value.push_back(parseValue(jsonStr));
 			skipWhilespace(jsonStr);
 			if (jsonStr [index] == ',')
 			{
@@ -117,15 +100,15 @@ private:
 			}
 			else if (jsonStr [index] != ']')
 			{
-				throw runtime_error("Expected comma or closing bracked in array");
+				throw std::runtime_error("Expected comma or closing bracked in array");
 			}
 		}
 		index++;
-		arr.type = JsonType::Array;
+		arr.m_type = JsonType::Array;
 		return arr;
 	}
 
-	JsonValue parseString(const string& jsonStr)
+	JsonValue JsonParser::parseString(const std::string& jsonStr)
 	{
 		JsonValue str;
 		index++;
@@ -141,254 +124,83 @@ private:
 				index++;
 			}
 		}
-		str.stringValue = jsonStr.substr(start, index - start);
+		str.m_string_value = jsonStr.substr(start, index - start);
 		index++;
-		str.type = JsonType::String;
+		str.m_type = JsonType::String;
 		return str;
 	}
 
-	JsonValue parseNumber(const string& jsonStr)
+	JsonValue JsonParser::parseNumber(const std::string& jsonStr)
 	{
 		JsonValue num;
 		int start = index;
-		while (isdigit(jsonStr [index]) || jsonStr [index] == '.' || jsonStr[index] == '-')
+		while (isdigit(jsonStr [index]) || jsonStr [index] == '.' || jsonStr [index] == '-')
 		{
 			index++;
 		}
-		string numStr = jsonStr.substr(start, index - start);
-		num.numberValue = (float32) stod(numStr);
-		num.type = JsonType::Number;
+		std::string numStr = jsonStr.substr(start, index - start);
+		num.m_number_value = (float32) stod(numStr);
+		num.m_type = JsonType::Number;
 		return num;
 	}
 
-	void skipWhilespace(const string& jsonStr)
+	void JsonParser::skipWhilespace(const std::string& jsonStr)
 	{
 		while (isspace(jsonStr [index]))
 		{
 			index++;
 		}
 	}
-};
 
-void printJsonValue(const JsonValue& jsonValue, int depth = 0)
-{
-	switch (jsonValue.type)
+	std::string JsonParser::toJsonString(JsonValue p_value) const
 	{
-		case JsonType::Object:
-			cout << "{\n";
-			for (const auto& pair : jsonValue.objectValue)
-			{
-				cout << string(depth + 1, '\t') << "\"" << pair.first << "\": ";
-				printJsonValue(pair.second, depth + 1);
-				cout << ",\n";
-			}
-			cout << string(depth, '\t') << "}";
-			break;
-		case JsonType::Array:
-			cout << "[\n";
-			for (const auto& value : jsonValue.arrayValue)
-			{
-				cout << string(depth + 1, '\t');
-				printJsonValue(value, depth + 1);
-				cout << ",\n";
-			}
-			cout << string(depth, '\t') << "]";
-			break;
-		case JsonType::String:
-			cout << "\"" << jsonValue.stringValue << "\"";
-			break;
-		case JsonType::Number:
-			cout << jsonValue.numberValue;
-			break;
-		case JsonType::True:
-			cout << "true";
-			break;
-		case JsonType::False:
-			cout << "false";
-			break;
-		case JsonType::Null:
-			cout << "null";
-			break;
-	}
-}
-
-int JsonParserTest::runtest(const char* p_path, PhysicSystem* p_physic_system)
-{
-	ifstream file(p_path);
-	if (!file.is_open())
-	{
-		cout << "Failed to open file" << endl;
-		return 1;
-	}
-
-	string jsonStr((istreambuf_iterator<char>(file)), istreambuf_iterator<char>());
-
-	JsonParser parser;
-	try
-	{
-		JsonValue jsonValue = parser.parse(jsonStr);
-		printJsonValue(jsonValue);
-		cout << endl;
-
-		string formatVersion = jsonValue.objectValue.find("format_version")->second.stringValue;
-		//vector<Scene*> scenes;
-		for (const auto& sceneValue : jsonValue.objectValue.find("scenes")->second.arrayValue)
+		switch (p_value.m_type)
 		{
-			std::string sceneIdentifier = sceneValue.objectValue.begin()->second.objectValue.find("identifier")->second.stringValue;
-			Scene* scene = new Scene(sceneIdentifier);
-			p_physic_system->AddScene(scene);
-
-			for (const auto& objectValue : sceneValue.objectValue.begin()->second.objectValue.find("objects")->second.arrayValue)
+			case JsonType::Object:
 			{
-				Object* object = nullptr;
-				if (objectValue.objectValue.begin()->second.objectValue.find("type")->second.stringValue == "model")
+				std::string jsonStr = "{";
+				bool isFirst = true;
+				for (const auto& pair : p_value.m_object_value)
 				{
-					std::string identifier = objectValue.objectValue.begin()->second.objectValue.find("identifier")->second.stringValue;
-					object = new ModelObject(identifier);
+					if (!isFirst)
+					{
+						jsonStr += ",";
+					}
+					jsonStr += "\"" + pair.first + "\":" + toJsonString(pair.second);
+					isFirst = false;
 				}
-				else if (objectValue.objectValue.begin()->second.objectValue.find("type")->second.stringValue == "light")
-				{
-					std::string identifier = objectValue.objectValue.begin()->second.objectValue.find("identifier")->second.stringValue;
-					object = new Light(identifier);
-				}
-				const auto& componentValue = objectValue.objectValue.begin()->second.objectValue.find("components")->second.objectValue;
-
-				std::unordered_map<std::string, Component*> components = object->GetComponents();
-
-				// Transform component
-				const auto& transformComponentValue = componentValue.find("transform");
-				TransformComponent* transformComponent = dynamic_cast<TransformComponent*>(components.find("Transform")->second);
-				vec3f position(0.0f), rotation(0.0f), scale(1.0f);
-				const auto& transformComponentProperties = transformComponentValue->second.objectValue.find("properties");
-
-				const auto& transformTransformProperty = transformComponentProperties->second.objectValue.find("transform");
-
-				const auto& positionTransformTransformProperty = transformTransformProperty->second.objectValue.find("position")->second.arrayValue;
-				position.x = positionTransformTransformProperty [0].numberValue;
-				position.y = positionTransformTransformProperty [1].numberValue;
-				position.z = positionTransformTransformProperty [2].numberValue;
-				const auto& rotationTransformTransformProperty = transformTransformProperty->second.objectValue.find("rotation")->second.arrayValue;
-				rotation.x = rotationTransformTransformProperty [0].numberValue;
-				rotation.y = rotationTransformTransformProperty [1].numberValue;
-				rotation.z = rotationTransformTransformProperty [2].numberValue;
-				const auto& scaleTransformTransformProperty = transformTransformProperty->second.objectValue.find("scale")->second.arrayValue;
-				scale.x = scaleTransformTransformProperty [0].numberValue;
-				scale.y = scaleTransformTransformProperty [1].numberValue;
-				scale.z = scaleTransformTransformProperty [2].numberValue;
-				
-				transformComponent->SetPosition(position);
-				transformComponent->SetRotation(rotation);
-				transformComponent->SetScale(scale);
-
-				// Shader component
-				const auto& shaderComponentValue = componentValue.find("shader");
-				const auto& shaderComponentProperties = shaderComponentValue->second.objectValue.find("properties");
-
-				const auto& shaderProperty = shaderComponentProperties->second.objectValue.find("shaders");
-				//std::string shaderIdentifier = shaderProperty->second.objectValue.find("identifier")->second.stringValue;
-
-				if (object->m_type == "model")
-				{
-					// Physics component
-					const auto& physicsComponentValue = componentValue.find("physics");
-					PhysicsComponent* physicsComponent = dynamic_cast<PhysicsComponent*>(components.find("Physics")->second);
-					ModelObject* modelObject = dynamic_cast<ModelObject*>(object);
-					const auto& physicsComponentProperties = physicsComponentValue->second.objectValue.find("properties");
-
-					const auto& physicsTransformProperty = physicsComponentProperties->second.objectValue.find("transform");
-
-					const auto& positionPhysicsTransformProperty = physicsTransformProperty->second.objectValue.find("position")->second.arrayValue;
-					position.x = positionPhysicsTransformProperty [0].numberValue;
-					position.y = positionPhysicsTransformProperty [1].numberValue;
-					position.z = positionPhysicsTransformProperty [2].numberValue;
-					const auto& rotationPhysicsTransformProperty = physicsTransformProperty->second.objectValue.find("rotation")->second.arrayValue;
-					rotation.x = rotationPhysicsTransformProperty [0].numberValue;
-					rotation.y = rotationPhysicsTransformProperty [1].numberValue;
-					rotation.z = rotationPhysicsTransformProperty [2].numberValue;
-					const auto& scalePhysicsTransformProperty = physicsTransformProperty->second.objectValue.find("scale")->second.arrayValue;
-					scale.x = scalePhysicsTransformProperty [0].numberValue;
-					scale.y = scalePhysicsTransformProperty [1].numberValue;
-					scale.z = scalePhysicsTransformProperty [2].numberValue;
-
-					const auto& physicsModelShapeProperty = physicsComponentProperties->second.objectValue.find("model_type")->second.stringValue;
-					JPH::RefConst<JPH::Shape> modelShape;
-					if (physicsModelShapeProperty == "CUBE")
-					{
-						modelObject->SetModelType(ModelType::CUBE);
-					}
-					else if (physicsModelShapeProperty == "SPHERE")
-					{
-						modelObject->SetModelType(ModelType::SPHERE);
-					}
-					else if (physicsModelShapeProperty == "CAPSULE")
-					{
-						modelObject->SetModelType(ModelType::CAPSULE);
-					}
-					else if (physicsModelShapeProperty == "CYLINDER")
-					{
-						modelObject->SetModelType(ModelType::CYLINDER);
-					}
-					else if (physicsModelShapeProperty == "PLANE")
-					{
-						modelObject->SetModelType(ModelType::PLANE);
-					}
-					else if (physicsModelShapeProperty == "QUAD")
-					{
-						modelObject->SetModelType(ModelType::QUAD);
-					}
-
-					const auto& physicsMotionTypeProperty = physicsComponentProperties->second.objectValue.find("motion_type")->second.stringValue;
-					JPH::EMotionType motionType = JPH::EMotionType::Dynamic;
-					if (physicsMotionTypeProperty == "Dynamic")
-					{
-						motionType = JPH::EMotionType::Dynamic;
-					}
-					else if (physicsMotionTypeProperty == "Kinematic")
-					{
-						motionType = JPH::EMotionType::Kinematic;
-					}
-					else if (physicsMotionTypeProperty == "Static")
-					{
-						motionType = JPH::EMotionType::Static;
-					}
-
-					const auto& physicsActivationProperty = physicsComponentProperties->second.objectValue.find("activation")->second.stringValue;
-					JPH::EActivation activation = JPH::EActivation::DontActivate;
-					if (physicsActivationProperty == "DontActivate")
-					{
-						activation = JPH::EActivation::DontActivate;
-					}
-					else if (physicsActivationProperty == "Activate")
-					{
-						activation = JPH::EActivation::Activate;
-					}
-
-					// Audio component
-					const auto& audioComponentValue = componentValue.find("audio");
-					const auto& audioComponentProperties = audioComponentValue->second.objectValue.find("properties");
-
-
-					const auto& modelsValue = objectValue.objectValue.begin()->second.objectValue.find("models")->second.objectValue;
-					const auto& modelvalue = modelsValue.find("model")->second.objectValue;
-					const auto& modelIdentifier = modelvalue.find("identifier")->second.stringValue;
-					const auto& modelPath = modelvalue.find("path")->second.stringValue;
-					Model* model = new Model(modelPath);
-					modelObject->AddModel(model);
-					scene->AddObject(object);
-					physicsComponent->GetBodyInterface()->SetMotionType(physicsComponent->GetBody()->GetID(), motionType, activation);
-				}
-				else
-				{
-					scene->AddObject(object);
-				}
-				//object->AddObserver(scene);
+				jsonStr += "}";
+				return jsonStr;
 			}
-			scenes.push_back(scene);
+			case JsonType::Array:
+			{
+				std::string jsonStr = "[";
+				bool isFirst = true;
+				for (const auto& val : p_value.m_array_value)
+				{
+					if (!isFirst)
+					{
+						jsonStr += ",";
+					}
+					jsonStr += toJsonString(val);
+					isFirst = false;
+				}
+				jsonStr += "]";
+				return jsonStr;
+			}
+			case JsonType::String:
+				return "\"" + p_value.m_string_value + "\"";
+			case JsonType::Number:
+				return std::to_string(p_value.m_number_value);
+			case JsonType::True:
+				return "true";
+			case JsonType::False:
+				return "false";
+			case JsonType::Null:
+				return "null";
+			default:
+				return "";
+				break;
 		}
 	}
-	catch (const exception& e)
-	{
-		cout << "Error: " << e.what() << endl;
-	}
-	return 0;
 }
