@@ -155,18 +155,4 @@ namespace Spore
 	{
 		return m_velocity;
 	}
-
-	void PhysicsComponent::Tick1(uint32 p_step)
-	{
-		/*JPH::RVec3 position = JPHVec3(m_position);
-		JPH::Vec3 velocity = JPHVec3(m_velocity);*/
-		m_position = Vec3f(m_body_interface->GetCenterOfMassPosition(m_body->GetID()));
-		m_rotation = Vec3f(m_body_interface->GetRotation(m_body->GetID()));
-		m_velocity = Vec3f(m_body_interface->GetLinearVelocity(m_body->GetID()));
-		std::cout << "Step " << p_step << ": " <<
-			"Position = (" << m_position.x << ", " << m_position.y << ", " << m_position.z << "), " <<
-			"Rotation = (" << m_rotation.x << ", " << m_rotation.y << ", " << m_rotation.z << "), " <<
-			"Velocity = (" << m_velocity.x << ", " << m_velocity.y << ", " << m_velocity.z << ")" <<
-			std::endl;
-	}
 }
