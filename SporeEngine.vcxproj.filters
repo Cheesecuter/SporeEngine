@@ -801,6 +801,9 @@
     <ClCompile Include="Runtime\Core\Base\Global.cpp">
       <Filter>源文件\Core\Base</Filter>
     </ClCompile>
+    <ClCompile Include="Runtime\ECS\Component\ModelComponent.cpp">
+      <Filter>源文件\ECS\Component</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Runtime\Core\Base\Types.hpp">
@@ -1881,6 +1884,9 @@
       <Filter>源文件\Spore\Utils</Filter>
     </ClInclude>
     <ClInclude Include="Runtime\ECS\Component\LightComponent.hpp">
+      <Filter>源文件\ECS\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\ECS\Component\ModelComponent.hpp">
       <Filter>源文件\ECS\Component</Filter>
     </ClInclude>
   </ItemGroup>

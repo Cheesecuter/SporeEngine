@@ -158,6 +158,7 @@
     <ClCompile Include="Runtime\ECS\Component.cpp" />
     <ClCompile Include="Runtime\ECS\Component\AudioComponent.cpp" />
     <ClCompile Include="Runtime\ECS\Component\LightComponent.cpp" />
+    <ClCompile Include="Runtime\ECS\Component\ModelComponent.cpp" />
     <ClCompile Include="Runtime\ECS\Component\PhysicsComponent.cpp" />
     <ClCompile Include="Runtime\ECS\Component\ShaderComponent.cpp" />
     <ClCompile Include="Runtime\ECS\Component\TransformComponent.cpp" />
@@ -383,6 +384,7 @@
     <ClInclude Include="Runtime\ECS\Component.hpp" />
     <ClInclude Include="Runtime\ECS\Component\AudioComponent.hpp" />
     <ClInclude Include="Runtime\ECS\Component\LightComponent.hpp" />
+    <ClInclude Include="Runtime\ECS\Component\ModelComponent.hpp" />
     <ClInclude Include="Runtime\ECS\Component\PhysicsComponent.hpp" />
     <ClInclude Include="Runtime\ECS\Component\ShaderComponent.hpp" />
     <ClInclude Include="Runtime\ECS\Component\TransformComponent.hpp" />
