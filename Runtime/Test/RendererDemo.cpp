@@ -17,8 +17,8 @@
 #include <PhysicSystem.hpp>
 #include <AudioSystem.hpp>
 #include <BasicModelsRegister.hpp>
-
 #include <JsonParser.hpp>
+#include <Serializer.hpp>
 
 using namespace Spore;
 
@@ -163,11 +163,15 @@ void Runtime(MainWindow* p_window, UI* p_ui, PhysicSystem* p_physic_system)
     sceneMapper.push_back(scene2);
 
     std::vector<Scene*> scenesFromJson;
+    Serializer* serializer = new Serializer();
     if (firstjson)
     {
-        JsonParserTest jsontest;
-        jsontest.runtest("./Assets/Configs/config1.json", p_physic_system);
-        scenesFromJson = jsontest.scenes;
+        serializer->SetPhysicSystem(p_physic_system);
+        serializer->Deserialize("./Assets/Configs/config3.json");
+        scenesFromJson = serializer->GetScenes();
+        //JsonParserTest jsontest;
+        //jsontest.runtest("./Assets/Configs/config1.json", p_physic_system);
+        //scenesFromJson = jsontest.scenes;
         firstjson = false;
     }
     for (int i = 0; i < scenesFromJson.size(); i++)
@@ -208,6 +212,7 @@ void Runtime(MainWindow* p_window, UI* p_ui, PhysicSystem* p_physic_system)
         currentFrame = static_cast<float32>(glfwGetTime());
         deltaTime = currentFrame - lastFrame;
         lastFrame = currentFrame;
+        p_ui->m_delta_time = deltaTime;
 
         glClearColor(backgroungColor.x, backgroungColor.y, backgroungColor.z, backgroungColor.w);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -217,21 +222,6 @@ void Runtime(MainWindow* p_window, UI* p_ui, PhysicSystem* p_physic_system)
         p_ui->RenderPanels(p_window);
 
         Keyboard::GetInstance().processInput(p_window, editorCamera, deltaTime);
-
-        for (int i = 0; i < sceneMapper.size(); i++)
-        {
-            if (sceneMapper[i]->m_flag_run)
-            {
-                ;
-                if (sceneMapper [i]->IsActive(step))
-                {
-                    ++sceneMapper [i]->step;
-
-                    const int cCollisionSteps = 1;
-                    sceneMapper [i]->m_physics_system->Update(1.0f / 60.0f, cCollisionSteps, sceneMapper [i]->m_temp_allocator, sceneMapper [i]->m_job_system);
-                }
-            }
-        }
 
         mat4f projection = glm::perspective(glm::radians(editorCamera.m_zoom),
                                             (float32) p_window->GetWindowWidth() / (float32) p_window->GetWindowHeight(),
@@ -287,7 +277,7 @@ void Runtime(MainWindow* p_window, UI* p_ui, PhysicSystem* p_physic_system)
             (shaders, &floorTexture, model);
             p_window->m_render_pipeline->Render(shaders, &editorCamera,
                                              (uint32) shadow_width, (uint32) shadow_height,
-                                             projection, view, model);
+                                             projection, view, model, deltaTime);
             glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
             glfwGetFramebufferSize(p_window->m_window, &displayW, &displayH);
@@ -310,7 +300,7 @@ void Runtime(MainWindow* p_window, UI* p_ui, PhysicSystem* p_physic_system)
             plane->Render(shaders, &floorTexture, model);
             p_window->m_render_pipeline->Render(shaders, &editorCamera,
                                              (uint32) p_window->GetWindowWidth(), (uint32) p_window->GetWindowHeight(),
-                                             projection, view, model);
+                                             projection, view, model, deltaTime);
             debugDepthQuadShader.Use();
             debugDepthQuadShader.SetFloat("near_plane", nearPlane);
             debugDepthQuadShader.SetFloat("far_plane", farPlane);
@@ -324,7 +314,7 @@ void Runtime(MainWindow* p_window, UI* p_ui, PhysicSystem* p_physic_system)
                                                projection, view, model);*/
         p_window->m_render_pipeline->Render(shaders, &editorCamera,
                                          (uint32) p_window->GetWindowWidth(), (uint32) p_window->GetWindowHeight(),
-                                         projection, view, model);
+                                         projection, view, model, deltaTime);
         p_window->m_render_pipeline->RenderSkyBox(&editorCamera, projection, view);
         p_window->m_render_pipeline->RenderGrid(&editorCamera, projection, view);
 
