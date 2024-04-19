@@ -95,27 +95,25 @@ namespace Spore
 
 	void RenderPipeline::Render(std::vector<Shader*> p_shaders, Camera* p_camera,
 								uint32 p_screen_width, uint32 p_screen_height,
-								mat4f p_projection, mat4f p_view, mat4f p_model,
-								float32 p_delta_time)
+								mat4f p_projection, mat4f p_view, mat4f p_model)
 	{
 		for (std::pair<std::string, Scene*> it : m_scene_mapper)
 		{
 			Scene* scene = it.second;
 			scene->Render(p_shaders, p_camera, p_screen_width, p_screen_height,
-						  p_projection, p_view, p_model, p_delta_time);
+						  p_projection, p_view, p_model);
 		}
 	}
 
 	void RenderPipeline::ForwardRender(std::vector<Shader*> p_shaders, Camera* p_camera,
 									   uint32 p_screen_width, uint32 p_screen_height,
-									   mat4f p_projection, mat4f p_view, mat4f p_model,
-									   float32 p_delta_time)
+									   mat4f p_projection, mat4f p_view, mat4f p_model)
 	{
 		for (std::pair<std::string, Scene*> it : m_scene_mapper)
 		{
 			Scene* scene = it.second;
 			scene->Render(p_shaders, p_camera, p_screen_width, p_screen_height,
-						  p_projection, p_view, p_model, p_delta_time);
+						  p_projection, p_view, p_model);
 		}
 	}
 
@@ -303,8 +301,7 @@ namespace Spore
 
 	void RenderPipeline::DeferredRender(std::vector<Shader*> p_shaders, Camera* p_camera,
 										uint32 p_screen_width, uint32 p_screen_height,
-										mat4f p_projection, mat4f p_view, mat4f p_model,
-										float32 p_delta_time)
+										mat4f p_projection, mat4f p_view, mat4f p_model)
 	{
 		//glViewport(m_scene_pos_x, m_scene_pos_y, m_scene_width, m_scene_height);
 		glBindFramebuffer(GL_FRAMEBUFFER, m_g_buffer);
@@ -313,7 +310,7 @@ namespace Spore
 		{
 			Scene* scene = it.second;
 			scene->Render(p_shaders, p_camera, p_screen_width, p_screen_height,
-						  p_projection, p_view, p_model, p_delta_time);
+						  p_projection, p_view, p_model);
 		}
 		RenderSkyBox(p_camera, p_projection, p_view);
 		RenderGrid(p_camera, p_projection, p_view);
@@ -456,8 +453,7 @@ namespace Spore
 	void RenderPipeline::ShadowMapRender(std::shared_ptr<Light> p_light,
 										 std::vector<Shader*> p_shaders, Camera* p_camera,
 										 uint32 p_screen_width, uint32 p_screen_height,
-										 mat4f p_projection, mat4f p_view, mat4f p_model,
-										 float32 p_delta_time)
+										 mat4f p_projection, mat4f p_view, mat4f p_model)
 	{
 		m_light_projection = glm::ortho(-10.0f, 10.0f, -10.0f, 10.0f, m_near_plane, m_far_plane);
 		m_light_view = glm::lookAt(p_light->GetPosition(), vec3f(0.0f), vec3f(0.0f, 1.0f, 0.0f));
@@ -467,7 +463,7 @@ namespace Spore
 		glViewport(0, 0, SHADOW_WIDTH, SHADOW_HEIGHT);
 		glBindFramebuffer(GL_FRAMEBUFFER, m_depth_map_FBO);
 		glClear(GL_DEPTH_BUFFER_BIT);
-		Render(p_shaders, p_camera, p_screen_width, p_screen_height, p_projection, p_view, p_model, p_delta_time);
+		Render(p_shaders, p_camera, p_screen_width, p_screen_height, p_projection, p_view, p_model);
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
 		m_shadow_mapping_shader->Use();
@@ -478,7 +474,7 @@ namespace Spore
 		m_shadow_mapping_shader->SetMat4("lightSpaceMatrix", m_light_space_matrix);
 		glActiveTexture(GL_TEXTURE1);
 		glBindTexture(GL_TEXTURE_2D, m_depth_map);
-		Render(p_shaders, p_camera, p_screen_width, p_screen_height, p_projection, p_view, p_model, p_delta_time);
+		Render(p_shaders, p_camera, p_screen_width, p_screen_height, p_projection, p_view, p_model);
 
 		m_debug_depth_quad_shader->Use();
 		m_debug_depth_quad_shader->SetFloat("near_plane", m_near_plane);

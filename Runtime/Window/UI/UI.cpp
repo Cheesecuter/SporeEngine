@@ -602,7 +602,7 @@ namespace Spore
 				{
 					ImGui::Text("Type: %s", m_selected_object->m_type.c_str());
 					ImGui::Separator();
-					if (m_selected_object->m_type == "Model")
+					if (m_selected_object->m_type == "model")
 					{
 						ModelObject* modelObject = dynamic_cast<ModelObject*>(m_selected_object);
 						ImGui::Text("Models");
@@ -767,17 +767,7 @@ namespace Spore
 						for (uint32 n = 0; n < shaderIdentifiers.size(); n++)
 						{
 							if (ImGui::Selectable(shaderIdentifiers [n].c_str(), selected_shader == n))
-							{
 								selected_shader = n;
-							}
-							if (ImGui::BeginDragDropSource())
-							{
-								selected_shader = n;
-								const char* identifier = shaderIdentifiers [n].c_str();
-								ImGui::SetDragDropPayload("ShaderDragDrop", identifier, strlen(identifier) + 1);
-								ImGui::Text("%s", identifier);
-								ImGui::EndDragDropSource();
-							}
 							if (ImGui::BeginPopupContextItem())
 							{
 								selected_shader = n;
@@ -925,7 +915,6 @@ namespace Spore
 
 			ImGui::Text("Camera Position: %.2f, %.2f, %.2f", p_window->m_camera->m_position.x, p_window->m_camera->m_position.y, p_window->m_camera->m_position.z);
 			ImGui::Text(" %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
-			ImGui::Text(" %.5f", m_delta_time);
 
 			if (ImGui::Button("Run"))
 			{
@@ -948,18 +937,6 @@ namespace Spore
 				m_selected_scene->m_flag_stop = true;
 				g_tick_run = false;
 				g_tick_stop = true;
-			}
-
-			if (ImGui::Button("Export"))
-			{
-				std::vector<Scene*> scenes;
-				for (std::pair<std::string, Scene*> it_scene : p_window->m_render_pipeline->m_scene_mapper)
-				{
-					scenes.push_back(it_scene.second);
-				}
-				Serializer* serializer = new Serializer();
-				serializer->SetScenes(scenes);
-				serializer->Serialize("./Assets/Configs/config3.json");
 			}
 
 			ImGui::End();

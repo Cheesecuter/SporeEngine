@@ -4,7 +4,7 @@ namespace Spore
 {
 	ModelObject::ModelObject(const std::string& p_identifier) : Object(p_identifier)
 	{
-		m_type = "Model";
+		m_type = "model";
 		m_model_mapper = std::map<std::string, Model*>();
 		ModelComponent* modelComponent = new ModelComponent();
 		AddComponent(modelComponent);

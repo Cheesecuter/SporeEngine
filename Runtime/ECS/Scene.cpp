@@ -14,7 +14,7 @@ namespace Spore
 
 	void Scene::AddObject(Object* p_object)
 	{
-		if (p_object->m_type == "Model")
+		if (p_object->m_type == "model")
 		{
 			ModelObject* modelObject = dynamic_cast<ModelObject*>(p_object);
 			TransformComponent* transformComponent = dynamic_cast<TransformComponent*>(
@@ -82,19 +82,23 @@ namespace Spore
 		m_object_mapper.erase(p_object->m_identifier);
 	}
 
+	void Scene::Update(float32 p_deltaTime)
+	{
+
+	}
+
 	void Scene::Render(std::vector<Shader*> p_shaders, Camera* p_camera,
 					   uint32 p_screen_width, uint32 p_screen_height,
-					   mat4f p_projection, mat4f p_view, mat4f p_model, 
-					   float32 p_delta_time)
+					   mat4f p_projection, mat4f p_view, mat4f p_model)
 	{
 		for (const std::pair<std::string, Object*> it : m_object_mapper)
 		{
 			Object* object = it.second;
-			if (object->m_type == "Default")
+			if (object->m_type == "default")
 			{
 
 			}
-			else if (object->m_type == "Model")
+			else if (object->m_type == "model")
 			{
 				ModelObject* modelObject = dynamic_cast<ModelObject*>(object);
 				modelObject->m_flag_run = m_flag_run;
@@ -104,19 +108,14 @@ namespace Spore
 					modelObject->Render(p_shaders, p_camera, p_screen_width, p_screen_height,
 								   p_projection, p_view, p_model);
 				}
-				if (g_tick_run)
-				{
-					const int cCollisionSteps = 1;
-					m_physics_system->Update(p_delta_time / 10, cCollisionSteps, m_temp_allocator, m_job_system);
-				}
 			}
-			else if (object->m_type == "Plane")
+			else if (object->m_type == "plane")
 			{
 				Plane* plane = dynamic_cast<Plane*>(object);
 				Texture* floorTexture = AssetsManager::GetInstance().m_texture_mapper.find("default.png")->second;
 				plane->Render(p_shaders, floorTexture, p_model);
 			}
-			else if (object->m_type == "Light")
+			else if (object->m_type == "light")
 			{
 				Light* light = dynamic_cast<Light*>(object);
 				light->Render(p_shaders, p_camera, p_screen_width, p_screen_height,
@@ -156,6 +155,26 @@ namespace Spore
 		return nullptr;
 	}
 
+	bool Scene::IsActive(uint32 p_step)
+	{
+		bool flag = false;
+		for (const std::pair<std::string, Object*> it : m_object_mapper)
+		{
+			Object* object = it.second;
+			if (object->m_type == "model")
+			{
+				ModelObject* modelObject = dynamic_cast<ModelObject*>(object);
+				PhysicsComponent* physicsComponent = dynamic_cast<PhysicsComponent*>(object->GetComponents().find("Physics")->second);
+				if (m_body_interface->IsActive(physicsComponent->GetBody()->GetID()))
+				{
+					flag = true;
+					physicsComponent->Tick1(p_step);
+				}
+			}
+		}
+		return flag;
+	}
+
 	void Scene::Tick(uint32 step)
 	{
 
@@ -166,7 +185,7 @@ namespace Spore
 		for (const std::pair<std::string, Object*> it : m_object_mapper)
 		{
 			Object* object = it.second;
-			if (object->m_type == "Model")
+			if (object->m_type == "model")
 			{
 				ModelObject* modelObject = dynamic_cast<ModelObject*>(object);
 				PhysicsComponent* physicsComponent = dynamic_cast<PhysicsComponent*>(object->GetComponents().find("Physics")->second);

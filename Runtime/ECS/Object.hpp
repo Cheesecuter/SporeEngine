@@ -20,7 +20,7 @@ namespace Spore
 		virtual ~Object();
 
 		std::string m_identifier;
-		std::string m_type = "Default";
+		std::string m_type = "default";
 		bool m_selected = false;
 		void AddObserver(ObjectObserver* p_observer);
 		void RemoveObserver(ObjectObserver* p_observer);

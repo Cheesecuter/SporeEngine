@@ -62,7 +62,6 @@ namespace Spore
 		std::replace(pathS.begin(), pathS.end(), '\\', '/');
 		m_directory = pathS.substr(0, pathS.find_last_of('/'));
 		m_identifier = pathS.substr(pathS.find_last_of('/') + 1, pathS.size());
-		m_path = pathS;
 		// process ASSIMP's root node recursively
 		ProcessNode(scene->mRootNode, scene);
 		AssetsManager::GetInstance().m_model_mapper.insert(std::make_pair(m_identifier, this));

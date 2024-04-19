@@ -21,7 +21,6 @@ namespace Spore
 		std::vector<Texture> m_textures_loaded;
 		std::vector<Mesh> m_meshes;
 		std::string m_directory;
-		std::string m_path;
 		bool m_gamma_correction;
 
 		void AddObserver(ModelObserver* p_observer);
