@@ -10,5 +10,10 @@ namespace Spore
 		ModelObserver();
 		virtual ~ModelObserver();
 		virtual void OnModelDeleted(Model* p_model);
+
+	protected:
+
+	private:
+
 	};
 }

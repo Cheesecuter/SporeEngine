@@ -103,7 +103,7 @@ namespace Spore
 				ModelObject* modelObject = dynamic_cast<ModelObject*>(object);
 				modelObject->m_flag_run = m_flag_run;
 				modelObject->m_flag_stop = m_flag_stop;
-				if (!modelObject->m_model_mapper.empty())
+				if (!modelObject->ModelMapperEmpty())
 				{
 					modelObject->Render(p_shaders, p_camera, p_screen_width, p_screen_height,
 								   p_projection, p_view, p_model);

@@ -6,6 +6,8 @@ namespace Spore
 	{
 		m_type = "model";
 		m_model_mapper = std::map<std::string, Model*>();
+		ModelComponent* modelComponent = new ModelComponent();
+		AddComponent(modelComponent);
 		ShaderComponent* shaderComponent = new ShaderComponent(); 
 		//Shader* shader = AssetsManager::GetInstance().m_shader_mapper.find("ModelLoadingFragment.glsl")->second;
 		Shader* shader = AssetsManager::GetInstance().m_shader_mapper.find("LightingFragment.glsl")->second;
@@ -34,74 +36,67 @@ namespace Spore
 
 	void ModelObject::AddModel(Model* p_model)
 	{
-		m_model_mapper.insert(std::make_pair(p_model->m_identifier, p_model));
-		m_model_mapper [p_model->m_identifier]->AddObserver(this);
+		ModelComponent* modelComponent = dynamic_cast<ModelComponent*>(m_components.find("Model")->second);
+		modelComponent->AddModel(p_model);
 	}
 
 	Model* ModelObject::GetModel()
 	{
-		return m_model_mapper.begin()->second;
+		ModelComponent* modelComponent = dynamic_cast<ModelComponent*>(m_components.find("Model")->second);
+		return modelComponent->GetModel();
 	}
 
 	void ModelObject::DeleteModel(Model* p_model)
 	{
-		m_model_mapper.erase(p_model->m_identifier);
-		m_model_mapper [p_model->m_identifier]->RemoveObserver(this);
+		ModelComponent* modelComponent = dynamic_cast<ModelComponent*>(m_components.find("Model")->second);
+		modelComponent->DeleteModel(p_model->m_identifier);
 	}
 
 	void ModelObject::DeleteModel(std::string p_identifier)
 	{
-		m_model_mapper.erase(p_identifier);
-		m_model_mapper [p_identifier]->RemoveObserver(this);
+		ModelComponent* modelComponent = dynamic_cast<ModelComponent*>(m_components.find("Model")->second);
+		modelComponent->DeleteModel(p_identifier);
 	}
 
 	void ModelObject::OnModelDeleted(Model* p_model)
 	{
-		m_model_mapper.erase(p_model->m_identifier);
-		ModelObject::~ModelObject();
+
+	}
+
+	bool ModelObject::ModelMapperEmpty()
+	{
+		ModelComponent* modelComponent = dynamic_cast<ModelComponent*>(m_components.find("Model")->second);
+		return modelComponent->GetModel() == nullptr;
 	}
 
 	void ModelObject::SetModelType(ModelType p_model_type)
 	{
-		m_model_type = p_model_type;
+		ModelComponent* modelComponent = dynamic_cast<ModelComponent*>(m_components.find("Model")->second);
+		modelComponent->SetModelType(p_model_type);
 	}
 
 	ModelType ModelObject::GetModelType()
 	{
-		return m_model_type;
+		ModelComponent* modelComponent = dynamic_cast<ModelComponent*>(m_components.find("Model")->second);
+		return modelComponent->GetModelType();
 	}
 
 	void ModelObject::Render(std::vector<Shader*> p_shaders, Camera* p_camera,
 						uint32 p_screen_width, uint32 p_screen_height,
 						mat4f p_projection, mat4f p_view, mat4f p_model)
 	{
+		PhysicsComponent* physicsComponent = dynamic_cast<PhysicsComponent*>(m_components.find("Physics")->second);
+		TransformComponent* transformComponent = dynamic_cast<TransformComponent*>(m_components.find("Transform")->second);
 		p_projection = glm::perspective(glm::radians(p_camera->m_zoom),
 										(float32) p_screen_width / (float32) p_screen_height, 0.1f, 10000.0f);
 		p_view = p_camera->GetViewMatrix();
-
-		PhysicsComponent* physicsComponent = dynamic_cast<PhysicsComponent*>(m_components.find("Physics")->second);
-		TransformComponent* transformComponent = dynamic_cast<TransformComponent*>(m_components.find("Transform")->second);
+		p_model = transformComponent->GetMatrix();
+		ModelComponent* modelComponent = dynamic_cast<ModelComponent*>(m_components.find("Model")->second);
+		modelComponent->SetModelTransformMatrixNode(p_projection, p_view, p_model);
 		ShaderComponent* shaderComponent = dynamic_cast<ShaderComponent*>(m_components.find("Shader")->second);
-		Model* model = nullptr;
 		transformComponent->Tick(10);
 		physicsComponent->Tick(10);
 		shaderComponent->Tick(10);
-		p_model = transformComponent->GetMatrix();
-		for (std::map<std::string, Model*>::iterator it_model = m_model_mapper.begin(); it_model != m_model_mapper.end(); it_model++)
-		{
-			model = it_model->second;
-			for (std::pair<std::string, ShaderNode*> it_shader : shaderComponent->GetShaders())
-			{
-				if (it_shader.second->m_is_loading)
-				{
-					it_shader.second->m_shader->Use();
-					it_shader.second->m_shader->SetBool("alphaFilterFlag", it_shader.second->m_shader->m_alpha_filter_flag);
-					it_shader.second->m_shader->SetMat4("projection", p_projection);
-					it_shader.second->m_shader->SetMat4("view", p_view);
-					it_shader.second->m_shader->SetMat4("model", p_model);
-					model->Draw(*(it_shader.second->m_shader));
-				}
-			}
-		}
+		modelComponent->Tick(10);
 	}
 }
