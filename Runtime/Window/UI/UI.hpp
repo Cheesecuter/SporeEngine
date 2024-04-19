@@ -12,6 +12,7 @@
 #include <Audio.hpp>
 #include <Scene.hpp>
 #include <Gizmos.hpp>
+#include <Serializer.hpp>
 
 #include <Windows.h>
 
@@ -35,6 +36,7 @@ namespace Spore
 		void Render();
 		void RenderPanels(MainWindow* p_window);
 		void ShowDemoWindow();
+		float32 m_delta_time = 0.0f;
 
 	protected:
 

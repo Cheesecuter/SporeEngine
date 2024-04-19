@@ -4,7 +4,7 @@ namespace Spore
 {
 	Light::Light(const std::string& p_identifier) : Object(p_identifier, true)
 	{
-		m_type = "light";
+		m_type = "Light";
 		ShaderComponent* shaderComponent = new ShaderComponent();
 		//Shader* lightingShader = AssetsManager::GetInstance().m_shader_mapper.find("LightingFragment.glsl")->second;
 		Shader* modelShader = AssetsManager::GetInstance().m_shader_mapper.find("ModelLoadingFragment.glsl")->second;

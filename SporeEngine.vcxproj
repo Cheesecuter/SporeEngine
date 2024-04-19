@@ -154,6 +154,7 @@
     <ClCompile Include="Runtime\Core\Math\SDKMath.cpp" />
     <ClCompile Include="Runtime\Core\Reflection\Reflection.cpp" />
     <ClCompile Include="Runtime\Core\Serializer\JsonParser.cpp" />
+    <ClCompile Include="Runtime\Core\Serializer\JsonValue.cpp" />
     <ClCompile Include="Runtime\Core\Serializer\Serializer.cpp" />
     <ClCompile Include="Runtime\ECS\Component.cpp" />
     <ClCompile Include="Runtime\ECS\Component\AudioComponent.cpp" />
@@ -166,7 +167,6 @@
     <ClCompile Include="Runtime\ECS\Object.cpp" />
     <ClCompile Include="Runtime\ECS\Objects\ModelObject.cpp" />
     <ClCompile Include="Runtime\ECS\Objects\Plane.cpp" />
-    <ClCompile Include="Runtime\ECS\Objects\RigidObject.cpp" />
     <ClCompile Include="Runtime\ECS\Scene.cpp" />
     <ClCompile Include="Runtime\ECS\Tick.cpp" />
     <ClCompile Include="Runtime\ECS\Transform.cpp" />
@@ -380,6 +380,7 @@
     <ClInclude Include="Runtime\Core\Math\SDKMath.hpp" />
     <ClInclude Include="Runtime\Core\Reflection\Reflection.hpp" />
     <ClInclude Include="Runtime\Core\Serializer\JsonParser.hpp" />
+    <ClInclude Include="Runtime\Core\Serializer\JsonValue.hpp" />
     <ClInclude Include="Runtime\Core\Serializer\Serializer.hpp" />
     <ClInclude Include="Runtime\ECS\Component.hpp" />
     <ClInclude Include="Runtime\ECS\Component\AudioComponent.hpp" />
@@ -392,7 +393,6 @@
     <ClInclude Include="Runtime\ECS\Object.hpp" />
     <ClInclude Include="Runtime\ECS\Objects\ModelObject.hpp" />
     <ClInclude Include="Runtime\ECS\Objects\Plane.hpp" />
-    <ClInclude Include="Runtime\ECS\Objects\RigidObject.hpp" />
     <ClInclude Include="Runtime\ECS\Scene.hpp" />
     <ClInclude Include="Runtime\ECS\Tick.hpp" />
     <ClInclude Include="Runtime\ECS\Transform.hpp" />

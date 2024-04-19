@@ -40,14 +40,17 @@ namespace Spore
 		void PreRender();
 		void Render(std::vector<Shader*> p_shaders, Camera* p_camera,
 					uint32 p_screen_width, uint32 p_screen_height,
-					mat4f p_projection, mat4f p_view, mat4f p_model);
+					mat4f p_projection, mat4f p_view, mat4f p_model,
+					float32 p_delta_time);
 		void ForwardRender(std::vector<Shader*> p_shaders, Camera* p_camera,
 						   uint32 p_screen_width, uint32 p_screen_height,
-						   mat4f p_projection, mat4f p_view, mat4f p_model);
+						   mat4f p_projection, mat4f p_view, mat4f p_model,
+						   float32 p_delta_time);
 		void InitGBuffer(uint32 p_screen_width, uint32 p_screen_height);
 		void DeferredRender(std::vector<Shader*> p_shaders, Camera* p_camera,
 							uint32 p_screen_width, uint32 p_screen_height,
-							mat4f p_projection, mat4f p_view, mat4f p_model);
+							mat4f p_projection, mat4f p_view, mat4f p_model,
+							float32 p_delta_time);
 		void InitPostProcesser(uint32 p_screen_width, uint32 p_screen_height, PostProcess* p_post_process);
 		PostProcesser* GetPostProcesser();
 		void PostProcessRenderToFBO();
@@ -61,7 +64,8 @@ namespace Spore
 		void ShadowMapRender(std::shared_ptr<Light> p_light,
 							 std::vector<Shader*> p_shaders, Camera* p_camera,
 							 uint32 p_screen_width, uint32 p_screen_height,
-							 mat4f p_projection, mat4f p_view, mat4f p_model);
+							 mat4f p_projection, mat4f p_view, mat4f p_model,
+							 float32 p_delta_time);
 		void ShadingRender();
 		void InitGrid();
 		void RenderGrid(Camera* p_camera, mat4f p_projection, mat4f p_view);

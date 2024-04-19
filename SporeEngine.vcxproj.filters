@@ -291,9 +291,6 @@
     <ClCompile Include="Runtime\Physics\Utils\ContactListenerImpl.cpp">
       <Filter>源文件\Physics\Utils</Filter>
     </ClCompile>
-    <ClCompile Include="Runtime\ECS\Objects\RigidObject.cpp">
-      <Filter>源文件\ECS\Objects</Filter>
-    </ClCompile>
     <ClCompile Include="Runtime\ECS\Component\PhysicsComponent.cpp">
       <Filter>源文件\ECS\Component</Filter>
     </ClCompile>
@@ -804,6 +801,9 @@
     <ClCompile Include="Runtime\ECS\Component\ModelComponent.cpp">
       <Filter>源文件\ECS\Component</Filter>
     </ClCompile>
+    <ClCompile Include="Runtime\Core\Serializer\JsonValue.cpp">
+      <Filter>源文件\Core\Serializer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Runtime\Core\Base\Types.hpp">
@@ -925,9 +925,6 @@
     </ClInclude>
     <ClInclude Include="Runtime\Physics\Test\PTSimpleTest.hpp">
       <Filter>源文件\Physics\Test</Filter>
-    </ClInclude>
-    <ClInclude Include="Runtime\ECS\Objects\RigidObject.hpp">
-      <Filter>源文件\ECS\Objects</Filter>
     </ClInclude>
     <ClInclude Include="Runtime\ECS\Component\PhysicsComponent.hpp">
       <Filter>源文件\ECS\Component</Filter>
@@ -1888,6 +1885,9 @@
     </ClInclude>
     <ClInclude Include="Runtime\ECS\Component\ModelComponent.hpp">
       <Filter>源文件\ECS\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\Core\Serializer\JsonValue.hpp">
+      <Filter>源文件\Core\Serializer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

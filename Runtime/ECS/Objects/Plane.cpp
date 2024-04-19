@@ -4,7 +4,7 @@ namespace Spore
 {
 	Plane::Plane(const std::string& p_identifier) : Object(p_identifier)
 	{
-		m_type = "plane";
+		m_type = "Plane";
 		TransformComponent* transformComponent = new TransformComponent();
 		ShaderComponent* shaderComponent = new ShaderComponent();
 		m_model_mapper = std::map<std::string, Model*>();
