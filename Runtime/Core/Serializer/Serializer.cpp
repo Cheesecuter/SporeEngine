@@ -233,6 +233,43 @@ namespace Spore
 						}
 						physicsComponentObject.m_object_value ["properties"].m_object_value ["activation"] = JsonValue(activationStr);
 
+						std::vector<JsonValue> physicsComponentPropertyLinearVelocityArray;
+						JsonValue physicsComponentPropertyLinearVelocityNumber;
+						physicsComponentPropertyLinearVelocityNumber.m_type = JsonType::Number;
+						vec3f physicsLinearVelocity = physicsComponent->GetLinearVelocity();
+						physicsComponentPropertyLinearVelocityNumber.m_number_value = physicsLinearVelocity.x;
+						physicsComponentPropertyLinearVelocityArray.push_back(physicsComponentPropertyLinearVelocityNumber);
+						physicsComponentPropertyLinearVelocityNumber.m_number_value = physicsLinearVelocity.y;
+						physicsComponentPropertyLinearVelocityArray.push_back(physicsComponentPropertyLinearVelocityNumber);
+						physicsComponentPropertyLinearVelocityNumber.m_number_value = physicsLinearVelocity.z;
+						physicsComponentPropertyLinearVelocityArray.push_back(physicsComponentPropertyLinearVelocityNumber);
+						physicsComponentObject.m_object_value ["properties"].m_object_value ["velocity"].m_object_value ["linear_velocity"] = physicsComponentPropertyLinearVelocityArray;
+						physicsComponentObject.m_object_value ["properties"].m_object_value ["velocity"].m_object_value ["linear_velocity"].m_type = JsonType::Array;
+
+						std::vector<JsonValue> physicsComponentPropertyAngularVelocityArray;
+						JsonValue physicsComponentPropertyAngularVelocityNumber;
+						physicsComponentPropertyAngularVelocityNumber.m_type = JsonType::Number;
+						vec3f physicsAngularVelocity = physicsComponent->GetAngularVelocity();
+						physicsComponentPropertyAngularVelocityNumber.m_number_value = physicsAngularVelocity.x;
+						physicsComponentPropertyAngularVelocityArray.push_back(physicsComponentPropertyAngularVelocityNumber);
+						physicsComponentPropertyAngularVelocityNumber.m_number_value = physicsAngularVelocity.y;
+						physicsComponentPropertyAngularVelocityArray.push_back(physicsComponentPropertyAngularVelocityNumber);
+						physicsComponentPropertyAngularVelocityNumber.m_number_value = physicsAngularVelocity.z;
+						physicsComponentPropertyAngularVelocityArray.push_back(physicsComponentPropertyAngularVelocityNumber);
+						physicsComponentObject.m_object_value ["properties"].m_object_value ["velocity"].m_object_value ["angular_velocity"] = physicsComponentPropertyAngularVelocityArray;
+						physicsComponentObject.m_object_value ["properties"].m_object_value ["velocity"].m_object_value ["angular_velocity"].m_type = JsonType::Array;
+
+						physicsComponentObject.m_object_value ["properties"].m_object_value ["velocity"].m_type = JsonType::Object;
+
+						float32 physicsGravityFactor = physicsComponent->GetGravityFactor();
+						physicsComponentObject.m_object_value ["properties"].m_object_value ["gravity_factor"] = JsonValue(physicsGravityFactor);
+
+						float32 physicsRestitution = physicsComponent->GetRestitution();
+						physicsComponentObject.m_object_value ["properties"].m_object_value ["restitution"] = JsonValue(physicsRestitution);
+
+						float32 physicsFriction = physicsComponent->GetFriction();
+						physicsComponentObject.m_object_value ["properties"].m_object_value ["friction"] = JsonValue(physicsFriction);
+
 						physicsComponentObject.m_object_value ["properties"].m_type = JsonType::Object;
 
 						objectComponentObject.m_object_value ["physics"] = physicsComponentObject;
@@ -449,6 +486,30 @@ namespace Spore
 							activation = JPH::EActivation::Activate;
 						}
 
+						vec3f linearVelocity(0.0f, 0.0f, 0.0f);
+						vec3f angularVelocity(0.0f, 0.0f, 0.0f);
+
+						const auto& physicsVelocityProperty = physicsComponentProperties->second.m_object_value.find("velocity");
+
+						const auto& linearVelocityPhysicsVelocityProperty = physicsVelocityProperty->second.m_object_value.find("linear_velocity")->second.m_array_value;
+						linearVelocity.x = linearVelocityPhysicsVelocityProperty [0].m_number_value;
+						linearVelocity.y = linearVelocityPhysicsVelocityProperty [1].m_number_value;
+						linearVelocity.z = linearVelocityPhysicsVelocityProperty [2].m_number_value;
+
+						const auto& angularVelocityPhysicsVelocityProperty = physicsVelocityProperty->second.m_object_value.find("angular_velocity")->second.m_array_value;
+						angularVelocity.x = angularVelocityPhysicsVelocityProperty [0].m_number_value;
+						angularVelocity.y = angularVelocityPhysicsVelocityProperty [1].m_number_value;
+						angularVelocity.z = angularVelocityPhysicsVelocityProperty [2].m_number_value;
+
+						const auto& physicsGravityFactorProperty = physicsComponentProperties->second.m_object_value.find("gravity_factor");
+						float32 gravityFactor = physicsGravityFactorProperty->second.m_number_value;
+
+						const auto& physicsRestitutionProperty = physicsComponentProperties->second.m_object_value.find("restitution");
+						float32 restitution = physicsRestitutionProperty->second.m_number_value;
+
+						const auto& physicsFrictionProperty = physicsComponentProperties->second.m_object_value.find("friction");
+						float32 friction = physicsFrictionProperty->second.m_number_value;
+
 						// Audio component
 						const auto& audioComponentValue = componentValue.find("audio");
 						const auto& audioComponentProperties = audioComponentValue->second.m_object_value.find("properties");
@@ -461,6 +522,11 @@ namespace Spore
 						Model* model = new Model(modelPath);
 						modelObject->AddModel(model);
 						scene->AddObject(object);
+						physicsComponent->GetBody()->GetMotionProperties()->SetLinearVelocity(JPHVec3(linearVelocity));
+						physicsComponent->GetBody()->GetMotionProperties()->SetAngularVelocity(JPHVec3(angularVelocity));
+						physicsComponent->GetBody()->GetMotionProperties()->SetGravityFactor(gravityFactor);
+						physicsComponent->GetBody()->SetRestitution(restitution);
+						physicsComponent->GetBody()->SetFriction(friction);
 						physicsComponent->GetBodyInterface()->SetMotionType(physicsComponent->GetBody()->GetID(), motionType, activation);
 					}
 					else

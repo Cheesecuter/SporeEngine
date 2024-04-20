@@ -14,11 +14,8 @@
                             "name": "Physics",
                             "properties": {
                                 "activation": "DontActivate",
-                                "friction": 0.200000,
-                                "gravity_factor": 1.000000,
                                 "model_type": "PLANE",
                                 "motion_type": "Static",
-                                "restitution": 0.000000,
                                 "transform": {
                                     "position": [
                                         0.000000,
@@ -34,18 +31,6 @@
                                         1.000000,
                                         1.000000,
                                         1.000000
-                                    ]
-                                },
-                                "velocity": {
-                                    "angular_velocity": [
-                                        0.000000,
-                                        0.000000,
-                                        0.000000
-                                    ],
-                                    "linear_velocity": [
-                                        0.000000,
-                                        0.000000,
-                                        0.000000
                                     ]
                                 }
                             }
@@ -98,11 +83,8 @@
                             "name": "Physics",
                             "properties": {
                                 "activation": "DontActivate",
-                                "friction": 0.200000,
-                                "gravity_factor": 1.000000,
                                 "model_type": "PLANE",
                                 "motion_type": "Static",
-                                "restitution": 0.000000,
                                 "transform": {
                                     "position": [
                                         -2.000000,
@@ -118,18 +100,6 @@
                                         1.000000,
                                         1.000000,
                                         1.000000
-                                    ]
-                                },
-                                "velocity": {
-                                    "angular_velocity": [
-                                        0.000000,
-                                        0.000000,
-                                        0.000000
-                                    ],
-                                    "linear_velocity": [
-                                        0.000000,
-                                        0.000000,
-                                        0.000000
                                     ]
                                 }
                             }
@@ -182,11 +152,8 @@
                             "name": "Physics",
                             "properties": {
                                 "activation": "DontActivate",
-                                "friction": 0.200000,
-                                "gravity_factor": 1.000000,
                                 "model_type": "PLANE",
                                 "motion_type": "Static",
-                                "restitution": 0.000000,
                                 "transform": {
                                     "position": [
                                         2.000000,
@@ -202,18 +169,6 @@
                                         1.000000,
                                         1.000000,
                                         1.000000
-                                    ]
-                                },
-                                "velocity": {
-                                    "angular_velocity": [
-                                        0.000000,
-                                        0.000000,
-                                        0.000000
-                                    ],
-                                    "linear_velocity": [
-                                        0.000000,
-                                        0.000000,
-                                        0.000000
                                     ]
                                 }
                             }
@@ -266,11 +221,8 @@
                             "name": "Physics",
                             "properties": {
                                 "activation": "DontActivate",
-                                "friction": 0.200000,
-                                "gravity_factor": 1.000000,
                                 "model_type": "PLANE",
                                 "motion_type": "Static",
-                                "restitution": 0.000000,
                                 "transform": {
                                     "position": [
                                         0.000000,
@@ -286,18 +238,6 @@
                                         1.000000,
                                         1.000000,
                                         1.000000
-                                    ]
-                                },
-                                "velocity": {
-                                    "angular_velocity": [
-                                        0.000000,
-                                        0.000000,
-                                        0.000000
-                                    ],
-                                    "linear_velocity": [
-                                        0.000000,
-                                        0.000000,
-                                        0.000000
                                     ]
                                 }
                             }
@@ -350,11 +290,8 @@
                             "name": "Physics",
                             "properties": {
                                 "activation": "DontActivate",
-                                "friction": 0.200000,
-                                "gravity_factor": 1.000000,
                                 "model_type": "PLANE",
                                 "motion_type": "Static",
-                                "restitution": 0.000000,
                                 "transform": {
                                     "position": [
                                         -2.000000,
@@ -370,18 +307,6 @@
                                         1.000000,
                                         1.000000,
                                         1.000000
-                                    ]
-                                },
-                                "velocity": {
-                                    "angular_velocity": [
-                                        0.000000,
-                                        0.000000,
-                                        0.000000
-                                    ],
-                                    "linear_velocity": [
-                                        0.000000,
-                                        0.000000,
-                                        0.000000
                                     ]
                                 }
                             }
@@ -434,11 +359,8 @@
                             "name": "Physics",
                             "properties": {
                                 "activation": "DontActivate",
-                                "friction": 0.200000,
-                                "gravity_factor": 1.000000,
                                 "model_type": "PLANE",
                                 "motion_type": "Static",
-                                "restitution": 0.000000,
                                 "transform": {
                                     "position": [
                                         2.000000,
@@ -454,18 +376,6 @@
                                         1.000000,
                                         1.000000,
                                         1.000000
-                                    ]
-                                },
-                                "velocity": {
-                                    "angular_velocity": [
-                                        0.000000,
-                                        0.000000,
-                                        0.000000
-                                    ],
-                                    "linear_velocity": [
-                                        0.000000,
-                                        0.000000,
-                                        0.000000
                                     ]
                                 }
                             }
@@ -518,11 +428,8 @@
                             "name": "Physics",
                             "properties": {
                                 "activation": "DontActivate",
-                                "friction": 0.200000,
-                                "gravity_factor": 1.000000,
                                 "model_type": "PLANE",
                                 "motion_type": "Static",
-                                "restitution": 0.000000,
                                 "transform": {
                                     "position": [
                                         0.000000,
@@ -538,18 +445,6 @@
                                         1.000000,
                                         1.000000,
                                         1.000000
-                                    ]
-                                },
-                                "velocity": {
-                                    "angular_velocity": [
-                                        0.000000,
-                                        0.000000,
-                                        0.000000
-                                    ],
-                                    "linear_velocity": [
-                                        0.000000,
-                                        0.000000,
-                                        0.000000
                                     ]
                                 }
                             }
@@ -602,11 +497,8 @@
                             "name": "Physics",
                             "properties": {
                                 "activation": "DontActivate",
-                                "friction": 0.200000,
-                                "gravity_factor": 1.000000,
                                 "model_type": "PLANE",
                                 "motion_type": "Static",
-                                "restitution": 0.000000,
                                 "transform": {
                                     "position": [
                                         0.000000,
@@ -622,18 +514,6 @@
                                         1.000000,
                                         1.000000,
                                         1.000000
-                                    ]
-                                },
-                                "velocity": {
-                                    "angular_velocity": [
-                                        0.000000,
-                                        0.000000,
-                                        0.000000
-                                    ],
-                                    "linear_velocity": [
-                                        0.000000,
-                                        0.000000,
-                                        0.000000
                                     ]
                                 }
                             }
@@ -686,11 +566,8 @@
                             "name": "Physics",
                             "properties": {
                                 "activation": "DontActivate",
-                                "friction": 0.200000,
-                                "gravity_factor": 1.000000,
                                 "model_type": "PLANE",
                                 "motion_type": "Static",
-                                "restitution": 0.000000,
                                 "transform": {
                                     "position": [
                                         0.000000,
@@ -706,18 +583,6 @@
                                         1.000000,
                                         1.000000,
                                         1.000000
-                                    ]
-                                },
-                                "velocity": {
-                                    "angular_velocity": [
-                                        0.000000,
-                                        0.000000,
-                                        0.000000
-                                    ],
-                                    "linear_velocity": [
-                                        0.000000,
-                                        0.000000,
-                                        0.000000
                                     ]
                                 }
                             }
@@ -807,39 +672,24 @@
                         "physics": {
                             "name": "Physics",
                             "properties": {
-                                "activation": "Activate",
-                                "friction": 2.300000,
-                                "gravity_factor": 3.600000,
+                                "activation": "DontActivate",
                                 "model_type": "CUBE",
                                 "motion_type": "Dynamic",
-                                "restitution": 1.200000,
                                 "transform": {
                                     "position": [
-                                        12.320846,
-                                        9.266244,
-                                        4.627209
+                                        4.761680,
+                                        1.000000,
+                                        -2.393842
                                     ],
                                     "rotation": [
-                                        174.919052,
-                                        31.018133,
-                                        127.182335
+                                        -179.999100,
+                                        -89.562103,
+                                        179.999100
                                     ],
                                     "scale": [
-                                        0.999726,
-                                        0.999484,
-                                        0.999609
-                                    ]
-                                },
-                                "velocity": {
-                                    "angular_velocity": [
-                                        0.072316,
-                                        -0.128268,
-                                        1.940728
-                                    ],
-                                    "linear_velocity": [
-                                        -2.130226,
-                                        2.529619,
-                                        -0.080369
+                                        0.999849,
+                                        0.999969,
+                                        0.999852
                                     ]
                                 }
                             }
@@ -855,19 +705,19 @@
                             "properties": {
                                 "transform": {
                                     "position": [
-                                        12.331223,
-                                        9.253847,
-                                        4.627600
+                                        4.761680,
+                                        1.000000,
+                                        -2.393842
                                     ],
                                     "rotation": [
-                                        174.966568,
-                                        31.012756,
-                                        126.665222
+                                        -179.999100,
+                                        -89.562103,
+                                        179.999100
                                     ],
                                     "scale": [
-                                        0.999726,
-                                        0.999484,
-                                        0.999609
+                                        0.999849,
+                                        0.999969,
+                                        0.999852
                                     ]
                                 }
                             }
@@ -892,16 +742,13 @@
                             "name": "Physics",
                             "properties": {
                                 "activation": "DontActivate",
-                                "friction": 0.200000,
-                                "gravity_factor": 1.000000,
                                 "model_type": "QUAD",
                                 "motion_type": "Dynamic",
-                                "restitution": 0.000000,
                                 "transform": {
                                     "position": [
                                         -5.920431,
                                         0.097893,
-                                        -0.396748
+                                        -0.396468
                                     ],
                                     "rotation": [
                                         0.061691,
@@ -912,18 +759,6 @@
                                         0.200000,
                                         0.200000,
                                         0.200000
-                                    ]
-                                },
-                                "velocity": {
-                                    "angular_velocity": [
-                                        0.000000,
-                                        0.000000,
-                                        0.000000
-                                    ],
-                                    "linear_velocity": [
-                                        0.000000,
-                                        0.000000,
-                                        0.000000
                                     ]
                                 }
                             }
@@ -941,7 +776,7 @@
                                     "position": [
                                         -5.920431,
                                         0.097893,
-                                        -0.396748
+                                        -0.396468
                                     ],
                                     "rotation": [
                                         0.061691,
@@ -976,38 +811,23 @@
                             "name": "Physics",
                             "properties": {
                                 "activation": "DontActivate",
-                                "friction": 0.200000,
-                                "gravity_factor": 1.000000,
                                 "model_type": "QUAD",
                                 "motion_type": "Dynamic",
-                                "restitution": 0.000000,
                                 "transform": {
                                     "position": [
                                         -7.790982,
-                                        0.099991,
+                                        0.099992,
                                         -3.104055
                                     ],
                                     "rotation": [
                                         -0.000082,
-                                        1.958724,
+                                        1.958727,
                                         0.000049
                                     ],
                                     "scale": [
                                         0.200000,
                                         0.200000,
                                         0.200000
-                                    ]
-                                },
-                                "velocity": {
-                                    "angular_velocity": [
-                                        0.000000,
-                                        0.000000,
-                                        0.000000
-                                    ],
-                                    "linear_velocity": [
-                                        0.000000,
-                                        0.000000,
-                                        0.000000
                                     ]
                                 }
                             }
@@ -1024,12 +844,12 @@
                                 "transform": {
                                     "position": [
                                         -7.790982,
-                                        0.099991,
+                                        0.099992,
                                         -3.104055
                                     ],
                                     "rotation": [
                                         -0.000082,
-                                        1.958724,
+                                        1.958727,
                                         0.000049
                                     ],
                                     "scale": [
@@ -1060,38 +880,23 @@
                             "name": "Physics",
                             "properties": {
                                 "activation": "DontActivate",
-                                "friction": 0.200000,
-                                "gravity_factor": 1.000000,
                                 "model_type": "PLANE",
                                 "motion_type": "Dynamic",
-                                "restitution": 0.000000,
                                 "transform": {
                                     "position": [
                                         -7.431077,
-                                        0.229949,
-                                        -0.163385
+                                        0.230314,
+                                        -0.162766
                                     ],
                                     "rotation": [
                                         -0.186222,
                                         0.357531,
-                                        7.316570
+                                        7.316571
                                     ],
                                     "scale": [
                                         0.999990,
                                         0.999990,
                                         0.999992
-                                    ]
-                                },
-                                "velocity": {
-                                    "angular_velocity": [
-                                        0.000000,
-                                        0.000000,
-                                        0.000000
-                                    ],
-                                    "linear_velocity": [
-                                        0.000000,
-                                        0.000000,
-                                        0.000000
                                     ]
                                 }
                             }
@@ -1108,13 +913,13 @@
                                 "transform": {
                                     "position": [
                                         -7.431077,
-                                        0.229949,
-                                        -0.163385
+                                        0.230314,
+                                        -0.162766
                                     ],
                                     "rotation": [
                                         -0.186222,
                                         0.357531,
-                                        7.316570
+                                        7.316571
                                     ],
                                     "scale": [
                                         0.999990,
@@ -1144,16 +949,13 @@
                             "name": "Physics",
                             "properties": {
                                 "activation": "DontActivate",
-                                "friction": 0.200000,
-                                "gravity_factor": 1.000000,
                                 "model_type": "CYLINDER",
                                 "motion_type": "Dynamic",
-                                "restitution": 0.000000,
                                 "transform": {
                                     "position": [
-                                        -7.168831,
-                                        1.199861,
-                                        -2.896476
+                                        -7.168869,
+                                        1.199883,
+                                        -2.896469
                                     ],
                                     "rotation": [
                                         179.999924,
@@ -1164,18 +966,6 @@
                                         1.000000,
                                         1.000000,
                                         1.000000
-                                    ]
-                                },
-                                "velocity": {
-                                    "angular_velocity": [
-                                        0.000000,
-                                        0.000000,
-                                        0.000000
-                                    ],
-                                    "linear_velocity": [
-                                        0.000000,
-                                        0.000000,
-                                        0.000000
                                     ]
                                 }
                             }
@@ -1191,9 +981,9 @@
                             "properties": {
                                 "transform": {
                                     "position": [
-                                        -7.168831,
-                                        1.199861,
-                                        -2.896476
+                                        -7.168869,
+                                        1.199883,
+                                        -2.896469
                                     ],
                                     "rotation": [
                                         179.999924,
@@ -1228,38 +1018,23 @@
                             "name": "Physics",
                             "properties": {
                                 "activation": "DontActivate",
-                                "friction": 0.200000,
-                                "gravity_factor": 1.000000,
                                 "model_type": "SPHERE",
                                 "motion_type": "Dynamic",
-                                "restitution": 0.000000,
                                 "transform": {
                                     "position": [
-                                        -9.054769,
+                                        4.030060,
                                         0.999932,
                                         1.797256
                                     ],
                                     "rotation": [
-                                        -54.567429,
-                                        43.061611,
-                                        -56.843712
+                                        -54.567471,
+                                        43.061680,
+                                        -56.843788
                                     ],
                                     "scale": [
                                         0.999987,
                                         0.999992,
                                         0.999913
-                                    ]
-                                },
-                                "velocity": {
-                                    "angular_velocity": [
-                                        0.000000,
-                                        0.000000,
-                                        0.000000
-                                    ],
-                                    "linear_velocity": [
-                                        0.000000,
-                                        0.000000,
-                                        0.000000
                                     ]
                                 }
                             }
@@ -1275,14 +1050,14 @@
                             "properties": {
                                 "transform": {
                                     "position": [
-                                        -9.054769,
+                                        4.030060,
                                         0.999932,
                                         1.797256
                                     ],
                                     "rotation": [
-                                        -54.567429,
-                                        43.061611,
-                                        -56.843712
+                                        -54.567471,
+                                        43.061680,
+                                        -56.843788
                                     ],
                                     "scale": [
                                         0.999987,
@@ -1312,11 +1087,8 @@
                             "name": "Physics",
                             "properties": {
                                 "activation": "DontActivate",
-                                "friction": 0.200000,
-                                "gravity_factor": 1.000000,
                                 "model_type": "PLANE",
                                 "motion_type": "Static",
-                                "restitution": 0.000000,
                                 "transform": {
                                     "position": [
                                         -2.000000,
@@ -1332,18 +1104,6 @@
                                         1.000000,
                                         1.000000,
                                         1.000000
-                                    ]
-                                },
-                                "velocity": {
-                                    "angular_velocity": [
-                                        0.000000,
-                                        0.000000,
-                                        0.000000
-                                    ],
-                                    "linear_velocity": [
-                                        0.000000,
-                                        0.000000,
-                                        0.000000
                                     ]
                                 }
                             }
@@ -1396,11 +1156,8 @@
                             "name": "Physics",
                             "properties": {
                                 "activation": "DontActivate",
-                                "friction": 0.200000,
-                                "gravity_factor": 1.000000,
                                 "model_type": "PLANE",
                                 "motion_type": "Static",
-                                "restitution": 0.000000,
                                 "transform": {
                                     "position": [
                                         0.000000,
@@ -1416,18 +1173,6 @@
                                         1.000000,
                                         1.000000,
                                         1.000000
-                                    ]
-                                },
-                                "velocity": {
-                                    "angular_velocity": [
-                                        0.000000,
-                                        0.000000,
-                                        0.000000
-                                    ],
-                                    "linear_velocity": [
-                                        0.000000,
-                                        0.000000,
-                                        0.000000
                                     ]
                                 }
                             }
@@ -1480,11 +1225,8 @@
                             "name": "Physics",
                             "properties": {
                                 "activation": "DontActivate",
-                                "friction": 0.200000,
-                                "gravity_factor": 1.000000,
                                 "model_type": "PLANE",
                                 "motion_type": "Static",
-                                "restitution": 0.000000,
                                 "transform": {
                                     "position": [
                                         2.000000,
@@ -1500,18 +1242,6 @@
                                         1.000000,
                                         1.000000,
                                         1.000000
-                                    ]
-                                },
-                                "velocity": {
-                                    "angular_velocity": [
-                                        0.000000,
-                                        0.000000,
-                                        0.000000
-                                    ],
-                                    "linear_velocity": [
-                                        0.000000,
-                                        0.000000,
-                                        0.000000
                                     ]
                                 }
                             }
