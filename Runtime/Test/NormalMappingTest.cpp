@@ -89,8 +89,8 @@
 //    // shader configuration
 //    // --------------------
 //    shader.Use();
-//    shader.SetInt("diffuseMap", 0);
-//    shader.SetInt("normalMap", 1);
+//    shader.SetInt("texture_diffuse1", 0);
+//    shader.SetInt("texture_normal1", 1);
 //
 //    // lighting info
 //    // -------------
@@ -116,7 +116,7 @@
 //        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 //
 //        // configure view/projection matrices
-//        glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float) SCR_WIDTH / (float) SCR_HEIGHT, 0.1f, 100.0f);
+//        glm::mat4 projection = glm::perspective(glm::radians(camera.m_zoom), (float) SCR_WIDTH / (float) SCR_HEIGHT, 0.1f, 100.0f);
 //        glm::mat4 view = camera.GetViewMatrix();
 //        shader.Use();
 //        shader.SetMat4("projection", projection);
@@ -125,7 +125,7 @@
 //        glm::mat4 model = glm::mat4(1.0f);
 //        model = glm::rotate(model, glm::radians((float) glfwGetTime() * -10.0f), glm::normalize(glm::vec3(1.0, 0.0, 1.0))); // rotate the quad to show normal mapping from multiple directions
 //        shader.SetMat4("model", model);
-//        shader.SetVec3("viewPos", camera.Position);
+//        shader.SetVec3("viewPos", camera.m_position);
 //        shader.SetVec3("lightPos", lightPos);
 //        glActiveTexture(GL_TEXTURE0);
 //        glBindTexture(GL_TEXTURE_2D, diffuseMap);

@@ -318,9 +318,6 @@
     <ClCompile Include="Runtime\Asset\FileExplorer.cpp">
       <Filter>源文件\Asset</Filter>
     </ClCompile>
-    <ClCompile Include="Runtime\Renderer\GraphicRenderer\BasicModelsRegister.cpp">
-      <Filter>源文件\Renderer\GraphicRenderer</Filter>
-    </ClCompile>
     <ClCompile Include="Runtime\Core\Serializer\Serializer.cpp">
       <Filter>源文件\Core\Serializer</Filter>
     </ClCompile>
@@ -804,6 +801,15 @@
     <ClCompile Include="Runtime\Core\Serializer\JsonValue.cpp">
       <Filter>源文件\Core\Serializer</Filter>
     </ClCompile>
+    <ClCompile Include="Runtime\Renderer\GraphicRenderer\Utils\BasicModelsRegister.cpp">
+      <Filter>源文件\Renderer\GraphicRenderer\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Renderer\GraphicRenderer\Utils\BasicShadersRegister.cpp">
+      <Filter>源文件\Renderer\GraphicRenderer\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Spore\Entrance.cpp">
+      <Filter>源文件\Spore</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Runtime\Core\Base\Types.hpp">
@@ -946,9 +952,6 @@
     </ClInclude>
     <ClInclude Include="Runtime\Asset\FileExplorer.hpp">
       <Filter>源文件\Asset</Filter>
-    </ClInclude>
-    <ClInclude Include="Runtime\Renderer\GraphicRenderer\BasicModelsRegister.hpp">
-      <Filter>源文件\Renderer\GraphicRenderer</Filter>
     </ClInclude>
     <ClInclude Include="Runtime\Core\Serializer\Serializer.hpp">
       <Filter>源文件\Core\Serializer</Filter>
@@ -1888,6 +1891,12 @@
     </ClInclude>
     <ClInclude Include="Runtime\Core\Serializer\JsonValue.hpp">
       <Filter>源文件\Core\Serializer</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\Renderer\GraphicRenderer\Utils\BasicModelsRegister.hpp">
+      <Filter>源文件\Renderer\GraphicRenderer\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\Renderer\GraphicRenderer\Utils\BasicShadersRegister.hpp">
+      <Filter>源文件\Renderer\GraphicRenderer\Utils</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

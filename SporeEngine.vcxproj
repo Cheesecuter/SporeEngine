@@ -180,7 +180,6 @@
     <ClCompile Include="Runtime\Physics\Utils\ContactListenerImpl.cpp" />
     <ClCompile Include="Runtime\Renderer\AudioRenderer\Audio.cpp" />
     <ClCompile Include="Runtime\Renderer\AudioRenderer\AudioSystem.cpp" />
-    <ClCompile Include="Runtime\Renderer\GraphicRenderer\BasicModelsRegister.cpp" />
     <ClCompile Include="Runtime\Renderer\GraphicRenderer\Camera.cpp" />
     <ClCompile Include="Runtime\Renderer\GraphicRenderer\glad\glad.c" />
     <ClCompile Include="Runtime\Renderer\GraphicRenderer\Grid.cpp" />
@@ -191,9 +190,12 @@
     <ClCompile Include="Runtime\Renderer\GraphicRenderer\SkyBox.cpp" />
     <ClCompile Include="Runtime\Renderer\GraphicRenderer\stb_image\stb_image.cpp" />
     <ClCompile Include="Runtime\Renderer\GraphicRenderer\Texture.cpp" />
+    <ClCompile Include="Runtime\Renderer\GraphicRenderer\Utils\BasicModelsRegister.cpp" />
+    <ClCompile Include="Runtime\Renderer\GraphicRenderer\Utils\BasicShadersRegister.cpp" />
     <ClCompile Include="Runtime\Renderer\GraphicRenderer\Utils\ModelObserver.cpp" />
     <ClCompile Include="Runtime\Scripts\MonoTest.cpp" />
     <ClCompile Include="Runtime\Scripts\MonoTest_2.cpp" />
+    <ClCompile Include="Runtime\Spore\Entrance.cpp" />
     <ClCompile Include="Runtime\Spore\Spore.cpp" />
     <ClCompile Include="Runtime\Spore\Utils\AudioRenderer.cpp" />
     <ClCompile Include="Runtime\Spore\Utils\GraphicRenderer.cpp" />
@@ -408,7 +410,6 @@
     <ClInclude Include="Runtime\Physics\Utils\ContactListenerImpl.hpp" />
     <ClInclude Include="Runtime\Renderer\AudioRenderer\Audio.hpp" />
     <ClInclude Include="Runtime\Renderer\AudioRenderer\AudioSystem.hpp" />
-    <ClInclude Include="Runtime\Renderer\GraphicRenderer\BasicModelsRegister.hpp" />
     <ClInclude Include="Runtime\Renderer\GraphicRenderer\Camera.hpp" />
     <ClInclude Include="Runtime\Renderer\GraphicRenderer\Mesh.hpp" />
     <ClInclude Include="Runtime\Renderer\GraphicRenderer\Model.hpp" />
@@ -418,6 +419,8 @@
     <ClInclude Include="Runtime\Renderer\GraphicRenderer\SkyBox.hpp" />
     <ClInclude Include="Runtime\Renderer\GraphicRenderer\stb_image\stb_image.h" />
     <ClInclude Include="Runtime\Renderer\GraphicRenderer\Texture.hpp" />
+    <ClInclude Include="Runtime\Renderer\GraphicRenderer\Utils\BasicModelsRegister.hpp" />
+    <ClInclude Include="Runtime\Renderer\GraphicRenderer\Utils\BasicShadersRegister.hpp" />
     <ClInclude Include="Runtime\Renderer\GraphicRenderer\Utils\ModelObserver.hpp" />
     <ClInclude Include="Runtime\Scripts\MonoTest.h" />
     <ClInclude Include="Runtime\Spore\Spore.hpp" />
