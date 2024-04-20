@@ -9,6 +9,8 @@ namespace Spore
 	public:
 		AudioRenderer();
 		~AudioRenderer();
+		void Init();
+		void Terminate();
 		AudioSystem* GetAudioSystem();
 
 	private:

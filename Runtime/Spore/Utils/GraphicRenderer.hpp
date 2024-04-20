@@ -10,6 +10,11 @@ namespace Spore
 	public:
 		GraphicRenderer();
 		~GraphicRenderer();
+		void Init();
+		void Terminate();
+		Camera* GetCamera();
+		RenderPipeline* GetRenderPipeline();
+		void SetFlipVerticallyOnLoad(bool p_bool);
 
 	private:
 		Camera* m_editor_camera = nullptr;

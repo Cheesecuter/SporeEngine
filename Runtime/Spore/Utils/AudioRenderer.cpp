@@ -4,10 +4,20 @@ namespace Spore
 {
 	AudioRenderer::AudioRenderer()
 	{
-		m_audio_system = new AudioSystem();
+
 	}
 
 	AudioRenderer::~AudioRenderer()
+	{
+
+	}
+
+	void AudioRenderer::Init()
+	{
+		m_audio_system = new AudioSystem();
+	}
+	
+	void AudioRenderer::Terminate()
 	{
 		delete m_audio_system;
 	}
