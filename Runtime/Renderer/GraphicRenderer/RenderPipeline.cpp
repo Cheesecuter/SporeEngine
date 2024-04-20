@@ -21,6 +21,16 @@ namespace Spore
 		m_initialized = true;
 	}
 
+	void RenderPipeline::SetBackgroundColor(vec4f p_background_color)
+	{
+		m_background_color = p_background_color;
+	}
+
+	vec4f RenderPipeline::GetBackgroundColor()
+	{
+		return m_background_color;
+	}
+
 	void RenderPipeline::AddScene(Scene* p_scene)
 	{
 		m_scene_mapper.insert(std::make_pair(p_scene->m_identifier, p_scene));

@@ -25,6 +25,8 @@ namespace Spore
 		std::string m_post_process = "";
 
 		void Initialize();
+		void SetBackgroundColor(vec4f p_background_color);
+		vec4f GetBackgroundColor();
 		void AddScene(Scene* p_scene);
 		void DeleteScene(Scene* p_scene);
 		void DeleteScene(std::string p_identifier);
@@ -81,6 +83,7 @@ namespace Spore
 
 	private:
 		bool m_initialized;
+		vec4f m_background_color = vec4f(0.1f, 0.1f, 0.1f, 1.0f);
 		uint32 m_g_buffer;
 		uint32 m_g_position, m_g_normal, m_g_albedo_specular;
 		uint32 m_forward_render_FBO;
