@@ -474,7 +474,8 @@ namespace Spore
 									std::string name = "quad";
 									ModelObject* object = new ModelObject("obj_" + std::to_string(it_scene->second->m_object_index++) + "_" + name);
 									object->SetModelType(ModelType::QUAD);
-									object->AddModel(AssetsManager::GetInstance().m_model_mapper ["quad.fbx"]);
+									object->AddModel(AssetsManager::GetInstance().m_model_mapper ["plane.fbx"]);
+									//object->AddModel(AssetsManager::GetInstance().m_model_mapper ["quad.fbx"]);
 									it_scene->second->AddObject(object);
 									object->AddObserver(it_scene->second);
 								}
