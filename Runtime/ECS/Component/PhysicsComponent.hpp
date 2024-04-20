@@ -45,7 +45,6 @@ namespace Spore
 		float32 GetRestitution();
 		void SetFriction(float32 p_friction);
 		float32 GetFriction();
-		vec3f GetVelocity();
 
 	protected:
 
@@ -57,6 +56,7 @@ namespace Spore
 		vec3f m_position = vec3f(0.0f, 0.0f, 0.0f);
 		vec3f m_rotation = vec3f(0.0f, 0.0f, 0.0f);
 		vec3f m_scale = vec3f(1.0f, 1.0f, 1.0f);
+		JPH::EMotionType m_current_motion_type;
 		vec3f m_linear_velocity = vec3f(0.0f, 0.0f, 0.0f);
 		vec3f m_angular_velocity = vec3f(0.0f, 0.0f, 0.0f);
 		vec3f m_velocity = vec3f(0.0f, 0.0f, 0.0f);
