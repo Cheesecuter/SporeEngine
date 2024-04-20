@@ -350,11 +350,10 @@ namespace Spore
 		try
 		{
 			m_json_value = parser.parse(jsonStr);
-			printJsonValue(m_json_value);
-			std::cout << std::endl;
+			//printJsonValue(m_json_value);
+			//std::cout << std::endl;
 
 			std::string formatVersion = m_json_value.m_object_value.find("format_version")->second.m_string_value;
-			//vector<Scene*> scenes;
 			for (const auto& sceneValue : m_json_value.m_object_value.find("scenes")->second.m_array_value)
 			{
 				std::string sceneIdentifier = sceneValue.m_object_value.find("identifier")->second.m_string_value;
