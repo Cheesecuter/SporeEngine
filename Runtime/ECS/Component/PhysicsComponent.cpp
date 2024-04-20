@@ -7,6 +7,7 @@ namespace Spore
 	PhysicsComponent::PhysicsComponent()
 	{
 		m_name = "Physics";
+		m_button_image_reset = new Texture("./Assets/Utils/Images/reset.png");
 	}
 
 	PhysicsComponent::~PhysicsComponent()
@@ -65,7 +66,61 @@ namespace Spore
 				}
 				ImGui::EndCombo();
 			}
+
+			SetLinearVelocity(Vec3f(m_body->GetMotionProperties()->GetLinearVelocity()));
+			float linearVelocity [3] = { m_linear_velocity.x, m_linear_velocity.y, m_linear_velocity.z };
+			ImGui::Text("Linear Velocity");
+			ImGui::PushID("Inspector::Physics::EMotionProperties::Linear_Velocity");
+			ImGui::DragFloat3("##Inspector::Physics::EMotionProperties::Linear_Velocity", linearVelocity, 0.1f);
+			ImGui::PopID();
+			ImGui::SameLine();
+			ImGui::PushID("Inspector::Physics::ImageButtonResetLinear_Velocity");
+			if (ImGui::ImageButton((ImTextureID) (intptr_t) m_button_image_reset->m_ID, ImVec2(13, 13)))
+			{
+			}
+			if (ImGui::IsItemClicked())
+			{
+				linearVelocity [0] = 0.0f;
+				linearVelocity [1] = 0.0f;
+				linearVelocity [2] = 0.0f;
+			}
+			ImGui::PopID();
+			m_body->GetMotionProperties()->SetLinearVelocity(JPHVec3(vec3f(linearVelocity [0], linearVelocity [1], linearVelocity [2])));
+
+			SetAngularVelocity(Vec3f(m_body->GetMotionProperties()->GetAngularVelocity()));
+			float angularVelocity [3] = { m_angular_velocity.x, m_angular_velocity.y, m_angular_velocity.z };
+			ImGui::Text("Angular Velocity");
+			ImGui::PushID("Inspector::Physics::EMotionProperties::Angular_Velocity");
+			ImGui::DragFloat3("##Inspector::Physics::EMotionProperties::Angular_Velocity", angularVelocity, 0.1f);
+			ImGui::PopID();
+			ImGui::SameLine();
+			ImGui::PushID("Inspector::Physics::ImageButtonResetAngular_Velocity");
+			if (ImGui::ImageButton((ImTextureID) (intptr_t) m_button_image_reset->m_ID, ImVec2(13, 13)))
+			{
+			}
+			if (ImGui::IsItemClicked())
+			{
+				angularVelocity [0] = 0.0f;
+				angularVelocity [1] = 0.0f;
+				angularVelocity [2] = 0.0f;
+			}
+			ImGui::PopID();
+			m_body->GetMotionProperties()->SetAngularVelocity(JPHVec3(vec3f(angularVelocity [0], angularVelocity [1], angularVelocity [2])));
+
+			SetGravityFactor(m_body->GetMotionProperties()->GetGravityFactor());
+			ImGui::Text("GravityFactor");
+			ImGui::DragFloat("##Inspector::Physics::EMotionProperties::GravityFactor", &m_gravity_factor, 0.1f);
+			m_body->GetMotionProperties()->SetGravityFactor(m_gravity_factor);
+
+			SetRestitution(m_body->GetRestitution());
+			ImGui::Text("Restitution");
+			ImGui::DragFloat("##Inspector::Physics::BodySettings::Restitution", &m_restitution, 0.1f);
+			m_body->SetRestitution(m_restitution);
 			
+			SetFriction(m_body->GetFriction());
+			ImGui::Text("Friction");
+			ImGui::DragFloat("##Inspector::Physics::BodySettings::Friction", &m_friction, 0.1f);
+			m_body->SetFriction(m_friction);
 		}
 	}
 
@@ -149,6 +204,66 @@ namespace Spore
 	mat4x4f PhysicsComponent::GetTransform()
 	{
 		return m_transform;
+	}
+
+	void PhysicsComponent::SetLinearVelocity(vec3f p_velocity)
+	{
+		m_linear_velocity = p_velocity;
+	}
+
+	void PhysicsComponent::SetLinearVelocity(float32 p_x, float32 p_y, float32 p_z)
+	{
+		m_linear_velocity = vec3f(p_x, p_y, p_z);
+	}
+
+	vec3f PhysicsComponent::GetLinearVelocity()
+	{
+		return m_linear_velocity;
+	}
+
+	void PhysicsComponent::SetAngularVelocity(vec3f p_velocity)
+	{
+		m_angular_velocity = p_velocity;
+	}
+
+	void PhysicsComponent::SetAngularVelocity(float32 p_x, float32 p_y, float32 p_z)
+	{
+		m_angular_velocity = vec3f(p_x, p_y, p_z);
+	}
+
+	vec3f PhysicsComponent::GetAngularVelocity()
+	{
+		return m_angular_velocity;
+	}
+
+	void PhysicsComponent::SetGravityFactor(float32 p_gravity_factor)
+	{
+		m_gravity_factor = p_gravity_factor;
+	}
+
+	float32 PhysicsComponent::GetGravityFactor()
+	{
+		return m_gravity_factor;
+	}
+
+	void PhysicsComponent::SetRestitution(float32 p_restitution)
+	{
+		m_restitution = p_restitution;
+	}
+
+	float32 PhysicsComponent::GetRestitution()
+	{
+		return m_restitution;
+	}
+
+	void PhysicsComponent::SetFriction(float32 p_friction)
+	{
+		m_friction = p_friction;
+	}
+
+	float32 PhysicsComponent::GetFriction()
+	{
+		return m_friction;
 	}
 
 	vec3f PhysicsComponent::GetVelocity()

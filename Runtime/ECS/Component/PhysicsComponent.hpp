@@ -5,6 +5,7 @@
 #include <Transform.hpp>
 #include <PhysicSyetemHeaders.h>
 #include <Layers.hpp>
+#include <Texture.hpp>
 
 namespace Spore
 {
@@ -32,6 +33,18 @@ namespace Spore
 		vec3f GetRotation();
 		//vec3f GetScale();
 		mat4x4f GetTransform();
+		void SetLinearVelocity(vec3f p_velocity);
+		void SetLinearVelocity(float32 p_x, float32 p_y, float32 p_z);
+		vec3f GetLinearVelocity();
+		void SetAngularVelocity(vec3f p_velocity);
+		void SetAngularVelocity(float32 p_x, float32 p_y, float32 p_z);
+		vec3f GetAngularVelocity();
+		void SetGravityFactor(float32 p_gravity_factor);
+		float32 GetGravityFactor();
+		void SetRestitution(float32 p_restitution);
+		float32 GetRestitution();
+		void SetFriction(float32 p_friction);
+		float32 GetFriction();
 		vec3f GetVelocity();
 
 	protected:
@@ -44,6 +57,12 @@ namespace Spore
 		vec3f m_position = vec3f(0.0f, 0.0f, 0.0f);
 		vec3f m_rotation = vec3f(0.0f, 0.0f, 0.0f);
 		vec3f m_scale = vec3f(1.0f, 1.0f, 1.0f);
+		vec3f m_linear_velocity = vec3f(0.0f, 0.0f, 0.0f);
+		vec3f m_angular_velocity = vec3f(0.0f, 0.0f, 0.0f);
 		vec3f m_velocity = vec3f(0.0f, 0.0f, 0.0f);
+		float32 m_gravity_factor = 1.0f;
+		float32 m_restitution = 0.0f;
+		float32 m_friction = 0.2f;
+		Texture* m_button_image_reset;
 	};
 }
