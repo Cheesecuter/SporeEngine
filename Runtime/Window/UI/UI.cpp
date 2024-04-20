@@ -963,6 +963,12 @@ namespace Spore
 				serializer->Serialize("./Assets/Configs/config3.json");
 			}
 
+			{
+				ImGui::BeginChild("Console logout", ImVec2((float32) width, (float32) height - 132));
+				
+				ImGui::EndChild();
+			}
+
 			ImGui::End();
 		}
 	}
