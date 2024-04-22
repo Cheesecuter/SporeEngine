@@ -9,7 +9,8 @@ Assets/Models/
 Assets/Scripts/
 Assets/Shaders/
 Assets/Textures/
-Runtime/Debug
+Runtime/Test/
+Runtime/Sandbox/
 SDKs/
 
 # User-specific files
