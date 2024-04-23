@@ -21,7 +21,7 @@ namespace Spore
 			ImGui::Text("Add Shader");
 			if (ImGui::BeginDragDropTarget())
 			{
-				if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("ShaderDragDrop"))
+				if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("AssetShaderDragDrop"))
 				{
 					const char* shaderIdentifier = static_cast<const char*>(payload->Data);
 					Shader* shaderTemp = AssetsManager::GetInstance().m_shader_mapper [shaderIdentifier];
