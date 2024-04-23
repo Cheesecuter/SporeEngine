@@ -8,9 +8,15 @@
 #include <JoltPhysics/Jolt/Core/JobSystemThreadPool.h>
 #include <JoltPhysics/Jolt/Core/JobSystemSingleThreaded.h>
 #include <JoltPhysics/Jolt/Core/RTTI.h>
+#include <JoltPhysics/Jolt/Geometry/Triangle.h>
 #include <JoltPhysics/Jolt/Physics/PhysicsSettings.h>
 #include <JoltPhysics/Jolt/Physics/PhysicsSystem.h>
+#include <JoltPhysics/Jolt/Physics/Collision/PhysicsMaterialSimple.h>
 #include <JoltPhysics/Jolt/Physics/Collision/Shape/BoxShape.h>
+#include <JoltPhysics/Jolt/Physics/Collision/Shape/CapsuleShape.h>
+#include <JoltPhysics/Jolt/Physics/Collision/Shape/CylinderShape.h>
+#include <JoltPhysics/Jolt/Physics/Collision/Shape/MeshShape.h>
+#include <JoltPhysics/Jolt/Physics/Collision/Shape/ScaledShape.h>
 #include <JoltPhysics/Jolt/Physics/Collision/Shape/SphereShape.h>
 #include <JoltPhysics/Jolt/Physics/Collision/Shape/MeshShape.h>
 #include <JoltPhysics/Jolt/Physics/Collision/Shape/HeightFieldShape.h>
