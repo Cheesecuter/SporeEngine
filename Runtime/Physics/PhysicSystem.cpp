@@ -84,7 +84,7 @@ namespace Spore
 			m_physics_system->SetContactListener(p_scene->GetContactListener());
 		}
 		p_scene->InitPhysics();
-		p_scene->CreateFloor();
+		//p_scene->CreateFloor();
 		m_physics_system->OptimizeBroadPhase();
 	}
 
