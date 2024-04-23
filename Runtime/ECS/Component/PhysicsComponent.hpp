@@ -6,6 +6,7 @@
 #include <PhysicSyetemHeaders.h>
 #include <Layers.hpp>
 #include <Texture.hpp>
+#include <ModelType.hpp>
 
 namespace Spore
 {
@@ -25,13 +26,15 @@ namespace Spore
 		JPH::Body* GetBody();
 		void SetBodyInterface(JPH::BodyInterface* p_body_interface);
 		JPH::BodyInterface* GetBodyInterface();
+		void SetModelType(ModelType p_model_type);
+		ModelType GetModelType();
 		void SetPosition(const vec3f& p_potision);
-		void SetRotation(const vec3f& p_rotation);
-		//void SetScale(const vec3f& p_scale);
-		void SetTransform(const Transform p_transform);
 		vec3f GetPosition();
+		void SetRotation(const vec3f& p_rotation);
 		vec3f GetRotation();
+		//void SetScale(const vec3f& p_scale);
 		//vec3f GetScale();
+		void SetTransform(const Transform p_transform);
 		mat4x4f GetTransform();
 		void SetLinearVelocity(vec3f p_velocity);
 		void SetLinearVelocity(float32 p_x, float32 p_y, float32 p_z);
@@ -52,6 +55,7 @@ namespace Spore
 		JPH::Body* m_body = nullptr;
 		JPH::BodyCreationSettings* m_body_creation_settings = nullptr;
 		JPH::BodyInterface* m_body_interface = nullptr;
+		ModelType m_model_type = ModelType::NONE;
 		mat4x4f m_transform;
 		vec3f m_position = vec3f(0.0f, 0.0f, 0.0f);
 		vec3f m_rotation = vec3f(0.0f, 0.0f, 0.0f);
