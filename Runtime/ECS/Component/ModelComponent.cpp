@@ -19,6 +19,21 @@ namespace Spore
 		if (ImGui::CollapsingHeader(m_name.c_str(), true))
 		{
 			ImGui::Text("Model component");
+			ImGui::Text("Add Model");
+			if (ImGui::BeginDragDropTarget())
+			{
+				if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("AssetModelDragDrop"))
+				{
+					const char* modelIdentifier = static_cast<const char*>(payload->Data);
+					Model* modelTemp = AssetsManager::GetInstance().m_model_mapper [modelIdentifier];
+					if (modelTemp != nullptr)
+					{
+						m_model_mapper.clear();
+						AddModel(modelTemp);
+					}
+					ImGui::EndDragDropTarget();
+				}
+			}
 			for (std::pair<std::string, Model*> it_model : m_model_mapper)
 			{
 				ImGui::Separator();
@@ -40,6 +55,8 @@ namespace Spore
 				it_shader.second->m_shader->SetMat4("projection", m_model_transform_matrix_node.m_projection);
 				it_shader.second->m_shader->SetMat4("view", m_model_transform_matrix_node.m_view);
 				it_shader.second->m_shader->SetMat4("model", m_model_transform_matrix_node.m_model);
+				it_shader.second->m_shader->SetFloat("iTime", (float32) glfwGetTime());
+				it_shader.second->m_shader->SetVec3("iResolution", 1024, 1024, 1024);
 				model->Draw(*(it_shader.second->m_shader));
 			}
 		}

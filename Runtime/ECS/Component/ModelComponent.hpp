@@ -3,20 +3,10 @@
 #include <Component.hpp>
 #include <Model.hpp>
 #include <ModelObserver.hpp>
+#include <ModelType.hpp>
 
 namespace Spore
 {
-	enum class ModelType
-	{
-		CUBE,
-		SPHERE,
-		CAPSULE,
-		CYLINDER,
-		PLANE,
-		QUAD,
-		CUSTOM
-	};
-
 	struct ModelTransformMatrixNode
 	{
 		mat4f m_projection;
@@ -31,9 +21,7 @@ namespace Spore
 		virtual ~ModelComponent();
 		virtual void InspectorPanel() override;
 		virtual void Tick(float32 p_delta_time) override;
-
 		virtual void OnModelDeleted(Model* p_model) override;
-
 		void SetModelType(ModelType p_model_type);
 		ModelType GetModelType();
 		void SetModelTransformMatrixNode(ModelTransformMatrixNode p_model_transform_matrix_node);
