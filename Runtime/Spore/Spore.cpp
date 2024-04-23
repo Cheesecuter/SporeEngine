@@ -29,10 +29,13 @@ namespace Spore
 		m_graphic_renderer->Init();
 		m_audio_renderer->Init();
 		Camera* editorCamera = m_graphic_renderer->GetCamera();
+		Camera* playerCamera = new Camera(0.0f, 1.0f, 0.0f);
 		RenderPipeline* renderPipeline = m_graphic_renderer->GetRenderPipeline();
 		if (editorCamera != nullptr && renderPipeline != nullptr)
 		{
 			m_window = new MainWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Spore Engine", editorCamera, renderPipeline);
+			m_window->SetGraphicRenderer(m_graphic_renderer);
+			m_window->Init();
 			m_ui = new UI(m_window);
 		}
 		Mouse::GetInstance().Update();
@@ -48,8 +51,8 @@ namespace Spore
 
 	void _Spore::PreProcessing()
 	{
-		m_graphic_renderer->GetRenderPipeline()->SetScenePos(m_window->m_width / 6, m_window->m_height / 3);
-		m_graphic_renderer->GetRenderPipeline()->SetSceneSize(m_window->m_width / 6 * 4, m_window->m_height / 3 * 2);
+		m_graphic_renderer->GetRenderPipeline()->SetScenePos(m_window->GetWindowWidth() / 6, m_window->GetWindowHeight() / 3);
+		m_graphic_renderer->GetRenderPipeline()->SetSceneSize(m_window->GetWindowWidth() / 6 * 4, m_window->GetWindowHeight() / 3 * 2);
 
 		BasicModelsRegister basicModelsRegister;
 		BasicShadersRegister basicShadersRegister;
@@ -60,11 +63,11 @@ namespace Spore
 		scenesFromJson = m_serializer->GetScenes();
 		for (int i = 0; i < scenesFromJson.size(); i++)
 		{
-			m_window->m_render_pipeline->AddScene(scenesFromJson [i]);
+			m_window->GetRenderPipeline()->AddScene(scenesFromJson [i]);
 		}
 
-		m_window->m_render_pipeline->InitGrid();
-		m_window->m_render_pipeline->InitSkyBox();
+		m_window->GetRenderPipeline()->InitGrid();
+		m_window->GetRenderPipeline()->InitSkyBox();
 
 
 		Shader* postProcessDefaultShader = new Shader("./Assets/Shaders/FrameBuffersScreenVertex.glsl", "./Assets/Shaders/PostProcesses/DefaultPostProcessFS.glsl");
@@ -72,25 +75,27 @@ namespace Spore
 		Shader* postProcessGrayscaleShader = new Shader("./Assets/Shaders/FrameBuffersScreenVertex.glsl", "./Assets/Shaders/PostProcesses/GrayscalePostProcessFS.glsl");
 		Shader* postProcessSharpenShader = new Shader("./Assets/Shaders/FrameBuffersScreenVertex.glsl", "./Assets/Shaders/PostProcesses/SharpenPostProcessFS.glsl");
 		Shader* postProcessBlurShader = new Shader("./Assets/Shaders/FrameBuffersScreenVertex.glsl", "./Assets/Shaders/PostProcesses/BlurPostProcessFS.glsl");
+		//Shader* postProcessBlurShader = new Shader("./Assets/Shaders/FrameBuffersScreenVertex.glsl", "./Assets/Shaders/PostProcesses/VoronoiNoiseFragment.glsl");
+		//Shader* voronoiNoiseShader = new Shader("./Assets/Shaders/VoronoiNoiseVertex.glsl", "./Assets/Shaders/VoronoiNoiseFragment.glsl");
 		Shader* postProcessEdgeDetectionShader = new Shader("./Assets/Shaders/FrameBuffersScreenVertex.glsl", "./Assets/Shaders/PostProcesses/EdgeDetectionPostProcessFS.glsl");
 
 		PostProcess* postProcessDefault = new PostProcess("Default", postProcessDefaultShader);
-		m_window->m_render_pipeline->InitPostProcesser((uint32) m_window->m_render_pipeline->GetSceneSize().x, (uint32) m_window->m_render_pipeline->GetSceneSize().y, postProcessDefault);
+		m_window->GetRenderPipeline()->InitPostProcesser((uint32) m_window->GetRenderPipeline()->GetSceneSize().x, (uint32) m_window->GetRenderPipeline()->GetSceneSize().y, postProcessDefault);
 
-		m_window->m_render_pipeline->GetPostProcesser()->AddPostProcess(postProcessDefault);
+		m_window->GetRenderPipeline()->GetPostProcesser()->AddPostProcess(postProcessDefault);
 		PostProcess* postProcessInversion = new PostProcess("Inversion", postProcessInversionShader);
-		m_window->m_render_pipeline->GetPostProcesser()->AddPostProcess(postProcessInversion);
+		m_window->GetRenderPipeline()->GetPostProcesser()->AddPostProcess(postProcessInversion);
 		PostProcess* postProcessGrayscale = new PostProcess("Grayscale", postProcessGrayscaleShader);
-		m_window->m_render_pipeline->GetPostProcesser()->AddPostProcess(postProcessGrayscale);
+		m_window->GetRenderPipeline()->GetPostProcesser()->AddPostProcess(postProcessGrayscale);
 		PostProcess* postProcessSharpen = new PostProcess("Sharpen", postProcessSharpenShader);
-		m_window->m_render_pipeline->GetPostProcesser()->AddPostProcess(postProcessSharpen);
+		m_window->GetRenderPipeline()->GetPostProcesser()->AddPostProcess(postProcessSharpen);
 		PostProcess* postProcessBlur = new PostProcess("Blur", postProcessBlurShader);
-		m_window->m_render_pipeline->GetPostProcesser()->AddPostProcess(postProcessBlur);
+		m_window->GetRenderPipeline()->GetPostProcesser()->AddPostProcess(postProcessBlur);
 		PostProcess* postProcessEdgeDetection = new PostProcess("Edge Detection", postProcessEdgeDetectionShader);
-		m_window->m_render_pipeline->GetPostProcesser()->AddPostProcess(postProcessEdgeDetection);
+		m_window->GetRenderPipeline()->GetPostProcesser()->AddPostProcess(postProcessEdgeDetection);
 	
 		glfwPollEvents();
-		vec4f backgroungColor = m_window->m_render_pipeline->GetBackgroundColor();
+		vec4f backgroungColor = m_window->GetRenderPipeline()->GetBackgroundColor();
 		glClearColor(backgroungColor.x, backgroungColor.y, backgroungColor.z, backgroungColor.w);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	}
@@ -107,18 +112,19 @@ namespace Spore
 		Camera* editorCamera = m_graphic_renderer->GetCamera();
 		RenderPipeline* renderPipeline = m_graphic_renderer->GetRenderPipeline();
 
-		while (!glfwWindowShouldClose(m_window->m_window))
+		while (!glfwWindowShouldClose(m_window->GetWindow()))
 		{
 			currentFrame = static_cast<float32>(glfwGetTime());
 			deltaTime = currentFrame - lastFrame;
 			lastFrame = currentFrame;
 
 			m_ui->m_delta_time = deltaTime;
+			Camera* editorCamera = m_graphic_renderer->GetCamera();
 
 			uint32 windowWidth = m_window->GetWindowWidth();
 			uint32 windowHeight = m_window->GetWindowHeight();
 
-			vec4f backgroungColor = m_window->m_render_pipeline->GetBackgroundColor();
+			vec4f backgroungColor = m_window->GetRenderPipeline()->GetBackgroundColor();
 			glClearColor(backgroungColor.x, backgroungColor.y, backgroungColor.z, backgroungColor.w);
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -133,36 +139,36 @@ namespace Spore
 												0.1f, 10000.0f);
 			mat4f view = editorCamera->GetViewMatrix();
 			mat4f model = mat4f(1.0f);
-			m_window->m_render_pipeline->PreRender();
+			m_window->GetRenderPipeline()->PreRender();
 
-			m_window->m_render_pipeline->SetScenePos(windowWidth / 6, windowHeight / 3);
-			m_window->m_render_pipeline->SetSceneSize(windowWidth / 6 * 4, windowHeight / 3 * 2);
+			m_window->GetRenderPipeline()->SetScenePos(windowWidth / 6, windowHeight / 3);
+			m_window->GetRenderPipeline()->SetSceneSize(windowWidth / 6 * 4, windowHeight / 3 * 2);
 
-			if (m_window->m_render_pipeline->m_post_process_on)
+			if (m_window->GetRenderPipeline()->m_post_process_on)
 			{
-				m_window->m_render_pipeline->PostProcessRenderToFBO();
+				m_window->GetRenderPipeline()->PostProcessRenderToFBO();
 			}
 
-			m_window->m_render_pipeline->Render(shaders, editorCamera,
+			m_window->GetRenderPipeline()->Render(shaders, editorCamera,
 												(uint32) windowWidth, (uint32) windowHeight,
 												projection, view, model, deltaTime);
-			m_window->m_render_pipeline->RenderSkyBox(editorCamera, projection, view);
-			m_window->m_render_pipeline->RenderGrid(editorCamera, projection, view);
+			m_window->GetRenderPipeline()->RenderSkyBox(editorCamera, projection, view);
+			m_window->GetRenderPipeline()->RenderGrid(editorCamera, projection, view);
 
-			if (m_window->m_render_pipeline->m_post_process_on)
+			if (m_window->GetRenderPipeline()->m_post_process_on)
 			{
-				m_window->m_render_pipeline->UpdateSceneFBO();
-				m_window->m_render_pipeline->UpdateSceneRBO();
-				m_window->m_render_pipeline->PostProcessFBO();
+				m_window->GetRenderPipeline()->UpdateSceneFBO();
+				m_window->GetRenderPipeline()->UpdateSceneRBO();
+				m_window->GetRenderPipeline()->PostProcessFBO();
 			}
 
 			glViewport(windowWidth / 6, windowHeight / 3, windowWidth / 6 * 4, windowHeight / 3 * 2);
-			glfwGetWindowSize(m_window->m_window, &displayW, &displayH);
+			glfwGetWindowSize(m_window->GetWindow(), &displayW, &displayH);
 			m_window->SetWindowSize(displayW, displayH);
 
 			m_ui->Render();
 
-			glfwSwapBuffers(m_window->m_window);
+			glfwSwapBuffers(m_window->GetWindow());
 			glfwPollEvents();
 		}
 	}
