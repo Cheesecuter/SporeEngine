@@ -24,6 +24,9 @@ namespace Spore
 		bool m_flag_run = false;
 		bool m_flag_stop = true;
 		double step = 0;
+		float32 m_delta_time_factor = 10.0f;
+		Camera* m_editor_camera = nullptr;
+		Camera* m_player_camera = nullptr;
 
 		JPH::JobSystem* m_job_system = nullptr;
 		JPH::PhysicsSystem* m_physics_system = nullptr;
