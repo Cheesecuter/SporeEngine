@@ -13,6 +13,7 @@ namespace Spore
 		m_world_up = p_up;
 		m_yaw = p_yaw;
 		m_pitch = p_pitch;
+		m_camera_mode = CameraMode::EDITOR;
 		UpdateCameraVectors();
 	}
 
@@ -28,6 +29,7 @@ namespace Spore
 		m_world_up = vec3f(p_up_x, p_up_y, p_up_z);
 		m_yaw = p_yaw;
 		m_pitch = p_pitch;
+		m_camera_mode = CameraMode::EDITOR;
 		UpdateCameraVectors();
 	}
 
