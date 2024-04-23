@@ -1,6 +1,8 @@
 #include <PhysicsComponent.hpp>
 #include <TransformComponent.hpp>
+#include <ModelComponent.hpp>
 #include <Object.hpp>
+#include <ModelObject.hpp>
 
 namespace Spore
 {
@@ -156,8 +158,90 @@ namespace Spore
 												   JPH::EMotionType p_motion_type,
 												   JPH::ObjectLayer p_object_layer)
 	{
-		m_body_creation_settings = new JPH::BodyCreationSettings(
-			p_shape, p_position, p_rotation, p_motion_type, p_object_layer);
+		Object* object = GetReferencedObject();
+		ModelObject* modelObject = dynamic_cast<ModelObject*>(object);
+		m_model_type = modelObject->GetModelType();
+		if (p_shape == nullptr && m_model_type != ModelType::NONE)
+		{
+			JPH::RefConst<JPH::Shape> modelShape;
+			if (m_model_type == ModelType::CUBE)
+			{
+				modelShape = new JPH::BoxShape(JPH::Vec3(1.0f, 1.0f, 1.0f));
+				m_body_creation_settings = new JPH::BodyCreationSettings(
+					modelShape, p_position, p_rotation, p_motion_type, p_object_layer);
+			}
+			else if (m_model_type == ModelType::SPHERE)
+			{
+				modelShape = new JPH::SphereShape(1.0f);
+				m_body_creation_settings = new JPH::BodyCreationSettings(
+					modelShape, p_position, p_rotation, p_motion_type, p_object_layer);
+			}
+			else if (m_model_type == ModelType::CAPSULE)
+			{
+				modelShape = new JPH::CapsuleShape(2.0f, 1.0f);
+				m_body_creation_settings = new JPH::BodyCreationSettings(
+					modelShape, p_position, p_rotation, p_motion_type, p_object_layer);
+			}
+			else if (m_model_type == ModelType::CYLINDER)
+			{
+				modelShape = new JPH::CylinderShape(1.0f, 1.0f);
+				m_body_creation_settings = new JPH::BodyCreationSettings(
+					modelShape, p_position, p_rotation, p_motion_type, p_object_layer);
+			}
+			else if (m_model_type == ModelType::PLANE)
+			{
+				//modelShape = new JPH::BoxShape(JPH::Vec3(1.0f, 0.1f, 1.0f));
+
+				// Create a strip of triangles
+				JPH::TriangleList triangles;
+				JPH::Float3 v1 = JPH::Float3(-1.0f, 0, -1.0f);
+				JPH::Float3 v2 = JPH::Float3(1.0f, 0, -1.0f);
+				JPH::Float3 v3 = JPH::Float3(-1.0f, 0, 1.0f);
+				JPH::Float3 v4 = JPH::Float3(1.0f, 0, 1.0f);
+
+				triangles.push_back(JPH::Triangle(v1, v3, v4, 0));
+				triangles.push_back(JPH::Triangle(v1, v4, v2, 0));
+				JPH::PhysicsMaterialList materials;
+				materials.push_back(new JPH::PhysicsMaterialSimple());
+				JPH::Ref<JPH::ShapeSettings> mesh_shape = new JPH::MeshShapeSettings(triangles, std::move(materials));
+				m_body_creation_settings = new JPH::BodyCreationSettings(new JPH::ScaledShapeSettings(mesh_shape, JPH::Vec3::sReplicate(20)), p_position, p_rotation, JPH::EMotionType::Static, p_object_layer);
+			}
+			else if (m_model_type == ModelType::QUAD)
+			{
+				modelShape = new JPH::BoxShape(JPH::Vec3(1.0f, 0.1f, 1.0f));
+				m_body_creation_settings = new JPH::BodyCreationSettings(
+					modelShape, p_position, p_rotation, p_motion_type, p_object_layer);
+			}
+			else if (m_model_type == ModelType::CUSTOM)
+			{
+				modelShape = new JPH::BoxShape(JPH::Vec3(100.0f, 0.8f, 100.0f));
+				m_body_creation_settings = new JPH::BodyCreationSettings(
+					modelShape, p_position, p_rotation, p_motion_type, p_object_layer);
+			}
+			else if (m_model_type == ModelType::CUSTOM_CUBE)
+			{
+				modelShape = new JPH::BoxShape(JPH::Vec3(100.0f, 0.8f, 100.0f));
+				m_body_creation_settings = new JPH::BodyCreationSettings(
+					modelShape, p_position, p_rotation, p_motion_type, p_object_layer);
+			}
+			else if (m_model_type == ModelType::CUSTOM_FLOOR)
+			{
+				modelShape = new JPH::BoxShape(JPH::Vec3(100.0f, 0.8f, 100.0f));
+				m_body_creation_settings = new JPH::BodyCreationSettings(
+					modelShape, p_position, p_rotation, p_motion_type, p_object_layer);
+			}
+			else if (m_model_type == ModelType::CUSTOM_WALL)
+			{
+				modelShape = new JPH::BoxShape(JPH::Vec3(0.8f, 20.0f, 100.0f));
+				m_body_creation_settings = new JPH::BodyCreationSettings(
+					modelShape, p_position, p_rotation, p_motion_type, p_object_layer);
+			}
+		}
+		else
+		{
+			m_body_creation_settings = new JPH::BodyCreationSettings(
+				p_shape, p_position, p_rotation, p_motion_type, p_object_layer);
+		}
 	}
 
 	void PhysicsComponent::CreateAndAddBody()
@@ -181,19 +265,19 @@ namespace Spore
 		return m_body_interface;
 	}
 
+	void PhysicsComponent::SetModelType(ModelType p_model_type)
+	{
+		m_model_type = p_model_type;
+	}
+	
+	ModelType PhysicsComponent::GetModelType()
+	{
+		return m_model_type;
+	}
+
 	void PhysicsComponent::SetPosition(const vec3f& p_potision)
 	{
 		m_body_interface->SetPosition(m_body->GetID(), JPHVec3(p_potision), JPH::EActivation::DontActivate);
-	}
-
-	void PhysicsComponent::SetRotation(const vec3f& p_rotation)
-	{
-		m_body_interface->SetRotation(m_body->GetID(), JPHQuat(quat(glm::radians(p_rotation))), JPH::EActivation::DontActivate);
-	}
-
-	void PhysicsComponent::SetTransform(const Transform p_transform)
-	{
-		m_transform = p_transform.GetMatrix();
 	}
 
 	vec3f PhysicsComponent::GetPosition()
@@ -202,10 +286,20 @@ namespace Spore
 		return m_position;
 	}
 
+	void PhysicsComponent::SetRotation(const vec3f& p_rotation)
+	{
+		m_body_interface->SetRotation(m_body->GetID(), JPHQuat(quat(glm::radians(p_rotation))), JPH::EActivation::DontActivate);
+	}
+
 	vec3f PhysicsComponent::GetRotation()
 	{
 		m_rotation = Vec3f(m_body_interface->GetRotation(m_body->GetID()));
 		return m_rotation;
+	}
+
+	void PhysicsComponent::SetTransform(const Transform p_transform)
+	{
+		m_transform = p_transform.GetMatrix();
 	}
 
 	mat4x4f PhysicsComponent::GetTransform()
