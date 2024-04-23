@@ -12,12 +12,13 @@ namespace Spore
 		~GraphicRenderer();
 		void Init();
 		void Terminate();
+		void SetCamera(Camera* p_camera);
 		Camera* GetCamera();
 		RenderPipeline* GetRenderPipeline();
 		void SetFlipVerticallyOnLoad(bool p_bool);
 
 	private:
-		Camera* m_editor_camera = nullptr;
+		Camera* m_current_camera = nullptr;
 		RenderPipeline* m_render_pipeline = nullptr;
 	};
 }

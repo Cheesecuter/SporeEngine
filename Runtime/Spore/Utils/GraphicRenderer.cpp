@@ -14,21 +14,26 @@ namespace Spore
 
 	void GraphicRenderer::Init()
 	{
-		m_editor_camera = new Camera(vec3f(0.0f, 5.0f, 5.0f));
+		m_current_camera = new Camera(vec3f(0.0f, 5.0f, 5.0f));
 		m_render_pipeline = new RenderPipeline();
 	}
 
 	void GraphicRenderer::Terminate()
 	{
 		delete m_render_pipeline;
-		delete m_editor_camera;
+		delete m_current_camera;
+	}
+
+	void GraphicRenderer::SetCamera(Camera* p_camera)
+	{
+		m_current_camera = p_camera;
 	}
 
 	Camera* GraphicRenderer::GetCamera()
 	{
-		if (m_editor_camera != nullptr)
+		if (m_current_camera != nullptr)
 		{
-			return m_editor_camera;
+			return m_current_camera;
 		}
 		return nullptr;
 	}
