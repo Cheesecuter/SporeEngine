@@ -13,16 +13,184 @@
                         "physics": {
                             "name": "Physics",
                             "properties": {
+                                "activation": "Activate",
+                                "friction": 0.200000,
+                                "gravity_factor": 1.000000,
+                                "model_type": "CAPSULE",
+                                "motion_type": "Dynamic",
+                                "restitution": 0.000000,
+                                "transform": {
+                                    "position": [
+                                        -3.710064,
+                                        5.408094,
+                                        0.000000
+                                    ],
+                                    "rotation": [
+                                        -160.607986,
+                                        -46.613869,
+                                        25.174683
+                                    ],
+                                    "scale": [
+                                        1.000345,
+                                        0.999706,
+                                        0.999857
+                                    ]
+                                },
+                                "velocity": {
+                                    "angular_velocity": [
+                                        0.000000,
+                                        0.000000,
+                                        0.000000
+                                    ],
+                                    "linear_velocity": [
+                                        0.000000,
+                                        0.000000,
+                                        0.000000
+                                    ]
+                                }
+                            }
+                        },
+                        "shader": {
+                            "name": "Shader",
+                            "properties": {
+                                "shaders": []
+                            }
+                        },
+                        "transform": {
+                            "name": "Transform",
+                            "properties": {
+                                "transform": {
+                                    "position": [
+                                        -3.710064,
+                                        5.408094,
+                                        0.000000
+                                    ],
+                                    "rotation": [
+                                        -160.607986,
+                                        -46.613865,
+                                        25.174681
+                                    ],
+                                    "scale": [
+                                        1.000345,
+                                        0.999706,
+                                        0.999857
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "identifier": "capsule0",
+                    "models": {
+                        "model": {
+                            "identifier": "capsule.obj",
+                            "path": "./Assets/Models/_basic models/capsule.obj"
+                        }
+                    },
+                    "type": "Model"
+                },
+                {
+                    "components": {
+                        "audio": {
+                            "name": "Audio",
+                            "properties": {}
+                        },
+                        "physics": {
+                            "name": "Physics",
+                            "properties": {
+                                "activation": "Activate",
+                                "friction": 0.200000,
+                                "gravity_factor": 1.000000,
+                                "model_type": "CUBE",
+                                "motion_type": "Dynamic",
+                                "restitution": 0.000000,
+                                "transform": {
+                                    "position": [
+                                        0.000000,
+                                        5.408094,
+                                        0.000000
+                                    ],
+                                    "rotation": [
+                                        -160.607986,
+                                        -46.613869,
+                                        25.174683
+                                    ],
+                                    "scale": [
+                                        1.000345,
+                                        0.999706,
+                                        0.999857
+                                    ]
+                                },
+                                "velocity": {
+                                    "angular_velocity": [
+                                        0.000000,
+                                        0.000000,
+                                        0.000000
+                                    ],
+                                    "linear_velocity": [
+                                        0.000000,
+                                        0.000000,
+                                        0.000000
+                                    ]
+                                }
+                            }
+                        },
+                        "shader": {
+                            "name": "Shader",
+                            "properties": {
+                                "shaders": []
+                            }
+                        },
+                        "transform": {
+                            "name": "Transform",
+                            "properties": {
+                                "transform": {
+                                    "position": [
+                                        0.000000,
+                                        5.408094,
+                                        0.000000
+                                    ],
+                                    "rotation": [
+                                        -160.607986,
+                                        -46.613865,
+                                        25.174681
+                                    ],
+                                    "scale": [
+                                        1.000345,
+                                        0.999706,
+                                        0.999857
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "identifier": "cube0",
+                    "models": {
+                        "model": {
+                            "identifier": "cube.obj",
+                            "path": "./Assets/Models/_basic models/cube.obj"
+                        }
+                    },
+                    "type": "Model"
+                },
+                {
+                    "components": {
+                        "audio": {
+                            "name": "Audio",
+                            "properties": {}
+                        },
+                        "physics": {
+                            "name": "Physics",
+                            "properties": {
                                 "activation": "DontActivate",
                                 "friction": 0.200000,
                                 "gravity_factor": 1.000000,
-                                "model_type": "PLANE",
+                                "model_type": "CUSTOM_FLOOR",
                                 "motion_type": "Static",
                                 "restitution": 0.000000,
                                 "transform": {
                                     "position": [
                                         0.000000,
-                                        0.000000,
+                                        -0.297112,
                                         0.000000
                                     ],
                                     "rotation": [
@@ -62,7 +230,7 @@
                                 "transform": {
                                     "position": [
                                         0.000000,
-                                        0.000000,
+                                        -0.297112,
                                         0.000000
                                     ],
                                     "rotation": [
@@ -82,680 +250,8 @@
                     "identifier": "floor0",
                     "models": {
                         "model": {
-                            "identifier": "floor.fbx",
-                            "path": "./Assets/Models/Project/floor.fbx"
-                        }
-                    },
-                    "type": "Model"
-                },
-                {
-                    "components": {
-                        "audio": {
-                            "name": "Audio",
-                            "properties": {}
-                        },
-                        "physics": {
-                            "name": "Physics",
-                            "properties": {
-                                "activation": "DontActivate",
-                                "friction": 0.200000,
-                                "gravity_factor": 1.000000,
-                                "model_type": "PLANE",
-                                "motion_type": "Static",
-                                "restitution": 0.000000,
-                                "transform": {
-                                    "position": [
-                                        -2.000000,
-                                        0.000000,
-                                        0.000000
-                                    ],
-                                    "rotation": [
-                                        0.000000,
-                                        -0.000000,
-                                        0.000000
-                                    ],
-                                    "scale": [
-                                        1.000000,
-                                        1.000000,
-                                        1.000000
-                                    ]
-                                },
-                                "velocity": {
-                                    "angular_velocity": [
-                                        0.000000,
-                                        0.000000,
-                                        0.000000
-                                    ],
-                                    "linear_velocity": [
-                                        0.000000,
-                                        0.000000,
-                                        0.000000
-                                    ]
-                                }
-                            }
-                        },
-                        "shader": {
-                            "name": "Shader",
-                            "properties": {
-                                "shaders": []
-                            }
-                        },
-                        "transform": {
-                            "name": "Transform",
-                            "properties": {
-                                "transform": {
-                                    "position": [
-                                        -2.000000,
-                                        0.000000,
-                                        0.000000
-                                    ],
-                                    "rotation": [
-                                        0.000000,
-                                        -0.000000,
-                                        0.000000
-                                    ],
-                                    "scale": [
-                                        1.000000,
-                                        1.000000,
-                                        1.000000
-                                    ]
-                                }
-                            }
-                        }
-                    },
-                    "identifier": "floor1",
-                    "models": {
-                        "model": {
-                            "identifier": "floor.fbx",
-                            "path": "./Assets/Models/Project/floor.fbx"
-                        }
-                    },
-                    "type": "Model"
-                },
-                {
-                    "components": {
-                        "audio": {
-                            "name": "Audio",
-                            "properties": {}
-                        },
-                        "physics": {
-                            "name": "Physics",
-                            "properties": {
-                                "activation": "DontActivate",
-                                "friction": 0.200000,
-                                "gravity_factor": 1.000000,
-                                "model_type": "PLANE",
-                                "motion_type": "Static",
-                                "restitution": 0.000000,
-                                "transform": {
-                                    "position": [
-                                        2.000000,
-                                        0.000000,
-                                        0.000000
-                                    ],
-                                    "rotation": [
-                                        0.000000,
-                                        -0.000000,
-                                        0.000000
-                                    ],
-                                    "scale": [
-                                        1.000000,
-                                        1.000000,
-                                        1.000000
-                                    ]
-                                },
-                                "velocity": {
-                                    "angular_velocity": [
-                                        0.000000,
-                                        0.000000,
-                                        0.000000
-                                    ],
-                                    "linear_velocity": [
-                                        0.000000,
-                                        0.000000,
-                                        0.000000
-                                    ]
-                                }
-                            }
-                        },
-                        "shader": {
-                            "name": "Shader",
-                            "properties": {
-                                "shaders": []
-                            }
-                        },
-                        "transform": {
-                            "name": "Transform",
-                            "properties": {
-                                "transform": {
-                                    "position": [
-                                        2.000000,
-                                        0.000000,
-                                        0.000000
-                                    ],
-                                    "rotation": [
-                                        0.000000,
-                                        -0.000000,
-                                        0.000000
-                                    ],
-                                    "scale": [
-                                        1.000000,
-                                        1.000000,
-                                        1.000000
-                                    ]
-                                }
-                            }
-                        }
-                    },
-                    "identifier": "floor2",
-                    "models": {
-                        "model": {
-                            "identifier": "floor.fbx",
-                            "path": "./Assets/Models/Project/floor.fbx"
-                        }
-                    },
-                    "type": "Model"
-                },
-                {
-                    "components": {
-                        "audio": {
-                            "name": "Audio",
-                            "properties": {}
-                        },
-                        "physics": {
-                            "name": "Physics",
-                            "properties": {
-                                "activation": "DontActivate",
-                                "friction": 0.200000,
-                                "gravity_factor": 1.000000,
-                                "model_type": "PLANE",
-                                "motion_type": "Static",
-                                "restitution": 0.000000,
-                                "transform": {
-                                    "position": [
-                                        0.000000,
-                                        0.000000,
-                                        2.000000
-                                    ],
-                                    "rotation": [
-                                        0.000000,
-                                        -0.000000,
-                                        0.000000
-                                    ],
-                                    "scale": [
-                                        1.000000,
-                                        1.000000,
-                                        1.000000
-                                    ]
-                                },
-                                "velocity": {
-                                    "angular_velocity": [
-                                        0.000000,
-                                        0.000000,
-                                        0.000000
-                                    ],
-                                    "linear_velocity": [
-                                        0.000000,
-                                        0.000000,
-                                        0.000000
-                                    ]
-                                }
-                            }
-                        },
-                        "shader": {
-                            "name": "Shader",
-                            "properties": {
-                                "shaders": []
-                            }
-                        },
-                        "transform": {
-                            "name": "Transform",
-                            "properties": {
-                                "transform": {
-                                    "position": [
-                                        0.000000,
-                                        0.000000,
-                                        2.000000
-                                    ],
-                                    "rotation": [
-                                        0.000000,
-                                        -0.000000,
-                                        0.000000
-                                    ],
-                                    "scale": [
-                                        1.000000,
-                                        1.000000,
-                                        1.000000
-                                    ]
-                                }
-                            }
-                        }
-                    },
-                    "identifier": "floor3",
-                    "models": {
-                        "model": {
-                            "identifier": "floor.fbx",
-                            "path": "./Assets/Models/Project/floor.fbx"
-                        }
-                    },
-                    "type": "Model"
-                },
-                {
-                    "components": {
-                        "audio": {
-                            "name": "Audio",
-                            "properties": {}
-                        },
-                        "physics": {
-                            "name": "Physics",
-                            "properties": {
-                                "activation": "DontActivate",
-                                "friction": 0.200000,
-                                "gravity_factor": 1.000000,
-                                "model_type": "PLANE",
-                                "motion_type": "Static",
-                                "restitution": 0.000000,
-                                "transform": {
-                                    "position": [
-                                        -2.000000,
-                                        0.000000,
-                                        2.000000
-                                    ],
-                                    "rotation": [
-                                        0.000000,
-                                        -0.000000,
-                                        0.000000
-                                    ],
-                                    "scale": [
-                                        1.000000,
-                                        1.000000,
-                                        1.000000
-                                    ]
-                                },
-                                "velocity": {
-                                    "angular_velocity": [
-                                        0.000000,
-                                        0.000000,
-                                        0.000000
-                                    ],
-                                    "linear_velocity": [
-                                        0.000000,
-                                        0.000000,
-                                        0.000000
-                                    ]
-                                }
-                            }
-                        },
-                        "shader": {
-                            "name": "Shader",
-                            "properties": {
-                                "shaders": []
-                            }
-                        },
-                        "transform": {
-                            "name": "Transform",
-                            "properties": {
-                                "transform": {
-                                    "position": [
-                                        -2.000000,
-                                        0.000000,
-                                        2.000000
-                                    ],
-                                    "rotation": [
-                                        0.000000,
-                                        -0.000000,
-                                        0.000000
-                                    ],
-                                    "scale": [
-                                        1.000000,
-                                        1.000000,
-                                        1.000000
-                                    ]
-                                }
-                            }
-                        }
-                    },
-                    "identifier": "floor4",
-                    "models": {
-                        "model": {
-                            "identifier": "floor.fbx",
-                            "path": "./Assets/Models/Project/floor.fbx"
-                        }
-                    },
-                    "type": "Model"
-                },
-                {
-                    "components": {
-                        "audio": {
-                            "name": "Audio",
-                            "properties": {}
-                        },
-                        "physics": {
-                            "name": "Physics",
-                            "properties": {
-                                "activation": "DontActivate",
-                                "friction": 0.200000,
-                                "gravity_factor": 1.000000,
-                                "model_type": "PLANE",
-                                "motion_type": "Static",
-                                "restitution": 0.000000,
-                                "transform": {
-                                    "position": [
-                                        2.000000,
-                                        0.000000,
-                                        2.000000
-                                    ],
-                                    "rotation": [
-                                        0.000000,
-                                        -0.000000,
-                                        0.000000
-                                    ],
-                                    "scale": [
-                                        1.000000,
-                                        1.000000,
-                                        1.000000
-                                    ]
-                                },
-                                "velocity": {
-                                    "angular_velocity": [
-                                        0.000000,
-                                        0.000000,
-                                        0.000000
-                                    ],
-                                    "linear_velocity": [
-                                        0.000000,
-                                        0.000000,
-                                        0.000000
-                                    ]
-                                }
-                            }
-                        },
-                        "shader": {
-                            "name": "Shader",
-                            "properties": {
-                                "shaders": []
-                            }
-                        },
-                        "transform": {
-                            "name": "Transform",
-                            "properties": {
-                                "transform": {
-                                    "position": [
-                                        2.000000,
-                                        0.000000,
-                                        2.000000
-                                    ],
-                                    "rotation": [
-                                        0.000000,
-                                        -0.000000,
-                                        0.000000
-                                    ],
-                                    "scale": [
-                                        1.000000,
-                                        1.000000,
-                                        1.000000
-                                    ]
-                                }
-                            }
-                        }
-                    },
-                    "identifier": "floor5",
-                    "models": {
-                        "model": {
-                            "identifier": "floor.fbx",
-                            "path": "./Assets/Models/Project/floor.fbx"
-                        }
-                    },
-                    "type": "Model"
-                },
-                {
-                    "components": {
-                        "audio": {
-                            "name": "Audio",
-                            "properties": {}
-                        },
-                        "physics": {
-                            "name": "Physics",
-                            "properties": {
-                                "activation": "DontActivate",
-                                "friction": 0.200000,
-                                "gravity_factor": 1.000000,
-                                "model_type": "PLANE",
-                                "motion_type": "Static",
-                                "restitution": 0.000000,
-                                "transform": {
-                                    "position": [
-                                        0.000000,
-                                        0.397000,
-                                        3.939000
-                                    ],
-                                    "rotation": [
-                                        -23.453001,
-                                        -0.000000,
-                                        0.000000
-                                    ],
-                                    "scale": [
-                                        1.000000,
-                                        1.000000,
-                                        1.000000
-                                    ]
-                                },
-                                "velocity": {
-                                    "angular_velocity": [
-                                        0.000000,
-                                        0.000000,
-                                        0.000000
-                                    ],
-                                    "linear_velocity": [
-                                        0.000000,
-                                        0.000000,
-                                        0.000000
-                                    ]
-                                }
-                            }
-                        },
-                        "shader": {
-                            "name": "Shader",
-                            "properties": {
-                                "shaders": []
-                            }
-                        },
-                        "transform": {
-                            "name": "Transform",
-                            "properties": {
-                                "transform": {
-                                    "position": [
-                                        0.000000,
-                                        0.397000,
-                                        3.939000
-                                    ],
-                                    "rotation": [
-                                        -23.453001,
-                                        -0.000000,
-                                        0.000000
-                                    ],
-                                    "scale": [
-                                        1.000000,
-                                        1.000000,
-                                        1.000000
-                                    ]
-                                }
-                            }
-                        }
-                    },
-                    "identifier": "floor6",
-                    "models": {
-                        "model": {
-                            "identifier": "floor.fbx",
-                            "path": "./Assets/Models/Project/floor.fbx"
-                        }
-                    },
-                    "type": "Model"
-                },
-                {
-                    "components": {
-                        "audio": {
-                            "name": "Audio",
-                            "properties": {}
-                        },
-                        "physics": {
-                            "name": "Physics",
-                            "properties": {
-                                "activation": "DontActivate",
-                                "friction": 0.200000,
-                                "gravity_factor": 1.000000,
-                                "model_type": "PLANE",
-                                "motion_type": "Static",
-                                "restitution": 0.000000,
-                                "transform": {
-                                    "position": [
-                                        0.000000,
-                                        3.329000,
-                                        1.294000
-                                    ],
-                                    "rotation": [
-                                        20.348000,
-                                        -0.000000,
-                                        0.000000
-                                    ],
-                                    "scale": [
-                                        1.000000,
-                                        1.000000,
-                                        1.000000
-                                    ]
-                                },
-                                "velocity": {
-                                    "angular_velocity": [
-                                        0.000000,
-                                        0.000000,
-                                        0.000000
-                                    ],
-                                    "linear_velocity": [
-                                        0.000000,
-                                        0.000000,
-                                        0.000000
-                                    ]
-                                }
-                            }
-                        },
-                        "shader": {
-                            "name": "Shader",
-                            "properties": {
-                                "shaders": []
-                            }
-                        },
-                        "transform": {
-                            "name": "Transform",
-                            "properties": {
-                                "transform": {
-                                    "position": [
-                                        0.000000,
-                                        3.329000,
-                                        1.294000
-                                    ],
-                                    "rotation": [
-                                        20.348000,
-                                        -0.000000,
-                                        0.000000
-                                    ],
-                                    "scale": [
-                                        1.000000,
-                                        1.000000,
-                                        1.000000
-                                    ]
-                                }
-                            }
-                        }
-                    },
-                    "identifier": "floor7",
-                    "models": {
-                        "model": {
-                            "identifier": "floor.fbx",
-                            "path": "./Assets/Models/Project/floor.fbx"
-                        }
-                    },
-                    "type": "Model"
-                },
-                {
-                    "components": {
-                        "audio": {
-                            "name": "Audio",
-                            "properties": {}
-                        },
-                        "physics": {
-                            "name": "Physics",
-                            "properties": {
-                                "activation": "DontActivate",
-                                "friction": 0.200000,
-                                "gravity_factor": 1.000000,
-                                "model_type": "PLANE",
-                                "motion_type": "Static",
-                                "restitution": 0.000000,
-                                "transform": {
-                                    "position": [
-                                        0.000000,
-                                        1.755000,
-                                        5.101000
-                                    ],
-                                    "rotation": [
-                                        -80.143997,
-                                        -0.000000,
-                                        0.000000
-                                    ],
-                                    "scale": [
-                                        1.000000,
-                                        1.000000,
-                                        1.000000
-                                    ]
-                                },
-                                "velocity": {
-                                    "angular_velocity": [
-                                        0.000000,
-                                        0.000000,
-                                        0.000000
-                                    ],
-                                    "linear_velocity": [
-                                        0.000000,
-                                        0.000000,
-                                        0.000000
-                                    ]
-                                }
-                            }
-                        },
-                        "shader": {
-                            "name": "Shader",
-                            "properties": {
-                                "shaders": []
-                            }
-                        },
-                        "transform": {
-                            "name": "Transform",
-                            "properties": {
-                                "transform": {
-                                    "position": [
-                                        0.000000,
-                                        1.755000,
-                                        5.101000
-                                    ],
-                                    "rotation": [
-                                        -80.143997,
-                                        -0.000000,
-                                        0.000000
-                                    ],
-                                    "scale": [
-                                        1.000000,
-                                        1.000000,
-                                        1.000000
-                                    ]
-                                }
-                            }
-                        }
-                    },
-                    "identifier": "floor8",
-                    "models": {
-                        "model": {
-                            "identifier": "floor.fbx",
-                            "path": "./Assets/Models/Project/floor.fbx"
+                            "identifier": "floor.obj",
+                            "path": "D:/SporeEngine/master/SporeEngine/Assets/Models/Project/floor.obj"
                         }
                     },
                     "type": "Model"
@@ -777,9 +273,9 @@
                             "properties": {
                                 "transform": {
                                     "position": [
-                                        -11.735510,
-                                        7.010843,
-                                        9.479913
+                                        1.827966,
+                                        31.260723,
+                                        -1.431990
                                     ],
                                     "rotation": [
                                         0.000000,
@@ -808,99 +304,15 @@
                             "name": "Physics",
                             "properties": {
                                 "activation": "DontActivate",
-                                "friction": 2.300000,
-                                "gravity_factor": 3.600000,
-                                "model_type": "CUBE",
-                                "motion_type": "Dynamic",
-                                "restitution": 0.700000,
-                                "transform": {
-                                    "position": [
-                                        5.234377,
-                                        0.999999,
-                                        0.331294
-                                    ],
-                                    "rotation": [
-                                        -0.000038,
-                                        -4.127432,
-                                        0.000000
-                                    ],
-                                    "scale": [
-                                        0.999638,
-                                        0.999484,
-                                        0.999615
-                                    ]
-                                },
-                                "velocity": {
-                                    "angular_velocity": [
-                                        0.000000,
-                                        0.000000,
-                                        0.000000
-                                    ],
-                                    "linear_velocity": [
-                                        0.000000,
-                                        0.000000,
-                                        0.000000
-                                    ]
-                                }
-                            }
-                        },
-                        "shader": {
-                            "name": "Shader",
-                            "properties": {
-                                "shaders": []
-                            }
-                        },
-                        "transform": {
-                            "name": "Transform",
-                            "properties": {
-                                "transform": {
-                                    "position": [
-                                        5.234377,
-                                        0.999999,
-                                        0.331294
-                                    ],
-                                    "rotation": [
-                                        -0.000038,
-                                        -4.127432,
-                                        0.000000
-                                    ],
-                                    "scale": [
-                                        0.999638,
-                                        0.999484,
-                                        0.999615
-                                    ]
-                                }
-                            }
-                        }
-                    },
-                    "identifier": "obj_0_cube",
-                    "models": {
-                        "model": {
-                            "identifier": "cube.fbx",
-                            "path": "./Assets/Models/_basic models/cube.fbx"
-                        }
-                    },
-                    "type": "Model"
-                },
-                {
-                    "components": {
-                        "audio": {
-                            "name": "Audio",
-                            "properties": {}
-                        },
-                        "physics": {
-                            "name": "Physics",
-                            "properties": {
-                                "activation": "DontActivate",
                                 "friction": 0.200000,
                                 "gravity_factor": 1.000000,
-                                "model_type": "QUAD",
+                                "model_type": "CUSTOM_WALL",
                                 "motion_type": "Static",
                                 "restitution": 0.000000,
                                 "transform": {
                                     "position": [
+                                        -31.491722,
                                         0.000000,
-                                        -0.297112,
                                         0.000000
                                     ],
                                     "rotation": [
@@ -910,8 +322,8 @@
                                     ],
                                     "scale": [
                                         1.000000,
-                                        1.000000,
-                                        1.000000
+                                        0.999971,
+                                        0.999971
                                     ]
                                 },
                                 "velocity": {
@@ -939,8 +351,8 @@
                             "properties": {
                                 "transform": {
                                     "position": [
+                                        -31.491722,
                                         0.000000,
-                                        -0.297112,
                                         0.000000
                                     ],
                                     "rotation": [
@@ -950,176 +362,8 @@
                                     ],
                                     "scale": [
                                         1.000000,
-                                        1.000000,
-                                        1.000000
-                                    ]
-                                }
-                            }
-                        }
-                    },
-                    "identifier": "obj_0_model.fbx",
-                    "models": {
-                        "model": {
-                            "identifier": "model.fbx",
-                            "path": "D:/SporeEngine/master/SporeEngine/Assets/Models/Project/model.fbx"
-                        }
-                    },
-                    "type": "Model"
-                },
-                {
-                    "components": {
-                        "audio": {
-                            "name": "Audio",
-                            "properties": {}
-                        },
-                        "physics": {
-                            "name": "Physics",
-                            "properties": {
-                                "activation": "DontActivate",
-                                "friction": 0.200000,
-                                "gravity_factor": 1.000000,
-                                "model_type": "SPHERE",
-                                "motion_type": "Dynamic",
-                                "restitution": 0.000000,
-                                "transform": {
-                                    "position": [
-                                        -9.054773,
-                                        1.000003,
-                                        -3.120292
-                                    ],
-                                    "rotation": [
-                                        -54.567444,
-                                        43.061577,
-                                        -56.843658
-                                    ],
-                                    "scale": [
-                                        0.999988,
-                                        0.999992,
-                                        0.999913
-                                    ]
-                                },
-                                "velocity": {
-                                    "angular_velocity": [
-                                        0.000000,
-                                        0.000000,
-                                        0.000000
-                                    ],
-                                    "linear_velocity": [
-                                        0.000000,
-                                        0.000000,
-                                        0.000000
-                                    ]
-                                }
-                            }
-                        },
-                        "shader": {
-                            "name": "Shader",
-                            "properties": {
-                                "shaders": []
-                            }
-                        },
-                        "transform": {
-                            "name": "Transform",
-                            "properties": {
-                                "transform": {
-                                    "position": [
-                                        -9.054773,
-                                        1.000003,
-                                        -3.120292
-                                    ],
-                                    "rotation": [
-                                        -54.567440,
-                                        43.061573,
-                                        -56.843651
-                                    ],
-                                    "scale": [
-                                        0.999988,
-                                        0.999992,
-                                        0.999913
-                                    ]
-                                }
-                            }
-                        }
-                    },
-                    "identifier": "sphere0",
-                    "models": {
-                        "model": {
-                            "identifier": "sphere.fbx",
-                            "path": "./Assets/Models/_basic models/sphere.fbx"
-                        }
-                    },
-                    "type": "Model"
-                },
-                {
-                    "components": {
-                        "audio": {
-                            "name": "Audio",
-                            "properties": {}
-                        },
-                        "physics": {
-                            "name": "Physics",
-                            "properties": {
-                                "activation": "DontActivate",
-                                "friction": 0.200000,
-                                "gravity_factor": 1.000000,
-                                "model_type": "PLANE",
-                                "motion_type": "Static",
-                                "restitution": 0.000000,
-                                "transform": {
-                                    "position": [
-                                        -2.000000,
-                                        1.100000,
-                                        -0.899000
-                                    ],
-                                    "rotation": [
-                                        90.066002,
-                                        -0.000000,
-                                        -0.001000
-                                    ],
-                                    "scale": [
-                                        1.000000,
-                                        1.000000,
-                                        1.000000
-                                    ]
-                                },
-                                "velocity": {
-                                    "angular_velocity": [
-                                        0.000000,
-                                        0.000000,
-                                        0.000000
-                                    ],
-                                    "linear_velocity": [
-                                        0.000000,
-                                        0.000000,
-                                        0.000000
-                                    ]
-                                }
-                            }
-                        },
-                        "shader": {
-                            "name": "Shader",
-                            "properties": {
-                                "shaders": []
-                            }
-                        },
-                        "transform": {
-                            "name": "Transform",
-                            "properties": {
-                                "transform": {
-                                    "position": [
-                                        -2.000000,
-                                        1.100000,
-                                        -0.899000
-                                    ],
-                                    "rotation": [
-                                        90.066002,
-                                        -0.000000,
-                                        -0.001000
-                                    ],
-                                    "scale": [
-                                        1.000000,
-                                        1.000000,
-                                        1.000000
+                                        0.999971,
+                                        0.999971
                                     ]
                                 }
                             }
@@ -1128,8 +372,8 @@
                     "identifier": "wall0",
                     "models": {
                         "model": {
-                            "identifier": "wall.fbx",
-                            "path": "./Assets/Models/Project/wall.fbx"
+                            "identifier": "wall.obj",
+                            "path": "D:/SporeEngine/master/SporeEngine/Assets/Models/Project/wall.obj"
                         }
                     },
                     "type": "Model"
@@ -1146,24 +390,24 @@
                                 "activation": "DontActivate",
                                 "friction": 0.200000,
                                 "gravity_factor": 1.000000,
-                                "model_type": "PLANE",
+                                "model_type": "CUSTOM_WALL",
                                 "motion_type": "Static",
                                 "restitution": 0.000000,
                                 "transform": {
                                     "position": [
+                                        31.496677,
                                         0.000000,
-                                        1.100000,
-                                        -0.901000
+                                        0.000000
                                     ],
                                     "rotation": [
-                                        89.976006,
+                                        0.000000,
                                         -0.000000,
-                                        0.002000
+                                        0.000000
                                     ],
                                     "scale": [
                                         1.000000,
-                                        1.000000,
-                                        1.000000
+                                        0.999971,
+                                        0.999971
                                     ]
                                 },
                                 "velocity": {
@@ -1191,19 +435,19 @@
                             "properties": {
                                 "transform": {
                                     "position": [
+                                        31.496677,
                                         0.000000,
-                                        1.100000,
-                                        -0.901000
+                                        0.000000
                                     ],
                                     "rotation": [
-                                        89.976006,
+                                        0.000000,
                                         -0.000000,
-                                        0.002000
+                                        0.000000
                                     ],
                                     "scale": [
                                         1.000000,
-                                        1.000000,
-                                        1.000000
+                                        0.999971,
+                                        0.999971
                                     ]
                                 }
                             }
@@ -1212,8 +456,8 @@
                     "identifier": "wall1",
                     "models": {
                         "model": {
-                            "identifier": "wall.fbx",
-                            "path": "./Assets/Models/Project/wall.fbx"
+                            "identifier": "wall.obj",
+                            "path": "D:/SporeEngine/master/SporeEngine/Assets/Models/Project/wall.obj"
                         }
                     },
                     "type": "Model"
@@ -1230,24 +474,24 @@
                                 "activation": "DontActivate",
                                 "friction": 0.200000,
                                 "gravity_factor": 1.000000,
-                                "model_type": "PLANE",
+                                "model_type": "CUSTOM_WALL",
                                 "motion_type": "Static",
                                 "restitution": 0.000000,
                                 "transform": {
                                     "position": [
-                                        2.000000,
-                                        1.100000,
-                                        -0.900000
+                                        0.000000,
+                                        0.000000,
+                                        -31.478149
                                     ],
                                     "rotation": [
-                                        90.010002,
-                                        -0.000000,
-                                        -0.001000
+                                        0.000000,
+                                        -89.980217,
+                                        0.000000
                                     ],
                                     "scale": [
-                                        1.000000,
-                                        1.000000,
-                                        1.000000
+                                        0.998965,
+                                        0.999720,
+                                        0.999759
                                     ]
                                 },
                                 "velocity": {
@@ -1275,19 +519,19 @@
                             "properties": {
                                 "transform": {
                                     "position": [
-                                        2.000000,
-                                        1.100000,
-                                        -0.900000
+                                        0.000000,
+                                        0.000000,
+                                        -31.478149
                                     ],
                                     "rotation": [
-                                        90.010002,
-                                        -0.000000,
-                                        -0.001000
+                                        0.000000,
+                                        -90.000000,
+                                        0.000000
                                     ],
                                     "scale": [
-                                        1.000000,
-                                        1.000000,
-                                        1.000000
+                                        0.998965,
+                                        0.999720,
+                                        0.999759
                                     ]
                                 }
                             }
@@ -1296,8 +540,92 @@
                     "identifier": "wall2",
                     "models": {
                         "model": {
-                            "identifier": "wall.fbx",
-                            "path": "./Assets/Models/Project/wall.fbx"
+                            "identifier": "wall.obj",
+                            "path": "D:/SporeEngine/master/SporeEngine/Assets/Models/Project/wall.obj"
+                        }
+                    },
+                    "type": "Model"
+                },
+                {
+                    "components": {
+                        "audio": {
+                            "name": "Audio",
+                            "properties": {}
+                        },
+                        "physics": {
+                            "name": "Physics",
+                            "properties": {
+                                "activation": "DontActivate",
+                                "friction": 0.200000,
+                                "gravity_factor": 1.000000,
+                                "model_type": "CUSTOM_WALL",
+                                "motion_type": "Static",
+                                "restitution": 0.000000,
+                                "transform": {
+                                    "position": [
+                                        0.000000,
+                                        0.000000,
+                                        31.476961
+                                    ],
+                                    "rotation": [
+                                        0.000000,
+                                        -89.980217,
+                                        0.000000
+                                    ],
+                                    "scale": [
+                                        0.999936,
+                                        0.999819,
+                                        0.999945
+                                    ]
+                                },
+                                "velocity": {
+                                    "angular_velocity": [
+                                        0.000000,
+                                        0.000000,
+                                        0.000000
+                                    ],
+                                    "linear_velocity": [
+                                        0.000000,
+                                        0.000000,
+                                        0.000000
+                                    ]
+                                }
+                            }
+                        },
+                        "shader": {
+                            "name": "Shader",
+                            "properties": {
+                                "shaders": []
+                            }
+                        },
+                        "transform": {
+                            "name": "Transform",
+                            "properties": {
+                                "transform": {
+                                    "position": [
+                                        0.000000,
+                                        0.000000,
+                                        31.476961
+                                    ],
+                                    "rotation": [
+                                        0.000000,
+                                        -90.000000,
+                                        0.000000
+                                    ],
+                                    "scale": [
+                                        0.999936,
+                                        0.999819,
+                                        0.999945
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "identifier": "wall3",
+                    "models": {
+                        "model": {
+                            "identifier": "wall.obj",
+                            "path": "D:/SporeEngine/master/SporeEngine/Assets/Models/Project/wall.obj"
                         }
                     },
                     "type": "Model"
