@@ -54,6 +54,7 @@ namespace Spore
 		// check for errors (if is Not Zero)
 		if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode)
 		{
+			std::cout << "ERROR::SPORE::Model                                              ::LoadAsset" << std::endl;
 			std::cout << "ERROR::ASSIMP:: " << importer.GetErrorString() << std::endl;
 			return;
 		}
@@ -312,7 +313,7 @@ namespace Spore
 		}
 		else
 		{
-			std::cout << "SporeEngine::Model: Texture failed to load at path: " << p_path << std::endl;
+			std::cout << "ERROR::SPORE::Model::TextureFromFile: Texture failed to load at path: " << p_path << std::endl;
 			stbi_image_free(data);
 		}
 
