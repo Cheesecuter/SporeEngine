@@ -204,6 +204,18 @@ namespace Spore
 						{
 							modelTypeStr = "QUAD";
 						}
+						else if (modelType == ModelType::CUSTOM_CUBE)
+						{
+							modelTypeStr = "CUSTOM_CUBE";
+						}
+						else if (modelType == ModelType::CUSTOM_FLOOR)
+						{
+							modelTypeStr = "CUSTOM_FLOOR";
+						}
+						else if (modelType == ModelType::CUSTOM_WALL)
+						{
+							modelTypeStr = "CUSTOM_WALL";
+						}
 						physicsComponentObject.m_object_value ["properties"].m_object_value ["model_type"] = JsonValue(modelTypeStr);
 
 						std::string motionTypeStr = "";
@@ -436,27 +448,48 @@ namespace Spore
 						JPH::RefConst<JPH::Shape> modelShape;
 						if (physicsModelShapeProperty == "CUBE")
 						{
+							physicsComponent->SetModelType(ModelType::CUBE);
 							modelObject->SetModelType(ModelType::CUBE);
 						}
 						else if (physicsModelShapeProperty == "SPHERE")
 						{
+							physicsComponent->SetModelType(ModelType::SPHERE);
 							modelObject->SetModelType(ModelType::SPHERE);
 						}
 						else if (physicsModelShapeProperty == "CAPSULE")
 						{
+							physicsComponent->SetModelType(ModelType::CAPSULE);
 							modelObject->SetModelType(ModelType::CAPSULE);
 						}
 						else if (physicsModelShapeProperty == "CYLINDER")
 						{
+							physicsComponent->SetModelType(ModelType::CYLINDER);
 							modelObject->SetModelType(ModelType::CYLINDER);
 						}
 						else if (physicsModelShapeProperty == "PLANE")
 						{
+							physicsComponent->SetModelType(ModelType::PLANE);
 							modelObject->SetModelType(ModelType::PLANE);
 						}
 						else if (physicsModelShapeProperty == "QUAD")
 						{
+							physicsComponent->SetModelType(ModelType::QUAD);
 							modelObject->SetModelType(ModelType::QUAD);
+						}
+						else if (physicsModelShapeProperty == "CUSTOM_CUBE")
+						{
+							physicsComponent->SetModelType(ModelType::CUSTOM_CUBE);
+							modelObject->SetModelType(ModelType::CUSTOM_CUBE);
+						}
+						else if (physicsModelShapeProperty == "CUSTOM_FLOOR")
+						{
+							physicsComponent->SetModelType(ModelType::CUSTOM_FLOOR);
+							modelObject->SetModelType(ModelType::CUSTOM_FLOOR);
+						}
+						else if (physicsModelShapeProperty == "CUSTOM_WALL")
+						{
+							physicsComponent->SetModelType(ModelType::CUSTOM_WALL);
+							modelObject->SetModelType(ModelType::CUSTOM_WALL);
 						}
 
 						const auto& physicsMotionTypeProperty = physicsComponentProperties->second.m_object_value.find("motion_type")->second.m_string_value;
