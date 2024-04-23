@@ -26,33 +26,7 @@ namespace Spore
 
 			JPH::RVec3 position = JPHVec3(transformComponent->GetPosition());
 			JPH::Quat quaternion = JPHQuat(quat(glm::radians(transformComponent->GetRotation())));
-			JPH::RefConst<JPH::Shape> model_shape;
-			if (modelObject->GetModelType() == ModelType::CUBE)
-			{
-				model_shape = new JPH::BoxShape(JPH::Vec3(1.0f, 1.0f, 1.0f));
-			}
-			else if (modelObject->GetModelType() == ModelType::SPHERE)
-			{
-				model_shape = new JPH::SphereShape(1.0f);
-			}
-			else if (modelObject->GetModelType() == ModelType::CAPSULE)
-			{
-				model_shape = new JPH::BoxShape(JPH::Vec3(1.0f, 2.0f, 1.0f));
-			}
-			else if (modelObject->GetModelType() == ModelType::CYLINDER)
-			{
-				model_shape = new JPH::BoxShape(JPH::Vec3(1.0f, 1.0f, 1.0f));
-			}
-			else if (modelObject->GetModelType() == ModelType::PLANE)
-			{
-				model_shape = new JPH::BoxShape(JPH::Vec3(1.0f, 0.1f, 1.0f));
-			}
-			else if (modelObject->GetModelType() == ModelType::QUAD)
-			{
-				model_shape = new JPH::BoxShape(JPH::Vec3(1.0f, 0.1f, 1.0f));
-			}
-
-			physicsComponent->SetBodyCreationSettings(model_shape, position, quaternion,
+			physicsComponent->SetBodyCreationSettings(nullptr, position, quaternion,
 													  JPH::EMotionType::Dynamic, Layers::MOVING);
 			physicsComponent->CreateAndAddBody();
 		}
@@ -108,7 +82,7 @@ namespace Spore
 				if (g_tick_run)
 				{
 					const int cCollisionSteps = 1;
-					m_physics_system->Update(p_delta_time / 10, cCollisionSteps, m_temp_allocator, m_job_system);
+					m_physics_system->Update(p_delta_time / m_delta_time_factor, cCollisionSteps, m_temp_allocator, m_job_system);
 				}
 			}
 			else if (object->m_type == "Plane")
