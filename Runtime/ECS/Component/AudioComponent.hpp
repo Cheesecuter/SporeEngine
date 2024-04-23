@@ -7,6 +7,7 @@
 #include <Types.hpp>
 #include <Component.hpp>
 #include <Audio.hpp>
+#include <Texture.hpp>
 
 namespace Spore
 {
@@ -34,5 +35,8 @@ namespace Spore
 		uint32 m_source;
 		uint32 m_buffer;
 		std::map<std::string, Audio*> m_audio_mapper;
+		Texture* m_button_image_play;
+		Texture* m_button_image_pause;
+		Texture* m_button_image_stop;
 	};
 }

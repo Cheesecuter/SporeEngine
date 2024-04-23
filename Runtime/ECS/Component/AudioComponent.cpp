@@ -8,6 +8,9 @@ namespace Spore
 		uint32 source = 0;
 		m_source = source;
 		alGenSources(1, &m_source);
+		m_button_image_play = new Texture("./Assets/Utils/Images/play.png");
+		m_button_image_pause = new Texture("./Assets/Utils/Images/pause.png");
+		m_button_image_stop = new Texture("./Assets/Utils/Images/stop.png");
 	}
 
 	AudioComponent::~AudioComponent()
@@ -33,33 +36,54 @@ namespace Spore
 					ImGui::EndDragDropTarget();
 				}
 			}
-			if (ImGui::Button("Add Audio"))
+			/*if (ImGui::Button("Add Audio"))
 			{
 				Audio* audioTemp = AssetsManager::GetInstance().m_selected_audio;
 				if (audioTemp != nullptr)
 				{
 					AddAudio(audioTemp);
 				}
-			}
+			}*/
 			ImGui::PushID("Inspector::Audio::Play");
-			if (ImGui::Button("Play"))
+			if (ImGui::ImageButton((ImTextureID) (intptr_t) m_button_image_play->m_ID, ImVec2(13, 13)))
+			{
+			}
+			if (ImGui::IsItemClicked())
 			{
 				Play();
 			}
+			/*if (ImGui::Button("Play"))
+			{
+				Play();
+			}*/
 			ImGui::PopID();
 			ImGui::SameLine();
 			ImGui::PushID("Inspector::Audio::Pause");
-			if (ImGui::Button("Pause"))
+			if (ImGui::ImageButton((ImTextureID) (intptr_t) m_button_image_pause->m_ID, ImVec2(13, 13)))
+			{
+			}
+			if (ImGui::IsItemClicked())
 			{
 				Pause();
 			}
+			/*if (ImGui::Button("Pause"))
+			{
+				Pause();
+			}*/
 			ImGui::PopID();
 			ImGui::SameLine();
 			ImGui::PushID("Inspector::Audio::Stop");
-			if (ImGui::Button("Stop"))
+			if (ImGui::ImageButton((ImTextureID) (intptr_t) m_button_image_stop->m_ID, ImVec2(13, 13)))
+			{
+			}
+			if (ImGui::IsItemClicked())
 			{
 				Stop();
 			}
+			/*if (ImGui::Button("Stop"))
+			{
+				Stop();
+			}*/
 			ImGui::PopID();
 			std::string imguiID = "";
 			for (std::pair<std::string, Audio*> it_audio : m_audio_mapper)
