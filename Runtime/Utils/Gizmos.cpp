@@ -43,8 +43,8 @@ namespace Spore
 			}
 		}
 
-		vec2f scenePos = p_window->m_render_pipeline->GetScenePos();
-		vec2f sceneSize = p_window->m_render_pipeline->GetSceneSize();
+		vec2f scenePos = p_window->GetRenderPipeline()->GetScenePos();
+		vec2f sceneSize = p_window->GetRenderPipeline()->GetSceneSize();
 		ImGuizmo::SetRect(scenePos.x, 0.0f, sceneSize.x, sceneSize.y);
 
 		float deltaMatrix = 0.1f;
