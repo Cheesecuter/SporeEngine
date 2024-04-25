@@ -1,4 +1,5 @@
 #include <Gizmos.hpp>
+#include <Keyboard.hpp>
 
 namespace Spore
 {
@@ -29,15 +30,15 @@ namespace Spore
 
 		if (p_edit_transform_decomposition)
 		{
-			if (ImGui::IsKeyPressed(ImGuiKey::ImGuiKey_R))
+			if (Keyboard::GetInstance().GetKey(p_window) == KEY_R)
 			{
 				m_current_gizmo_operation = ImGuizmo::TRANSLATE;
 			}
-			if (ImGui::IsKeyPressed(ImGuiKey::ImGuiKey_T))
+			if (Keyboard::GetInstance().GetKey(p_window) == KEY_T)
 			{
 				m_current_gizmo_operation = ImGuizmo::ROTATE;
 			}
-			if (ImGui::IsKeyPressed(ImGuiKey::ImGuiKey_Y))
+			if (Keyboard::GetInstance().GetKey(p_window) == KEY_Y)
 			{
 				m_current_gizmo_operation = ImGuizmo::SCALE;
 			}
