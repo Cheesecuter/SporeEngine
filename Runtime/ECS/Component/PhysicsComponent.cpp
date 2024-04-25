@@ -75,7 +75,8 @@ namespace Spore
 
 			if (m_current_motion_type != JPH::EMotionType::Static)
 			{
-				SetLinearVelocity(Vec3f(m_body->GetMotionProperties()->GetLinearVelocity()));
+				m_linear_velocity = Vec3f(m_body->GetMotionProperties()->GetLinearVelocity());
+				//SetLinearVelocity(Vec3f(m_body->GetMotionProperties()->GetLinearVelocity()));
 				float linearVelocity [3] = { m_linear_velocity.x, m_linear_velocity.y, m_linear_velocity.z };
 				ImGui::Text("Linear Velocity");
 				ImGui::PushID("Inspector::Physics::EMotionProperties::Linear_Velocity");
@@ -93,9 +94,11 @@ namespace Spore
 					linearVelocity [2] = 0.0f;
 				}
 				ImGui::PopID();
-				m_body->GetMotionProperties()->SetLinearVelocity(JPHVec3(vec3f(linearVelocity [0], linearVelocity [1], linearVelocity [2])));
+				//m_body->GetMotionProperties()->SetLinearVelocity(JPHVec3(vec3f(linearVelocity [0], linearVelocity [1], linearVelocity [2])));
+				SetLinearVelocity(vec3f(linearVelocity [0], linearVelocity [1], linearVelocity [2]));
 
-				SetAngularVelocity(Vec3f(m_body->GetMotionProperties()->GetAngularVelocity()));
+				m_angular_velocity = Vec3f(m_body->GetMotionProperties()->GetAngularVelocity());
+				//SetAngularVelocity(Vec3f(m_body->GetMotionProperties()->GetAngularVelocity()));
 				float angularVelocity [3] = { m_angular_velocity.x, m_angular_velocity.y, m_angular_velocity.z };
 				ImGui::Text("Angular Velocity");
 				ImGui::PushID("Inspector::Physics::EMotionProperties::Angular_Velocity");
@@ -113,7 +116,8 @@ namespace Spore
 					angularVelocity [2] = 0.0f;
 				}
 				ImGui::PopID();
-				m_body->GetMotionProperties()->SetAngularVelocity(JPHVec3(vec3f(angularVelocity [0], angularVelocity [1], angularVelocity [2])));
+				//m_body->GetMotionProperties()->SetAngularVelocity(JPHVec3(vec3f(angularVelocity [0], angularVelocity [1], angularVelocity [2])));
+				SetAngularVelocity(vec3f(angularVelocity [0], angularVelocity [1], angularVelocity [2]));
 
 				SetGravityFactor(m_body->GetMotionProperties()->GetGravityFactor());
 				ImGui::Text("GravityFactor");
@@ -310,11 +314,13 @@ namespace Spore
 	void PhysicsComponent::SetLinearVelocity(vec3f p_velocity)
 	{
 		m_linear_velocity = p_velocity;
+		m_body->GetMotionProperties()->SetLinearVelocity(JPHVec3(vec3f(m_linear_velocity)));
 	}
 
 	void PhysicsComponent::SetLinearVelocity(float32 p_x, float32 p_y, float32 p_z)
 	{
 		m_linear_velocity = vec3f(p_x, p_y, p_z);
+		m_body->GetMotionProperties()->SetLinearVelocity(JPHVec3(vec3f(m_linear_velocity)));
 	}
 
 	vec3f PhysicsComponent::GetLinearVelocity()
@@ -325,11 +331,13 @@ namespace Spore
 	void PhysicsComponent::SetAngularVelocity(vec3f p_velocity)
 	{
 		m_angular_velocity = p_velocity;
+		m_body->GetMotionProperties()->SetAngularVelocity(JPHVec3(vec3f(m_angular_velocity)));
 	}
 
 	void PhysicsComponent::SetAngularVelocity(float32 p_x, float32 p_y, float32 p_z)
 	{
 		m_angular_velocity = vec3f(p_x, p_y, p_z);
+		m_body->GetMotionProperties()->SetAngularVelocity(JPHVec3(vec3f(m_angular_velocity)));
 	}
 
 	vec3f PhysicsComponent::GetAngularVelocity()
@@ -365,5 +373,15 @@ namespace Spore
 	float32 PhysicsComponent::GetFriction()
 	{
 		return m_friction;
+	}
+
+	bool PhysicsComponent::Wake()
+	{
+		if (!m_body_interface->IsActive(m_body->GetID()))
+		{
+			m_body_interface->ActivateBody(m_body->GetID());
+			return true;
+		}
+		return false;
 	}
 }

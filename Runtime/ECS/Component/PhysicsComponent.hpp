@@ -48,6 +48,7 @@ namespace Spore
 		float32 GetRestitution();
 		void SetFriction(float32 p_friction);
 		float32 GetFriction();
+		bool Wake();
 
 	protected:
 
