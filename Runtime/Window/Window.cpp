@@ -1,10 +1,12 @@
 #include <Window.hpp>
+#include <Keyboard.hpp>
 #include <IMGUI_GLFW_OPENGL3.hpp>
+#include <GraphicRenderer.hpp>
 
 namespace Spore
 {
-	std::map<GLFWwindow*, Camera*> MainWindow::m_camera_mapper;
 	std::map<std::string, Scene*> MainWindow::m_scene_mapper;
+	Camera* MainWindow::m_camera = nullptr;
 	bool MainWindow::m_camera_lock = false;
 	bool MainWindow::m_first_mouse = true;
 	bool MainWindow::m_hide_cursor = false;
@@ -18,18 +20,21 @@ namespace Spore
 
 	MainWindow::MainWindow(uint32 p_width, uint32 p_height, const char* p_windowID,
 						   Camera* p_camera, RenderPipeline* p_render_pipeline) :
-		m_width(p_width), m_height(p_height), m_windowID(p_windowID), m_camera(p_camera), m_render_pipeline(p_render_pipeline)
+		m_width(p_width), m_height(p_height), m_windowID(p_windowID)
 	{
-		m_camera = p_camera;
 		m_windowID = p_windowID;
 		m_width = p_width; m_height = p_height;
-		m_render_pipeline = p_render_pipeline;
-		m_window = InitWindow();
-		m_camera_mapper.insert({ m_window, m_camera });
 	}
 
 	MainWindow::~MainWindow()
 	{
+
+	}
+
+	void MainWindow::Init()
+	{
+		m_camera = m_graphic_renderer->GetCamera();
+		m_window = InitWindow();
 	}
 
 	void MainWindow::Terminate()
@@ -37,6 +42,11 @@ namespace Spore
 		if (m_window != nullptr)
 			glfwDestroyWindow(m_window);
 		glfwTerminate();
+	}
+
+	void MainWindow::SetWindowSize(uint32 p_width, uint32 p_height)
+	{
+		m_width = p_width; m_height = p_height;
 	}
 
 	uint32 MainWindow::GetWindowWidth()
@@ -49,9 +59,104 @@ namespace Spore
 		return m_height;
 	}
 
-	void MainWindow::SetWindowSize(uint32 p_width, uint32 p_height)
+	void MainWindow::SetCamera(Camera* p_camera)
 	{
-		m_width = p_width; m_height = p_height;
+		m_camera = p_camera;
+		m_graphic_renderer->SetCamera(p_camera);
+	}
+
+	Camera* MainWindow::GetCamera()
+	{
+		return m_graphic_renderer->GetCamera();
+	}
+
+	bool MainWindow::TransformCamera(float32 p_delta_time)
+	{
+		if (Keyboard::GetInstance().GetKey(this) == KEY_ESC)
+		{
+			glfwSetWindowShouldClose(m_window, true);
+			return true;
+		}
+		if (Keyboard::GetInstance().GetKey(this) == KEY_LEFT_CONTROL)
+		{
+			if (Keyboard::GetInstance().GetKey(this) == KEY_W)
+			{
+				m_camera->ProcessKeyboard(FORWARD, p_delta_time * 2);
+			}
+			if (Keyboard::GetInstance().GetKey(this) == KEY_S)
+			{
+				m_camera->ProcessKeyboard(BACKWARD, p_delta_time * 2);
+			}
+			if (Keyboard::GetInstance().GetKey(this) == KEY_A)
+			{
+				m_camera->ProcessKeyboard(LEFT, p_delta_time * 2);
+			}
+			if (Keyboard::GetInstance().GetKey(this) == KEY_D)
+			{
+				m_camera->ProcessKeyboard(RIGHT, p_delta_time * 2);
+			}
+			if (Keyboard::GetInstance().GetKey(this) == KEY_E)
+			{
+				m_camera->ProcessKeyboard(UP, p_delta_time * 2);
+			}
+			if (Keyboard::GetInstance().GetKey(this) == KEY_Q)
+			{
+				m_camera->ProcessKeyboard(DOWN, p_delta_time * 2);
+			}
+		}
+		else
+		{
+			if (Keyboard::GetInstance().GetKey(this) == KEY_W)
+			{
+				m_camera->ProcessKeyboard(FORWARD, p_delta_time);
+			}
+			if (Keyboard::GetInstance().GetKey(this) == KEY_S)
+			{
+				m_camera->ProcessKeyboard(BACKWARD, p_delta_time);
+			}
+			if (Keyboard::GetInstance().GetKey(this) == KEY_A)
+			{
+				m_camera->ProcessKeyboard(LEFT, p_delta_time);
+			}
+			if (Keyboard::GetInstance().GetKey(this) == KEY_D)
+			{
+				m_camera->ProcessKeyboard(RIGHT, p_delta_time);
+			}
+			if (Keyboard::GetInstance().GetKey(this) == KEY_E)
+			{
+				m_camera->ProcessKeyboard(UP, p_delta_time);
+			}
+			if (Keyboard::GetInstance().GetKey(this) == KEY_Q)
+			{
+				m_camera->ProcessKeyboard(DOWN, p_delta_time);
+			}
+		}
+		return true;
+	}
+
+	void MainWindow::SetWindow(GLFWwindow* p_window)
+	{
+		m_window = p_window;
+	}
+
+	GLFWwindow* MainWindow::GetWindow()
+	{
+		return m_window;
+	}
+
+	void MainWindow::SetGraphicRenderer(GraphicRenderer* p_graphic_renderer)
+	{
+		m_graphic_renderer = p_graphic_renderer;
+	}
+
+	GraphicRenderer* MainWindow::GetGraphicRenderer()
+	{
+		return m_graphic_renderer;
+	}
+
+	RenderPipeline* MainWindow::GetRenderPipeline()
+	{
+		return m_graphic_renderer->GetRenderPipeline();
 	}
 
 	GLFWwindow* MainWindow::InitWindow()
@@ -147,8 +252,8 @@ namespace Spore
 
 			if (Mouse::GetInstance().m_button_right)
 			{
-				MainWindow::m_camera_mapper [p_window]->ProcessMouseMovement(Mouse::GetInstance().m_x_offset,
-																			 Mouse::GetInstance().m_y_offset);
+				MainWindow::m_camera->ProcessMouseMovement(Mouse::GetInstance().m_x_offset,
+														   Mouse::GetInstance().m_y_offset);
 			}
 		}
 	}
@@ -168,7 +273,7 @@ namespace Spore
 
 	void MouseScrollCallback(GLFWwindow* p_window, float64 p_x_offset, float64 p_y_offset)
 	{
-		MainWindow::m_camera_mapper [p_window]->ProcessMouseScroll(static_cast<float32>(p_y_offset));
+		MainWindow::m_camera->ProcessMouseScroll(static_cast<float32>(p_y_offset));
 	}
 
 	static void ErrorCallBack(int32 p_error, const char* p_description)
