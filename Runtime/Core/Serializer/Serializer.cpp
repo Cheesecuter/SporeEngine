@@ -1,9 +1,12 @@
 #include <Serializer.hpp>
-#include <TransformComponent.hpp>
-#include <ShaderComponent.hpp>
+#include <AudioComponent.hpp>
+#include <CameraComponent.hpp>
+#include <CharacterControllerComponent.hpp>
+#include <LightComponent.hpp>
 #include <ModelComponent.hpp>
 #include <PhysicsComponent.hpp>
-#include <AudioComponent.hpp>
+#include <ShaderComponent.hpp>
+#include <TransformComponent.hpp>
 
 namespace Spore
 {
@@ -57,255 +60,295 @@ namespace Spore
 
 					// Transform Component
 					TransformComponent* transformComponent = dynamic_cast<TransformComponent*>(it_object.second->GetComponent("Transform"));
-					JsonValue transformComponentObject;
-					transformComponentObject.m_type = JsonType::Object;
-					transformComponentObject.m_object_value ["name"] = JsonValue("Transform");
-					JsonValue transformComponentPropertiesObject;
-					transformComponentPropertiesObject.m_type = JsonType::Object;
+					if (transformComponent != nullptr)
+					{
+						JsonValue transformComponentObject;
+						transformComponentObject.m_type = JsonType::Object;
+						transformComponentObject.m_object_value ["name"] = JsonValue("Transform");
+						JsonValue transformComponentPropertiesObject;
+						transformComponentPropertiesObject.m_type = JsonType::Object;
 
-					std::vector<JsonValue> transformComponentPropertyPositionArray;
-					JsonValue transformComponentPropertyPositionNumber;
-					transformComponentPropertyPositionNumber.m_type = JsonType::Number;
-					vec3f transformPosition = transformComponent->GetPosition();
-					transformComponentPropertyPositionNumber.m_number_value = transformPosition.x;
-					transformComponentPropertyPositionArray.push_back(transformComponentPropertyPositionNumber);
-					transformComponentPropertyPositionNumber.m_number_value = transformPosition.y;
-					transformComponentPropertyPositionArray.push_back(transformComponentPropertyPositionNumber);
-					transformComponentPropertyPositionNumber.m_number_value = transformPosition.z;
-					transformComponentPropertyPositionArray.push_back(transformComponentPropertyPositionNumber);
-					transformComponentObject.m_object_value ["properties"].m_object_value ["transform"].m_object_value["position"] = transformComponentPropertyPositionArray;
-					transformComponentObject.m_object_value ["properties"].m_object_value ["transform"].m_object_value ["position"].m_type = JsonType::Array;
+						std::vector<JsonValue> transformComponentPropertyPositionArray;
+						JsonValue transformComponentPropertyPositionNumber;
+						transformComponentPropertyPositionNumber.m_type = JsonType::Number;
+						vec3f transformPosition = transformComponent->GetPosition();
+						transformComponentPropertyPositionNumber.m_number_value = transformPosition.x;
+						transformComponentPropertyPositionArray.push_back(transformComponentPropertyPositionNumber);
+						transformComponentPropertyPositionNumber.m_number_value = transformPosition.y;
+						transformComponentPropertyPositionArray.push_back(transformComponentPropertyPositionNumber);
+						transformComponentPropertyPositionNumber.m_number_value = transformPosition.z;
+						transformComponentPropertyPositionArray.push_back(transformComponentPropertyPositionNumber);
+						transformComponentObject.m_object_value ["properties"].m_object_value ["transform"].m_object_value ["position"] = transformComponentPropertyPositionArray;
+						transformComponentObject.m_object_value ["properties"].m_object_value ["transform"].m_object_value ["position"].m_type = JsonType::Array;
 
-					std::vector<JsonValue> transformComponentPropertyRotationArray;
-					JsonValue transformComponentPropertyRotationNumber;
-					transformComponentPropertyRotationNumber.m_type = JsonType::Number;
-					vec3f transformRotation = transformComponent->GetRotation();
-					transformComponentPropertyRotationNumber.m_number_value = transformRotation.x;
-					transformComponentPropertyRotationArray.push_back(transformComponentPropertyRotationNumber);
-					transformComponentPropertyRotationNumber.m_number_value = transformRotation.y;
-					transformComponentPropertyRotationArray.push_back(transformComponentPropertyRotationNumber);
-					transformComponentPropertyRotationNumber.m_number_value = transformRotation.z;
-					transformComponentPropertyRotationArray.push_back(transformComponentPropertyRotationNumber);
-					transformComponentObject.m_object_value ["properties"].m_object_value ["transform"].m_object_value ["rotation"] = transformComponentPropertyRotationArray;
-					transformComponentObject.m_object_value ["properties"].m_object_value ["transform"].m_object_value ["rotation"].m_type = JsonType::Array;
+						std::vector<JsonValue> transformComponentPropertyRotationArray;
+						JsonValue transformComponentPropertyRotationNumber;
+						transformComponentPropertyRotationNumber.m_type = JsonType::Number;
+						vec3f transformRotation = transformComponent->GetRotation();
+						transformComponentPropertyRotationNumber.m_number_value = transformRotation.x;
+						transformComponentPropertyRotationArray.push_back(transformComponentPropertyRotationNumber);
+						transformComponentPropertyRotationNumber.m_number_value = transformRotation.y;
+						transformComponentPropertyRotationArray.push_back(transformComponentPropertyRotationNumber);
+						transformComponentPropertyRotationNumber.m_number_value = transformRotation.z;
+						transformComponentPropertyRotationArray.push_back(transformComponentPropertyRotationNumber);
+						transformComponentObject.m_object_value ["properties"].m_object_value ["transform"].m_object_value ["rotation"] = transformComponentPropertyRotationArray;
+						transformComponentObject.m_object_value ["properties"].m_object_value ["transform"].m_object_value ["rotation"].m_type = JsonType::Array;
 
-					std::vector<JsonValue> transformComponentPropertyScaleArray;
-					JsonValue transformComponentPropertyScaleNumber;
-					transformComponentPropertyScaleNumber.m_type = JsonType::Number;
-					vec3f transformScale = transformComponent->GetScale();
-					transformComponentPropertyScaleNumber.m_number_value = transformScale.x;
-					transformComponentPropertyScaleArray.push_back(transformComponentPropertyScaleNumber);
-					transformComponentPropertyScaleNumber.m_number_value = transformScale.y;
-					transformComponentPropertyScaleArray.push_back(transformComponentPropertyScaleNumber);
-					transformComponentPropertyScaleNumber.m_number_value = transformScale.z;
-					transformComponentPropertyScaleArray.push_back(transformComponentPropertyScaleNumber);
-					transformComponentObject.m_object_value ["properties"].m_object_value ["transform"].m_object_value ["scale"] = transformComponentPropertyScaleArray;
-					transformComponentObject.m_object_value ["properties"].m_object_value ["transform"].m_object_value ["scale"].m_type = JsonType::Array;
+						std::vector<JsonValue> transformComponentPropertyScaleArray;
+						JsonValue transformComponentPropertyScaleNumber;
+						transformComponentPropertyScaleNumber.m_type = JsonType::Number;
+						vec3f transformScale = transformComponent->GetScale();
+						transformComponentPropertyScaleNumber.m_number_value = transformScale.x;
+						transformComponentPropertyScaleArray.push_back(transformComponentPropertyScaleNumber);
+						transformComponentPropertyScaleNumber.m_number_value = transformScale.y;
+						transformComponentPropertyScaleArray.push_back(transformComponentPropertyScaleNumber);
+						transformComponentPropertyScaleNumber.m_number_value = transformScale.z;
+						transformComponentPropertyScaleArray.push_back(transformComponentPropertyScaleNumber);
+						transformComponentObject.m_object_value ["properties"].m_object_value ["transform"].m_object_value ["scale"] = transformComponentPropertyScaleArray;
+						transformComponentObject.m_object_value ["properties"].m_object_value ["transform"].m_object_value ["scale"].m_type = JsonType::Array;
 
-					transformComponentObject.m_object_value ["properties"].m_object_value ["transform"].m_type = JsonType::Object;
-					
-					transformComponentObject.m_object_value ["properties"].m_type = JsonType::Object;
+						transformComponentObject.m_object_value ["properties"].m_object_value ["transform"].m_type = JsonType::Object;
+
+						transformComponentObject.m_object_value ["properties"].m_type = JsonType::Object;
 
 
-					objectComponentObject.m_object_value ["transform"] = transformComponentObject;
+						objectComponentObject.m_object_value ["transform"] = transformComponentObject;
+					}
 
 					// Shader Component
 					ShaderComponent* shaderComponent = dynamic_cast<ShaderComponent*>(it_object.second->GetComponent("Shader"));
-					JsonValue shaderComponentObject;
-					shaderComponentObject.m_type = JsonType::Object;
-					shaderComponentObject.m_object_value ["name"] = JsonValue("Shader");
+					if (shaderComponent != nullptr)
+					{
+						JsonValue shaderComponentObject;
+						shaderComponentObject.m_type = JsonType::Object;
+						shaderComponentObject.m_object_value ["name"] = JsonValue("Shader");
 
-					std::vector<JsonValue> shaderComponentPropertyShaderArray;
+						std::vector<JsonValue> shaderComponentPropertyShaderArray;
+
+						shaderComponentObject.m_object_value ["properties"].m_object_value ["shaders"].m_array_value = shaderComponentPropertyShaderArray;
+						shaderComponentObject.m_object_value ["properties"].m_object_value ["shaders"].m_type = JsonType::Array;
+
+						shaderComponentObject.m_object_value ["properties"].m_type = JsonType::Object;
+
+						objectComponentObject.m_object_value ["shader"] = shaderComponentObject;
+					}
 					
-					shaderComponentObject.m_object_value ["properties"].m_object_value ["shaders"].m_array_value = shaderComponentPropertyShaderArray;
-					shaderComponentObject.m_object_value ["properties"].m_object_value ["shaders"].m_type = JsonType::Array;
-
-					shaderComponentObject.m_object_value ["properties"].m_type = JsonType::Object;
-
-					objectComponentObject.m_object_value ["shader"] = shaderComponentObject;
-
 					if (objectType == "Model")
 					{
 						ModelObject* modelObject = dynamic_cast<ModelObject*>(it_object.second);
 
 						// Physics Component
 						PhysicsComponent* physicsComponent = dynamic_cast<PhysicsComponent*>(it_object.second->GetComponent("Physics"));
-						JsonValue physicsComponentObject;
-						physicsComponentObject.m_type = JsonType::Object;
-						physicsComponentObject.m_object_value ["name"] = JsonValue("Physics");
-
-						JsonValue physicsComponentPropertiesObject;
-						physicsComponentPropertiesObject.m_type = JsonType::Object;
-
-						std::vector<JsonValue> physicsComponentPropertyPositionArray;
-						JsonValue physicsComponentPropertyPositionNumber;
-						physicsComponentPropertyPositionNumber.m_type = JsonType::Number;
-						vec3f physicsPosition = physicsComponent->GetPosition();
-						physicsComponentPropertyPositionNumber.m_number_value = physicsPosition.x;
-						physicsComponentPropertyPositionArray.push_back(physicsComponentPropertyPositionNumber);
-						physicsComponentPropertyPositionNumber.m_number_value = physicsPosition.y;
-						physicsComponentPropertyPositionArray.push_back(physicsComponentPropertyPositionNumber);
-						physicsComponentPropertyPositionNumber.m_number_value = physicsPosition.z;
-						physicsComponentPropertyPositionArray.push_back(physicsComponentPropertyPositionNumber);
-						physicsComponentObject.m_object_value ["properties"].m_object_value ["transform"].m_object_value ["position"] = physicsComponentPropertyPositionArray;
-						physicsComponentObject.m_object_value ["properties"].m_object_value ["transform"].m_object_value ["position"].m_type = JsonType::Array;
-
-						std::vector<JsonValue> physicsComponentPropertyRotationArray;
-						JsonValue physicsComponentPropertyRotationNumber;
-						physicsComponentPropertyRotationNumber.m_type = JsonType::Number;
-						vec3f physicsRotation = physicsComponent->GetRotation();
-						physicsComponentPropertyRotationNumber.m_number_value = physicsRotation.x;
-						physicsComponentPropertyRotationArray.push_back(physicsComponentPropertyRotationNumber);
-						physicsComponentPropertyRotationNumber.m_number_value = physicsRotation.y;
-						physicsComponentPropertyRotationArray.push_back(physicsComponentPropertyRotationNumber);
-						physicsComponentPropertyRotationNumber.m_number_value = physicsRotation.z;
-						physicsComponentPropertyRotationArray.push_back(physicsComponentPropertyRotationNumber);
-						physicsComponentObject.m_object_value ["properties"].m_object_value ["transform"].m_object_value ["rotation"] = physicsComponentPropertyRotationArray;
-						physicsComponentObject.m_object_value ["properties"].m_object_value ["transform"].m_object_value ["rotation"].m_type = JsonType::Array;
-
-						std::vector<JsonValue> physicsComponentPropertyScaleArray;
-						JsonValue physicsComponentPropertyScaleNumber;
-						physicsComponentPropertyScaleNumber.m_type = JsonType::Number;
-						vec3f physicsScale = transformComponent->GetScale();
-						physicsComponentPropertyScaleNumber.m_number_value = physicsScale.x;
-						physicsComponentPropertyScaleArray.push_back(physicsComponentPropertyScaleNumber);
-						physicsComponentPropertyScaleNumber.m_number_value = physicsScale.y;
-						physicsComponentPropertyScaleArray.push_back(physicsComponentPropertyScaleNumber);
-						physicsComponentPropertyScaleNumber.m_number_value = physicsScale.z;
-						physicsComponentPropertyScaleArray.push_back(physicsComponentPropertyScaleNumber);
-						physicsComponentObject.m_object_value ["properties"].m_object_value ["transform"].m_object_value ["scale"] = physicsComponentPropertyScaleArray;
-						physicsComponentObject.m_object_value ["properties"].m_object_value ["transform"].m_object_value ["scale"].m_type = JsonType::Array;
-
-						physicsComponentObject.m_object_value ["properties"].m_object_value ["transform"].m_type = JsonType::Object;
-
-						std::string modelTypeStr = "";
-						ModelType modelType = modelObject->GetModelType();
-						if (modelType == ModelType::CUBE)
+						if (physicsComponent != nullptr)
 						{
-							modelTypeStr = "CUBE";
-						}
-						else if (modelType == ModelType::SPHERE)
-						{
-							modelTypeStr = "SPHERE";
-						}
-						else if (modelType == ModelType::CAPSULE)
-						{
-							modelTypeStr = "CAPSULE";
-						}
-						else if (modelType == ModelType::CYLINDER)
-						{
-							modelTypeStr = "CYLINDER";
-						}
-						else if (modelType == ModelType::PLANE)
-						{
-							modelTypeStr = "PLANE";
-						}
-						else if (modelType == ModelType::QUAD)
-						{
-							modelTypeStr = "QUAD";
-						}
-						else if (modelType == ModelType::CUSTOM_CUBE)
-						{
-							modelTypeStr = "CUSTOM_CUBE";
-						}
-						else if (modelType == ModelType::CUSTOM_FLOOR)
-						{
-							modelTypeStr = "CUSTOM_FLOOR";
-						}
-						else if (modelType == ModelType::CUSTOM_WALL)
-						{
-							modelTypeStr = "CUSTOM_WALL";
-						}
-						physicsComponentObject.m_object_value ["properties"].m_object_value ["model_type"] = JsonValue(modelTypeStr);
+							JsonValue physicsComponentObject;
+							physicsComponentObject.m_type = JsonType::Object;
+							physicsComponentObject.m_object_value ["name"] = JsonValue("Physics");
 
-						std::string motionTypeStr = "";
-						JPH::EMotionType motionType = physicsComponent->GetBodyInterface()->GetMotionType(physicsComponent->GetBody()->GetID());
-						if (motionType == JPH::EMotionType::Dynamic)
-						{
-							motionTypeStr = "Dynamic";
+							JsonValue physicsComponentPropertiesObject;
+							physicsComponentPropertiesObject.m_type = JsonType::Object;
+
+							std::vector<JsonValue> physicsComponentPropertyPositionArray;
+							JsonValue physicsComponentPropertyPositionNumber;
+							physicsComponentPropertyPositionNumber.m_type = JsonType::Number;
+							vec3f physicsPosition = physicsComponent->GetPosition();
+							physicsComponentPropertyPositionNumber.m_number_value = physicsPosition.x;
+							physicsComponentPropertyPositionArray.push_back(physicsComponentPropertyPositionNumber);
+							physicsComponentPropertyPositionNumber.m_number_value = physicsPosition.y;
+							physicsComponentPropertyPositionArray.push_back(physicsComponentPropertyPositionNumber);
+							physicsComponentPropertyPositionNumber.m_number_value = physicsPosition.z;
+							physicsComponentPropertyPositionArray.push_back(physicsComponentPropertyPositionNumber);
+							physicsComponentObject.m_object_value ["properties"].m_object_value ["transform"].m_object_value ["position"] = physicsComponentPropertyPositionArray;
+							physicsComponentObject.m_object_value ["properties"].m_object_value ["transform"].m_object_value ["position"].m_type = JsonType::Array;
+
+							std::vector<JsonValue> physicsComponentPropertyRotationArray;
+							JsonValue physicsComponentPropertyRotationNumber;
+							physicsComponentPropertyRotationNumber.m_type = JsonType::Number;
+							vec3f physicsRotation = physicsComponent->GetRotation();
+							physicsComponentPropertyRotationNumber.m_number_value = physicsRotation.x;
+							physicsComponentPropertyRotationArray.push_back(physicsComponentPropertyRotationNumber);
+							physicsComponentPropertyRotationNumber.m_number_value = physicsRotation.y;
+							physicsComponentPropertyRotationArray.push_back(physicsComponentPropertyRotationNumber);
+							physicsComponentPropertyRotationNumber.m_number_value = physicsRotation.z;
+							physicsComponentPropertyRotationArray.push_back(physicsComponentPropertyRotationNumber);
+							physicsComponentObject.m_object_value ["properties"].m_object_value ["transform"].m_object_value ["rotation"] = physicsComponentPropertyRotationArray;
+							physicsComponentObject.m_object_value ["properties"].m_object_value ["transform"].m_object_value ["rotation"].m_type = JsonType::Array;
+
+							std::vector<JsonValue> physicsComponentPropertyScaleArray;
+							JsonValue physicsComponentPropertyScaleNumber;
+							physicsComponentPropertyScaleNumber.m_type = JsonType::Number;
+							vec3f physicsScale = transformComponent->GetScale();
+							physicsComponentPropertyScaleNumber.m_number_value = physicsScale.x;
+							physicsComponentPropertyScaleArray.push_back(physicsComponentPropertyScaleNumber);
+							physicsComponentPropertyScaleNumber.m_number_value = physicsScale.y;
+							physicsComponentPropertyScaleArray.push_back(physicsComponentPropertyScaleNumber);
+							physicsComponentPropertyScaleNumber.m_number_value = physicsScale.z;
+							physicsComponentPropertyScaleArray.push_back(physicsComponentPropertyScaleNumber);
+							physicsComponentObject.m_object_value ["properties"].m_object_value ["transform"].m_object_value ["scale"] = physicsComponentPropertyScaleArray;
+							physicsComponentObject.m_object_value ["properties"].m_object_value ["transform"].m_object_value ["scale"].m_type = JsonType::Array;
+
+							physicsComponentObject.m_object_value ["properties"].m_object_value ["transform"].m_type = JsonType::Object;
+
+							std::string modelTypeStr = "";
+							ModelType modelType = modelObject->GetModelType();
+							if (modelType == ModelType::CUBE)
+							{
+								modelTypeStr = "CUBE";
+							}
+							else if (modelType == ModelType::SPHERE)
+							{
+								modelTypeStr = "SPHERE";
+							}
+							else if (modelType == ModelType::CAPSULE)
+							{
+								modelTypeStr = "CAPSULE";
+							}
+							else if (modelType == ModelType::CYLINDER)
+							{
+								modelTypeStr = "CYLINDER";
+							}
+							else if (modelType == ModelType::PLANE)
+							{
+								modelTypeStr = "PLANE";
+							}
+							else if (modelType == ModelType::QUAD)
+							{
+								modelTypeStr = "QUAD";
+							}
+							else if (modelType == ModelType::CUSTOM_CUBE)
+							{
+								modelTypeStr = "CUSTOM_CUBE";
+							}
+							else if (modelType == ModelType::CUSTOM_FLOOR)
+							{
+								modelTypeStr = "CUSTOM_FLOOR";
+							}
+							else if (modelType == ModelType::CUSTOM_WALL)
+							{
+								modelTypeStr = "CUSTOM_WALL";
+							}
+							physicsComponentObject.m_object_value ["properties"].m_object_value ["model_type"] = JsonValue(modelTypeStr);
+
+							std::string motionTypeStr = "";
+							JPH::EMotionType motionType = physicsComponent->GetBodyInterface()->GetMotionType(physicsComponent->GetBody()->GetID());
+							if (motionType == JPH::EMotionType::Dynamic)
+							{
+								motionTypeStr = "Dynamic";
+							}
+							else if (motionType == JPH::EMotionType::Kinematic)
+							{
+								motionTypeStr = "Kinematic";
+							}
+							else if (motionType == JPH::EMotionType::Static)
+							{
+								motionTypeStr = "Static";
+							}
+							physicsComponentObject.m_object_value ["properties"].m_object_value ["motion_type"] = JsonValue(motionTypeStr);
+
+							std::string activationStr = "";
+							if (physicsComponent->GetBodyInterface()->IsActive(physicsComponent->GetBody()->GetID()))
+							{
+								activationStr = "Activate";
+							}
+							else
+							{
+								activationStr = "DontActivate";
+							}
+							physicsComponentObject.m_object_value ["properties"].m_object_value ["activation"] = JsonValue(activationStr);
+
+							std::vector<JsonValue> physicsComponentPropertyLinearVelocityArray;
+							JsonValue physicsComponentPropertyLinearVelocityNumber;
+							physicsComponentPropertyLinearVelocityNumber.m_type = JsonType::Number;
+							vec3f physicsLinearVelocity = physicsComponent->GetLinearVelocity();
+							physicsComponentPropertyLinearVelocityNumber.m_number_value = physicsLinearVelocity.x;
+							physicsComponentPropertyLinearVelocityArray.push_back(physicsComponentPropertyLinearVelocityNumber);
+							physicsComponentPropertyLinearVelocityNumber.m_number_value = physicsLinearVelocity.y;
+							physicsComponentPropertyLinearVelocityArray.push_back(physicsComponentPropertyLinearVelocityNumber);
+							physicsComponentPropertyLinearVelocityNumber.m_number_value = physicsLinearVelocity.z;
+							physicsComponentPropertyLinearVelocityArray.push_back(physicsComponentPropertyLinearVelocityNumber);
+							physicsComponentObject.m_object_value ["properties"].m_object_value ["velocity"].m_object_value ["linear_velocity"] = physicsComponentPropertyLinearVelocityArray;
+							physicsComponentObject.m_object_value ["properties"].m_object_value ["velocity"].m_object_value ["linear_velocity"].m_type = JsonType::Array;
+
+							std::vector<JsonValue> physicsComponentPropertyAngularVelocityArray;
+							JsonValue physicsComponentPropertyAngularVelocityNumber;
+							physicsComponentPropertyAngularVelocityNumber.m_type = JsonType::Number;
+							vec3f physicsAngularVelocity = physicsComponent->GetAngularVelocity();
+							physicsComponentPropertyAngularVelocityNumber.m_number_value = physicsAngularVelocity.x;
+							physicsComponentPropertyAngularVelocityArray.push_back(physicsComponentPropertyAngularVelocityNumber);
+							physicsComponentPropertyAngularVelocityNumber.m_number_value = physicsAngularVelocity.y;
+							physicsComponentPropertyAngularVelocityArray.push_back(physicsComponentPropertyAngularVelocityNumber);
+							physicsComponentPropertyAngularVelocityNumber.m_number_value = physicsAngularVelocity.z;
+							physicsComponentPropertyAngularVelocityArray.push_back(physicsComponentPropertyAngularVelocityNumber);
+							physicsComponentObject.m_object_value ["properties"].m_object_value ["velocity"].m_object_value ["angular_velocity"] = physicsComponentPropertyAngularVelocityArray;
+							physicsComponentObject.m_object_value ["properties"].m_object_value ["velocity"].m_object_value ["angular_velocity"].m_type = JsonType::Array;
+
+							physicsComponentObject.m_object_value ["properties"].m_object_value ["velocity"].m_type = JsonType::Object;
+
+							float32 physicsGravityFactor = physicsComponent->GetGravityFactor();
+							physicsComponentObject.m_object_value ["properties"].m_object_value ["gravity_factor"] = JsonValue(physicsGravityFactor);
+
+							float32 physicsRestitution = physicsComponent->GetRestitution();
+							physicsComponentObject.m_object_value ["properties"].m_object_value ["restitution"] = JsonValue(physicsRestitution);
+
+							float32 physicsFriction = physicsComponent->GetFriction();
+							physicsComponentObject.m_object_value ["properties"].m_object_value ["friction"] = JsonValue(physicsFriction);
+
+							physicsComponentObject.m_object_value ["properties"].m_type = JsonType::Object;
+
+							objectComponentObject.m_object_value ["physics"] = physicsComponentObject;
 						}
-						else if (motionType == JPH::EMotionType::Kinematic)
-						{
-							motionTypeStr = "Kinematic";
-						}
-						else if (motionType == JPH::EMotionType::Static)
-						{
-							motionTypeStr = "Static";
-						}
-						physicsComponentObject.m_object_value ["properties"].m_object_value ["motion_type"] = JsonValue(motionTypeStr);
-
-						std::string activationStr = "";
-						if (physicsComponent->GetBodyInterface()->IsActive(physicsComponent->GetBody()->GetID()))
-						{
-							activationStr = "Activate";
-						}
-						else
-						{
-							activationStr = "DontActivate";
-						}
-						physicsComponentObject.m_object_value ["properties"].m_object_value ["activation"] = JsonValue(activationStr);
-
-						std::vector<JsonValue> physicsComponentPropertyLinearVelocityArray;
-						JsonValue physicsComponentPropertyLinearVelocityNumber;
-						physicsComponentPropertyLinearVelocityNumber.m_type = JsonType::Number;
-						vec3f physicsLinearVelocity = physicsComponent->GetLinearVelocity();
-						physicsComponentPropertyLinearVelocityNumber.m_number_value = physicsLinearVelocity.x;
-						physicsComponentPropertyLinearVelocityArray.push_back(physicsComponentPropertyLinearVelocityNumber);
-						physicsComponentPropertyLinearVelocityNumber.m_number_value = physicsLinearVelocity.y;
-						physicsComponentPropertyLinearVelocityArray.push_back(physicsComponentPropertyLinearVelocityNumber);
-						physicsComponentPropertyLinearVelocityNumber.m_number_value = physicsLinearVelocity.z;
-						physicsComponentPropertyLinearVelocityArray.push_back(physicsComponentPropertyLinearVelocityNumber);
-						physicsComponentObject.m_object_value ["properties"].m_object_value ["velocity"].m_object_value ["linear_velocity"] = physicsComponentPropertyLinearVelocityArray;
-						physicsComponentObject.m_object_value ["properties"].m_object_value ["velocity"].m_object_value ["linear_velocity"].m_type = JsonType::Array;
-
-						std::vector<JsonValue> physicsComponentPropertyAngularVelocityArray;
-						JsonValue physicsComponentPropertyAngularVelocityNumber;
-						physicsComponentPropertyAngularVelocityNumber.m_type = JsonType::Number;
-						vec3f physicsAngularVelocity = physicsComponent->GetAngularVelocity();
-						physicsComponentPropertyAngularVelocityNumber.m_number_value = physicsAngularVelocity.x;
-						physicsComponentPropertyAngularVelocityArray.push_back(physicsComponentPropertyAngularVelocityNumber);
-						physicsComponentPropertyAngularVelocityNumber.m_number_value = physicsAngularVelocity.y;
-						physicsComponentPropertyAngularVelocityArray.push_back(physicsComponentPropertyAngularVelocityNumber);
-						physicsComponentPropertyAngularVelocityNumber.m_number_value = physicsAngularVelocity.z;
-						physicsComponentPropertyAngularVelocityArray.push_back(physicsComponentPropertyAngularVelocityNumber);
-						physicsComponentObject.m_object_value ["properties"].m_object_value ["velocity"].m_object_value ["angular_velocity"] = physicsComponentPropertyAngularVelocityArray;
-						physicsComponentObject.m_object_value ["properties"].m_object_value ["velocity"].m_object_value ["angular_velocity"].m_type = JsonType::Array;
-
-						physicsComponentObject.m_object_value ["properties"].m_object_value ["velocity"].m_type = JsonType::Object;
-
-						float32 physicsGravityFactor = physicsComponent->GetGravityFactor();
-						physicsComponentObject.m_object_value ["properties"].m_object_value ["gravity_factor"] = JsonValue(physicsGravityFactor);
-
-						float32 physicsRestitution = physicsComponent->GetRestitution();
-						physicsComponentObject.m_object_value ["properties"].m_object_value ["restitution"] = JsonValue(physicsRestitution);
-
-						float32 physicsFriction = physicsComponent->GetFriction();
-						physicsComponentObject.m_object_value ["properties"].m_object_value ["friction"] = JsonValue(physicsFriction);
-
-						physicsComponentObject.m_object_value ["properties"].m_type = JsonType::Object;
-
-						objectComponentObject.m_object_value ["physics"] = physicsComponentObject;
 
 						// Audio Component
 						AudioComponent* audioComponent = dynamic_cast<AudioComponent*>(it_object.second->GetComponent("Audio"));
-						JsonValue audioComponentObject;
-						audioComponentObject.m_type = JsonType::Object;
-						audioComponentObject.m_object_value ["name"] = JsonValue("Audio");
+						
+						if (audioComponent != nullptr)
+						{
+							JsonValue audioComponentObject;
+							audioComponentObject.m_type = JsonType::Object;
+							audioComponentObject.m_object_value ["name"] = JsonValue("Audio");
 
-						audioComponentObject.m_object_value ["properties"].m_type = JsonType::Object;
+							audioComponentObject.m_object_value ["properties"].m_type = JsonType::Object;
 
-						objectComponentObject.m_object_value ["audio"] = audioComponentObject;
+							objectComponentObject.m_object_value ["audio"] = audioComponentObject;
+						}
+
+						CameraComponent* cameraComponent = dynamic_cast<CameraComponent*>(it_object.second->GetComponent("Camera"));
+						if (cameraComponent != nullptr)
+						{
+							JsonValue cameraComponentObject;
+							cameraComponentObject.m_type = JsonType::Object;
+							cameraComponentObject.m_object_value ["name"] = JsonValue("Camera");
+
+							cameraComponentObject.m_object_value ["properties"].m_type = JsonType::Object;
+
+							objectComponentObject.m_object_value ["camera"] = cameraComponentObject;
+						}
+
+						CharacterControllerComponent* characterControllerComponent = dynamic_cast<CharacterControllerComponent*>(it_object.second->GetComponent("CharacterController"));
+						if (characterControllerComponent != nullptr)
+						{
+							JsonValue characterControllerComponentObject;
+							characterControllerComponentObject.m_type = JsonType::Object;
+							characterControllerComponentObject.m_object_value ["name"] = JsonValue("CharacterController");
+
+							characterControllerComponentObject.m_object_value ["properties"].m_type = JsonType::Object;
+
+							objectComponentObject.m_object_value ["character_controller"] = characterControllerComponentObject;
+						}
 					}
 					else if (objectType == "Light")
 					{
 						LightComponent* lightComponent = dynamic_cast<LightComponent*>(it_object.second->GetComponent("Light"));
-						JsonValue lightComponentObject;
-						lightComponentObject.m_type = JsonType::Object;
-						lightComponentObject.m_object_value ["name"] = JsonValue("Light");
+						if (lightComponent != nullptr)
+						{
+							JsonValue lightComponentObject;
+							lightComponentObject.m_type = JsonType::Object;
+							lightComponentObject.m_object_value ["name"] = JsonValue("Light");
 
-						lightComponentObject.m_object_value ["properties"].m_type = JsonType::Object;
+							lightComponentObject.m_object_value ["properties"].m_type = JsonType::Object;
 
-						objectComponentObject.m_object_value ["light"] = lightComponentObject;
+							objectComponentObject.m_object_value ["light"] = lightComponentObject;
+						}
 					}
 					objectObject.m_object_value ["components"] = objectComponentObject;
 
@@ -423,10 +466,27 @@ namespace Spore
 
 					if (object->m_type == "Model")
 					{
+						ModelObject* modelObject = dynamic_cast<ModelObject*>(object);
+
+						// Camera component
+						const auto& cameraComponentValue = componentValue.find("camera");
+						if (cameraComponentValue != componentValue.end())
+						{
+							CameraComponent* cameraComponent = new CameraComponent();
+							modelObject->AddComponent(cameraComponent);
+						}
+
+						// CharacterController component
+						const auto& characterControllerComponentValue = componentValue.find("character_controller");
+						if (characterControllerComponentValue != componentValue.end())
+						{
+							CharacterControllerComponent* characterControllerComponent = new CharacterControllerComponent();
+							modelObject->AddComponent(characterControllerComponent);
+						}
+
 						// Physics component
 						const auto& physicsComponentValue = componentValue.find("physics");
 						PhysicsComponent* physicsComponent = dynamic_cast<PhysicsComponent*>(components.find("Physics")->second);
-						ModelObject* modelObject = dynamic_cast<ModelObject*>(object);
 						const auto& physicsComponentProperties = physicsComponentValue->second.m_object_value.find("properties");
 
 						const auto& physicsTransformProperty = physicsComponentProperties->second.m_object_value.find("transform");
