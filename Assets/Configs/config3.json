@@ -10,6 +10,14 @@
                             "name": "Audio",
                             "properties": {}
                         },
+                        "camera": {
+                            "name": "Camera",
+                            "properties": {}
+                        },
+                        "character_controller": {
+                            "name": "CharacterController",
+                            "properties": {}
+                        },
                         "physics": {
                             "name": "Physics",
                             "properties": {
@@ -21,18 +29,18 @@
                                 "restitution": 0.000000,
                                 "transform": {
                                     "position": [
-                                        -3.710064,
-                                        5.408094,
-                                        0.000000
+                                        15.262966,
+                                        1.502809,
+                                        13.029184
                                     ],
                                     "rotation": [
-                                        -160.607986,
-                                        -46.613869,
-                                        25.174683
+                                        -7.790742,
+                                        -11.807414,
+                                        -88.398445
                                     ],
                                     "scale": [
                                         1.000345,
-                                        0.999706,
+                                        0.999700,
                                         0.999857
                                     ]
                                 },
@@ -43,9 +51,9 @@
                                         0.000000
                                     ],
                                     "linear_velocity": [
+                                        3.000000,
                                         0.000000,
-                                        0.000000,
-                                        0.000000
+                                        3.000000
                                     ]
                                 }
                             }
@@ -61,18 +69,18 @@
                             "properties": {
                                 "transform": {
                                     "position": [
-                                        -3.710064,
-                                        5.408094,
-                                        0.000000
+                                        15.262966,
+                                        1.502809,
+                                        13.029184
                                     ],
                                     "rotation": [
-                                        -160.607986,
-                                        -46.613865,
-                                        25.174681
+                                        -7.790741,
+                                        -11.807414,
+                                        -88.398438
                                     ],
                                     "scale": [
                                         1.000345,
-                                        0.999706,
+                                        0.999700,
                                         0.999857
                                     ]
                                 }
@@ -84,90 +92,6 @@
                         "model": {
                             "identifier": "capsule.obj",
                             "path": "./Assets/Models/_basic models/capsule.obj"
-                        }
-                    },
-                    "type": "Model"
-                },
-                {
-                    "components": {
-                        "audio": {
-                            "name": "Audio",
-                            "properties": {}
-                        },
-                        "physics": {
-                            "name": "Physics",
-                            "properties": {
-                                "activation": "Activate",
-                                "friction": 0.200000,
-                                "gravity_factor": 1.000000,
-                                "model_type": "CUBE",
-                                "motion_type": "Dynamic",
-                                "restitution": 0.000000,
-                                "transform": {
-                                    "position": [
-                                        0.000000,
-                                        5.408094,
-                                        0.000000
-                                    ],
-                                    "rotation": [
-                                        -160.607986,
-                                        -46.613869,
-                                        25.174683
-                                    ],
-                                    "scale": [
-                                        1.000345,
-                                        0.999706,
-                                        0.999857
-                                    ]
-                                },
-                                "velocity": {
-                                    "angular_velocity": [
-                                        0.000000,
-                                        0.000000,
-                                        0.000000
-                                    ],
-                                    "linear_velocity": [
-                                        0.000000,
-                                        0.000000,
-                                        0.000000
-                                    ]
-                                }
-                            }
-                        },
-                        "shader": {
-                            "name": "Shader",
-                            "properties": {
-                                "shaders": []
-                            }
-                        },
-                        "transform": {
-                            "name": "Transform",
-                            "properties": {
-                                "transform": {
-                                    "position": [
-                                        0.000000,
-                                        5.408094,
-                                        0.000000
-                                    ],
-                                    "rotation": [
-                                        -160.607986,
-                                        -46.613865,
-                                        25.174681
-                                    ],
-                                    "scale": [
-                                        1.000345,
-                                        0.999706,
-                                        0.999857
-                                    ]
-                                }
-                            }
-                        }
-                    },
-                    "identifier": "cube0",
-                    "models": {
-                        "model": {
-                            "identifier": "cube.obj",
-                            "path": "./Assets/Models/_basic models/cube.obj"
                         }
                     },
                     "type": "Model"
@@ -525,7 +449,7 @@
                                     ],
                                     "rotation": [
                                         0.000000,
-                                        -90.000000,
+                                        -89.980217,
                                         0.000000
                                     ],
                                     "scale": [
@@ -609,7 +533,7 @@
                                     ],
                                     "rotation": [
                                         0.000000,
-                                        -90.000000,
+                                        -89.980217,
                                         0.000000
                                     ],
                                     "scale": [
