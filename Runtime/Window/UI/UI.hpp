@@ -38,6 +38,9 @@ namespace Spore
 		void ShowDemoWindow();
 		float32 m_delta_time = 0.0f;
 
+		Camera* m_player_camera = nullptr;
+		Camera* m_editor_camera = nullptr;
+
 	protected:
 
 	private:
@@ -45,6 +48,7 @@ namespace Spore
 		bool m_show_demo_window = false;
 		bool m_show_another_window = false;
 		bool m_show_scene_panel = false;
+		bool m_show_adding_component_panel = false;
 		Gizmos* m_gizmos;
 		std::filesystem::path m_import_assets_path = Files::GetInstance().GetAssetsPath();
 		MainWindow* m_window;
@@ -54,6 +58,10 @@ namespace Spore
 		Object* m_selected_object;
 		std::unordered_map<std::string, PostProcess*> m_post_process_mapper;
 		Texture* m_button_image_reset;
+		Texture* m_image_folder;
+		Texture* m_image_folder_close;
+		Texture* m_image_empty_file;
+		Texture* m_image_file;
 
 		void InitImages();
 		void RenderMenuBar(MainWindow* p_window);
@@ -63,5 +71,6 @@ namespace Spore
 		void RenderProjectPanel(MainWindow* p_window);
 		void RenderConsolePanel(MainWindow* p_window);
 		void RenderGizmos(MainWindow* p_window);
+		void RenderAddingComponentsPanel(MainWindow* p_window);
 	};
 }
