@@ -133,6 +133,12 @@
     <Filter Include="源文件\Spore\Utils">
       <UniqueIdentifier>{3bc1b5a8-fa1e-4b2e-92c5-8ab4a0a49792}</UniqueIdentifier>
     </Filter>
+    <Filter Include="源文件\Sandbox\BrickOut">
+      <UniqueIdentifier>{40be7ba4-36e0-4cb0-9ee4-ccad1f706eaa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Input\Utils">
+      <UniqueIdentifier>{d5697973-87ab-4939-a399-8cfd2d3a9932}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Runtime\ECS\Component.cpp">
@@ -809,6 +815,45 @@
     </ClCompile>
     <ClCompile Include="Runtime\Spore\Entrance.cpp">
       <Filter>源文件\Spore</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Sandbox\BKShader.cpp">
+      <Filter>源文件\Sandbox</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Sandbox\BKTexture.cpp">
+      <Filter>源文件\Sandbox</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Sandbox\BKGame.cpp">
+      <Filter>源文件\Sandbox</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Sandbox\BKResourceManager.cpp">
+      <Filter>源文件\Sandbox</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Sandbox\BKMain.cpp">
+      <Filter>源文件\Sandbox</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Sandbox\BKSpriteRenderer.cpp">
+      <Filter>源文件\Sandbox</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Sandbox\BKGameObject.cpp">
+      <Filter>源文件\Sandbox</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Sandbox\BKGameLevel.cpp">
+      <Filter>源文件\Sandbox</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Sandbox\BKBallObject.cpp">
+      <Filter>源文件\Sandbox</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Sandbox\BrickOut\BrickOutGame.cpp">
+      <Filter>源文件\Sandbox\BrickOut</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Sandbox\BrickOut\BrickOutTexture.cpp">
+      <Filter>源文件\Sandbox\BrickOut</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\ECS\Component\CameraComponent.cpp">
+      <Filter>源文件\ECS\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\ECS\Component\CharacterControllerComponent.cpp">
+      <Filter>源文件\ECS\Component</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1897,6 +1942,51 @@
     </ClInclude>
     <ClInclude Include="Runtime\Renderer\GraphicRenderer\Utils\BasicShadersRegister.hpp">
       <Filter>源文件\Renderer\GraphicRenderer\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\Sandbox\BKShader.hpp">
+      <Filter>源文件\Sandbox</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\Sandbox\BKTexture.hpp">
+      <Filter>源文件\Sandbox</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\Sandbox\BKGame.hpp">
+      <Filter>源文件\Sandbox</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\Sandbox\BKResourceManager.hpp">
+      <Filter>源文件\Sandbox</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\Sandbox\BKSpriteRenderer.hpp">
+      <Filter>源文件\Sandbox</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\Sandbox\BKGameObject.hpp">
+      <Filter>源文件\Sandbox</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\Sandbox\BKGameLevel.hpp">
+      <Filter>源文件\Sandbox</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\Sandbox\BKBallObject.hpp">
+      <Filter>源文件\Sandbox</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\Sandbox\BrickOut\BrickOutGame.hpp">
+      <Filter>源文件\Sandbox\BrickOut</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\Sandbox\BrickOut\BrickOutTexture.hpp">
+      <Filter>源文件\Sandbox\BrickOut</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\Sandbox\BrickOut\BrickOutShader.hpp">
+      <Filter>源文件\Sandbox\BrickOut</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\ECS\Component\CameraComponent.hpp">
+      <Filter>源文件\ECS\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\Renderer\GraphicRenderer\Utils\ModelType.hpp">
+      <Filter>源文件\Renderer\GraphicRenderer\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\ECS\Component\CharacterControllerComponent.hpp">
+      <Filter>源文件\ECS\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\Input\Utils\KeyboardKeys.h">
+      <Filter>源文件\Input\Utils</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -39,7 +39,7 @@ namespace Spore
 			m_ui = new UI(m_window);
 		}
 		Mouse::GetInstance().Update();
-		Keyboard::GetInstance();
+		Keyboard::GetInstance().SetWindow(m_window);
 		AssetsManager::GetInstance();
 		m_physicSystem = new PhysicSystem();
 		m_audio_renderer->GetAudioSystem()->Init();
@@ -132,7 +132,11 @@ namespace Spore
 
 			m_ui->RenderPanels(m_window);
 
-			Keyboard::GetInstance().processInput(m_window, *editorCamera, deltaTime);
+			if (g_tick_stop)
+			{
+				Keyboard::GetInstance().processInput(m_window, *editorCamera, deltaTime);
+			}
+			//m_window->TransformCamera(deltaTime);
 
 			mat4f projection = glm::perspective(glm::radians(editorCamera->m_zoom),
 												(float32) (windowWidth / windowHeight),

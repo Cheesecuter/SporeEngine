@@ -78,7 +78,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>.\Runtime\Asset;.\Runtime\Core\Base;.\Runtime\Core\Math;.\Runtime\Core\Reflection;.\Runtime\Core\Serializer;.\Runtime\ECS;.\Runtime\ECS\Component;.\Runtime\ECS\Objects;.\Runtime\ECS\Utils;.\Runtime\Input;.\Runtime\Physics;.\Runtime\Physics\Test;.\Runtime\Physics\Utils;.\Runtime\Renderer\AudioRenderer;.\Runtime\Renderer\GraphicRenderer;.\Runtime\Renderer\GraphicRenderer\glad;.\Runtime\Renderer\GraphicRenderer\stb_image;.\Runtime\Renderer\GraphicRenderer\Utils;.\Runtime\Scripts;.\Runtime\Spore;.\Runtime\Spore\Utils;.\Runtime\Utils;.\Runtime\VisualEffect;.\Runtime\Window;.\Runtime\Window\UI;$(IncludePath)</IncludePath>
+    <IncludePath>.\Runtime\Asset;.\Runtime\Core\Base;.\Runtime\Core\Math;.\Runtime\Core\Reflection;.\Runtime\Core\Serializer;.\Runtime\ECS;.\Runtime\ECS\Component;.\Runtime\ECS\Objects;.\Runtime\ECS\Utils;.\Runtime\Input;.\Runtime\Input\Utils;.\Runtime\Physics;.\Runtime\Physics\Test;.\Runtime\Physics\Utils;.\Runtime\Renderer\AudioRenderer;.\Runtime\Renderer\GraphicRenderer;.\Runtime\Renderer\GraphicRenderer\glad;.\Runtime\Renderer\GraphicRenderer\stb_image;.\Runtime\Renderer\GraphicRenderer\Utils;.\Runtime\Sandbox;.\Runtime\Sandbox\BrickOut;.\Runtime\Scripts;.\Runtime\Spore;.\Runtime\Spore\Utils;.\Runtime\Utils;.\Runtime\VisualEffect;.\Runtime\Window;.\Runtime\Window\UI;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -158,6 +158,8 @@
     <ClCompile Include="Runtime\Core\Serializer\Serializer.cpp" />
     <ClCompile Include="Runtime\ECS\Component.cpp" />
     <ClCompile Include="Runtime\ECS\Component\AudioComponent.cpp" />
+    <ClCompile Include="Runtime\ECS\Component\CameraComponent.cpp" />
+    <ClCompile Include="Runtime\ECS\Component\CharacterControllerComponent.cpp" />
     <ClCompile Include="Runtime\ECS\Component\LightComponent.cpp" />
     <ClCompile Include="Runtime\ECS\Component\ModelComponent.cpp" />
     <ClCompile Include="Runtime\ECS\Component\PhysicsComponent.cpp" />
@@ -193,6 +195,17 @@
     <ClCompile Include="Runtime\Renderer\GraphicRenderer\Utils\BasicModelsRegister.cpp" />
     <ClCompile Include="Runtime\Renderer\GraphicRenderer\Utils\BasicShadersRegister.cpp" />
     <ClCompile Include="Runtime\Renderer\GraphicRenderer\Utils\ModelObserver.cpp" />
+    <ClCompile Include="Runtime\Sandbox\BKBallObject.cpp" />
+    <ClCompile Include="Runtime\Sandbox\BKGame.cpp" />
+    <ClCompile Include="Runtime\Sandbox\BKGameLevel.cpp" />
+    <ClCompile Include="Runtime\Sandbox\BKGameObject.cpp" />
+    <ClCompile Include="Runtime\Sandbox\BKMain.cpp" />
+    <ClCompile Include="Runtime\Sandbox\BKResourceManager.cpp" />
+    <ClCompile Include="Runtime\Sandbox\BKShader.cpp" />
+    <ClCompile Include="Runtime\Sandbox\BKSpriteRenderer.cpp" />
+    <ClCompile Include="Runtime\Sandbox\BKTexture.cpp" />
+    <ClCompile Include="Runtime\Sandbox\BrickOut\BrickOutGame.cpp" />
+    <ClCompile Include="Runtime\Sandbox\BrickOut\BrickOutTexture.cpp" />
     <ClCompile Include="Runtime\Scripts\MonoTest.cpp" />
     <ClCompile Include="Runtime\Scripts\MonoTest_2.cpp" />
     <ClCompile Include="Runtime\Spore\Entrance.cpp" />
@@ -386,6 +399,8 @@
     <ClInclude Include="Runtime\Core\Serializer\Serializer.hpp" />
     <ClInclude Include="Runtime\ECS\Component.hpp" />
     <ClInclude Include="Runtime\ECS\Component\AudioComponent.hpp" />
+    <ClInclude Include="Runtime\ECS\Component\CameraComponent.hpp" />
+    <ClInclude Include="Runtime\ECS\Component\CharacterControllerComponent.hpp" />
     <ClInclude Include="Runtime\ECS\Component\LightComponent.hpp" />
     <ClInclude Include="Runtime\ECS\Component\ModelComponent.hpp" />
     <ClInclude Include="Runtime\ECS\Component\PhysicsComponent.hpp" />
@@ -401,6 +416,7 @@
     <ClInclude Include="Runtime\ECS\Utils\ObjectObserver.hpp" />
     <ClInclude Include="Runtime\Input\Keyboard.hpp" />
     <ClInclude Include="Runtime\Input\Mouse.hpp" />
+    <ClInclude Include="Runtime\Input\Utils\KeyboardKeys.h" />
     <ClInclude Include="Runtime\Physics\Layers.hpp" />
     <ClInclude Include="Runtime\Physics\PhysicsSettings.h" />
     <ClInclude Include="Runtime\Physics\PhysicSyetemHeaders.h" />
@@ -422,6 +438,18 @@
     <ClInclude Include="Runtime\Renderer\GraphicRenderer\Utils\BasicModelsRegister.hpp" />
     <ClInclude Include="Runtime\Renderer\GraphicRenderer\Utils\BasicShadersRegister.hpp" />
     <ClInclude Include="Runtime\Renderer\GraphicRenderer\Utils\ModelObserver.hpp" />
+    <ClInclude Include="Runtime\Renderer\GraphicRenderer\Utils\ModelType.hpp" />
+    <ClInclude Include="Runtime\Sandbox\BKBallObject.hpp" />
+    <ClInclude Include="Runtime\Sandbox\BKGame.hpp" />
+    <ClInclude Include="Runtime\Sandbox\BKGameLevel.hpp" />
+    <ClInclude Include="Runtime\Sandbox\BKGameObject.hpp" />
+    <ClInclude Include="Runtime\Sandbox\BKResourceManager.hpp" />
+    <ClInclude Include="Runtime\Sandbox\BKShader.hpp" />
+    <ClInclude Include="Runtime\Sandbox\BKSpriteRenderer.hpp" />
+    <ClInclude Include="Runtime\Sandbox\BKTexture.hpp" />
+    <ClInclude Include="Runtime\Sandbox\BrickOut\BrickOutGame.hpp" />
+    <ClInclude Include="Runtime\Sandbox\BrickOut\BrickOutShader.hpp" />
+    <ClInclude Include="Runtime\Sandbox\BrickOut\BrickOutTexture.hpp" />
     <ClInclude Include="Runtime\Scripts\MonoTest.h" />
     <ClInclude Include="Runtime\Spore\Spore.hpp" />
     <ClInclude Include="Runtime\Spore\Utils\AudioRenderer.hpp" />
