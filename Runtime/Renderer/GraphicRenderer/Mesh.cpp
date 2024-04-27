@@ -2,7 +2,7 @@
 
 namespace Spore
 {
-	Mesh::Mesh(std::vector<Vertex> p_vertices, std::vector<uint32> p_indices, std::vector<Texture> p_textures) :
+	Mesh::Mesh(std::vector<Vertex> p_vertices, std::vector<uint32> p_indices, std::vector<Texture*> p_textures) :
 		m_vertices(p_vertices), m_indices(p_indices), m_textures(p_textures)
 	{
 		SetupMesh();
@@ -21,7 +21,7 @@ namespace Spore
 			glActiveTexture(GL_TEXTURE0 + i);
 			// retrieve texture number (the N in diffuse_textureN)
 			std::string number;
-			std::string name = m_textures [i].m_type;
+			std::string name = m_textures [i]->m_type;
 			if (name == "texture_diffuse")
 				number = std::to_string(diffuseNr++);
 			else if (name == "texture_specular")
@@ -34,7 +34,7 @@ namespace Spore
 			// now set the sampler to the correct texture unit
 			glUniform1i(glGetUniformLocation(p_shader.m_ID, (name + number).c_str()), i);
 			// and finally bind the texture
-			glBindTexture(GL_TEXTURE_2D, m_textures [i].m_ID);
+			glBindTexture(GL_TEXTURE_2D, m_textures [i]->m_ID);
 		}
 
 		// draw mesh

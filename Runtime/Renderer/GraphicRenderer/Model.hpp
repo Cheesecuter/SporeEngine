@@ -18,7 +18,7 @@ namespace Spore
 		~Model();
 
 		std::string m_identifier;
-		std::vector<Texture> m_textures_loaded;
+		std::vector<Texture*> m_textures_loaded;
 		std::vector<Mesh> m_meshes;
 		std::string m_directory;
 		std::string m_path;
@@ -37,6 +37,6 @@ namespace Spore
 		void LoadAsset(const char* p_path);
 		void ProcessNode(aiNode* p_node, const aiScene* p_scene);
 		Mesh ProcessMesh(aiMesh* p_mesh, const aiScene* p_scene);
-		std::vector<Texture> LoadMaterialTextures(aiMaterial* p_material, aiTextureType p_type, std::string p_type_name);
+		std::vector<Texture*> LoadMaterialTextures(aiMaterial* p_material, aiTextureType p_type, std::string p_type_name);
 	};
 }

@@ -67,7 +67,6 @@ namespace Spore
 		// process ASSIMP's root node recursively
 		ProcessNode(scene->mRootNode, scene);
 		AssetsManager::GetInstance().m_model_mapper.insert(std::make_pair(m_identifier, this));
-		AssetsManager::GetInstance().m_model_counter [m_identifier] = 0;
 	}
 
 	void Model::ProcessNode(aiNode* p_node, const aiScene* p_scene)
@@ -92,7 +91,7 @@ namespace Spore
 		// data to fill
 		std::vector<Vertex> vertices;
 		std::vector<uint32> indices;
-		std::vector<Texture> textures;
+		std::vector<Texture*> textures;
 
 		// walk through each of the mesh's vertices
 		for (uint32 i = 0; i < p_mesh->mNumVertices; i++)
@@ -156,18 +155,18 @@ namespace Spore
 		// normal: texture_normalN
 
 		// 1. diffuse maps
-		std::vector<Texture> diffuseMaps = LoadMaterialTextures(material, aiTextureType_DIFFUSE, "texture_diffuse");
+		std::vector<Texture*> diffuseMaps = LoadMaterialTextures(material, aiTextureType_DIFFUSE, "texture_diffuse");
 		textures.insert(textures.end(), diffuseMaps.begin(), diffuseMaps.end());
 		// 2. specular maps
-		std::vector<Texture> specularMaps = LoadMaterialTextures(material, aiTextureType_SPECULAR, "texture_specular");
+		std::vector<Texture*> specularMaps = LoadMaterialTextures(material, aiTextureType_SPECULAR, "texture_specular");
 		textures.insert(textures.end(), specularMaps.begin(), specularMaps.end());
 		// 3. normal maps
 		//std::vector<Texture> normalMaps = LoadMaterialTextures(material, aiTextureType_NORMALS, "texture_normal");
-		std::vector<Texture> normalMaps = LoadMaterialTextures(material, aiTextureType_HEIGHT, "texture_normal");
+		std::vector<Texture*> normalMaps = LoadMaterialTextures(material, aiTextureType_HEIGHT, "texture_normal");
 		textures.insert(textures.end(), normalMaps.begin(), normalMaps.end());
 		// 4. height maps
 		//std::vector<Texture> heightMaps = LoadMaterialTextures(material, aiTextureType_HEIGHT, "texture_height");
-		std::vector<Texture> heightMaps = LoadMaterialTextures(material, aiTextureType_AMBIENT, "texture_height");
+		std::vector<Texture*> heightMaps = LoadMaterialTextures(material, aiTextureType_AMBIENT, "texture_height");
 		textures.insert(textures.end(), heightMaps.begin(), heightMaps.end());
 
 
@@ -234,22 +233,18 @@ namespace Spore
 
 		if (textures.size() == 0)
 		{
-			Texture texture;
-			const char* path = "default.png";
-			std::string directory = "./Assets/Textures/_basic textures";
-			texture.m_ID = TextureFromFile(path, directory);
-			texture.m_type = "texture_default";
-			texture.m_path = path;
+			Texture* texture = AssetsManager::GetInstance().m_texture_mapper ["default.png"];
 			textures.insert(textures.end(), texture);
+			m_textures_loaded.push_back(texture);
 		}
 
 		// return a mesh object created from the extracted mesh data
 		return Mesh(vertices, indices, textures);
 	}
 
-	std::vector<Texture> Model::LoadMaterialTextures(aiMaterial* p_material, aiTextureType p_type, std::string p_type_name)
+	std::vector<Texture*> Model::LoadMaterialTextures(aiMaterial* p_material, aiTextureType p_type, std::string p_type_name)
 	{
-		std::vector<Texture> textures;
+		std::vector<Texture*> textures;
 		for (uint32 i = 0; i < p_material->GetTextureCount(p_type); i++)
 		{
 			aiString str;
@@ -258,7 +253,7 @@ namespace Spore
 			bool skip = false;
 			for (uint32 j = 0; j < m_textures_loaded.size(); j++)
 			{
-				if (std::strcmp(m_textures_loaded [j].m_path.data(), str.C_Str()) == 0)
+				if (std::strcmp(m_textures_loaded [j]->m_path.data(), str.C_Str()) == 0)
 				{
 					textures.push_back(m_textures_loaded [j]);
 					skip = true;
@@ -268,10 +263,11 @@ namespace Spore
 			if (!skip)
 			{
 				// if texture hasn't been loaded already, load it
-				Texture texture;
-				texture.m_ID = TextureFromFile(str.C_Str(), this->m_directory);
-				texture.m_type = p_type_name;
-				texture.m_path = str.C_Str();
+				std::string path = str.C_Str();
+				Texture* texture = new Texture(std::string(this->m_directory + "/" + path).c_str());
+				//texture.m_ID = TextureFromFile(str.C_Str(), this->m_directory);
+				//texture.m_type = p_type_name;
+				//texture.m_path = str.C_Str();
 				textures.push_back(texture);
 				// store it as texture loaded for entire model, to ensure we won't unnecessary load duplicate textures
 				m_textures_loaded.push_back(texture);

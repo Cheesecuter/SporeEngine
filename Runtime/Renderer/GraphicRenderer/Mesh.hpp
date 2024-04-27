@@ -24,11 +24,11 @@ namespace Spore
 	class Mesh
 	{
 	public:
-		Mesh(std::vector<Vertex> p_vertices, std::vector<uint32> p_indices, std::vector<Texture> p_textures);
+		Mesh(std::vector<Vertex> p_vertices, std::vector<uint32> p_indices, std::vector<Texture*> p_textures);
 		
 		std::vector<Vertex> m_vertices;
 		std::vector<uint32> m_indices;
-		std::vector<Texture> m_textures;
+		std::vector<Texture*> m_textures;
 		uint32 m_VAO;
 
 		void Draw(Shader& p_shader);
