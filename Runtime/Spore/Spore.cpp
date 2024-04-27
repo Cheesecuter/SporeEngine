@@ -4,6 +4,7 @@
 #include <AssetsManager.hpp>
 #include <BasicModelsRegister.hpp>
 #include <BasicShadersRegister.hpp>
+#include <BasicTexturesRegister.hpp>
 #include <Serializer.hpp>
 #include <Scene.hpp>
 #include <PostProcess.hpp>
@@ -27,6 +28,7 @@ namespace Spore
 	void _Spore::Init()
 	{
 		m_graphic_renderer->Init();
+		m_graphic_renderer->SetFlipVerticallyOnLoad(false);
 		m_audio_renderer->Init();
 		Camera* editorCamera = m_graphic_renderer->GetCamera();
 		Camera* playerCamera = new Camera(0.0f, 1.0f, 0.0f);
@@ -41,11 +43,13 @@ namespace Spore
 		Mouse::GetInstance().Update();
 		Keyboard::GetInstance().SetWindow(m_window);
 		AssetsManager::GetInstance();
+		BasicTexturesRegister basicTextureRegister;
+		BasicModelsRegister basicModelsRegister;
+		BasicShadersRegister basicShadersRegister;
 		m_physicSystem = new PhysicSystem();
 		m_audio_renderer->GetAudioSystem()->Init();
 		m_physicSystem->Init();
 		m_ui->Init();
-		m_graphic_renderer->SetFlipVerticallyOnLoad(false);
 		m_serializer = new Serializer();
 	}
 
@@ -53,9 +57,6 @@ namespace Spore
 	{
 		m_graphic_renderer->GetRenderPipeline()->SetScenePos(m_window->GetWindowWidth() / 6, m_window->GetWindowHeight() / 3);
 		m_graphic_renderer->GetRenderPipeline()->SetSceneSize(m_window->GetWindowWidth() / 6 * 4, m_window->GetWindowHeight() / 3 * 2);
-
-		BasicModelsRegister basicModelsRegister;
-		BasicShadersRegister basicShadersRegister;
 
 		std::vector<Scene*> scenesFromJson;
 		m_serializer->SetPhysicSystem(m_physicSystem);
@@ -130,6 +131,9 @@ namespace Spore
 
 			m_ui->NewFrame();
 
+			m_window->GetRenderPipeline()->SetScenePos(windowWidth / 6, windowHeight / 3);
+			m_window->GetRenderPipeline()->SetSceneSize(windowWidth / 6 * 4, windowHeight / 3 * 2);
+
 			m_ui->RenderPanels(m_window);
 
 			if (g_tick_stop)
@@ -138,24 +142,25 @@ namespace Spore
 			}
 			//m_window->TransformCamera(deltaTime);
 
-			mat4f projection = glm::perspective(glm::radians(editorCamera->m_zoom),
+			/*mat4f projection = glm::perspective(glm::radians(editorCamera->m_zoom),
 												(float32) (windowWidth / windowHeight),
+												0.1f, 10000.0f);*/
+			mat4f projection = glm::perspective(glm::radians(editorCamera->m_zoom),
+												(float32) (m_window->GetRenderPipeline()->GetSceneSize().x / m_window->GetRenderPipeline()->GetSceneSize().y),
 												0.1f, 10000.0f);
 			mat4f view = editorCamera->GetViewMatrix();
 			mat4f model = mat4f(1.0f);
+
 			m_window->GetRenderPipeline()->PreRender();
 
-			m_window->GetRenderPipeline()->SetScenePos(windowWidth / 6, windowHeight / 3);
-			m_window->GetRenderPipeline()->SetSceneSize(windowWidth / 6 * 4, windowHeight / 3 * 2);
 
 			if (m_window->GetRenderPipeline()->m_post_process_on)
 			{
 				m_window->GetRenderPipeline()->PostProcessRenderToFBO();
 			}
 
-			m_window->GetRenderPipeline()->Render(shaders, editorCamera,
-												(uint32) windowWidth, (uint32) windowHeight,
-												projection, view, model, deltaTime);
+			m_window->GetRenderPipeline()->Render(editorCamera,
+												(uint32) windowWidth, (uint32) windowHeight, deltaTime);
 			m_window->GetRenderPipeline()->RenderSkyBox(editorCamera, projection, view);
 			m_window->GetRenderPipeline()->RenderGrid(editorCamera, projection, view);
 
