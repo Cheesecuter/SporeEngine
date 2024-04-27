@@ -7,7 +7,7 @@ namespace Spore
 	CameraComponent::CameraComponent()
 	{
 		m_name = "Camera";
-		m_button_image_reset = new Texture("./Assets/Utils/Images/reset.png");
+		m_button_image_reset = AssetsManager::GetInstance().m_texture_mapper ["reset.png"];
 		m_camera = new Camera(0.0f, 1.0f, 0.0f);
 	}
 

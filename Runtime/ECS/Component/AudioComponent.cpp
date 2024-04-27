@@ -8,9 +8,9 @@ namespace Spore
 		uint32 source = 0;
 		m_source = source;
 		alGenSources(1, &m_source);
-		m_button_image_play = new Texture("./Assets/Utils/Images/play.png");
-		m_button_image_pause = new Texture("./Assets/Utils/Images/pause.png");
-		m_button_image_stop = new Texture("./Assets/Utils/Images/stop.png");
+		m_button_image_play = AssetsManager::GetInstance().m_texture_mapper ["play.png"];
+		m_button_image_pause = AssetsManager::GetInstance().m_texture_mapper ["pause.png"];
+		m_button_image_stop = AssetsManager::GetInstance().m_texture_mapper ["stop.png"];
 	}
 
 	AudioComponent::~AudioComponent()

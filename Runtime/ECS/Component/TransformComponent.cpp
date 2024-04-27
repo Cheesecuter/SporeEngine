@@ -7,7 +7,7 @@ namespace Spore
 	TransformComponent::TransformComponent()
 	{
 		m_name = "Transform";
-		m_button_image_reset = new Texture("./Assets/Utils/Images/reset.png");
+		m_button_image_reset = AssetsManager::GetInstance().m_texture_mapper ["reset.png"];
 	}
 
 	TransformComponent::~TransformComponent()
