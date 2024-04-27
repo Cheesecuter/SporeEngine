@@ -16,6 +16,7 @@ namespace Spore
 		std::string m_identifier;
 		std::string m_type;
 		std::string m_path;
+		bool m_utility_image = false;
 
 		uint32 LoadTexture(const char* p_path);
 
