@@ -15,7 +15,8 @@ namespace Spore
 		CUSTOM,
 		CUSTOM_CUBE,
 		NONE,
-		CUSTOM_FLOOR,
+		CUSTOM_GIANT_FLOOR,
+		CUSTOM_GIANT_WALL,
 		CUSTOM_WALL
 	};
 #endif
