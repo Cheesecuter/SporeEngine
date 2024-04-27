@@ -57,9 +57,8 @@ namespace Spore
 		m_object_mapper.erase(p_object->m_identifier);
 	}
 
-	void Scene::Render(std::vector<Shader*> p_shaders, Camera* p_camera,
+	void Scene::Render(Camera* p_camera,
 					   uint32 p_screen_width, uint32 p_screen_height,
-					   mat4f p_projection, mat4f p_view, mat4f p_model, 
 					   float32 p_delta_time)
 	{
 		for (const std::pair<std::string, Object*> it : m_object_mapper)
@@ -76,8 +75,7 @@ namespace Spore
 				modelObject->m_flag_stop = m_flag_stop;
 				if (!modelObject->ModelMapperEmpty())
 				{
-					modelObject->Render(p_shaders, p_camera, p_screen_width, p_screen_height,
-								   p_projection, p_view, p_model);
+					modelObject->Render(p_camera, p_screen_width, p_screen_height);
 				}
 				if (g_tick_run)
 				{
@@ -85,17 +83,10 @@ namespace Spore
 					m_physics_system->Update(p_delta_time / m_delta_time_factor, cCollisionSteps, m_temp_allocator, m_job_system);
 				}
 			}
-			else if (object->m_type == "Plane")
-			{
-				Plane* plane = dynamic_cast<Plane*>(object);
-				Texture* floorTexture = AssetsManager::GetInstance().m_texture_mapper.find("default.png")->second;
-				plane->Render(p_shaders, floorTexture, p_model);
-			}
 			else if (object->m_type == "Light")
 			{
 				Light* light = dynamic_cast<Light*>(object);
-				light->Render(p_shaders, p_camera, p_screen_width, p_screen_height,
-							  p_projection, p_view, p_model);
+				light->Render(p_camera, p_screen_width, p_screen_height);
 			}
 		}
 	}
