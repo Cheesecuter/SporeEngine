@@ -103,16 +103,14 @@ namespace Spore
 		}
 	}
 
-	void RenderPipeline::Render(std::vector<Shader*> p_shaders, Camera* p_camera,
+	void RenderPipeline::Render(Camera* p_camera,
 								uint32 p_screen_width, uint32 p_screen_height,
-								mat4f p_projection, mat4f p_view, mat4f p_model,
 								float32 p_delta_time)
 	{
 		for (std::pair<std::string, Scene*> it : m_scene_mapper)
 		{
 			Scene* scene = it.second;
-			scene->Render(p_shaders, p_camera, p_screen_width, p_screen_height,
-						  p_projection, p_view, p_model, p_delta_time);
+			scene->Render(p_camera, m_scene_width, m_scene_height, p_delta_time);
 		}
 	}
 
@@ -124,8 +122,7 @@ namespace Spore
 		for (std::pair<std::string, Scene*> it : m_scene_mapper)
 		{
 			Scene* scene = it.second;
-			scene->Render(p_shaders, p_camera, p_screen_width, p_screen_height,
-						  p_projection, p_view, p_model, p_delta_time);
+			scene->Render(p_camera, p_screen_width, p_screen_height, p_delta_time);
 		}
 	}
 
@@ -322,8 +319,7 @@ namespace Spore
 		for (std::pair<std::string, Scene*> it : m_scene_mapper)
 		{
 			Scene* scene = it.second;
-			scene->Render(p_shaders, p_camera, p_screen_width, p_screen_height,
-						  p_projection, p_view, p_model, p_delta_time);
+			scene->Render(p_camera, p_screen_width, p_screen_height, p_delta_time);
 		}
 		RenderSkyBox(p_camera, p_projection, p_view);
 		RenderGrid(p_camera, p_projection, p_view);
@@ -477,7 +473,7 @@ namespace Spore
 		glViewport(0, 0, SHADOW_WIDTH, SHADOW_HEIGHT);
 		glBindFramebuffer(GL_FRAMEBUFFER, m_depth_map_FBO);
 		glClear(GL_DEPTH_BUFFER_BIT);
-		Render(p_shaders, p_camera, p_screen_width, p_screen_height, p_projection, p_view, p_model, p_delta_time);
+		Render(p_camera, p_screen_width, p_screen_height, p_delta_time);
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
 		m_shadow_mapping_shader->Use();
@@ -488,7 +484,7 @@ namespace Spore
 		m_shadow_mapping_shader->SetMat4("lightSpaceMatrix", m_light_space_matrix);
 		glActiveTexture(GL_TEXTURE1);
 		glBindTexture(GL_TEXTURE_2D, m_depth_map);
-		Render(p_shaders, p_camera, p_screen_width, p_screen_height, p_projection, p_view, p_model, p_delta_time);
+		Render(p_camera, p_screen_width, p_screen_height, p_delta_time);
 
 		m_debug_depth_quad_shader->Use();
 		m_debug_depth_quad_shader->SetFloat("near_plane", m_near_plane);
@@ -509,30 +505,18 @@ namespace Spore
 
 	void RenderPipeline::RenderGrid(Camera* p_camera, mat4f p_projection, mat4f p_view)
 	{
-		glEnable(GL_DEPTH_TEST | GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		Shader* gridShader = AssetsManager::GetInstance().m_shader_mapper.find("GridFragment.glsl")->second;
-		Shader* shadowMappingShader = AssetsManager::GetInstance().m_shader_mapper.find("ShadowMappingFragment.glsl")->second;
-		Shader* shadowMappingDepthShader = AssetsManager::GetInstance().m_shader_mapper.find("ShadowMappingDepthFragment.glsl")->second;
-		//std::vector<Shader*> shaders;
-		//shaders.push_back(shadowMappingShader);
-		//shaders.push_back(shadowMappingDepthShader);
-		//mat4f model = mat4f(1.0f);
-		//for (uint32 i = 0; i < shaders.size(); i++)
-		//{
-		//	shaders [i]->Use();
-		//	//shaders [i]->SetMat4("view", view_p);
-		//	//shaders [i]->SetMat4("projection", projection_p);
-		//	//shaders [i]->SetVec3("cameraPos", camera_p->Position);
-		//	shaders [i]->SetMat4("model", model);
-		//	grid.Draw(shaders [i]);
-		//}
-		gridShader->Use();
-		gridShader->SetMat4("view", p_view);
-		gridShader->SetMat4("projection", p_projection);
-		gridShader->SetVec3("cameraPos", p_camera->m_position);
-		m_grid->Draw(gridShader);
-		glDisable(GL_BLEND);
+		if (m_grid_on)
+		{
+			glEnable(GL_DEPTH_TEST | GL_BLEND);
+			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+			Shader* gridShader = AssetsManager::GetInstance().m_shader_mapper.find("GridFragment.glsl")->second;
+			gridShader->Use();
+			gridShader->SetMat4("view", p_view);
+			gridShader->SetMat4("projection", p_projection);
+			gridShader->SetVec3("cameraPos", p_camera->m_position);
+			m_grid->Draw(gridShader);
+			glDisable(GL_BLEND);
+		}
 	}
 
 	void RenderPipeline::InitSkyBox()
