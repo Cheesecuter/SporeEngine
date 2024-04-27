@@ -18,7 +18,6 @@ namespace Spore
 
 	UI::UI(MainWindow* p_window)
 	{
-		InitImages();
 		m_gizmos = new Gizmos();
 		m_window = p_window;
 		m_editor_camera = p_window->GetCamera();
@@ -33,6 +32,7 @@ namespace Spore
 	void UI::Init()
 	{
 		InitImGui(m_window);
+		InitImages();
 	}
 
 	void UI::InitImGui(MainWindow* p_window)
@@ -198,6 +198,7 @@ namespace Spore
 					}
 					ImGui::SeparatorText("General Setting");
 					ImGui::Checkbox("Show Skybox", &p_window->GetRenderPipeline()->m_skybox_on);
+					ImGui::Checkbox("Show Grid", &p_window->GetRenderPipeline()->m_grid_on);
 					ImGui::Separator();
 					ImGui::Checkbox("Gamma Correction", &p_window->GetRenderPipeline()->m_gamma_correction_on);
 					ImGui::Checkbox("Shadow Mapping", &p_window->GetRenderPipeline()->m_shadow_map_on);
@@ -759,6 +760,10 @@ namespace Spore
 			{
 				audioIdentifiers.push_back(it->first);
 			}
+			bool modelDetailsPanel = false;
+			bool shaderDetailsPanel	= false;
+			bool textureDetailsPanel = false;
+			bool audioDetailsPanel = false;
 			{
 				ImGui::BeginChild("Assets Folders", ImVec2((float32) (width / 5 * 2), (float32) height - 35));
 				ImGui::Image((ImTextureID) (intptr_t) m_image_folder->m_ID, ImVec2((float32) height1, (float32) height1));
@@ -769,6 +774,10 @@ namespace Spore
 					ImGui::SameLine();
 					if (ImGui::CollapsingHeader("Models", true))
 					{
+						modelDetailsPanel = true;
+						shaderDetailsPanel = false;
+						textureDetailsPanel = false;
+						audioDetailsPanel = false;
 						static int32 selected_model = -1;
 						for (uint32 n = 0; n < modelIdentifiers.size(); n++)
 						{
@@ -824,6 +833,10 @@ namespace Spore
 					ImGui::SameLine();
 					if (ImGui::CollapsingHeader("Shaders", true))
 					{
+						modelDetailsPanel = false;
+						shaderDetailsPanel = true;
+						textureDetailsPanel = false;
+						audioDetailsPanel = false;
 						static int32 selected_shader = -1;
 						for (uint32 n = 0; n < shaderIdentifiers.size(); n++)
 						{
@@ -868,6 +881,10 @@ namespace Spore
 					ImGui::SameLine();
 					if (ImGui::CollapsingHeader("Textures", true))
 					{
+						modelDetailsPanel = false;
+						shaderDetailsPanel = false;
+						textureDetailsPanel = true;
+						audioDetailsPanel = false;
 						static int32 selected_tex = -1;
 						{
 							for (uint32 n = 0; n < textureIdentifiers.size(); n++)
@@ -904,6 +921,10 @@ namespace Spore
 					ImGui::SameLine();
 					if (ImGui::CollapsingHeader("Audios", true))
 					{
+						modelDetailsPanel = false;
+						shaderDetailsPanel = false;
+						textureDetailsPanel = false;
+						audioDetailsPanel = true;
 						static int32 selected_audio = -1;
 						for (uint32 n = 0; n < audioIdentifiers.size(); n++)
 						{
@@ -954,6 +975,35 @@ namespace Spore
 			ImGui::SameLine();
 			{
 				ImGui::BeginChild("Assets Details", ImVec2((float32) (width / 5 * 3), (float32) height - 35));
+
+				std::map<std::string, Texture*> textureMapper = AssetsManager::GetInstance().m_texture_mapper;
+				if (textureDetailsPanel)
+				{
+					float32 imageLineLength = 0;
+					float32 imageSize = width / 5 * 3 / 5 > 64 ? width / 5 * 3 / 5 : 64;
+					for (std::pair<std::string, Texture*> it_texture : textureMapper)
+					{
+						if (!it_texture.second->m_utility_image)
+						{
+							ImGui::BeginChild(it_texture.second->m_identifier.c_str(), ImVec2(imageSize, imageSize + height1));
+							ImGui::Selectable(it_texture.second->m_identifier.c_str(), false);
+							ImGui::Image((ImTextureID) (intptr_t) it_texture.second->m_ID, ImVec2(imageSize, imageSize));
+							imageLineLength += (imageSize + 32);
+							if ((width / 5 * 3) < imageLineLength)
+							{
+								imageLineLength = 0;
+								ImGui::EndChild();
+								ImGui::SetItemTooltip(it_texture.second->m_identifier.c_str());
+							}
+							else
+							{
+								ImGui::EndChild();
+								ImGui::SetItemTooltip(it_texture.second->m_identifier.c_str());
+								ImGui::SameLine();
+							}
+						}
+					}
+				}
 
 				ImGui::EndChild();
 			}
@@ -1203,11 +1253,11 @@ namespace Spore
 
 	void UI::InitImages()
 	{
-		m_button_image_reset = new Texture("./Assets/Utils/Images/reset.png");
-		m_image_folder = new Texture("./Assets/Utils/Images/folder.png");
-		m_image_folder_close = new Texture("./Assets/Utils/Images/folder_close.png");
-		m_image_empty_file = new Texture("./Assets/Utils/Images/empty_file.png");
-		m_image_file = new Texture("./Assets/Utils/Images/file.png");
+		m_button_image_reset = AssetsManager::GetInstance().m_texture_mapper ["reset.png"];
+		m_image_folder = AssetsManager::GetInstance().m_texture_mapper ["folder.png"];
+		m_image_folder_close = AssetsManager::GetInstance().m_texture_mapper ["folder_close.png"];
+		m_image_empty_file = AssetsManager::GetInstance().m_texture_mapper ["empty_file.png"];
+		m_image_file = AssetsManager::GetInstance().m_texture_mapper ["file.png"];
 	}
 
 	void UI::ShowDemoWindow()
