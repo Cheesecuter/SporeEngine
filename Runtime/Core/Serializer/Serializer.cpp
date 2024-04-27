@@ -219,9 +219,13 @@ namespace Spore
 							{
 								modelTypeStr = "CUSTOM_CUBE";
 							}
-							else if (modelType == ModelType::CUSTOM_FLOOR)
+							else if (modelType == ModelType::CUSTOM_GIANT_FLOOR)
 							{
-								modelTypeStr = "CUSTOM_FLOOR";
+								modelTypeStr = "CUSTOM_GIANT_FLOOR";
+							}
+							else if (modelType == ModelType::CUSTOM_GIANT_WALL)
+							{
+								modelTypeStr = "CUSTOM_GIANT_WALL";
 							}
 							else if (modelType == ModelType::CUSTOM_WALL)
 							{
@@ -541,10 +545,15 @@ namespace Spore
 							physicsComponent->SetModelType(ModelType::CUSTOM_CUBE);
 							modelObject->SetModelType(ModelType::CUSTOM_CUBE);
 						}
-						else if (physicsModelShapeProperty == "CUSTOM_FLOOR")
+						else if (physicsModelShapeProperty == "CUSTOM_GIANT_FLOOR")
 						{
-							physicsComponent->SetModelType(ModelType::CUSTOM_FLOOR);
-							modelObject->SetModelType(ModelType::CUSTOM_FLOOR);
+							physicsComponent->SetModelType(ModelType::CUSTOM_GIANT_FLOOR);
+							modelObject->SetModelType(ModelType::CUSTOM_GIANT_FLOOR);
+						}
+						else if (physicsModelShapeProperty == "CUSTOM_GIANT_WALL")
+						{
+							physicsComponent->SetModelType(ModelType::CUSTOM_GIANT_WALL);
+							modelObject->SetModelType(ModelType::CUSTOM_GIANT_WALL);
 						}
 						else if (physicsModelShapeProperty == "CUSTOM_WALL")
 						{
