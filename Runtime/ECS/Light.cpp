@@ -27,30 +27,18 @@ namespace Spore
 		return m_light_color;
 	}
 
-	void Light::Render(std::vector<Shader*> p_shaders, Camera* p_camera,
-				uint32 p_screen_width, uint32 p_screen_height,
-				mat4f p_projection, mat4f p_view, mat4f p_model)
+	void Light::Render(Camera* p_camera, uint32 p_screen_width, uint32 p_screen_height)
 	{
-		p_projection = glm::perspective(glm::radians(p_camera->m_zoom),
+		mat4f projectionM = glm::perspective(glm::radians(p_camera->m_zoom),
 										(float32) p_screen_width / (float32) p_screen_height, 0.1f, 100.0f);
-		p_view = p_camera->GetViewMatrix();
+		mat4f viewM = p_camera->GetViewMatrix();
 
 		TransformComponent* transformComponent = dynamic_cast<TransformComponent*>(m_components.find("Transform")->second);
 		ShaderComponent* shaderComponent = dynamic_cast<ShaderComponent*>(m_components.find("Shader")->second);
-		p_model = transformComponent->GetMatrix();
+		mat4f modelM = transformComponent->GetMatrix();
 
 		LightComponent* lightComponent = dynamic_cast<LightComponent*>(m_components.find("Light")->second);
-		lightComponent->Render(p_camera, p_projection, p_view, p_model, transformComponent->GetPosition());
-		/*for (std::pair<std::string, ShaderNode*> it_shader : shaderComponent->GetShaders())
-		{
-			it_shader.second->m_shader->Use();
-			it_shader.second->m_shader->SetMat4("projection", p_projection);
-			it_shader.second->m_shader->SetMat4("view", p_view);
-			it_shader.second->m_shader->SetMat4("model", p_model);
-			it_shader.second->m_shader->SetVec3("viewPos", p_camera->m_position);
-			it_shader.second->m_shader->SetVec3("lightPos", transformComponent->GetPosition());
-			it_shader.second->m_shader->SetInt("blinn", true);
-		}*/
+		lightComponent->Render(p_camera, projectionM, viewM, modelM, transformComponent->GetPosition());
 	}
 
 }
