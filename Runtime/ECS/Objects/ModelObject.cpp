@@ -83,9 +83,7 @@ namespace Spore
 		return modelComponent->GetModelType();
 	}
 
-	void ModelObject::Render(std::vector<Shader*> p_shaders, Camera* p_camera,
-						uint32 p_screen_width, uint32 p_screen_height,
-						mat4f p_projection, mat4f p_view, mat4f p_model)
+	void ModelObject::Render(Camera* p_camera, uint32 p_screen_width, uint32 p_screen_height)
 	{
 		TransformComponent* transformComponent = nullptr;
 		if (m_components.find("Transform") != m_components.end())
@@ -97,15 +95,15 @@ namespace Spore
 		{
 			physicsComponent = dynamic_cast<PhysicsComponent*>(m_components.find("Physics")->second);
 		}
-		p_projection = glm::perspective(glm::radians(p_camera->m_zoom),
+		mat4f projectionM = glm::perspective(glm::radians(p_camera->m_zoom),
 										(float32) p_screen_width / (float32) p_screen_height, 0.1f, 10000.0f);
-		p_view = p_camera->GetViewMatrix();
-		p_model = transformComponent->GetMatrix();
+		mat4f viewM = p_camera->GetViewMatrix();
+		mat4f modelM = transformComponent->GetMatrix();
 		ModelComponent* modelComponent = nullptr;
 		if (m_components.find("Model") != m_components.end())
 		{
 			modelComponent = dynamic_cast<ModelComponent*>(m_components.find("Model")->second);
-			modelComponent->SetModelTransformMatrixNode(p_projection, p_view, p_model);
+			modelComponent->SetModelTransformMatrixNode(projectionM, viewM, modelM);
 		}
 		ShaderComponent* shaderComponent = nullptr;
 		if (m_components.find("Shader") != m_components.end())
