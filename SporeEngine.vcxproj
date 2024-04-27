@@ -168,7 +168,6 @@
     <ClCompile Include="Runtime\ECS\Light.cpp" />
     <ClCompile Include="Runtime\ECS\Object.cpp" />
     <ClCompile Include="Runtime\ECS\Objects\ModelObject.cpp" />
-    <ClCompile Include="Runtime\ECS\Objects\Plane.cpp" />
     <ClCompile Include="Runtime\ECS\Scene.cpp" />
     <ClCompile Include="Runtime\ECS\Tick.cpp" />
     <ClCompile Include="Runtime\ECS\Transform.cpp" />
@@ -194,6 +193,7 @@
     <ClCompile Include="Runtime\Renderer\GraphicRenderer\Texture.cpp" />
     <ClCompile Include="Runtime\Renderer\GraphicRenderer\Utils\BasicModelsRegister.cpp" />
     <ClCompile Include="Runtime\Renderer\GraphicRenderer\Utils\BasicShadersRegister.cpp" />
+    <ClCompile Include="Runtime\Renderer\GraphicRenderer\Utils\BasicTexturesRegister.cpp" />
     <ClCompile Include="Runtime\Renderer\GraphicRenderer\Utils\ModelObserver.cpp" />
     <ClCompile Include="Runtime\Sandbox\BKBallObject.cpp" />
     <ClCompile Include="Runtime\Sandbox\BKGame.cpp" />
@@ -409,7 +409,6 @@
     <ClInclude Include="Runtime\ECS\Light.hpp" />
     <ClInclude Include="Runtime\ECS\Object.hpp" />
     <ClInclude Include="Runtime\ECS\Objects\ModelObject.hpp" />
-    <ClInclude Include="Runtime\ECS\Objects\Plane.hpp" />
     <ClInclude Include="Runtime\ECS\Scene.hpp" />
     <ClInclude Include="Runtime\ECS\Tick.hpp" />
     <ClInclude Include="Runtime\ECS\Transform.hpp" />
@@ -437,6 +436,7 @@
     <ClInclude Include="Runtime\Renderer\GraphicRenderer\Texture.hpp" />
     <ClInclude Include="Runtime\Renderer\GraphicRenderer\Utils\BasicModelsRegister.hpp" />
     <ClInclude Include="Runtime\Renderer\GraphicRenderer\Utils\BasicShadersRegister.hpp" />
+    <ClInclude Include="Runtime\Renderer\GraphicRenderer\Utils\BasicTexturesRegister.hpp" />
     <ClInclude Include="Runtime\Renderer\GraphicRenderer\Utils\ModelObserver.hpp" />
     <ClInclude Include="Runtime\Renderer\GraphicRenderer\Utils\ModelType.hpp" />
     <ClInclude Include="Runtime\Sandbox\BKBallObject.hpp" />

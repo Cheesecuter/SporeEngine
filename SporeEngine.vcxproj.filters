@@ -210,9 +210,6 @@
     <ClCompile Include="Runtime\ECS\Light.cpp">
       <Filter>源文件\VisualEffect</Filter>
     </ClCompile>
-    <ClCompile Include="Runtime\ECS\Objects\Plane.cpp">
-      <Filter>源文件\ECS\Objects</Filter>
-    </ClCompile>
     <ClCompile Include="Runtime\VisualEffect\PostProcess.cpp">
       <Filter>源文件\VisualEffect</Filter>
     </ClCompile>
@@ -855,6 +852,9 @@
     <ClCompile Include="Runtime\ECS\Component\CharacterControllerComponent.cpp">
       <Filter>源文件\ECS\Component</Filter>
     </ClCompile>
+    <ClCompile Include="Runtime\Renderer\GraphicRenderer\Utils\BasicTexturesRegister.cpp">
+      <Filter>源文件\Renderer\GraphicRenderer\Utils</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Runtime\Core\Base\Types.hpp">
@@ -934,9 +934,6 @@
     </ClInclude>
     <ClInclude Include="Runtime\ECS\Light.hpp">
       <Filter>源文件\VisualEffect</Filter>
-    </ClInclude>
-    <ClInclude Include="Runtime\ECS\Objects\Plane.hpp">
-      <Filter>源文件\ECS\Objects</Filter>
     </ClInclude>
     <ClInclude Include="Runtime\VisualEffect\PostProcesser.hpp">
       <Filter>源文件\VisualEffect</Filter>
@@ -1987,6 +1984,9 @@
     </ClInclude>
     <ClInclude Include="Runtime\Input\Utils\KeyboardKeys.h">
       <Filter>源文件\Input\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\Renderer\GraphicRenderer\Utils\BasicTexturesRegister.hpp">
+      <Filter>源文件\Renderer\GraphicRenderer\Utils</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
