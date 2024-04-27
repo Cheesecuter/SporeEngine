@@ -9,7 +9,7 @@ namespace Spore
 	PhysicsComponent::PhysicsComponent()
 	{
 		m_name = "Physics";
-		m_button_image_reset = new Texture("./Assets/Utils/Images/reset.png");
+		m_button_image_reset = AssetsManager::GetInstance().m_texture_mapper ["reset.png"];
 	}
 
 	PhysicsComponent::~PhysicsComponent()
@@ -22,6 +22,7 @@ namespace Spore
 		if (ImGui::CollapsingHeader(m_name.c_str(), true))
 		{
 			ImGui::Text("Physics Component UI");
+
 			const char* EMotionTypesIndexs [] = {
 				"Dynamic",
 				"Kinematic",
@@ -76,7 +77,6 @@ namespace Spore
 			if (m_current_motion_type != JPH::EMotionType::Static)
 			{
 				m_linear_velocity = Vec3f(m_body->GetMotionProperties()->GetLinearVelocity());
-				//SetLinearVelocity(Vec3f(m_body->GetMotionProperties()->GetLinearVelocity()));
 				float linearVelocity [3] = { m_linear_velocity.x, m_linear_velocity.y, m_linear_velocity.z };
 				ImGui::Text("Linear Velocity");
 				ImGui::PushID("Inspector::Physics::EMotionProperties::Linear_Velocity");
@@ -94,11 +94,9 @@ namespace Spore
 					linearVelocity [2] = 0.0f;
 				}
 				ImGui::PopID();
-				//m_body->GetMotionProperties()->SetLinearVelocity(JPHVec3(vec3f(linearVelocity [0], linearVelocity [1], linearVelocity [2])));
 				SetLinearVelocity(vec3f(linearVelocity [0], linearVelocity [1], linearVelocity [2]));
 
 				m_angular_velocity = Vec3f(m_body->GetMotionProperties()->GetAngularVelocity());
-				//SetAngularVelocity(Vec3f(m_body->GetMotionProperties()->GetAngularVelocity()));
 				float angularVelocity [3] = { m_angular_velocity.x, m_angular_velocity.y, m_angular_velocity.z };
 				ImGui::Text("Angular Velocity");
 				ImGui::PushID("Inspector::Physics::EMotionProperties::Angular_Velocity");
@@ -116,20 +114,19 @@ namespace Spore
 					angularVelocity [2] = 0.0f;
 				}
 				ImGui::PopID();
-				//m_body->GetMotionProperties()->SetAngularVelocity(JPHVec3(vec3f(angularVelocity [0], angularVelocity [1], angularVelocity [2])));
 				SetAngularVelocity(vec3f(angularVelocity [0], angularVelocity [1], angularVelocity [2]));
 
-				SetGravityFactor(m_body->GetMotionProperties()->GetGravityFactor());
+				m_gravity_factor = m_body->GetMotionProperties()->GetGravityFactor();
 				ImGui::Text("GravityFactor");
 				ImGui::DragFloat("##Inspector::Physics::EMotionProperties::GravityFactor", &m_gravity_factor, 0.1f);
 				m_body->GetMotionProperties()->SetGravityFactor(m_gravity_factor);
 
-				SetRestitution(m_body->GetRestitution());
+				m_restitution = m_body->GetRestitution();
 				ImGui::Text("Restitution");
 				ImGui::DragFloat("##Inspector::Physics::BodySettings::Restitution", &m_restitution, 0.1f);
 				m_body->SetRestitution(m_restitution);
 
-				SetFriction(m_body->GetFriction());
+				m_friction = m_body->GetFriction();
 				ImGui::Text("Friction");
 				ImGui::DragFloat("##Inspector::Physics::BodySettings::Friction", &m_friction, 0.1f);
 				m_body->SetFriction(m_friction);
@@ -148,11 +145,6 @@ namespace Spore
 			m_position = Vec3f(m_body_interface->GetCenterOfMassPosition(m_body->GetID()));
 			m_rotation = Vec3f(m_body_interface->GetRotation(m_body->GetID()));
 			m_velocity = Vec3f(m_body_interface->GetLinearVelocity(m_body->GetID()));
-			/*std::cout << "Step " << p_delta_time << ": " <<
-			"Position = (" << m_position.x << ", " << m_position.y << ", " << m_position.z << "), " <<
-			"Rotation = (" << m_rotation.x << ", " << m_rotation.y << ", " << m_rotation.z << "), " <<
-			"Velocity = (" << m_velocity.x << ", " << m_velocity.y << ", " << m_velocity.z << ")" <<
-			std::endl;*/
 		}
 	}
 
@@ -195,8 +187,6 @@ namespace Spore
 			else if (m_model_type == ModelType::PLANE)
 			{
 				//modelShape = new JPH::BoxShape(JPH::Vec3(1.0f, 0.1f, 1.0f));
-
-				// Create a strip of triangles
 				JPH::TriangleList triangles;
 				JPH::Float3 v1 = JPH::Float3(-1.0f, 0, -1.0f);
 				JPH::Float3 v2 = JPH::Float3(1.0f, 0, -1.0f);
@@ -212,9 +202,22 @@ namespace Spore
 			}
 			else if (m_model_type == ModelType::QUAD)
 			{
-				modelShape = new JPH::BoxShape(JPH::Vec3(1.0f, 0.1f, 1.0f));
+				/*modelShape = new JPH::BoxShape(JPH::Vec3(1.0f, 0.1f, 1.0f));
 				m_body_creation_settings = new JPH::BodyCreationSettings(
-					modelShape, p_position, p_rotation, p_motion_type, p_object_layer);
+					modelShape, p_position, p_rotation, p_motion_type, p_object_layer);*/
+				JPH::TriangleList triangles;
+				JPH::Float3 v1 = JPH::Float3(-1.0f, 0, -1.0f);
+				JPH::Float3 v2 = JPH::Float3(1.0f, 0, -1.0f);
+				JPH::Float3 v3 = JPH::Float3(-1.0f, 0, 1.0f);
+				JPH::Float3 v4 = JPH::Float3(1.0f, 0, 1.0f);
+
+				triangles.push_back(JPH::Triangle(v1, v3, v4, 0));
+				triangles.push_back(JPH::Triangle(v1, v4, v2, 0));
+				JPH::PhysicsMaterialList materials;
+				materials.push_back(new JPH::PhysicsMaterialSimple());
+				JPH::Ref<JPH::ShapeSettings> mesh_shape = new JPH::MeshShapeSettings(triangles, std::move(materials));
+				m_body_creation_settings = new JPH::BodyCreationSettings(new JPH::ScaledShapeSettings(mesh_shape, JPH::Vec3::sReplicate(20)), p_position, p_rotation, JPH::EMotionType::Static, p_object_layer);
+
 			}
 			else if (m_model_type == ModelType::CUSTOM)
 			{
@@ -228,15 +231,21 @@ namespace Spore
 				m_body_creation_settings = new JPH::BodyCreationSettings(
 					modelShape, p_position, p_rotation, p_motion_type, p_object_layer);
 			}
-			else if (m_model_type == ModelType::CUSTOM_FLOOR)
+			else if (m_model_type == ModelType::CUSTOM_GIANT_FLOOR)
 			{
 				modelShape = new JPH::BoxShape(JPH::Vec3(100.0f, 0.8f, 100.0f));
 				m_body_creation_settings = new JPH::BodyCreationSettings(
 					modelShape, p_position, p_rotation, p_motion_type, p_object_layer);
 			}
+			else if (m_model_type == ModelType::CUSTOM_GIANT_WALL)
+			{
+				modelShape = new JPH::BoxShape(JPH::Vec3(0.8f, 50.0f, 100.0f));
+				m_body_creation_settings = new JPH::BodyCreationSettings(
+					modelShape, p_position, p_rotation, p_motion_type, p_object_layer);
+			}
 			else if (m_model_type == ModelType::CUSTOM_WALL)
 			{
-				modelShape = new JPH::BoxShape(JPH::Vec3(0.8f, 20.0f, 100.0f));
+				modelShape = new JPH::BoxShape(JPH::Vec3(0.5f, 8.0f, 8.0f));
 				m_body_creation_settings = new JPH::BodyCreationSettings(
 					modelShape, p_position, p_rotation, p_motion_type, p_object_layer);
 			}
@@ -348,6 +357,7 @@ namespace Spore
 	void PhysicsComponent::SetGravityFactor(float32 p_gravity_factor)
 	{
 		m_gravity_factor = p_gravity_factor;
+		m_body->GetMotionProperties()->SetGravityFactor(m_gravity_factor);
 	}
 
 	float32 PhysicsComponent::GetGravityFactor()
@@ -358,6 +368,7 @@ namespace Spore
 	void PhysicsComponent::SetRestitution(float32 p_restitution)
 	{
 		m_restitution = p_restitution;
+		m_body->SetRestitution(m_restitution);
 	}
 
 	float32 PhysicsComponent::GetRestitution()
@@ -368,6 +379,7 @@ namespace Spore
 	void PhysicsComponent::SetFriction(float32 p_friction)
 	{
 		m_friction = p_friction;
+		m_body->SetFriction(m_friction);
 	}
 
 	float32 PhysicsComponent::GetFriction()
