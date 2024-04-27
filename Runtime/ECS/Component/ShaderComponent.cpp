@@ -32,18 +32,41 @@ namespace Spore
 					ImGui::EndDragDropTarget();
 				}
 			}
+			std::vector<std::string> shadersToDelete;
 			for (std::pair<std::string, ShaderNode*> it_shader : m_shaders)
 			{
-				ImGui::Text(it_shader.second->m_shader->m_identifier.c_str());
+				//ImGui::Text(it_shader.second->m_shader->m_identifier.c_str());
+				ImGui::Selectable(it_shader.second->m_shader->m_identifier.c_str());
 				std::string widgetID = "Inspector::Transform::Position::" + it_shader.second->m_shader->m_identifier;
-				
+
+				ImGui::PushID((widgetID + "::Popup").c_str());
+				if (ImGui::BeginPopupContextItem())
+				{
+					ImGui::MenuItem("Rename", NULL, false, true);
+					if (ImGui::MenuItem("Delete", NULL, false, true))
+					{
+						shadersToDelete.push_back(it_shader.second->m_shader->m_identifier);
+					}
+					ImGui::Separator();
+					if (ImGui::MenuItem("Close", NULL, false, true))
+						ImGui::CloseCurrentPopup();
+					ImGui::EndPopup();
+				}
+				ImGui::PopID();
+
 				ImGui::PushID((widgetID + "::Is_Loading").c_str());
 				ImGui::Checkbox("Is dLoading", &it_shader.second->m_is_loading);
 				ImGui::PopID();
+
 				ImGui::PushID((widgetID + "::Alpha_Filter").c_str());
 				ImGui::Checkbox("Alpha Filter", &it_shader.second->m_shader->m_alpha_filter_flag);
 				ImGui::PopID();
+
 				ImGui::Separator();
+			}
+			for (int i = 0; i < shadersToDelete.size(); i++)
+			{
+				m_shaders.erase(shadersToDelete[i]);
 			}
 		}
 	}
