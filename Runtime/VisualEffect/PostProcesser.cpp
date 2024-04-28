@@ -1,4 +1,5 @@
 #include <PostProcesser.hpp>
+#include <ConsoleLogger.hpp>
 
 namespace Spore
 {
@@ -23,7 +24,9 @@ namespace Spore
 		glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, m_depth_buffer);
 
 		if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
-			std::cout << "ERROR::FRAMEBUFFER:: Framebuffer is not complete!" << std::endl;
+		{
+			ConsoleLogger::GetInstance().Logger()->error("PostProcesser::PostProcesser: Framebuffer is not complete");
+		}
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
 		glGenVertexArrays(1, &m_quad_VAO);
