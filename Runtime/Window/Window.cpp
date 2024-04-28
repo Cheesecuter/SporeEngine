@@ -2,6 +2,7 @@
 #include <Keyboard.hpp>
 #include <IMGUI_GLFW_OPENGL3.hpp>
 #include <GraphicRenderer.hpp>
+#include <ConsoleLogger.hpp>
 
 namespace Spore
 {
@@ -192,7 +193,7 @@ namespace Spore
 		GLFWwindow* m_window = glfwCreateWindow(m_width, m_height, m_windowID, nullptr, nullptr);
 		if (m_window == nullptr)
 		{
-			std::cout << "Failed to create GLFW window" << std::endl;
+			ConsoleLogger::GetInstance().Logger()->error("MainWindow::InitWindow: Failed to create GLFW window");
 			glfwTerminate();
 			return NULL;
 		}
@@ -217,7 +218,7 @@ namespace Spore
 
 		if (!gladLoadGLLoader((GLADloadproc) glfwGetProcAddress))
 		{
-			std::cout << "Failed to initialize GLAD" << std::endl;
+			ConsoleLogger::GetInstance().Logger()->error("MainWindow::InitWindow: Failed to initialize GLAD");
 			return NULL;
 		}
 
@@ -250,10 +251,23 @@ namespace Spore
 			Mouse::GetInstance().m_last_x = xpos;
 			Mouse::GetInstance().m_last_y = ypos;
 
-			if (Mouse::GetInstance().m_button_right)
+			if (Mouse::GetInstance().m_button_right && g_tick_stop)
 			{
 				MainWindow::m_camera->ProcessMouseMovement(Mouse::GetInstance().m_x_offset,
 														   Mouse::GetInstance().m_y_offset);
+			}
+			else if (g_tick_run)
+			{
+				if (glfwGetKey(p_window, GLFW_KEY_LEFT_ALT) == GLFW_PRESS)
+				{
+					glfwSetInputMode(p_window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+				}
+				else
+				{
+					glfwSetInputMode(p_window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+					MainWindow::m_camera->ProcessMouseMovement(Mouse::GetInstance().m_x_offset,
+															   Mouse::GetInstance().m_y_offset);
+				}
 			}
 		}
 	}
@@ -278,6 +292,6 @@ namespace Spore
 
 	static void ErrorCallBack(int32 p_error, const char* p_description)
 	{
-		std::cout << "GLFW Error " << p_error << ": " << p_description << std::endl;
+		ConsoleLogger::GetInstance().Logger()->error("MainWindow::ErrorCallBack: GLFW Error {}: {}", p_error, p_description);
 	}
 }
