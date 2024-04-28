@@ -1,4 +1,5 @@
 #include <RenderPipeline.hpp>
+#include <ConsoleLogger.hpp>
 
 namespace Spore
 {
@@ -163,7 +164,7 @@ namespace Spore
 		glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, m_RBO_depth);
 
 		if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
-			std::cout << "Framebuffer not complete!" << std::endl;
+			ConsoleLogger::GetInstance().Logger()->error("RenderPipeline::InitGBuffer: Framebuffer not complete");
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	}
 
@@ -411,7 +412,7 @@ namespace Spore
 		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, m_scene_texture, 0);
 		if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
 		{
-			std::cout << "Scene Framebuffer is not complete!" << std::endl;
+			ConsoleLogger::GetInstance().Logger()->error("RenderPipeline::InitSceneFramebuffer: Framebuffer not complete");
 		}
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	}

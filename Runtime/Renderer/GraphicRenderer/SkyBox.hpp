@@ -21,12 +21,12 @@ namespace Spore
 		Shader* m_shader;
 		uint32 m_cubemap_texture;
 		std::vector<std::string> m_faces {
-			"./Assets/Textures/sky/right1.jpg",
-			"./Assets/Textures/sky/left1.jpg",
-			"./Assets/Textures/sky/top1.jpg",
-			"./Assets/Textures/sky/bottom1.jpg",
-			"./Assets/Textures/sky/front1.jpg",
-			"./Assets/Textures/sky/back1.jpg",
+			"./Assets/Utils/Textures/Skybox/right.jpg",
+			"./Assets/Utils/Textures/Skybox/left.jpg",
+			"./Assets/Utils/Textures/Skybox/top.jpg",
+			"./Assets/Utils/Textures/Skybox/bottom.jpg",
+			"./Assets/Utils/Textures/Skybox/front.jpg",
+			"./Assets/Utils/Textures/Skybox/back.jpg",
 		};
 		const float32 m_vertices [108] = {
 			// positions          

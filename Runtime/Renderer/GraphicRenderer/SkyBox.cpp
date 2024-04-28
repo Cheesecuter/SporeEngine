@@ -1,4 +1,5 @@
 #include <SkyBox.hpp>
+#include <ConsoleLogger.hpp>
 
 namespace Spore
 {
@@ -45,7 +46,7 @@ namespace Spore
 			}
 			else
 			{
-				std::cout << "Cubemap texture failed to load at path: " << m_faces [i] << std::endl;
+				ConsoleLogger::GetInstance().Logger()->error("SkyBox::LoadCubeMap: Cubemap texture failed to load at path: {}", m_faces [i]);
 				stbi_image_free(data);
 			}
 		}

@@ -1,5 +1,6 @@
 #include <Shader.hpp>
 #include <AssetsManager.hpp>
+#include <ConsoleLogger.hpp>
 
 namespace Spore
 {
@@ -44,7 +45,7 @@ namespace Spore
 		}
 		catch (std::ifstream::failure e)
 		{
-			std::cout << "ERROR::SHADER::FILE_NOT_SUCCESFULLY_READ" << std::endl;
+			ConsoleLogger::GetInstance().Logger()->error("Shader::Shader: File not succesfully read");
 		}
 		const char* vShaderCode = vertexCode.c_str();
 		const char* fShaderCode = fragmentCode.c_str();
@@ -114,7 +115,7 @@ namespace Spore
 			if (!success)
 			{
 				glGetShaderInfoLog(p_shader, 1024, NULL, infoLog);
-				std::cout << "ERROR::SHADER_COMPILATION_ERROR of type: " << p_type << "\n" << infoLog << std::endl;
+				ConsoleLogger::GetInstance().Logger()->error("Shader::CheckCompileErrors: Shader compilation error of type: {}\n{}", p_type, infoLog);
 			}
 		}
 		else
@@ -123,7 +124,7 @@ namespace Spore
 			if (!success)
 			{
 				glGetProgramInfoLog(p_shader, 1024, NULL, infoLog);
-				std::cout << "ERROR::PROGRAM_LINKING_ERROR of type: " << p_type << "\n" << infoLog << std::endl;
+				ConsoleLogger::GetInstance().Logger()->error("Shader::CheckCompileErrors: Program linking error of type: {}\n{}", p_type, infoLog);
 			}
 		}
 	}

@@ -1,4 +1,5 @@
 #include <Texture.hpp>
+#include <ConsoleLogger.hpp>
 
 namespace Spore
 {
@@ -41,7 +42,7 @@ namespace Spore
 		}
 		else
 		{
-			std::cout << "Texture failed to load at path: " << p_path << std::endl;
+			ConsoleLogger::GetInstance().Logger()->error("Texture::LoadTexture: Texture failed to load at path: {}", p_path);
 			stbi_image_free(data);
 		}
 
