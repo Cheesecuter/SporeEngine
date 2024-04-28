@@ -1,5 +1,6 @@
 #include <PhysicSystem.hpp>
 #include <PTSimpleTest.hpp>
+#include <ConsoleLogger.hpp>
 
 namespace Spore
 {
@@ -169,7 +170,8 @@ namespace Spore
 
 	static bool AssertFailedImpl(const char* p_expression, const char* p_message, const char* p_file, uint32 p_line)
 	{
-		std::cout << p_file << ":" << p_line << ": (" << p_expression << ") " << (p_message != nullptr ? p_message : "") << std::endl;
+		ConsoleLogger::GetInstance().Logger()->info("{}:{}: ({}) {}", p_file, p_line, p_expression, (p_message != nullptr ? p_message : ""));
+		//std::cout << p_file << ":" << p_line << ": (" << p_expression << ") " << (p_message != nullptr ? p_message : "") << std::endl;
 		return true;
 	}
 

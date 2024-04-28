@@ -24,7 +24,6 @@ namespace Spore
 		virtual void OnContactRemoved(const JPH::SubShapeIDPair& p_sub_shape_pair) override;
 		void SaveState(JPH::StateRecorder& p_stream) const;
 		void RestoreState(JPH::StateRecorder& p_stream);
-		void DrawState();
 		void SetNextListener(JPH::ContactListener* p_listener);
 
 	private:

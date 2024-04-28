@@ -1,4 +1,5 @@
 #include <ContactListenerImpl.hpp>
+#include <ConsoleLogger.hpp>
 
 namespace Spore
 {
@@ -24,7 +25,8 @@ namespace Spore
 
 		JPH::RVec3 contact_point = p_base_offset + p_collision_result.mContactPointOn1;
 
-		JPH::Trace("Validate %u and %u result %d", p_body_1.GetID().GetIndex(), p_body_2.GetID().GetIndex(), (int) result);
+		ConsoleLogger::GetInstance().Logger()->info("Serializer::Serialize: Validate {} and {} result {}", p_body_1.GetID().GetIndex(), p_body_2.GetID().GetIndex(), (int) result);
+		//JPH::Trace("Validate %u and %u result %d", p_body_1.GetID().GetIndex(), p_body_2.GetID().GetIndex(), (int) result);
 
 		return result;
 	}
@@ -125,11 +127,6 @@ namespace Spore
 	}
 
 	void ContactListenerImpl::RestoreState(JPH::StateRecorder& p_stream)
-	{
-
-	}
-
-	void ContactListenerImpl::DrawState()
 	{
 
 	}
