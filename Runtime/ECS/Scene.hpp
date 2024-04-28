@@ -7,6 +7,7 @@
 #include <PhysicSyetemHeaders.h>
 #include <Layers.hpp>
 #include <ObjectObserver.hpp>
+#include <ConsoleLogger.hpp>
 
 namespace Spore
 {
@@ -56,12 +57,12 @@ namespace Spore
 		public:
 			virtual void OnBodyActivated(const JPH::BodyID& p_body_ID, uint64 p_body_user_data) override
 			{
-				JPH::Trace("Body %d activated", p_body_ID.GetIndex());
+				ConsoleLogger::GetInstance().Logger()->info("Body {} activated", p_body_ID.GetIndex());
 			}
 
 			virtual void OnBodyDeactivated(const JPH::BodyID& p_body_ID, uint64 p_body_user_data) override
 			{
-				JPH::Trace("Body %d deactivated", p_body_ID.GetIndex());
+				ConsoleLogger::GetInstance().Logger()->info("Body {} deactivated", p_body_ID.GetIndex());
 			}
 		};
 

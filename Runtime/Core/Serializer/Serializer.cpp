@@ -7,6 +7,7 @@
 #include <PhysicsComponent.hpp>
 #include <ShaderComponent.hpp>
 #include <TransformComponent.hpp>
+#include <ConsoleLogger.hpp>
 
 namespace Spore
 {
@@ -27,7 +28,7 @@ namespace Spore
 		std::ofstream file(p_path);
 		if (!file.is_open())
 		{
-			std::cout << "Failed to open file" << std::endl;
+			ConsoleLogger::GetInstance().Logger()->error("Serializer::Serialize: Failed to open file at path {}", p_path);
 			return 1;
 		}
 
@@ -384,7 +385,7 @@ namespace Spore
 			root.m_object_value ["scenes"].m_array_value = scenesArray;
 			root.m_object_value ["scenes"].m_type = JsonType::Array;
 			root.m_type = JsonType::Object;
-			std::string jsonStr = parser.toJsonString(root);
+			std::string jsonStr = parser.ToJsonString(root);
 			file << jsonStr;
 		}
 		catch (const std::exception& e)
@@ -399,7 +400,7 @@ namespace Spore
 		std::ifstream file(p_path);
 		if (!file.is_open())
 		{
-			std::cout << "Failed to open file" << std::endl;
+			ConsoleLogger::GetInstance().Logger()->error("Serializer::Serialize: Failed to open file at path {}", p_path);
 			return 1;
 		}
 
@@ -408,7 +409,7 @@ namespace Spore
 		JsonParser parser;
 		try
 		{
-			m_json_value = parser.parse(jsonStr);
+			m_json_value = parser.Parse(jsonStr);
 			//printJsonValue(m_json_value);
 			//std::cout << std::endl;
 

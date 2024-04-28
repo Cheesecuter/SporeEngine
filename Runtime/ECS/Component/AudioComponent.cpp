@@ -25,7 +25,7 @@ namespace Spore
 			ImGui::Text("Add Audio");
 			if (ImGui::BeginDragDropTarget())
 			{
-				if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("AudioSource"))
+				if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("AssetAudioDragDrop"))
 				{
 					const char* audioName = static_cast<const char*>(payload->Data);
 					Audio* audioTemp = AssetsManager::GetInstance().m_audio_mapper [audioName];
@@ -36,14 +36,6 @@ namespace Spore
 					ImGui::EndDragDropTarget();
 				}
 			}
-			/*if (ImGui::Button("Add Audio"))
-			{
-				Audio* audioTemp = AssetsManager::GetInstance().m_selected_audio;
-				if (audioTemp != nullptr)
-				{
-					AddAudio(audioTemp);
-				}
-			}*/
 			ImGui::PushID("Inspector::Audio::Play");
 			if (ImGui::ImageButton((ImTextureID) (intptr_t) m_button_image_play->m_ID, ImVec2(13, 13)))
 			{
@@ -52,10 +44,6 @@ namespace Spore
 			{
 				Play();
 			}
-			/*if (ImGui::Button("Play"))
-			{
-				Play();
-			}*/
 			ImGui::PopID();
 			ImGui::SameLine();
 			ImGui::PushID("Inspector::Audio::Pause");
@@ -66,10 +54,6 @@ namespace Spore
 			{
 				Pause();
 			}
-			/*if (ImGui::Button("Pause"))
-			{
-				Pause();
-			}*/
 			ImGui::PopID();
 			ImGui::SameLine();
 			ImGui::PushID("Inspector::Audio::Stop");
@@ -80,10 +64,6 @@ namespace Spore
 			{
 				Stop();
 			}
-			/*if (ImGui::Button("Stop"))
-			{
-				Stop();
-			}*/
 			ImGui::PopID();
 			std::string imguiID = "";
 			for (std::pair<std::string, Audio*> it_audio : m_audio_mapper)

@@ -21,18 +21,18 @@ namespace Spore
 	public:
 		JsonParser();
 		virtual ~JsonParser();
-		JsonValue parse(const std::string& jsonStr);
-		std::string toJsonString(JsonValue p_value) const;
+		JsonValue Parse(const std::string& p_json_str);
+		std::string ToJsonString(JsonValue p_value) const;
 
 	protected:
 
 	private:
 		int index;
-		JsonValue parseValue(const std::string& jsonStr);
-		JsonValue parseObject(const std::string& jsonStr);
-		JsonValue parseArray(const std::string& jsonStr);
-		JsonValue parseString(const std::string& jsonStr);
-		JsonValue parseNumber(const std::string& jsonStr);
-		void skipWhilespace(const std::string& jsonStr);
+		JsonValue ParseValue(const std::string& p_json_str);
+		JsonValue ParseObject(const std::string& p_json_str);
+		JsonValue ParseArray(const std::string& p_json_str);
+		JsonValue ParseString(const std::string& p_json_str);
+		JsonValue ParseNumber(const std::string& p_json_str);
+		void SkipWhilespace(const std::string& p_json_str);
 	};
 }

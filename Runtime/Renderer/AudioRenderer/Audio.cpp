@@ -1,4 +1,5 @@
 #include <Audio.hpp>
+#include <ConsoleLogger.hpp>
 
 namespace Spore
 {
@@ -11,21 +12,6 @@ namespace Spore
 	Audio::~Audio()
 	{
 		AssetsManager::GetInstance().m_audio_mapper.erase(m_identifier);
-	}
-
-	void WriteBuffer(unsigned char*& ptr, const std::string& str)
-	{
-		memcpy(ptr, str.c_str(), str.size());
-		std::string spliter = "|";
-		memcpy(ptr, spliter.c_str(), str.size() + spliter.size());
-	}
-
-	std::string ReadBuffer(const unsigned char*& ptr)
-	{
-		const unsigned char* start = ptr;
-		while (*ptr != '|' && *ptr != '\0') ++ptr;
-		std::string result(reinterpret_cast<const char*>(start), ptr - start);
-		return result;
 	}
 
 	std::string Audio::GetIdentifier()
@@ -47,10 +33,10 @@ namespace Spore
 		std::string audioType = m_identifier.substr(m_identifier.find_last_of('.') + 1, m_identifier.size());
 		if (audioType != "wav")
 		{
-			std::cout << "ERROR::AUDIO::ERROR TYPE" << std::endl;
+			ConsoleLogger::GetInstance().Logger()->error("Audio::LoadAsset: Error type");
 			return;
 		}
-		std::cout << "Audio imported: " << m_identifier << " from " << pathS << std::endl;
+		ConsoleLogger::GetInstance().Logger()->info("Audio::LoadAsset: Audio imported: {} from {}", m_identifier, pathS);
 		AssetsManager::GetInstance().m_audio_mapper.insert(std::make_pair(m_identifier, this));
 	}
 }

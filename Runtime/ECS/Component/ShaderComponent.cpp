@@ -35,7 +35,6 @@ namespace Spore
 			std::vector<std::string> shadersToDelete;
 			for (std::pair<std::string, ShaderNode*> it_shader : m_shaders)
 			{
-				//ImGui::Text(it_shader.second->m_shader->m_identifier.c_str());
 				ImGui::Selectable(it_shader.second->m_shader->m_identifier.c_str());
 				std::string widgetID = "Inspector::Transform::Position::" + it_shader.second->m_shader->m_identifier;
 
