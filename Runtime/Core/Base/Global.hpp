@@ -1,6 +1,7 @@
 #pragma once
 
 #include <mutex>
+#include <string>
 
 namespace Spore
 {
@@ -8,4 +9,5 @@ namespace Spore
 	extern bool g_tick_run;
 	extern bool g_tick_stop;
 	extern float iTime;
+	extern std::string g_terminal_output;
 }

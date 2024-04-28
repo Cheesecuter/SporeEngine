@@ -6,4 +6,5 @@ namespace Spore
 	bool g_tick_run = false;
 	bool g_tick_stop = true;
 	float iTime = 0.0f;
+	std::string g_terminal_output = "";
 }
