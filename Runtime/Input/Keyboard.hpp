@@ -3,7 +3,6 @@
 #include <Types.hpp>
 #include <SingletonInstance.hpp>
 #include <KeyboardKeys.h>
-//#include <Window.hpp>
 #include <Camera.hpp>
 
 namespace Spore
