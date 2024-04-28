@@ -855,6 +855,9 @@
     <ClCompile Include="Runtime\Renderer\GraphicRenderer\Utils\BasicTexturesRegister.cpp">
       <Filter>源文件\Renderer\GraphicRenderer\Utils</Filter>
     </ClCompile>
+    <ClCompile Include="Runtime\Utils\ConsoleLogger.cpp">
+      <Filter>源文件\Utils</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Runtime\Core\Base\Types.hpp">
@@ -1987,6 +1990,12 @@
     </ClInclude>
     <ClInclude Include="Runtime\Renderer\GraphicRenderer\Utils\BasicTexturesRegister.hpp">
       <Filter>源文件\Renderer\GraphicRenderer\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\Utils\SpdlogImguiSinks.h">
+      <Filter>源文件\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\Utils\ConsoleLogger.hpp">
+      <Filter>源文件\Utils</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

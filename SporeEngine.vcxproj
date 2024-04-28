@@ -118,7 +118,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;_USING_V110_SDK71_;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>.\SDKs;.\SDKs\GL;.\SDKs\glad\include;.\SDKs\glm;.\SDKs\OpenAL\include;.\SDKs\alut\include;.\SDKs\assimp-master\include;.\SDKs\imgui;.\SDKs\ImGuizmo;.\SDKs\imgui\backends;.\SDKs\JoltPhysics\Jolt\..;.\SDKs\Mono\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\SDKs;.\SDKs\alut\include;.\SDKs\assimp-master\include;.\SDKs\GL;.\SDKs\glad\include;.\SDKs\GLFW;.\SDKs\glm;.\SDKs\imgui;.\SDKs\imgui\backends;.\SDKs\ImGuizmo;.\SDKs\JoltPhysics\Jolt\..;.\SDKs\Mono\include;.\SDKs\OpenAL\include;.\SDKs\spdlog-1.x\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -230,6 +230,7 @@
     <ClCompile Include="Runtime\Test\ShadowTest.cpp" />
     <ClCompile Include="Runtime\Test\SSAOTest.cpp" />
     <ClCompile Include="Runtime\Test\StencilTest.cpp" />
+    <ClCompile Include="Runtime\Utils\ConsoleLogger.cpp" />
     <ClCompile Include="Runtime\Utils\Gizmos.cpp" />
     <ClCompile Include="Runtime\VisualEffect\PostProcess.cpp" />
     <ClCompile Include="Runtime\VisualEffect\PostProcesser.cpp" />
@@ -454,8 +455,10 @@
     <ClInclude Include="Runtime\Spore\Spore.hpp" />
     <ClInclude Include="Runtime\Spore\Utils\AudioRenderer.hpp" />
     <ClInclude Include="Runtime\Spore\Utils\GraphicRenderer.hpp" />
+    <ClInclude Include="Runtime\Utils\ConsoleLogger.hpp" />
     <ClInclude Include="Runtime\Utils\Gizmos.hpp" />
     <ClInclude Include="Runtime\Utils\SingletonInstance.hpp" />
+    <ClInclude Include="Runtime\Utils\SpdlogImguiSinks.h" />
     <ClInclude Include="Runtime\VisualEffect\PostProcess.hpp" />
     <ClInclude Include="Runtime\VisualEffect\PostProcesser.hpp" />
     <ClInclude Include="Runtime\Window\UI\IMGUI_GLFW_OPENGL3.hpp" />

@@ -27,6 +27,7 @@ namespace Spore
 
 	void _Spore::Init()
 	{
+		spdlog::cfg::load_env_levels();
 		m_graphic_renderer->Init();
 		m_graphic_renderer->SetFlipVerticallyOnLoad(false);
 		m_audio_renderer->Init();
