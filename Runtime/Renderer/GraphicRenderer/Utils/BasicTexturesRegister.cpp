@@ -14,6 +14,8 @@ namespace Spore
 		Texture* imageResetTexture			= new Texture("./Assets/Utils/Textures/Images/reset.png");
 		Texture* imageSettingsTexture		= new Texture("./Assets/Utils/Textures/Images/settings.png");
 		Texture* imageStopTexture			= new Texture("./Assets/Utils/Textures/Images/stop.png");
+		Texture* imageAudioTexture			= new Texture("./Assets/Utils/Textures/Images/audio.png");
+		Texture* imageModelTexture			= new Texture("./Assets/Utils/Textures/Images/model.png");
 		Texture* defaultModelTexture		= new Texture("./Assets/Utils/Textures/default.png");
 
 		imageEmptyFileTexture->m_utility_image		= true;
@@ -25,6 +27,8 @@ namespace Spore
 		imageResetTexture->m_utility_image			= true;
 		imageSettingsTexture->m_utility_image		= true;
 		imageStopTexture->m_utility_image			= true;
+		imageAudioTexture->m_utility_image			= true;
+		imageModelTexture->m_utility_image			= true;
 		defaultModelTexture->m_utility_image		= true;
 	}
 
