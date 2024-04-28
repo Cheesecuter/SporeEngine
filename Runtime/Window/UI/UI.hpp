@@ -62,6 +62,8 @@ namespace Spore
 		Texture* m_image_folder_close;
 		Texture* m_image_empty_file;
 		Texture* m_image_file;
+		Texture* m_image_audio;
+		Texture* m_image_model;
 
 		void InitImages();
 		void RenderMenuBar(MainWindow* p_window);

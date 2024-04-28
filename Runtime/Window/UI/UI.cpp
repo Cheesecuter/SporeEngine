@@ -10,6 +10,7 @@
 #include <TransformComponent.hpp>
 #include <CameraComponent.hpp>
 #include <CharacterControllerComponent.hpp>
+#include <ConsoleLogger.hpp>
 
 namespace fs = std::filesystem;
 namespace Spore
@@ -22,6 +23,9 @@ namespace Spore
 		m_window = p_window;
 		m_editor_camera = p_window->GetCamera();
 		m_player_camera = new Camera(0.0f, 1.0f, 0.0f);
+
+		ConsoleLogger::GetInstance().InitLogger();
+		ConsoleLogger::GetInstance().Logger()->info("Console info");
 	}
 
 	UI::~UI()
@@ -791,7 +795,9 @@ namespace Spore
 							{
 								selected_model = n;
 								const char* identifier = modelIdentifiers [n].c_str();
+								ImGui::PushID(std::string("Project::Assets::Models::" + modelIdentifiers [n]).c_str());
 								ImGui::SetDragDropPayload("AssetModelDragDrop", identifier, strlen(identifier) + 1);
+								ImGui::PopID();
 								ImGui::Text("%s", identifier);
 								ImGui::EndDragDropSource();
 							}
@@ -850,7 +856,9 @@ namespace Spore
 							{
 								selected_shader = n;
 								const char* identifier = shaderIdentifiers [n].c_str();
+								ImGui::PushID(std::string("Project::Assets::Shaders::" + shaderIdentifiers[n]).c_str());
 								ImGui::SetDragDropPayload("AssetShaderDragDrop", identifier, strlen(identifier) + 1);
+								ImGui::PopID();
 								ImGui::Text("%s", identifier);
 								ImGui::EndDragDropSource();
 							}
@@ -938,7 +946,9 @@ namespace Spore
 							{
 								selected_audio = n;
 								const char* name = audioIdentifiers [n].c_str();
-								ImGui::SetDragDropPayload("AudioSource", name, strlen(name) + 1);
+								ImGui::PushID(std::string("Project::Assets::Audios::" + audioIdentifiers [n]).c_str());
+								ImGui::SetDragDropPayload("AssetAudioDragDrop", name, strlen(name) + 1);
+								ImGui::PopID();
 								ImGui::Text("%s", name);
 								ImGui::EndDragDropSource();
 							}
@@ -976,22 +986,94 @@ namespace Spore
 			{
 				ImGui::BeginChild("Assets Details", ImVec2((float32) (width / 5 * 3), (float32) height - 35));
 
+				std::map<std::string, Model*> modelMapper = AssetsManager::GetInstance().m_model_mapper;
+				std::map<std::string, Shader*> shaderMapper = AssetsManager::GetInstance().m_shader_mapper;
 				std::map<std::string, Texture*> textureMapper = AssetsManager::GetInstance().m_texture_mapper;
+				std::map<std::string, Audio*> audioMapper = AssetsManager::GetInstance().m_audio_mapper;
+
+				if (modelDetailsPanel)
+				{
+					float32 assetLineLength = 0;
+					float32 assetImageSize = 64;
+					for (std::pair<std::string, Model*> it_model : modelMapper)
+					{
+						ImGui::BeginChild(it_model.second->m_identifier.c_str(), ImVec2(assetImageSize, assetImageSize + height1));
+						ImGui::Selectable(it_model.second->m_identifier.c_str(), false);
+						if (ImGui::BeginDragDropSource())
+						{
+							const char* identifier = it_model.second->m_identifier.c_str();
+							ImGui::PushID(std::string("Project::Details::Models::" + it_model.second->m_identifier).c_str());
+							ImGui::SetDragDropPayload("AssetModelDragDrop", identifier, strlen(identifier) + 1);
+							ImGui::PopID();
+							ImGui::Text("%s", identifier);
+							ImGui::EndDragDropSource();
+						}
+						ImGui::Image((ImTextureID) (intptr_t) m_image_model->m_ID, ImVec2(assetImageSize, assetImageSize));
+						assetLineLength += (assetImageSize + 32);
+						if ((width / 5 * 3) < assetLineLength)
+						{
+							assetLineLength = 0;
+							ImGui::EndChild();
+							ImGui::SetItemTooltip(it_model.second->m_identifier.c_str());
+						}
+						else
+						{
+							ImGui::EndChild();
+							ImGui::SetItemTooltip(it_model.second->m_identifier.c_str());
+							ImGui::SameLine();
+						}
+					}
+				}
+
+				if (shaderDetailsPanel)
+				{
+					float32 assetLineLength = 0;
+					float32 assetImageSize = 64;
+					for (std::pair<std::string, Shader*> it_shader : shaderMapper)
+					{
+						ImGui::BeginChild(it_shader.second->m_identifier.c_str(), ImVec2(assetImageSize, assetImageSize + height1));
+						ImGui::Selectable(it_shader.second->m_identifier.c_str(), false);
+						if (ImGui::BeginDragDropSource())
+						{
+							const char* identifier = it_shader.second->m_identifier.c_str();
+							ImGui::PushID(std::string("Project::Details::Shaders::" + it_shader.second->m_identifier).c_str());
+							ImGui::SetDragDropPayload("AssetShaderDragDrop", identifier, strlen(identifier) + 1);
+							ImGui::PopID();
+							ImGui::Text("%s", identifier);
+							ImGui::EndDragDropSource();
+						}
+						ImGui::Image((ImTextureID) (intptr_t) m_image_file->m_ID, ImVec2(assetImageSize, assetImageSize));
+						assetLineLength += (assetImageSize + 20);
+						if ((width / 5 * 3) < assetLineLength)
+						{
+							assetLineLength = 0;
+							ImGui::EndChild();
+							ImGui::SetItemTooltip(it_shader.second->m_identifier.c_str());
+						}
+						else
+						{
+							ImGui::EndChild();
+							ImGui::SetItemTooltip(it_shader.second->m_identifier.c_str());
+							ImGui::SameLine();
+						}
+					}
+				}
+
 				if (textureDetailsPanel)
 				{
-					float32 imageLineLength = 0;
-					float32 imageSize = width / 5 * 3 / 5 > 64 ? width / 5 * 3 / 5 : 64;
+					float32 assetLineLength = 0;
+					float32 assetImageSize = 64;
 					for (std::pair<std::string, Texture*> it_texture : textureMapper)
 					{
 						if (!it_texture.second->m_utility_image)
 						{
-							ImGui::BeginChild(it_texture.second->m_identifier.c_str(), ImVec2(imageSize, imageSize + height1));
+							ImGui::BeginChild(it_texture.second->m_identifier.c_str(), ImVec2(assetImageSize, assetImageSize + height1));
 							ImGui::Selectable(it_texture.second->m_identifier.c_str(), false);
-							ImGui::Image((ImTextureID) (intptr_t) it_texture.second->m_ID, ImVec2(imageSize, imageSize));
-							imageLineLength += (imageSize + 32);
-							if ((width / 5 * 3) < imageLineLength)
+							ImGui::Image((ImTextureID) (intptr_t) it_texture.second->m_ID, ImVec2(assetImageSize, assetImageSize));
+							assetLineLength += (assetImageSize + 32);
+							if ((width / 5 * 3) < assetLineLength)
 							{
-								imageLineLength = 0;
+								assetLineLength = 0;
 								ImGui::EndChild();
 								ImGui::SetItemTooltip(it_texture.second->m_identifier.c_str());
 							}
@@ -1001,6 +1083,41 @@ namespace Spore
 								ImGui::SetItemTooltip(it_texture.second->m_identifier.c_str());
 								ImGui::SameLine();
 							}
+						}
+					}
+				}
+
+				if (audioDetailsPanel)
+				{
+					float32 assetLineLength = 0;
+					float32 assetImageSize = 64;
+					for (std::pair<std::string, Audio*> it_audio : audioMapper)
+					{
+						ImGui::BeginChild(it_audio.second->GetIdentifier().c_str(), ImVec2(assetImageSize, assetImageSize + height1));
+						ImGui::Selectable(it_audio.second->GetIdentifier().c_str(), false);
+						if (ImGui::BeginDragDropSource())
+						{
+							std::string identifierStr = it_audio.second->GetIdentifier();
+							const char* identifier = identifierStr.c_str();
+							ImGui::PushID(std::string("Project::Details::Audios::" + it_audio.second->GetIdentifier()).c_str());
+							ImGui::SetDragDropPayload("AssetAudioDragDrop", identifier, strlen(identifier) + 1);
+							ImGui::PopID();
+							ImGui::Text("%s", identifier);
+							ImGui::EndDragDropSource();
+						}
+						ImGui::Image((ImTextureID) (intptr_t) m_image_audio->m_ID, ImVec2(assetImageSize, assetImageSize));
+						assetLineLength += (assetImageSize + 32);
+						if ((width / 5 * 3) < assetLineLength)
+						{
+							assetLineLength = 0;
+							ImGui::EndChild();
+							ImGui::SetItemTooltip(it_audio.second->GetIdentifier().c_str());
+						}
+						else
+						{
+							ImGui::EndChild();
+							ImGui::SetItemTooltip(it_audio.second->GetIdentifier().c_str());
+							ImGui::SameLine();
 						}
 					}
 				}
@@ -1027,12 +1144,12 @@ namespace Spore
 			style.Colors [ImGuiCol_Button] = ImVec4(0.495f, 0.289f, 0.289f, 1.0f);
 			style.Colors [ImGuiCol_ButtonActive] = ImVec4(0.917f, 0.211f, 0.211f, 1.0f);
 			style.Colors [ImGuiCol_ButtonHovered] = ImVec4(1.0f, 0.0f, 0.0f, 1.0f);
-			/*if (ImGui::Button("Click ME"))
+			if (ImGui::Button("Click ME"))
 			{
 				std::string url = "https://vdse.bdstatic.com//192d9a98d782d9c74c96f09db9378d93.mp4";
 				std::string command = "start " + std::string(url);
 				system(command.c_str());
-			}*/
+			}
 			style.Colors [ImGuiCol_Button] = ImVec4(0.289f, 0.289f, 0.289f, 1.0f);
 			style.Colors [ImGuiCol_ButtonActive] = ImVec4(0.511f, 0.511f, 0.511f, 1.0f);
 			style.Colors [ImGuiCol_ButtonHovered] = ImVec4(0.422f, 0.422f, 0.422f, 1.0f);
@@ -1056,6 +1173,7 @@ namespace Spore
 				g_tick_stop = false;
 				g_tick_run = true;
 				m_selected_scene->Active();
+				glfwSetInputMode(p_window->GetWindow(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
 				m_editor_camera = p_window->GetCamera();
 				p_window->SetCamera(m_player_camera);
@@ -1073,6 +1191,7 @@ namespace Spore
 				m_selected_scene->m_flag_stop = true;
 				g_tick_run = false;
 				g_tick_stop = true;
+				glfwSetInputMode(p_window->GetWindow(), GLFW_CURSOR, GLFW_CURSOR_NORMAL);
 
 				m_player_camera = p_window->GetCamera();
 				p_window->SetCamera(m_editor_camera);
@@ -1089,10 +1208,11 @@ namespace Spore
 				serializer->SetScenes(scenes);
 				serializer->Serialize("./Assets/Configs/config3.json");
 			}
-
 			{
 				ImGui::BeginChild("Console logout", ImVec2((float32) width, (float32) height - 132));
 				
+				ImGui::Text("%s", g_terminal_output.c_str());
+
 				ImGui::EndChild();
 			}
 
@@ -1258,6 +1378,8 @@ namespace Spore
 		m_image_folder_close = AssetsManager::GetInstance().m_texture_mapper ["folder_close.png"];
 		m_image_empty_file = AssetsManager::GetInstance().m_texture_mapper ["empty_file.png"];
 		m_image_file = AssetsManager::GetInstance().m_texture_mapper ["file.png"];
+		m_image_audio = AssetsManager::GetInstance().m_texture_mapper ["audio.png"];
+		m_image_model = AssetsManager::GetInstance().m_texture_mapper ["model.png"];
 	}
 
 	void UI::ShowDemoWindow()
