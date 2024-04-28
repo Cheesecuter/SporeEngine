@@ -34,6 +34,10 @@
 #define STBI_WINDOWS_UTF8
 #endif
 #include <stb_image.h>
+#include <spdlog/spdlog.h>
+#include <spdlog/cfg/env.h>
+#include <spdlog/fmt/ostr.h>
+#include <spdlog/sinks/stdout_color_sinks.h>
 
 #include <Global.hpp>
 #include <Math.hpp>
