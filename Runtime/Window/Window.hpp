@@ -34,8 +34,8 @@ namespace Spore
 		bool TransformCamera(float32 p_delta_time);
 		void SetWindow(GLFWwindow* p_window);
 		GLFWwindow* GetWindow();
-		void SetGraphicRenderer(GraphicRenderer* p_graphic_renderer);
-		GraphicRenderer* GetGraphicRenderer();
+		static void SetGraphicRenderer(GraphicRenderer* p_graphic_renderer);
+		static GraphicRenderer* GetGraphicRenderer();
 		RenderPipeline* GetRenderPipeline();
 
 	protected:
@@ -43,7 +43,7 @@ namespace Spore
 	private:
 		uint32 m_width, m_height;
 		GLFWwindow* m_window;
-		GraphicRenderer* m_graphic_renderer;
+		static GraphicRenderer* m_graphic_renderer;
 
 		GLFWwindow* InitWindow();
 	};

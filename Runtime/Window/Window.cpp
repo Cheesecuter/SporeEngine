@@ -11,12 +11,13 @@ namespace Spore
 	bool MainWindow::m_camera_lock = false;
 	bool MainWindow::m_first_mouse = true;
 	bool MainWindow::m_hide_cursor = false;
+	GraphicRenderer* MainWindow::m_graphic_renderer = nullptr;
 
 
 	static void FrameBufferSizeCallback(GLFWwindow* p_window, int32 p_width, int32 p_height);
 	static void MouseMoveCallback(GLFWwindow* p_window, float64 p_x_pos, float64 p_y_pos);
 	static void MouseClickCallback(GLFWwindow* p_window, int32 p_button, int32 p_state, int32 p_mod);
-	void MouseScrollCallback(GLFWwindow* p_window, float64 p_x_offset, float64 p_y_offset);
+	static void MouseScrollCallback(GLFWwindow* p_window, float64 p_x_offset, float64 p_y_offset);
 	static void ErrorCallBack(int32 p_error, const char* p_description);
 
 	MainWindow::MainWindow(uint32 p_width, uint32 p_height, const char* p_windowID,
@@ -285,9 +286,23 @@ namespace Spore
 
 	}
 
-	void MouseScrollCallback(GLFWwindow* p_window, float64 p_x_offset, float64 p_y_offset)
+	static void MouseScrollCallback(GLFWwindow* p_window, float64 p_x_offset, float64 p_y_offset)
 	{
-		MainWindow::m_camera->ProcessMouseScroll(static_cast<float32>(p_y_offset));
+		vec2f pos = MainWindow::GetGraphicRenderer()->GetRenderPipeline()->GetScenePos();
+		vec2f size = MainWindow::GetGraphicRenderer()->GetRenderPipeline()->GetSceneSize();
+
+		float32 x1 = pos.x;
+		float32 y1 = 0;
+		float32 x2 = x1 + size.x;
+		float32 y2 = size.y;
+
+		float32 xPos = Mouse::GetInstance().m_last_x;
+		float32 yPos = Mouse::GetInstance().m_last_y;
+
+		if (xPos >= x1 && xPos <= x2 && yPos >= y1 && yPos <= y2)
+		{
+			MainWindow::m_camera->ProcessMouseScroll(static_cast<float32>(p_y_offset));
+		}
 	}
 
 	static void ErrorCallBack(int32 p_error, const char* p_description)
