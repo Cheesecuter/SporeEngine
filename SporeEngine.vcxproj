@@ -124,9 +124,9 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>.\SDKs\assimp-master\build\lib\Debug;.\SDKs\GLFW\lib-vc2010-64;.\SDKs\Mono\lib;.\SDKs\Mono\lib\4.5;.\SDKs\OpenAL\libs\Win64;.\SDKs\OpenAL\libs\Win64\EFX-Util_MT;.\SDKs\alut\libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>.\SDKs\alut\libs;.\SDKs\assimp-master\build\lib\Debug;.\SDKs\GLFW\lib-vc2010-64;.\SDKs\OpenAL\libs\Win64;.\SDKs\OpenAL\libs\Win64\EFX-Util_MT;.\SDKs\Mono\lib;.\SDKs\Mono\lib\4.5;.\SDKs\WindowsLibs\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <IgnoreSpecificDefaultLibraries>msvcrt.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <AdditionalDependencies>assimp-vc143-mtd.lib;glfw3.lib;opengl32.lib;OpenAL32.lib;alut.lib;EFX-Util.lib;eglib.lib;libgcmonosgen.lib;libmini-sgen.lib;libmonoruntime-sgen.lib;libmono-static-sgen.lib;libmonoutils.lib;mono-2.0-sgen.lib;MonoPosixHelper.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>assimp-vc143-mtd.lib;glfw3.lib;opengl32.lib;OpenAL32.lib;alut.lib;EFX-Util.lib;eglib.lib;libgcmonosgen.lib;libmini-sgen.lib;libmonoruntime-sgen.lib;libmono-static-sgen.lib;libmonoutils.lib;mono-2.0-sgen.lib;MonoPosixHelper.lib;bcrypt.lib;MsWSock.Lib;psapi.lib;Version.Lib;WinMM.Lib;WS2_32.Lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -207,7 +207,7 @@
     <ClCompile Include="Runtime\Sandbox\BrickOut\BrickOutGame.cpp" />
     <ClCompile Include="Runtime\Sandbox\BrickOut\BrickOutTexture.cpp" />
     <ClCompile Include="Runtime\Scripts\MonoTest.cpp" />
-    <ClCompile Include="Runtime\Scripts\MonoTest_2.cpp" />
+    <ClCompile Include="Runtime\Scripts\ScriptEngine.cpp" />
     <ClCompile Include="Runtime\Spore\Entrance.cpp" />
     <ClCompile Include="Runtime\Spore\Spore.cpp" />
     <ClCompile Include="Runtime\Spore\Utils\AudioRenderer.cpp" />
@@ -452,6 +452,7 @@
     <ClInclude Include="Runtime\Sandbox\BrickOut\BrickOutShader.hpp" />
     <ClInclude Include="Runtime\Sandbox\BrickOut\BrickOutTexture.hpp" />
     <ClInclude Include="Runtime\Scripts\MonoTest.h" />
+    <ClInclude Include="Runtime\Scripts\ScriptEngine.hpp" />
     <ClInclude Include="Runtime\Spore\Spore.hpp" />
     <ClInclude Include="Runtime\Spore\Utils\AudioRenderer.hpp" />
     <ClInclude Include="Runtime\Spore\Utils\GraphicRenderer.hpp" />

@@ -300,9 +300,6 @@
     <ClCompile Include="Runtime\Scripts\MonoTest.cpp">
       <Filter>源文件\Scripts</Filter>
     </ClCompile>
-    <ClCompile Include="Runtime\Scripts\MonoTest_2.cpp">
-      <Filter>源文件\Scripts</Filter>
-    </ClCompile>
     <ClCompile Include="Runtime\Renderer\GraphicRenderer\glad\glad.c">
       <Filter>源文件\Renderer\GraphicRenderer\glad</Filter>
     </ClCompile>
@@ -857,6 +854,9 @@
     </ClCompile>
     <ClCompile Include="Runtime\Utils\ConsoleLogger.cpp">
       <Filter>源文件\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Scripts\ScriptEngine.cpp">
+      <Filter>源文件\Scripts</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1996,6 +1996,9 @@
     </ClInclude>
     <ClInclude Include="Runtime\Utils\ConsoleLogger.hpp">
       <Filter>源文件\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\Scripts\ScriptEngine.hpp">
+      <Filter>源文件\Scripts</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

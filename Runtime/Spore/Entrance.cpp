@@ -9,4 +9,5 @@ int main(int argc, char** argv)
 	spore.PreProcessing();
 	spore.Runtime();
 	spore.Terminate();
+	return 0;
 }

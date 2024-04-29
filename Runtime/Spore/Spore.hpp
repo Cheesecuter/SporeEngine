@@ -1,13 +1,17 @@
 #pragma once
 
-#include <GraphicRenderer.hpp>
-#include <AudioRenderer.hpp>
-#include <Window.hpp>
-#include <UI.hpp>
-#include <PhysicSystem.hpp>
+#include <Types.hpp>
 
 namespace Spore
 {
+	class GraphicRenderer;
+	class AudioRenderer;
+	class MainWindow;
+	class UI;
+	class PhysicSystem;
+	class Serializer;
+	class ScriptEngine;
+
 	class _Spore
 	{
 	public:
@@ -25,6 +29,7 @@ namespace Spore
 		UI* m_ui = nullptr;
 		PhysicSystem* m_physicSystem = nullptr;
 		Serializer* m_serializer = nullptr;
+		ScriptEngine* m_script_engine = nullptr;
 
 		uint32 SCREEN_WIDTH = 1200;
 		uint32 SCREEN_HEIGHT = 900;

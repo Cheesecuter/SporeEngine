@@ -1,4 +1,10 @@
 #include <Spore.hpp>
+#include <GraphicRenderer.hpp>
+#include <AudioRenderer.hpp>
+#include <Window.hpp>
+#include <UI.hpp>
+#include <PhysicSystem.hpp>
+#include <ScriptEngine.hpp>
 #include <Mouse.hpp>
 #include <Keyboard.hpp>
 #include <AssetsManager.hpp>
@@ -9,7 +15,7 @@
 #include <Scene.hpp>
 #include <PostProcess.hpp>
 #include <PostProcesser.hpp>
-
+#include <ConsoleLogger.hpp>
 
 namespace Spore
 {
@@ -52,6 +58,8 @@ namespace Spore
 		m_physicSystem->Init();
 		m_ui->Init();
 		m_serializer = new Serializer();
+		m_script_engine = new ScriptEngine();
+		m_script_engine->Init();
 	}
 
 	void _Spore::PreProcessing()
@@ -102,6 +110,11 @@ namespace Spore
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	}
 
+	static void Hello(MonoString* name)
+	{
+		std::cout << "Hello, " << mono_string_to_utf8(name) << "!" << std::endl;
+	}
+
 	void _Spore::Runtime()
 	{
 		auto currentFrame = static_cast<float32>(glfwGetTime());
@@ -113,6 +126,28 @@ namespace Spore
 
 		Camera* editorCamera = m_graphic_renderer->GetCamera();
 		RenderPipeline* renderPipeline = m_graphic_renderer->GetRenderPipeline();
+
+		MonoAssembly* appAssembly = m_script_engine->GetAppAssembly();
+		appAssembly = m_script_engine->LoadAssembly("D:/SporeEngine/ScriptEngine/ScriptEngine/bin/Debug/net6.0/ScriptEngine.dll");
+		if (!appAssembly)
+		{
+			ConsoleLogger::GetInstance().Logger()->error("Assembly Error");
+		}
+		else
+		{
+			ConsoleLogger::GetInstance().Logger()->info("Assembly Loaded");
+		}
+
+		MonoDomain* appDomain = m_script_engine->GetAppDomain();
+
+		mono_add_internal_call("Spore.HelloClass::Hello", reinterpret_cast<void*>(&Hello));
+
+		void* args [1];
+		args [0] = mono_array_new(appDomain, mono_get_string_class(), 0);
+		MonoClass* programClass = m_script_engine->GetClassInAssembly(appAssembly, "Spore", "MainClass");
+		MonoMethod* mainMethod = mono_class_get_method_from_name(programClass, "Main", 1);
+		MonoObject* result = mono_runtime_invoke(mainMethod, nullptr, args, nullptr);
+		int resultCode = *static_cast<int*>(mono_object_unbox(result));
 
 		while (!glfwWindowShouldClose(m_window->GetWindow()))
 		{
