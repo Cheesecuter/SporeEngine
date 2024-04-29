@@ -1144,12 +1144,12 @@ namespace Spore
 			style.Colors [ImGuiCol_Button] = ImVec4(0.495f, 0.289f, 0.289f, 1.0f);
 			style.Colors [ImGuiCol_ButtonActive] = ImVec4(0.917f, 0.211f, 0.211f, 1.0f);
 			style.Colors [ImGuiCol_ButtonHovered] = ImVec4(1.0f, 0.0f, 0.0f, 1.0f);
-			if (ImGui::Button("Click ME"))
+			/*if (ImGui::Button("Click ME"))
 			{
 				std::string url = "https://vdse.bdstatic.com//192d9a98d782d9c74c96f09db9378d93.mp4";
 				std::string command = "start " + std::string(url);
 				system(command.c_str());
-			}
+			}*/
 			style.Colors [ImGuiCol_Button] = ImVec4(0.289f, 0.289f, 0.289f, 1.0f);
 			style.Colors [ImGuiCol_ButtonActive] = ImVec4(0.511f, 0.511f, 0.511f, 1.0f);
 			style.Colors [ImGuiCol_ButtonHovered] = ImVec4(0.422f, 0.422f, 0.422f, 1.0f);
