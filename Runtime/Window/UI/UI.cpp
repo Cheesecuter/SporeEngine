@@ -1211,7 +1211,7 @@ namespace Spore
 			{
 				ImGui::BeginChild("Console logout", ImVec2((float32) width, (float32) height - 132));
 				
-				ImGui::Text("%s", g_terminal_output.c_str());
+				ImGui::TextWrapped("%s", g_terminal_output.c_str());
 
 				ImGui::EndChild();
 			}
