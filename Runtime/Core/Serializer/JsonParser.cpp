@@ -59,7 +59,10 @@ namespace Spore
 		{
 			ConsoleLogger::GetInstance().Logger()->error("JsonParser::ParseValue: Invalid JSON");
 			throw std::runtime_error("Invalid JSON");
+			return{ JsonValue() };
 		}
+
+		return{ JsonValue() };
 	}
 
 	JsonValue JsonParser::ParseObject(const std::string& p_json_str)
