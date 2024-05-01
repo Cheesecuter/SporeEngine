@@ -29,6 +29,7 @@ namespace Spore
         Shader* frameBuffersScreenShader = new Shader("./Assets/Shaders/FrameBuffersScreenVertex.glsl", "./Assets/Shaders/FrameBuffersScreenFragment.glsl");
         Shader* normalMappingShader = new Shader("./Assets/Shaders/NormalMappingVertex.glsl", "./Assets/Shaders/NormalMappingFragment.glsl");
         //Shader* voronoiNoiseShader = new Shader("./Assets/Shaders/VoronoiNoiseVertex.glsl", "./Assets/Shaders/VoronoiNoiseFragment.glsl");
+        //Shader* sobelEdgeShader = new Shader("./Assets/Shaders/SobelEdgeShadingVertex.glsl", "./Assets/Shaders/SobelEdgeShadingFragment.glsl");
     }
 
 	BasicShadersRegister::~BasicShadersRegister()
