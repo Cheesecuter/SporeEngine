@@ -18,6 +18,7 @@ namespace Spore
 		m_shader = p_shader;
 		m_shader->Use();
 		m_shader->SetInt("screenTexture", 0);
+		m_shader->SetInt("texture_depth", 1);
 		m_shader->SetFloat("iTime", glfwGetTime());
 		m_shader->SetVec3("iResolution", 1024, 1024, 1024);
 	}
