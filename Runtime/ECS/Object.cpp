@@ -1,4 +1,5 @@
 #include <Object.hpp>
+#include <IDComponent.hpp>
 
 namespace Spore
 {
@@ -112,6 +113,14 @@ namespace Spore
 				return component;
 			}
 		}
+	}
+
+	UUID Object::GetUUID()
+	{
+		IDComponent* idComponent = dynamic_cast<IDComponent*>(m_components.find("UUID")->second);
+		if (idComponent != nullptr)
+			return idComponent->GetID();
+		return UUID();
 	}
 
 	void Object::SetPosition(const vec3f& p_position)

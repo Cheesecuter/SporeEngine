@@ -5,6 +5,7 @@
 #include <Shader.hpp>
 #include <Camera.hpp>
 #include <AssetsManager.hpp>
+#include <UUID.hpp>
 #include <Component.hpp>
 #include <TransformComponent.hpp>
 #include <ShaderComponent.hpp>
@@ -34,6 +35,7 @@ namespace Spore
 		Component* GetComponent(const std::string& p_component_name);
 		template<typename TComponent>
 		TComponent* TryGetComponent(const std::string& p_component_name);
+		UUID GetUUID();
 
 		void SetPosition(const vec3f& p_position);
 		void SetRotation(const vec3f& p_rotation);
