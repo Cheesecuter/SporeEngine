@@ -116,6 +116,9 @@ namespace Spore
 	using mat4d = glm::dmat4;
 
 	using quat = glm::quat;
+
+	template<typename T>
+	using sptr = std::shared_ptr<T>;
 }
 
 #endif
