@@ -34,6 +34,8 @@ namespace Spore
 		JPH::TempAllocator* m_temp_allocator = nullptr;
 
 		void AddObject(Object* p_object);
+		Object* GetObjectByUUID(UUID p_uuid);
+		Object* GetObjectByName(std::string p_name);
 		void DeleteObject(Object* p_object);
 		void DeleteObject(std::string p_identifier);
 		void OnObjectDeleted(Object* p_object) override;

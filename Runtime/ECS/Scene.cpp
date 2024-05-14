@@ -34,6 +34,28 @@ namespace Spore
 		p_object->AddObserver(this);
 	}
 
+	Object* Scene::GetObjectByUUID(UUID p_uuid)
+	{
+		for (std::pair<std::string, Object*> it : m_object_mapper)
+		{
+			if (it.second->GetUUID() == p_uuid)
+			{
+				return it.second;
+			}
+		}
+		return nullptr;
+	}
+
+	Object* Scene::GetObjectByName(std::string p_name)
+	{
+		std::map<std::string, Object*>::iterator it = m_object_mapper.find(p_name);
+		if (it != m_object_mapper.end())
+		{
+			return it->second;
+		}
+		return nullptr;
+	}
+
 	void Scene::DeleteObject(Object* p_object)
 	{
 		std::map<std::string, Object*>::iterator it = m_object_mapper.find(p_object->m_identifier);
