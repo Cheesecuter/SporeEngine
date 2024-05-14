@@ -6,6 +6,9 @@ namespace Spore
 	Object::Object(const std::string& p_identifier, const bool p_light) : m_identifier(p_identifier)
 	{
 		TransformComponent* transformComponent = new TransformComponent();
+		IDComponent* idComponent = new IDComponent();
+		idComponent->SetID(0);
+		AddComponent(idComponent);
 		AddComponent(transformComponent);
 		transformComponent->SetReferencedObject(this);
 		if (!p_light)
