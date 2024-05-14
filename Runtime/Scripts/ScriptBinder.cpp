@@ -1,4 +1,4 @@
-#include <ScriptGlue.hpp>
+#include <ScriptBinder.hpp>
 #include <Types.hpp>
 #include <ConsoleLogger.hpp>
 #include <ScriptHeaders.h>
@@ -33,13 +33,7 @@ namespace Spore
 		{
 			return false;
 		}
-		/*MonoType* managedType = mono_reflection_type_get_type(p_componentType);
-		if (managedType == nullptr)
-		{
-			return false;
-		}*/
-		bool res = object->HasComponent(componentType);
-		return res;
+		return object->HasComponent(componentType);
 	}
 
 	/*static bool Object_HasComponent(UUID p_objectID, MonoReflectionType* p_componentType)
@@ -77,18 +71,46 @@ namespace Spore
 		return object->GetUUID();
 	}
 
-	static void TransformComponent_SetTranslation(UUID p_objectID, vec3f* p_translation)
+	static void TransformComponent_SetPosition(UUID p_objectID, vec3f* p_translation)
 	{
 		Scene* scene = ScriptEngine::GetSceneContext();
 		Object* object = scene->GetObjectByUUID(p_objectID);
 		dynamic_cast<TransformComponent*>(object->GetComponent("Transform"))->SetPosition(*p_translation);
 	}
 
-	static void TransformComponent_GetTranslation(UUID p_objectID, vec3f* p_out_translation)
+	static void TransformComponent_GetPosition(UUID p_objectID, vec3f* p_out_translation)
 	{
 		Scene* scene = ScriptEngine::GetSceneContext();
 		Object* object = scene->GetObjectByUUID(p_objectID);
 		*p_out_translation = dynamic_cast<TransformComponent*>(object->GetComponent("Transform"))->GetPosition();
+	}
+
+	static void TransformComponent_SetRotation(UUID p_objectID, vec3f* p_translation)
+	{
+		Scene* scene = ScriptEngine::GetSceneContext();
+		Object* object = scene->GetObjectByUUID(p_objectID);
+		dynamic_cast<TransformComponent*>(object->GetComponent("Transform"))->SetRotation(*p_translation);
+	}
+
+	static void TransformComponent_GetRotation(UUID p_objectID, vec3f* p_out_translation)
+	{
+		Scene* scene = ScriptEngine::GetSceneContext();
+		Object* object = scene->GetObjectByUUID(p_objectID);
+		*p_out_translation = dynamic_cast<TransformComponent*>(object->GetComponent("Transform"))->GetRotation();
+	}
+
+	static void TransformComponent_SetScale(UUID p_objectID, vec3f* p_translation)
+	{
+		Scene* scene = ScriptEngine::GetSceneContext();
+		Object* object = scene->GetObjectByUUID(p_objectID);
+		dynamic_cast<TransformComponent*>(object->GetComponent("Transform"))->SetScale(*p_translation);
+	}
+
+	static void TransformComponent_GetScale(UUID p_objectID, vec3f* p_out_translation)
+	{
+		Scene* scene = ScriptEngine::GetSceneContext();
+		Object* object = scene->GetObjectByUUID(p_objectID);
+		*p_out_translation = dynamic_cast<TransformComponent*>(object->GetComponent("Transform"))->GetScale();
 	}
 
 	template<typename... Component>
@@ -128,18 +150,22 @@ namespace Spore
 		RegisterComponent<Component...>();
 	}
 
-	void ScriptGlue::RegisterComponents()
+	void ScriptBinder::RegisterComponents()
 	{
 		s_object_has_component_funcs.clear();
 		RegisterComponent(AllComponents{});
 	}
 
-	void ScriptGlue::RegisterFunctions()
+	void ScriptBinder::RegisterFunctions()
 	{
 		mono_add_internal_call("Spore.InternalCalls::Object_HasComponent", reinterpret_cast<void*>(&Object_HasComponent));
 		mono_add_internal_call("Spore.InternalCalls::Object_FindObjectByName", reinterpret_cast<void*>(&Object_FindObjectByName));
-		mono_add_internal_call("Spore.InternalCalls::TransformComponent_SetTranslation", reinterpret_cast<void*>(&TransformComponent_SetTranslation));
-		mono_add_internal_call("Spore.InternalCalls::TransformComponent_GetTranslation", reinterpret_cast<void*>(&TransformComponent_GetTranslation));
+		mono_add_internal_call("Spore.InternalCalls::TransformComponent_SetPosition", reinterpret_cast<void*>(&TransformComponent_SetPosition));
+		mono_add_internal_call("Spore.InternalCalls::TransformComponent_GetPosition", reinterpret_cast<void*>(&TransformComponent_GetPosition));
+		mono_add_internal_call("Spore.InternalCalls::TransformComponent_SetRotation", reinterpret_cast<void*>(&TransformComponent_SetRotation));
+		mono_add_internal_call("Spore.InternalCalls::TransformComponent_GetRotation", reinterpret_cast<void*>(&TransformComponent_GetRotation));
+		mono_add_internal_call("Spore.InternalCalls::TransformComponent_SetScale", reinterpret_cast<void*>(&TransformComponent_SetScale));
+		mono_add_internal_call("Spore.InternalCalls::TransformComponent_GetScale", reinterpret_cast<void*>(&TransformComponent_GetScale));
 	}
 
 	std::string MonoStringToString(MonoString* p_string)

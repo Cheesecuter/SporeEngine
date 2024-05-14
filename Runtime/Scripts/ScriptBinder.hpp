@@ -2,7 +2,7 @@
 
 namespace Spore
 {
-	class ScriptGlue
+	class ScriptBinder
 	{
 	public:
 		static void RegisterComponents();
