@@ -150,6 +150,7 @@
     <ClCompile Include="Runtime\Asset\FileExplorer.cpp" />
     <ClCompile Include="Runtime\Asset\Files.cpp" />
     <ClCompile Include="Runtime\Core\Base\Global.cpp" />
+    <ClCompile Include="Runtime\Core\Base\UUID.cpp" />
     <ClCompile Include="Runtime\Core\Math\Math.cpp" />
     <ClCompile Include="Runtime\Core\Math\SDKMath.cpp" />
     <ClCompile Include="Runtime\Core\Reflection\Reflection.cpp" />
@@ -160,6 +161,7 @@
     <ClCompile Include="Runtime\ECS\Component\AudioComponent.cpp" />
     <ClCompile Include="Runtime\ECS\Component\CameraComponent.cpp" />
     <ClCompile Include="Runtime\ECS\Component\CharacterControllerComponent.cpp" />
+    <ClCompile Include="Runtime\ECS\Component\IDComponent.cpp" />
     <ClCompile Include="Runtime\ECS\Component\LightComponent.cpp" />
     <ClCompile Include="Runtime\ECS\Component\ModelComponent.cpp" />
     <ClCompile Include="Runtime\ECS\Component\PhysicsComponent.cpp" />
@@ -206,8 +208,13 @@
     <ClCompile Include="Runtime\Sandbox\BKTexture.cpp" />
     <ClCompile Include="Runtime\Sandbox\BrickOut\BrickOutGame.cpp" />
     <ClCompile Include="Runtime\Sandbox\BrickOut\BrickOutTexture.cpp" />
+    <ClCompile Include="Runtime\Scripts\MonoClassA.cpp" />
     <ClCompile Include="Runtime\Scripts\MonoTest.cpp" />
+    <ClCompile Include="Runtime\Scripts\ScriptClass.cpp" />
     <ClCompile Include="Runtime\Scripts\ScriptEngine.cpp" />
+    <ClCompile Include="Runtime\Scripts\ScriptFieldInstance.cpp" />
+    <ClCompile Include="Runtime\Scripts\ScriptGlue.cpp" />
+    <ClCompile Include="Runtime\Scripts\ScriptInstance.cpp" />
     <ClCompile Include="Runtime\Spore\Entrance.cpp" />
     <ClCompile Include="Runtime\Spore\Spore.cpp" />
     <ClCompile Include="Runtime\Spore\Utils\AudioRenderer.cpp" />
@@ -392,6 +399,7 @@
     <ClInclude Include="Runtime\Asset\Files.hpp" />
     <ClInclude Include="Runtime\Core\Base\Global.hpp" />
     <ClInclude Include="Runtime\Core\Base\Types.hpp" />
+    <ClInclude Include="Runtime\Core\Base\UUID.hpp" />
     <ClInclude Include="Runtime\Core\Math\Math.hpp" />
     <ClInclude Include="Runtime\Core\Math\SDKMath.hpp" />
     <ClInclude Include="Runtime\Core\Reflection\Reflection.hpp" />
@@ -402,6 +410,7 @@
     <ClInclude Include="Runtime\ECS\Component\AudioComponent.hpp" />
     <ClInclude Include="Runtime\ECS\Component\CameraComponent.hpp" />
     <ClInclude Include="Runtime\ECS\Component\CharacterControllerComponent.hpp" />
+    <ClInclude Include="Runtime\ECS\Component\IDComponent.hpp" />
     <ClInclude Include="Runtime\ECS\Component\LightComponent.hpp" />
     <ClInclude Include="Runtime\ECS\Component\ModelComponent.hpp" />
     <ClInclude Include="Runtime\ECS\Component\PhysicsComponent.hpp" />
@@ -451,8 +460,14 @@
     <ClInclude Include="Runtime\Sandbox\BrickOut\BrickOutGame.hpp" />
     <ClInclude Include="Runtime\Sandbox\BrickOut\BrickOutShader.hpp" />
     <ClInclude Include="Runtime\Sandbox\BrickOut\BrickOutTexture.hpp" />
+    <ClInclude Include="Runtime\Scripts\MonoClassA.hpp" />
     <ClInclude Include="Runtime\Scripts\MonoTest.h" />
+    <ClInclude Include="Runtime\Scripts\ScriptClass.hpp" />
     <ClInclude Include="Runtime\Scripts\ScriptEngine.hpp" />
+    <ClInclude Include="Runtime\Scripts\ScriptFieldInstance.hpp" />
+    <ClInclude Include="Runtime\Scripts\ScriptGlue.hpp" />
+    <ClInclude Include="Runtime\Scripts\ScriptHeaders.h" />
+    <ClInclude Include="Runtime\Scripts\ScriptInstance.hpp" />
     <ClInclude Include="Runtime\Spore\Spore.hpp" />
     <ClInclude Include="Runtime\Spore\Utils\AudioRenderer.hpp" />
     <ClInclude Include="Runtime\Spore\Utils\GraphicRenderer.hpp" />
@@ -825,6 +840,8 @@
     <None Include="Assets\Shaders\ShadowMappingVertex.glsl" />
     <None Include="Assets\Shaders\SkyboxFragment.glsl" />
     <None Include="Assets\Shaders\SkyboxVertex.glsl" />
+    <None Include="Assets\Shaders\SobelEdgeShadingFragment.glsl" />
+    <None Include="Assets\Shaders\SobelEdgeShadingVertex.glsl" />
     <None Include="Assets\Shaders\SSAOBlurFragment.glsl" />
     <None Include="Assets\Shaders\SSAOFragment.glsl" />
     <None Include="Assets\Shaders\SSAOGeometryFragment.glsl" />

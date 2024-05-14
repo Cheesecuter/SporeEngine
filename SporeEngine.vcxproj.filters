@@ -858,6 +858,27 @@
     <ClCompile Include="Runtime\Scripts\ScriptEngine.cpp">
       <Filter>源文件\Scripts</Filter>
     </ClCompile>
+    <ClCompile Include="Runtime\Scripts\MonoClassA.cpp">
+      <Filter>源文件\Scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Scripts\ScriptFieldInstance.cpp">
+      <Filter>源文件\Scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Scripts\ScriptClass.cpp">
+      <Filter>源文件\Scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Core\Base\UUID.cpp">
+      <Filter>源文件\Core\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Scripts\ScriptInstance.cpp">
+      <Filter>源文件\Scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\ECS\Component\IDComponent.cpp">
+      <Filter>源文件\ECS\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Scripts\ScriptGlue.cpp">
+      <Filter>源文件\Scripts</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Runtime\Core\Base\Types.hpp">
@@ -2000,6 +2021,30 @@
     <ClInclude Include="Runtime\Scripts\ScriptEngine.hpp">
       <Filter>源文件\Scripts</Filter>
     </ClInclude>
+    <ClInclude Include="Runtime\Scripts\MonoClassA.hpp">
+      <Filter>源文件\Scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\Scripts\ScriptFieldInstance.hpp">
+      <Filter>源文件\Scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\Scripts\ScriptHeaders.h">
+      <Filter>源文件\Scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\Scripts\ScriptClass.hpp">
+      <Filter>源文件\Scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\Core\Base\UUID.hpp">
+      <Filter>源文件\Core\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\Scripts\ScriptInstance.hpp">
+      <Filter>源文件\Scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\ECS\Component\IDComponent.hpp">
+      <Filter>源文件\ECS\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\Scripts\ScriptGlue.hpp">
+      <Filter>源文件\Scripts</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Shaders\BackgroundFragment.glsl">
@@ -2247,6 +2292,12 @@
     </None>
     <None Include="SDKs\JoltPhysics\Jolt\Physics\Body\MotionProperties.inl">
       <Filter>头文件\JoltPhysics</Filter>
+    </None>
+    <None Include="Assets\Shaders\SobelEdgeShadingVertex.glsl">
+      <Filter>资源文件\Assets\Shaders</Filter>
+    </None>
+    <None Include="Assets\Shaders\SobelEdgeShadingFragment.glsl">
+      <Filter>资源文件\Assets\Shaders</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
