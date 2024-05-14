@@ -876,7 +876,7 @@
     <ClCompile Include="Runtime\ECS\Component\IDComponent.cpp">
       <Filter>源文件\ECS\Component</Filter>
     </ClCompile>
-    <ClCompile Include="Runtime\Scripts\ScriptGlue.cpp">
+    <ClCompile Include="Runtime\Scripts\ScriptBinder.cpp">
       <Filter>源文件\Scripts</Filter>
     </ClCompile>
   </ItemGroup>
@@ -2042,7 +2042,7 @@
     <ClInclude Include="Runtime\ECS\Component\IDComponent.hpp">
       <Filter>源文件\ECS\Component</Filter>
     </ClInclude>
-    <ClInclude Include="Runtime\Scripts\ScriptGlue.hpp">
+    <ClInclude Include="Runtime\Scripts\ScriptBinder.hpp">
       <Filter>源文件\Scripts</Filter>
     </ClInclude>
   </ItemGroup>

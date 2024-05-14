@@ -213,7 +213,7 @@
     <ClCompile Include="Runtime\Scripts\ScriptClass.cpp" />
     <ClCompile Include="Runtime\Scripts\ScriptEngine.cpp" />
     <ClCompile Include="Runtime\Scripts\ScriptFieldInstance.cpp" />
-    <ClCompile Include="Runtime\Scripts\ScriptGlue.cpp" />
+    <ClCompile Include="Runtime\Scripts\ScriptBinder.cpp" />
     <ClCompile Include="Runtime\Scripts\ScriptInstance.cpp" />
     <ClCompile Include="Runtime\Spore\Entrance.cpp" />
     <ClCompile Include="Runtime\Spore\Spore.cpp" />
@@ -465,7 +465,7 @@
     <ClInclude Include="Runtime\Scripts\ScriptClass.hpp" />
     <ClInclude Include="Runtime\Scripts\ScriptEngine.hpp" />
     <ClInclude Include="Runtime\Scripts\ScriptFieldInstance.hpp" />
-    <ClInclude Include="Runtime\Scripts\ScriptGlue.hpp" />
+    <ClInclude Include="Runtime\Scripts\ScriptBinder.hpp" />
     <ClInclude Include="Runtime\Scripts\ScriptHeaders.h" />
     <ClInclude Include="Runtime\Scripts\ScriptInstance.hpp" />
     <ClInclude Include="Runtime\Spore\Spore.hpp" />
