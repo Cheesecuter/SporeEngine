@@ -79,6 +79,9 @@ namespace Spore
 		m_window->GetRenderPipeline()->InitGrid();
 		m_window->GetRenderPipeline()->InitSkyBox();
 
+		m_script_engine->s_data->m_scene_context = scenesFromJson [0];
+		m_script_engine->InvokeMethods();
+
 
 		Shader* postProcessDefaultShader = new Shader("./Assets/Shaders/FrameBuffersScreenVertex.glsl", "./Assets/Shaders/PostProcesses/DefaultPostProcessFS.glsl");
 		Shader* postProcessInversionShader = new Shader("./Assets/Shaders/FrameBuffersScreenVertex.glsl", "./Assets/Shaders/PostProcesses/InversionPostProcessFS.glsl");
@@ -87,6 +90,7 @@ namespace Spore
 		Shader* postProcessBlurShader = new Shader("./Assets/Shaders/FrameBuffersScreenVertex.glsl", "./Assets/Shaders/PostProcesses/BlurPostProcessFS.glsl");
 		//Shader* postProcessBlurShader = new Shader("./Assets/Shaders/FrameBuffersScreenVertex.glsl", "./Assets/Shaders/PostProcesses/VoronoiNoiseFragment.glsl");
 		//Shader* voronoiNoiseShader = new Shader("./Assets/Shaders/VoronoiNoiseVertex.glsl", "./Assets/Shaders/VoronoiNoiseFragment.glsl");
+		//Shader* postProcessEdgeDetectionShader = new Shader("./Assets/Shaders/SobelEdgeShadingVertex.glsl", "./Assets/Shaders/SobelEdgeShadingFragment.glsl");
 		Shader* postProcessEdgeDetectionShader = new Shader("./Assets/Shaders/FrameBuffersScreenVertex.glsl", "./Assets/Shaders/PostProcesses/EdgeDetectionPostProcessFS.glsl");
 
 		PostProcess* postProcessDefault = new PostProcess("Default", postProcessDefaultShader);
@@ -127,6 +131,11 @@ namespace Spore
 		Camera* editorCamera = m_graphic_renderer->GetCamera();
 		RenderPipeline* renderPipeline = m_graphic_renderer->GetRenderPipeline();
 
+		/*TransformComponent* tc = new TransformComponent();
+		tc->SetPosition(vec3f(0.0f, 0.0f, 0.0f));
+		vec3f posTC = tc->GetPosition();
+		std::cout << "tc: " << posTC.x << " " << posTC.y << " " << posTC.z << std::endl;
+
 		MonoAssembly* appAssembly = m_script_engine->GetAppAssembly();
 		appAssembly = m_script_engine->LoadAssembly("D:/SporeEngine/ScriptEngine/ScriptEngine/bin/Debug/net6.0/ScriptEngine.dll");
 		if (!appAssembly)
@@ -141,6 +150,7 @@ namespace Spore
 		MonoDomain* appDomain = m_script_engine->GetAppDomain();
 
 		mono_add_internal_call("Spore.HelloClass::Hello", reinterpret_cast<void*>(&Hello));
+		m_script_engine->AddInternalCalls();
 
 		void* args [1];
 		args [0] = mono_array_new(appDomain, mono_get_string_class(), 0);
@@ -148,6 +158,9 @@ namespace Spore
 		MonoMethod* mainMethod = mono_class_get_method_from_name(programClass, "Main", 1);
 		MonoObject* result = mono_runtime_invoke(mainMethod, nullptr, args, nullptr);
 		int resultCode = *static_cast<int*>(mono_object_unbox(result));
+
+		posTC = tc->GetPosition();
+		std::cout << "tc: " << posTC.x << " " << posTC.y << " " << posTC.z << std::endl;*/
 
 		while (!glfwWindowShouldClose(m_window->GetWindow()))
 		{
@@ -220,6 +233,7 @@ namespace Spore
 
 	void _Spore::Terminate()
 	{
+		m_script_engine->Terminate();
 		m_ui->Terminate();
 		m_physicSystem->Terminate();
 		m_audio_renderer->GetAudioSystem()->Terminate();
