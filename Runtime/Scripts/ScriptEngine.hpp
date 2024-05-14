@@ -1,11 +1,10 @@
 #pragma once
 
-#include <Types.hpp>
-
-#include <mono/jit/jit.h>
-#include <mono/metadata/attrdefs.h>
-#include <mono/metadata/assembly.h>
-#include <mono/metadata/mono-config.h>
+#include <Object.hpp>
+#include <Scene.hpp>
+#include <ScriptHeaders.h>
+#include <ScriptFieldInstance.hpp>
+#include <ScriptClass.hpp>
 
 namespace Spore
 {
@@ -14,21 +13,38 @@ namespace Spore
 	public:
 		ScriptEngine();
 		~ScriptEngine();
-		void Init();
-		MonoAssembly* GetAppAssembly();
-		MonoAssembly* LoadAssembly(const std::string& p_assembly_path);
-		MonoDomain* GetAppDomain();
-		MonoClass* GetClassInAssembly(MonoAssembly* p_assembly, 
-									  const char* p_namespace, 
-									  const char* p_class_name);
+
+		static ScriptEngineData* s_data;
+
+		static void Init();
+		static void Terminate();
+		static bool LoadAssembly(const std::filesystem::path& p_file_path);
+		static bool LoadAppAssembly(const std::filesystem::path& p_file_path);
+		static void ReloadAssembly();
+		static void OnRuntimeStart(Scene* p_scene);
+		static void OnRuntimeStop();
+		static bool ObjectClassExists(const std::string& p_class_name);
+		static void OnCreateObject(Object* p_object);
+		static void OnUpdateObject(Object* p_object, float32 ts);
+		static int InvokeMethods();
+		static Scene* GetSceneContext();
+		static sptr<ScriptInstance> GetObjectScriptInstance(UUID p_object_uuid);
+		static sptr<ScriptClass> GetObjectClass(const std::string& p_name);
+		static std::unordered_map<std::string, sptr<ScriptClass>> GetObjectClasses();
+		static ScriptFieldMap& GetScriptFieldMap(Object p_object);
+		static MonoImage* GetCoreAssemblyImage();
+		static MonoObject* GetManagedInstance(UUID p_uuid);
+		static MonoString* CreateString(const char* p_string);
 
 	protected:
 
 	private:
-		bool m_initialized = false;
-		MonoDomain* m_root_domain = nullptr;
-		MonoDomain* m_app_domain = nullptr;
-		MonoAssembly* m_app_assembly = nullptr;
+		static void InitMono();
+		static void TerminateMono();
+		static MonoObject* InstantiateClass(MonoClass* p_mono_class);
+		static void LoadAssemblyClasses();
 
+		friend class ScriptClass;
+		friend class ScriptGlue;
 	};
 }
