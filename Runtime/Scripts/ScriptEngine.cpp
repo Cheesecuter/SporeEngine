@@ -1,7 +1,7 @@
 #include <ScriptEngine.hpp>
 #include <ConsoleLogger.hpp>
 #include <ScriptInstance.hpp>
-#include <ScriptGlue.hpp>
+#include <ScriptBinder.hpp>
 
 namespace Spore
 {
@@ -50,7 +50,7 @@ namespace Spore
 		s_data = new ScriptEngineData();
 
 		InitMono();
-		ScriptGlue::RegisterFunctions();
+		ScriptBinder::RegisterFunctions();
 
 		bool status = LoadAssembly("D:/SporeEngine/ScriptEngine/ScriptEngine/bin/Debug/net4.5/Spore.dll");
 		if (!status)
@@ -69,7 +69,7 @@ namespace Spore
 
 		LoadAssemblyClasses();
 
-		ScriptGlue::RegisterComponents();
+		ScriptBinder::RegisterComponents();
 		s_data->m_object_class = new ScriptClass("Spore", "Object", true);
 	}
 
@@ -150,7 +150,7 @@ namespace Spore
 		LoadAppAssembly(s_data->m_app_assembly_filepath);
 		LoadAssemblyClasses();
 
-		ScriptGlue::RegisterComponents();
+		ScriptBinder::RegisterComponents();
 
 		s_data->m_object_class = new ScriptClass("Spore", "Object", true);
 	}

@@ -45,6 +45,6 @@ namespace Spore
 		static void LoadAssemblyClasses();
 
 		friend class ScriptClass;
-		friend class ScriptGlue;
+		friend class ScriptBinder;
 	};
 }
