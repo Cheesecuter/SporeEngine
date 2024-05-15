@@ -36,6 +36,7 @@ namespace Spore
 		void Render();
 		void RenderPanels(MainWindow* p_window);
 		void ShowDemoWindow();
+		void Marquee();
 		float32 m_delta_time = 0.0f;
 
 		Camera* m_player_camera = nullptr;
@@ -46,9 +47,10 @@ namespace Spore
 	private:
 		bool m_show_console = false;
 		bool m_show_demo_window = false;
+		bool m_marquee = false;
 		bool m_show_another_window = false;
 		bool m_show_scene_panel = false;
-		bool m_show_adding_component_panel = false;
+		bool m_show_adding_components_panel = false;
 		Gizmos* m_gizmos;
 		std::filesystem::path m_import_assets_path = Files::GetInstance().GetAssetsPath();
 		MainWindow* m_window;

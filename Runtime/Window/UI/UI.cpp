@@ -63,7 +63,7 @@ namespace Spore
 		//style.Colors [ImGuiCol_PopupBg] = ImVec4(0.382f, 0.382f, 0.382f, 1.0f);
 		//style.Colors [ImGuiCol_ChildBg] = ImVec4(0.382f, 0.382f, 0.382f, 1.0f);
 		style.Colors [ImGuiCol_ChildBg] = ImVec4(0.176f, 0.176f, 0.176f, 1.0f);
-		style.Colors [ImGuiCol_Header] = ImVec4(0.251f, 0.251f, 0.251f, 1.0f);				//
+		style.Colors [ImGuiCol_Header] = ImVec4(0.251f, 0.251f, 0.251f, 1.0f);
 		style.Colors [ImGuiCol_HeaderActive] = ImVec4(0.243f, 0.243f, 0.243f, 1.0f);
 		style.Colors [ImGuiCol_HeaderHovered] = ImVec4(0.422f, 0.422f, 0.422f, 1.0f);
 		//style.Colors [ImGuiCol_FrameBg] = ImVec4(0.382f, 0.382f, 0.382f, 1.0f);
@@ -105,11 +105,11 @@ namespace Spore
 
 	void UI::RenderPanels(MainWindow* p_window)
 	{
-		/*int32 displayW, displayH;
-		glfwGetFramebufferSize(window_p->window, &displayW, &displayH);
+		int32 displayW, displayH;
+		glfwGetFramebufferSize(p_window->GetWindow(), &displayW, &displayH);
 		ImGuiIO& io = ImGui::GetIO();
-		io.DisplaySize.x = displayW;
-		io.DisplaySize.y = displayH;*/
+		io.DisplaySize.x = (float32) displayW;
+		io.DisplaySize.y = (float32) displayH;
 
 		RenderMenuBar(p_window);
 		RenderHierarchyPanel(p_window);
@@ -123,6 +123,15 @@ namespace Spore
 		RenderConsolePanel(p_window);
 
 		ShowDemoWindow();
+		if (m_marquee)
+		{
+			Marquee();
+		}
+		else
+		{
+			ImGuiStyle& style = ImGui::GetStyle();
+			style.Colors [ImGuiCol_Text] = ImVec4(1.0f, 1.0f, 1.0f, 1.0f);
+		}
 	}
 
 	void UI::RenderMenuBar(MainWindow* p_window)
@@ -213,6 +222,7 @@ namespace Spore
 					static int32 windowSizeIndex = -1;
 					ImGui::Checkbox("Console", &m_show_console);
 					ImGui::Checkbox("Demo Window", &m_show_demo_window);
+					ImGui::Checkbox("Marquee", &m_marquee);
 					ImGui::SeparatorText("============");
 					ImGui::SeparatorText("============");
 
@@ -715,11 +725,11 @@ namespace Spore
 				}
 				if (ImGui::Button("Add Component"))
 				{
-					m_show_adding_component_panel = true;
+					m_show_adding_components_panel = true;
 				}
 			}
 
-			if (m_show_adding_component_panel)
+			if (m_show_adding_components_panel)
 			{
 				RenderAddingComponentsPanel(p_window);
 			}
@@ -1251,7 +1261,7 @@ namespace Spore
 		ImGuiWindowFlags windowFlags = 0;
 		windowFlags = ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse;
 		{
-			ImGui::Begin("Component", &m_show_adding_component_panel, windowFlags);
+			ImGui::Begin("Component", &m_show_adding_components_panel, windowFlags);
 
 			bool disableAudio = m_selected_object->HasComponent("Audio");
 			if (disableAudio)
@@ -1390,6 +1400,19 @@ namespace Spore
 		{
 			ImGui::ShowDemoWindow(&m_show_demo_window);
 		}
+	}
+
+	void UI::Marquee()
+	{
+		ImVec4 bgColor;
+		float32 time = (float32) (glfwGetTime() * 100.0f);
+		bgColor.x = sin(time * 0.2f) * 0.5f + 0.5f;
+		bgColor.y = cos(time * 0.3f) * 0.5f + 0.5f;
+		bgColor.z = sin(time * 0.1f) * 0.5f + 0.5f;
+		bgColor.w = 1.0f;
+
+		ImGuiStyle& style = ImGui::GetStyle();
+		style.Colors [ImGuiCol_Text] = bgColor;
 	}
 }
 
