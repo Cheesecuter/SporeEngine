@@ -13,7 +13,6 @@ namespace Spore
 	static std::unordered_map<MonoType*, std::function<bool(Object*)>> s_object_has_component_funcs;
 
 	std::string MonoStringToString(MonoString* p_string);
-#define SP_ADD_INTERNAL_CALL(Name) mono_add_internal_call("Spore.InternalCalls::", #Name, Name)
 
 	static MonoObject* GetScriptInstance(UUID p_objectID)
 	{
