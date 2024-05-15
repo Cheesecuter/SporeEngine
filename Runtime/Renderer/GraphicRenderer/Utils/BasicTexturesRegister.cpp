@@ -9,6 +9,7 @@ namespace Spore
 		Texture* imageFileTexture			= new Texture("./Assets/Utils/Textures/Images/file.png");
 		Texture* imageFolderTexture			= new Texture("./Assets/Utils/Textures/Images/folder.png");
 		Texture* imageFolderCloseTexture	= new Texture("./Assets/Utils/Textures/Images/folder_close.png");
+		Texture* imageDeleteTexture			= new Texture("./Assets/Utils/Textures/Images/delete.png");
 		Texture* imagePauseTexture			= new Texture("./Assets/Utils/Textures/Images/pause.png");
 		Texture* imagePlayTexture			= new Texture("./Assets/Utils/Textures/Images/play.png");
 		Texture* imageResetTexture			= new Texture("./Assets/Utils/Textures/Images/reset.png");
@@ -22,6 +23,7 @@ namespace Spore
 		imageFileTexture->m_utility_image			= true;
 		imageFolderTexture->m_utility_image			= true;
 		imageFolderCloseTexture->m_utility_image	= true;
+		imageDeleteTexture->m_utility_image			= true;
 		imagePauseTexture->m_utility_image			= true;
 		imagePlayTexture->m_utility_image			= true;
 		imageResetTexture->m_utility_image			= true;
