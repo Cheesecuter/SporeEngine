@@ -16,7 +16,8 @@ namespace Spore
 	{
 		if (ImGui::CollapsingHeader(m_name.c_str(), true))
 		{
-			ImGui::Text("UUID");
+			std::string id = "UUID: " + std::to_string(uint64(m_UUID));
+			ImGui::Text(id.c_str());
 		}
 	}
 
