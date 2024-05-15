@@ -449,6 +449,7 @@
     <ClInclude Include="Runtime\Renderer\GraphicRenderer\Utils\BasicTexturesRegister.hpp" />
     <ClInclude Include="Runtime\Renderer\GraphicRenderer\Utils\ModelObserver.hpp" />
     <ClInclude Include="Runtime\Renderer\GraphicRenderer\Utils\ModelType.hpp" />
+    <ClInclude Include="Runtime\Renderer\GraphicRenderer\Utils\ShaderUniformType.hpp" />
     <ClInclude Include="Runtime\Sandbox\BKBallObject.hpp" />
     <ClInclude Include="Runtime\Sandbox\BKGame.hpp" />
     <ClInclude Include="Runtime\Sandbox\BKGameLevel.hpp" />

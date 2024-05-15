@@ -114,11 +114,6 @@ namespace Spore
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	}
 
-	static void Hello(MonoString* name)
-	{
-		std::cout << "Hello, " << mono_string_to_utf8(name) << "!" << std::endl;
-	}
-
 	void _Spore::Runtime()
 	{
 		auto currentFrame = static_cast<float32>(glfwGetTime());
@@ -130,37 +125,6 @@ namespace Spore
 
 		Camera* editorCamera = m_graphic_renderer->GetCamera();
 		RenderPipeline* renderPipeline = m_graphic_renderer->GetRenderPipeline();
-
-		/*TransformComponent* tc = new TransformComponent();
-		tc->SetPosition(vec3f(0.0f, 0.0f, 0.0f));
-		vec3f posTC = tc->GetPosition();
-		std::cout << "tc: " << posTC.x << " " << posTC.y << " " << posTC.z << std::endl;
-
-		MonoAssembly* appAssembly = m_script_engine->GetAppAssembly();
-		appAssembly = m_script_engine->LoadAssembly("D:/SporeEngine/ScriptEngine/ScriptEngine/bin/Debug/net6.0/ScriptEngine.dll");
-		if (!appAssembly)
-		{
-			ConsoleLogger::GetInstance().Logger()->error("Assembly Error");
-		}
-		else
-		{
-			ConsoleLogger::GetInstance().Logger()->info("Assembly Loaded");
-		}
-
-		MonoDomain* appDomain = m_script_engine->GetAppDomain();
-
-		mono_add_internal_call("Spore.HelloClass::Hello", reinterpret_cast<void*>(&Hello));
-		m_script_engine->AddInternalCalls();
-
-		void* args [1];
-		args [0] = mono_array_new(appDomain, mono_get_string_class(), 0);
-		MonoClass* programClass = m_script_engine->GetClassInAssembly(appAssembly, "Spore", "MainClass");
-		MonoMethod* mainMethod = mono_class_get_method_from_name(programClass, "Main", 1);
-		MonoObject* result = mono_runtime_invoke(mainMethod, nullptr, args, nullptr);
-		int resultCode = *static_cast<int*>(mono_object_unbox(result));
-
-		posTC = tc->GetPosition();
-		std::cout << "tc: " << posTC.x << " " << posTC.y << " " << posTC.z << std::endl;*/
 
 		while (!glfwWindowShouldClose(m_window->GetWindow()))
 		{
@@ -191,9 +155,6 @@ namespace Spore
 			}
 			//m_window->TransformCamera(deltaTime);
 
-			/*mat4f projection = glm::perspective(glm::radians(editorCamera->m_zoom),
-												(float32) (windowWidth / windowHeight),
-												0.1f, 10000.0f);*/
 			mat4f projection = glm::perspective(glm::radians(editorCamera->m_zoom),
 												(float32) (m_window->GetRenderPipeline()->GetSceneSize().x / m_window->GetRenderPipeline()->GetSceneSize().y),
 												0.1f, 10000.0f);
@@ -201,7 +162,6 @@ namespace Spore
 			mat4f model = mat4f(1.0f);
 
 			m_window->GetRenderPipeline()->PreRender();
-
 
 			if (m_window->GetRenderPipeline()->m_post_process_on)
 			{

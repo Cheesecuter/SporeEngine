@@ -2045,6 +2045,9 @@
     <ClInclude Include="Runtime\Scripts\ScriptBinder.hpp">
       <Filter>源文件\Scripts</Filter>
     </ClInclude>
+    <ClInclude Include="Runtime\Renderer\GraphicRenderer\Utils\ShaderUniformType.hpp">
+      <Filter>源文件\Renderer\GraphicRenderer\Utils</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Shaders\BackgroundFragment.glsl">
