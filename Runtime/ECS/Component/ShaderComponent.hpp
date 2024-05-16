@@ -16,6 +16,7 @@ namespace Spore
 	struct UniformNode
 	{
 		ShaderUniformType m_type = ShaderUniformType::NONE;
+		bool m_is_loading = true;
 		std::string m_name = "unknown uniform";
 		bool m_bool = false;
 		int32 m_int = 0;
@@ -40,6 +41,7 @@ namespace Spore
 		void AddShader(Shader* p_shader);
 		void RemoveShader(Shader* p_shader);
 		std::unordered_map<std::string, ShaderNode*> GetShaders() const;
+		std::unordered_map<ShaderNode*, std::vector<UniformNode*>> GetUniforms() const;
 
 	protected:
 
@@ -47,11 +49,11 @@ namespace Spore
 		bool m_show_adding_uniforms_panel = false;
 		bool m_uniform_name_exist = false;
 		bool m_uniform_name_illegal = false;
-		std::string m_selected_shader_identifier = "";
+		ShaderNode* m_selected_shadernode = nullptr;
 		std::unordered_map<std::string, ShaderNode*> m_shaders;
-		std::unordered_map<std::string, std::vector<UniformNode*>> m_uniforms;
+		std::unordered_map<ShaderNode*, std::vector<UniformNode*>> m_uniforms;
 		Texture* m_button_image_delete;
 
-		void AddingUniformsPanel(std::string p_shader_identifier);
+		void AddingUniformsPanel(ShaderNode* p_shadernode);
 	};
 }
