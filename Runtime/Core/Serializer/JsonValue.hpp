@@ -27,10 +27,16 @@ namespace Spore
 		~JsonValue();
 		JsonValue& operator=(const JsonValue& p_value);
 
+	public:
 		JsonType m_type;
 		std::string m_string_value;
 		float m_number_value;
 		std::vector<JsonValue> m_array_value;
 		std::map<std::string, JsonValue> m_object_value;
+
+	protected:
+
+	private:
+
 	};
 }
