@@ -139,6 +139,9 @@
     <Filter Include="源文件\Input\Utils">
       <UniqueIdentifier>{d5697973-87ab-4939-a399-8cfd2d3a9932}</UniqueIdentifier>
     </Filter>
+    <Filter Include="源文件\Scripts\ScriptEngine">
+      <UniqueIdentifier>{e7cd83ff-7711-408d-85bc-a6bdaf030c13}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Runtime\ECS\Component.cpp">
