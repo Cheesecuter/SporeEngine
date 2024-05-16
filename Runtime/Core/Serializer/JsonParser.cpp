@@ -19,6 +19,58 @@ namespace Spore
 		return ParseValue(p_json_str);
 	}
 
+	std::string JsonParser::ToJsonString(JsonValue p_value) const
+	{
+		switch (p_value.m_type)
+		{
+			case JsonType::Object:
+			{
+				std::string jsonStr = "{";
+				bool isFirst = true;
+				for (const auto& pair : p_value.m_object_value)
+				{
+					if (!isFirst)
+					{
+						jsonStr += ",";
+					}
+					jsonStr += "\"" + pair.first + "\":" + ToJsonString(pair.second);
+					isFirst = false;
+				}
+				jsonStr += "}";
+				return jsonStr;
+			}
+			case JsonType::Array:
+			{
+				std::string jsonStr = "[";
+				bool isFirst = true;
+				for (const auto& val : p_value.m_array_value)
+				{
+					if (!isFirst)
+					{
+						jsonStr += ",";
+					}
+					jsonStr += ToJsonString(val);
+					isFirst = false;
+				}
+				jsonStr += "]";
+				return jsonStr;
+			}
+			case JsonType::String:
+				return "\"" + p_value.m_string_value + "\"";
+			case JsonType::Number:
+				return std::to_string(p_value.m_number_value);
+			case JsonType::True:
+				return "true";
+			case JsonType::False:
+				return "false";
+			case JsonType::Null:
+				return "null";
+			default:
+				return "";
+				break;
+		}
+	}
+
 	JsonValue JsonParser::ParseValue(const std::string& p_json_str)
 	{
 		SkipWhilespace(p_json_str);
@@ -163,58 +215,6 @@ namespace Spore
 		while (isspace(p_json_str [index]))
 		{
 			index++;
-		}
-	}
-
-	std::string JsonParser::ToJsonString(JsonValue p_value) const
-	{
-		switch (p_value.m_type)
-		{
-			case JsonType::Object:
-			{
-				std::string jsonStr = "{";
-				bool isFirst = true;
-				for (const auto& pair : p_value.m_object_value)
-				{
-					if (!isFirst)
-					{
-						jsonStr += ",";
-					}
-					jsonStr += "\"" + pair.first + "\":" + ToJsonString(pair.second);
-					isFirst = false;
-				}
-				jsonStr += "}";
-				return jsonStr;
-			}
-			case JsonType::Array:
-			{
-				std::string jsonStr = "[";
-				bool isFirst = true;
-				for (const auto& val : p_value.m_array_value)
-				{
-					if (!isFirst)
-					{
-						jsonStr += ",";
-					}
-					jsonStr += ToJsonString(val);
-					isFirst = false;
-				}
-				jsonStr += "]";
-				return jsonStr;
-			}
-			case JsonType::String:
-				return "\"" + p_value.m_string_value + "\"";
-			case JsonType::Number:
-				return std::to_string(p_value.m_number_value);
-			case JsonType::True:
-				return "true";
-			case JsonType::False:
-				return "false";
-			case JsonType::Null:
-				return "null";
-			default:
-				return "";
-				break;
 		}
 	}
 }
