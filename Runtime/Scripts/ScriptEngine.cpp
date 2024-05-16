@@ -52,14 +52,14 @@ namespace Spore
 		InitMono();
 		ScriptBinder::RegisterFunctions();
 
-		bool status = LoadAssembly("D:/SporeEngine/ScriptEngine/ScriptEngine/bin/Debug/net4.5/Spore.dll");
+		bool status = LoadAssembly("./Runtime/Scripts/ScriptEngine/bin/Debug/net4.5/Spore.dll");
 		if (!status)
 		{
 			ConsoleLogger::GetInstance().Logger()->error("ScriptEngine::Init: Could not load ScriptCore assembly");
 			return;
 		}
 
-		auto scriptModulePath = "D:/SporeEngine/ScriptEngine/ScriptEngine/bin/Debug/net4.5/Spore.dll";
+		auto scriptModulePath = "./Runtime/Scripts/ScriptEngine/bin/Debug/net4.5/Spore.dll";
 		status = LoadAppAssembly(scriptModulePath);
 		if (!status)
 		{
@@ -81,7 +81,7 @@ namespace Spore
 
 	void ScriptEngine::InitMono()
 	{
-		mono_set_assemblies_path("D:/SporeEngine/master/SporeEngine/SDKs/Mono/lib/mono/4.5");
+		mono_set_assemblies_path("./SDKs/Mono/lib/mono/4.5");
 
 		if (!s_data->m_enable_debugging)
 		{
