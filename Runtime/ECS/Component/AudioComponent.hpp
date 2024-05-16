@@ -17,15 +17,7 @@ namespace Spore
 		AudioComponent();
 		virtual ~AudioComponent();
 
-		virtual void InspectorPanel() override;
-		void AddAudio(Audio* p_audio);
-		void SetSource(uint32 p_source);
-		uint32 GetSource();
-		void SetBuffer(uint32 p_buffer);
-		uint32 GetBuffer();
-		void Play();
-		void Pause();
-		void Stop();
+	public:
 
 	protected:
 
@@ -38,5 +30,73 @@ namespace Spore
 		Texture* m_button_image_play;
 		Texture* m_button_image_pause;
 		Texture* m_button_image_stop;
+
+	public:
+		/**
+		 * @brief Render the inspector panel for the audio component.
+		 *
+		 * This function renders the inspector panel for the audio component using ImGui.
+		 * It allows users to add audio files, control playback (play, pause, stop), and manage audio buffers.
+		 */
+		virtual void InspectorPanel() override;
+		/**
+		 * @brief Add an audio object to the audio component.
+		 *
+		 * This function adds an audio object to the audio component's mapper.
+		 *
+		 * @param p_audio Pointer to the audio object to add.
+		 */
+		void AddAudio(Audio* p_audio);
+		/**
+		 * @brief Set the audio source for the audio component.
+		 *
+		 * This function sets the audio source for the audio component and generates the source.
+		 *
+		 * @param p_source The audio source ID to set.
+		 */
+		void SetSource(uint32 p_source);
+		/**
+		 * @brief Get the audio source ID associated with the audio component.
+		 *
+		 * @return The audio source ID associated with the audio component.
+		 */
+		uint32 GetSource();
+		/**
+		 * @brief Set the audio buffer for the audio component.
+		 *
+		 * This function sets the audio buffer for the audio component.
+		 *
+		 * @param p_buffer The audio buffer ID to set.
+		 */
+		void SetBuffer(uint32 p_buffer);
+		/**
+		 * @brief Get the audio buffer ID associated with the audio component.
+		 *
+		 * @return The audio buffer ID associated with the audio component.
+		 */
+		uint32 GetBuffer();
+		/**
+		 * @brief Start playing the audio associated with the audio component.
+		 *
+		 * This function starts playing the audio associated with the audio component.
+		 */
+		void Play();
+		/**
+		 * @brief Pause or resume the playback of the audio associated with the audio component.
+		 *
+		 * This function pauses or resumes the playback of the audio associated with the audio component.
+		 */
+		void Pause();
+		/**
+		 * @brief Stop the playback of the audio associated with the audio component.
+		 *
+		 * This function stops the playback of the audio associated with the audio component.
+		 */
+		void Stop();
+
+	protected:
+
+	private:
+
 	};
 }
