@@ -61,7 +61,6 @@ namespace Spore
 
 	bool Object::AddComponent(Component* p_component)
 	{
-		bool returnFlag = true;
 		try
 		{
 			m_components [p_component->GetName()] = p_component;
@@ -69,10 +68,10 @@ namespace Spore
 		}
 		catch (std::exception e)
 		{
-			returnFlag = false;
+			return false;
 		}
 
-		return returnFlag;
+		return true;
 	}
 
 	bool Object::HasComponent(const std::string& p_component_name) const
@@ -132,28 +131,28 @@ namespace Spore
 		transformComponent->SetPosition(p_position);
 	}
 
-	void Object::SetRotation(const vec3f& p_rotation)
-	{
-		TransformComponent* transformComponent = dynamic_cast<TransformComponent*>(m_components.find("Transform")->second);
-		transformComponent->SetRotation(p_rotation);
-	}
-
-	void Object::SetScale(const vec3f& p_scale)
-	{
-		TransformComponent* transformComponent = dynamic_cast<TransformComponent*>(m_components.find("Transform")->second);
-		transformComponent->SetScale(p_scale);
-	}
-
 	vec3f Object::GetPosition() const
 	{
 		TransformComponent* transformComponent = dynamic_cast<TransformComponent*>(m_components.find("Transform")->second);
 		return transformComponent->GetPosition();
 	}
 
+	void Object::SetRotation(const vec3f& p_rotation)
+	{
+		TransformComponent* transformComponent = dynamic_cast<TransformComponent*>(m_components.find("Transform")->second);
+		transformComponent->SetRotation(p_rotation);
+	}
+
 	vec3f Object::GetRotation() const
 	{
 		TransformComponent* transformComponent = dynamic_cast<TransformComponent*>(m_components.find("Transform")->second);
 		return transformComponent->GetRotation();
+	}
+
+	void Object::SetScale(const vec3f& p_scale)
+	{
+		TransformComponent* transformComponent = dynamic_cast<TransformComponent*>(m_components.find("Transform")->second);
+		transformComponent->SetScale(p_scale);
 	}
 
 	vec3f Object::GetScale() const
