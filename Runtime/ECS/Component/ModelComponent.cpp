@@ -56,7 +56,6 @@ namespace Spore
 				it_shader.first->m_shader->SetMat4("projection", m_model_transform_matrix_node.m_projection);
 				it_shader.first->m_shader->SetMat4("view", m_model_transform_matrix_node.m_view);
 				it_shader.first->m_shader->SetMat4("model", m_model_transform_matrix_node.m_model);
-				//it_shader.first->m_shader->SetBool("alphaFilterFlag", it_shader.first->m_shader->m_alpha_filter_flag);
 				for (UniformNode* it_uniform : it_shader.second)
 				{
 					if (it_uniform->m_type == ShaderUniformType::BOOL)
@@ -87,21 +86,6 @@ namespace Spore
 				model->Draw(*(it_shader.first->m_shader));
 			}
 		}
-
-		/*for (std::pair<std::string, ShaderNode*> it_shader : shaderComponent->GetShaders())
-		{
-			if (it_shader.second->m_is_loading)
-			{
-				it_shader.second->m_shader->Use();
-				it_shader.second->m_shader->SetBool("alphaFilterFlag", it_shader.second->m_shader->m_alpha_filter_flag);
-				it_shader.second->m_shader->SetMat4("projection", m_model_transform_matrix_node.m_projection);
-				it_shader.second->m_shader->SetMat4("view", m_model_transform_matrix_node.m_view);
-				it_shader.second->m_shader->SetMat4("model", m_model_transform_matrix_node.m_model);
-				it_shader.second->m_shader->SetFloat("iTime", (float32) glfwGetTime());
-				it_shader.second->m_shader->SetVec3("iResolution", 1024, 1024, 1024);
-				model->Draw(*(it_shader.second->m_shader));
-			}
-		}*/
 	}
 
 	void ModelComponent::OnModelDeleted(Model* p_model)
