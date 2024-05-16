@@ -9,6 +9,14 @@ namespace Spore
 	class Files : public Singleton<Files>
 	{
 	public:
+
+	protected:
+
+	private:
+		static const fs::path m_root_path;
+		static fs::path m_project_path;
+
+	public:
 		static const fs::path GetRootPath();
 		static const fs::path GetAssetsPath();
 		static const fs::path GetShadersPath();
@@ -19,9 +27,6 @@ namespace Spore
 	protected:
 
 	private:
-		static const fs::path m_root_path;
-		static fs::path m_project_path;
-
 		Files();
 		~Files();
 		friend class Singleton<Files>;
