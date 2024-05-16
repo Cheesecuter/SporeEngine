@@ -113,6 +113,11 @@ namespace Spore
 		}
 	}
 
+	void Scene::InitPhysics()
+	{
+		m_physics_system->SetBodyActivationListener(&m_body_activation_listener);
+	}
+
 	void Scene::SetPhysicsSystem(JPH::PhysicsSystem* p_physics_system)
 	{
 		m_physics_system = p_physics_system;
@@ -129,11 +134,6 @@ namespace Spore
 		m_temp_allocator = p_temp_allocator;
 	}
 
-	void Scene::InitPhysics()
-	{
-		m_physics_system->SetBodyActivationListener(&m_body_activation_listener);
-	}
-
 	JPH::BodyInterface* Scene::GetBodyInterface()
 	{
 		return m_body_interface;
@@ -142,11 +142,6 @@ namespace Spore
 	JPH::ContactListener* Scene::GetContactListener()
 	{
 		return nullptr;
-	}
-
-	void Scene::Tick(uint32 step)
-	{
-
 	}
 
 	void Scene::Active()
@@ -164,6 +159,11 @@ namespace Spore
 				}
 			}
 		}
+	}
+
+	void Scene::Tick(uint32 step)
+	{
+
 	}
 
 	JPH::Body& Scene::CreateFloor(float32 p_size)
