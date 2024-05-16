@@ -46,7 +46,49 @@ namespace Spore
 	{
 		ShaderComponent* shaderComponent = dynamic_cast<ShaderComponent*>(GetReferencedObject()->GetComponent("Shader"));
 		Model* model = m_model_mapper.begin()->second;
-		for (std::pair<std::string, ShaderNode*> it_shader : shaderComponent->GetShaders())
+		std::unordered_map<ShaderNode*, std::vector<UniformNode*>> uniforms = shaderComponent->GetUniforms();
+
+		for (std::pair<ShaderNode*, std::vector<UniformNode*>> it_shader : uniforms)
+		{
+			if (it_shader.first->m_is_loading)
+			{
+				it_shader.first->m_shader->Use();
+				it_shader.first->m_shader->SetMat4("projection", m_model_transform_matrix_node.m_projection);
+				it_shader.first->m_shader->SetMat4("view", m_model_transform_matrix_node.m_view);
+				it_shader.first->m_shader->SetMat4("model", m_model_transform_matrix_node.m_model);
+				//it_shader.first->m_shader->SetBool("alphaFilterFlag", it_shader.first->m_shader->m_alpha_filter_flag);
+				for (UniformNode* it_uniform : it_shader.second)
+				{
+					if (it_uniform->m_type == ShaderUniformType::BOOL)
+					{
+						it_shader.first->m_shader->SetBool(it_uniform->m_name, it_uniform->m_bool);
+					}
+					else if (it_uniform->m_type == ShaderUniformType::INT)
+					{
+						it_shader.first->m_shader->SetInt(it_uniform->m_name, it_uniform->m_int);
+					}
+					else if (it_uniform->m_type == ShaderUniformType::FLOAT)
+					{
+						it_shader.first->m_shader->SetFloat(it_uniform->m_name, it_uniform->m_float);
+					}
+					else if (it_uniform->m_type == ShaderUniformType::VEC2)
+					{
+						it_shader.first->m_shader->SetVec2(it_uniform->m_name, it_uniform->m_vec2);
+					}
+					else if (it_uniform->m_type == ShaderUniformType::VEC3)
+					{
+						it_shader.first->m_shader->SetVec3(it_uniform->m_name, it_uniform->m_vec3);
+					}
+					else if (it_uniform->m_type == ShaderUniformType::VEC4)
+					{
+						it_shader.first->m_shader->SetVec4(it_uniform->m_name, it_uniform->m_vec4);
+					}
+				}
+				model->Draw(*(it_shader.first->m_shader));
+			}
+		}
+
+		/*for (std::pair<std::string, ShaderNode*> it_shader : shaderComponent->GetShaders())
 		{
 			if (it_shader.second->m_is_loading)
 			{
@@ -59,7 +101,7 @@ namespace Spore
 				it_shader.second->m_shader->SetVec3("iResolution", 1024, 1024, 1024);
 				model->Draw(*(it_shader.second->m_shader));
 			}
-		}
+		}*/
 	}
 
 	void ModelComponent::OnModelDeleted(Model* p_model)
