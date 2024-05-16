@@ -8,7 +8,7 @@ namespace Spore
 	/**
 	 * @brief Convert degrees to radians.
 	 *
-	 * This function converts an angle from degrees to radians.
+	 * This function takes an angle value in degrees `p_value` and converts it to radians.
 	 *
 	 * @param p_value The angle value in degrees.
 	 * @return The equivalent angle value in radians.
@@ -18,7 +18,7 @@ namespace Spore
 	/**
 	 * @brief Convert radians to degrees.
 	 *
-	 * This function converts an angle from radians to degrees.
+	 * This function takes an angle value in radians `p_value` and converts it to degrees.
 	 *
 	 * @param p_value The angle value in radians.
 	 * @return The equivalent angle value in degrees.
