@@ -46,10 +46,10 @@ namespace Spore
 					{
 						shadersToDelete.push_back(it_shader.second->m_shader->m_identifier);
 					}
-					if (ImGui::MenuItem("Add Uniform", NULL, false, true))
+					if (ImGui::MenuItem("Set Uniforms", NULL, false, true))
 					{
 						m_show_adding_uniforms_panel = true;
-						m_selected_shader_identifier = it_shader.second->m_shader->m_identifier;
+						m_selected_shadernode = it_shader.second;
 					}
 					ImGui::Separator();
 					if (ImGui::MenuItem("Close", NULL, false, true))
@@ -77,7 +77,7 @@ namespace Spore
 
 		if (m_show_adding_uniforms_panel)
 		{
-			AddingUniformsPanel(m_selected_shader_identifier);
+			AddingUniformsPanel(m_selected_shadernode);
 		}
 	}
 
@@ -101,7 +101,7 @@ namespace Spore
 			shaderNode->m_shader = p_shader;
 			m_shaders [p_shader->m_identifier] = shaderNode;
 			std::vector<UniformNode*> uniforms;
-			m_uniforms.insert(std::pair(p_shader->m_identifier, uniforms));
+			m_uniforms.insert(std::pair(shaderNode, uniforms));
 		}
 	}
 
@@ -115,7 +115,12 @@ namespace Spore
 		return m_shaders;
 	}
 
-	void ShaderComponent::AddingUniformsPanel(std::string p_shader_identifier)
+	std::unordered_map<ShaderNode*, std::vector<UniformNode*>> ShaderComponent::GetUniforms() const
+	{
+		return m_uniforms;
+	}
+
+	void ShaderComponent::AddingUniformsPanel(ShaderNode* p_shadernode)
 	{
 		int32 width = 300;
 		int32 height = 400;
@@ -126,7 +131,7 @@ namespace Spore
 		ImGuiWindowFlags windowFlags = 0;
 		windowFlags = ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse;
 		{
-			ImGui::Begin(p_shader_identifier.c_str(), &m_show_adding_uniforms_panel, windowFlags);
+			ImGui::Begin(p_shadernode->m_shader->m_identifier.c_str(), &m_show_adding_uniforms_panel, windowFlags);
 
 			const char* uniformTypes [] = {
 				"Bool",
@@ -141,6 +146,7 @@ namespace Spore
 			};
 			static int currentUniformType = 0;
 			static std::string selectedUniformType = "Bool";
+			ImGui::Checkbox("Loading", &p_shadernode->m_is_loading);
 			ImGui::Text("Uniform Type");
 			if (ImGui::BeginCombo("##Uniform_Type", uniformTypes [currentUniformType]))
 			{
@@ -165,7 +171,7 @@ namespace Spore
 			std::string str = std::string(uniformName);
 
 			m_uniform_name_exist = false;
-			std::vector<UniformNode*>* uniforms = &m_uniforms.find(p_shader_identifier)->second;
+			std::vector<UniformNode*>* uniforms = &m_uniforms.find(p_shadernode)->second;
 			for (UniformNode* it_uniform : *uniforms)
 			{
 				if (it_uniform->m_name == str)
