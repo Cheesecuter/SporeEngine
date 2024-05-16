@@ -84,8 +84,7 @@ namespace Spore
 	void ShaderComponent::Tick(float32 p_delta_time)
 	{
 		ModelObject* object = dynamic_cast<ModelObject*>(GetReferencedObject());
-		Model* model = object->GetModel();
-		
+		Model* model = object->GetModel();	
 	}
 
 	void ShaderComponent::AddShader(Shader* p_shader)
@@ -148,6 +147,7 @@ namespace Spore
 			static std::string selectedUniformType = "Bool";
 			ImGui::Checkbox("Loading", &p_shadernode->m_is_loading);
 			ImGui::Text("Uniform Type");
+			ImGui::SameLine();
 			if (ImGui::BeginCombo("##Uniform_Type", uniformTypes [currentUniformType]))
 			{
 				for (uint32 i = 0; i < IM_ARRAYSIZE(uniformTypes); i++)
@@ -166,6 +166,8 @@ namespace Spore
 				ImGui::EndCombo();
 			}
 
+			ImGui::Text("Uniform Name");
+			ImGui::SameLine();
 			static char uniformName [32] = "";
 			ImGui::InputText("##Uniform_Name", uniformName, 32);
 			std::string str = std::string(uniformName);
@@ -240,7 +242,6 @@ namespace Spore
 
 			for (UniformNode* it_uniform : *uniforms)
 			{
-				//ImGui::Selectable(it_uniform->m_name.c_str());
 				ImGui::PushID("Inspector::Shader::ImageButtonDeleteUniform");
 				if (ImGui::ImageButton((ImTextureID) (intptr_t) m_button_image_delete->m_ID, ImVec2(13, 13)))
 				{
