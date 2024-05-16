@@ -36,12 +36,8 @@ namespace Spore
 	public:
 		ShaderComponent();
 		virtual ~ShaderComponent();
-		virtual void InspectorPanel() override;
-		virtual void Tick(float32 p_delta_time) override;
-		void AddShader(Shader* p_shader);
-		void RemoveShader(Shader* p_shader);
-		std::unordered_map<std::string, ShaderNode*> GetShaders() const;
-		std::unordered_map<ShaderNode*, std::vector<UniformNode*>> GetUniforms() const;
+
+	public:
 
 	protected:
 
@@ -54,6 +50,53 @@ namespace Spore
 		std::unordered_map<ShaderNode*, std::vector<UniformNode*>> m_uniforms;
 		Texture* m_button_image_delete;
 
+	public:
+		/**
+		 * @brief Display the inspector panel for the shader component.
+		 *
+		 * This function displays the inspector panel for the shader component.
+		 * Allowing users to add, rename, delete shaders, and set uniforms.
+		 */
+		virtual void InspectorPanel() override;
+		/**
+		 * @brief Perform ticking operations for the shader component.
+		 *
+		 * @param p_delta_time The time elapsed since the last tick.
+		 */
+		virtual void Tick(float32 p_delta_time) override;
+		/**
+		 * @brief Add a shader to the shader component.
+		 *
+		 * @param p_shader Pointer to the shader to add.
+		 */
+		void AddShader(Shader* p_shader);
+		/**
+		 * @brief Remove a shader from the shader component.
+		 *
+		 * @param p_shader Pointer to the shader to remove.
+		 */
+		void RemoveShader(Shader* p_shader);
+		/**
+		 * @brief Get the shaders associated with the shader component.
+		 *
+		 * @return An unordered map containing the shaders.
+		 */
+		std::unordered_map<std::string, ShaderNode*> GetShaders() const;
+		/**
+		 * @brief Get the uniforms associated with the shader component.
+		 *
+		 * @return An unordered map containing the uniforms.
+		 */
+		std::unordered_map<ShaderNode*, std::vector<UniformNode*>> GetUniforms() const;
+
+	protected:
+
+	private:
+		/**
+		 * @brief Display the panel for adding uniforms to a shader node.
+		 *
+		 * @param p_shadernode Pointer to the shader node to which uniforms will be added.
+		 */
 		void AddingUniformsPanel(ShaderNode* p_shadernode);
 	};
 }
