@@ -99,12 +99,22 @@ namespace Spore
 		m_is_dirty = true;
 	}
 
+	vec3f TransformComponent::GetPosition() const
+	{
+		return m_transformBuffer [m_currentIndex].m_position;
+	}
+
 	void TransformComponent::SetRotation(const vec3f& p_rotation)
 	{
 		//transformBuffer [nextIndex].rotation = rotation_p;
 		m_transformBuffer [m_currentIndex].m_rotation = p_rotation;
 		m_transform.m_rotation = p_rotation;
 		m_is_dirty = true;
+	}
+
+	vec3f TransformComponent::GetRotation() const
+	{
+		return m_transformBuffer [m_currentIndex].m_rotation;
 	}
 
 	void TransformComponent::SetScale(const vec3f& p_scale)
@@ -114,16 +124,6 @@ namespace Spore
 		m_transform.m_scale = p_scale;
 		m_is_dirty = true;
 		m_is_scale_dirty = true;
-	}
-	
-	vec3f TransformComponent::GetPosition() const
-	{
-		return m_transformBuffer [m_currentIndex].m_position;
-	}
-	
-	vec3f TransformComponent::GetRotation() const
-	{
-		return m_transformBuffer [m_currentIndex].m_rotation;
 	}
 	
 	vec3f TransformComponent::GetScale() const
