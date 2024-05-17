@@ -14,12 +14,12 @@
 //
 //using namespace Spore;
 //
-//void framebuffer_size_callback(GLFWwindow* window, int width, int height);
-//void mouse_callback(GLFWwindow* window, double xpos, double ypos);
-//void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
-//void processInput(GLFWwindow* window);
-//void renderSphere();
-//void renderCube();
+//void framebuffer_size_callback_pbr(GLFWwindow* window, int width, int height);
+//void mouse_callback_pbr(GLFWwindow* window, double xpos, double ypos);
+//void scroll_callback_pbr(GLFWwindow* window, double xoffset, double yoffset);
+//void processInput_pbr(GLFWwindow* window);
+//void renderSphere_pbr();
+//void renderCube_pbr();
 //
 //// settings
 //const unsigned int SCR_WIDTH = 1280;
@@ -35,7 +35,7 @@
 //float deltaTime = 0.0f;
 //float lastFrame = 0.0f;
 //
-//int main()
+//int main0()
 //{
 //    // glfw: initialize and configure
 //    // ------------------------------
@@ -59,9 +59,9 @@
 //        glfwTerminate();
 //        return -1;
 //    }
-//    glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
-//    glfwSetCursorPosCallback(window, mouse_callback);
-//    glfwSetScrollCallback(window, scroll_callback);
+//    glfwSetFramebufferSizeCallback(window, framebuffer_size_callback_pbr);
+//    glfwSetCursorPosCallback(window, mouse_callback_pbr);
+//    glfwSetScrollCallback(window, scroll_callback_pbr);
 //
 //    // tell GLFW to capture our mouse
 //    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
@@ -194,7 +194,7 @@
 //        glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, envCubemap, 0);
 //        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 //
-//        renderCube();
+//        renderCube_pbr();
 //    }
 //    glBindFramebuffer(GL_FRAMEBUFFER, 0);
 //
@@ -233,13 +233,13 @@
 //        glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, irradianceMap, 0);
 //        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 //
-//        renderCube();
+//        renderCube_pbr();
 //    }
 //    glBindFramebuffer(GL_FRAMEBUFFER, 0);
 //
 //    // initialize static shader uniforms before rendering
 //    // --------------------------------------------------
-//    glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float) SCR_WIDTH / (float) SCR_HEIGHT, 0.1f, 100.0f);
+//    glm::mat4 projection = glm::perspective(glm::radians(camera.m_zoom), (float) SCR_WIDTH / (float) SCR_HEIGHT, 0.1f, 100.0f);
 //    pbrShader.Use();
 //    pbrShader.SetMat4("projection", projection);
 //    backgroundShader.Use();
@@ -262,7 +262,7 @@
 //
 //        // input
 //        // -----
-//        processInput(window);
+//        processInput_pbr(window);
 //
 //        // render
 //        // ------
@@ -274,7 +274,7 @@
 //        pbrShader.Use();
 //        glm::mat4 view = camera.GetViewMatrix();
 //        pbrShader.SetMat4("view", view);
-//        pbrShader.SetVec3("camPos", camera.Position);
+//        pbrShader.SetVec3("camPos", camera.m_position);
 //
 //        // bind pre-computed IBL data
 //        glActiveTexture(GL_TEXTURE0);
@@ -299,7 +299,7 @@
 //                ));
 //                pbrShader.SetMat4("model", model);
 //                pbrShader.SetMat3("normalMatrix", glm::transpose(glm::inverse(glm::mat3(model))));
-//                renderSphere();
+//                renderSphere_pbr();
 //            }
 //        }
 //
@@ -319,7 +319,7 @@
 //            model = glm::scale(model, glm::vec3(0.5f));
 //            pbrShader.SetMat4("model", model);
 //            pbrShader.SetMat3("normalMatrix", glm::transpose(glm::inverse(glm::mat3(model))));
-//            renderSphere();
+//            renderSphere_pbr();
 //        }
 //
 //        // render skybox (render as last to prevent overdraw)
@@ -328,7 +328,7 @@
 //        glActiveTexture(GL_TEXTURE0);
 //        glBindTexture(GL_TEXTURE_CUBE_MAP, envCubemap);
 //        //glBindTexture(GL_TEXTURE_CUBE_MAP, irradianceMap); // display irradiance map
-//        renderCube();
+//        renderCube_pbr();
 //
 //
 //        // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
@@ -345,7 +345,7 @@
 //
 //// process all input: query GLFW whether relevant keys are pressed/released this frame and react accordingly
 //// ---------------------------------------------------------------------------------------------------------
-//void processInput(GLFWwindow* window)
+//void processInput_pbr(GLFWwindow* window)
 //{
 //    if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
 //        glfwSetWindowShouldClose(window, true);
@@ -362,7 +362,7 @@
 //
 //// glfw: whenever the window size changed (by OS or user resize) this callback function executes
 //// ---------------------------------------------------------------------------------------------
-//void framebuffer_size_callback(GLFWwindow* window, int width, int height)
+//void framebuffer_size_callback_pbr(GLFWwindow* window, int width, int height)
 //{
 //    // make sure the viewport matches the new window dimensions; note that width and 
 //    // height will be significantly larger than specified on retina displays.
@@ -372,7 +372,7 @@
 //
 //// glfw: whenever the mouse moves, this callback is called
 //// -------------------------------------------------------
-//void mouse_callback(GLFWwindow* window, double xposIn, double yposIn)
+//void mouse_callback_pbr(GLFWwindow* window, double xposIn, double yposIn)
 //{
 //    float xpos = static_cast<float>(xposIn);
 //    float ypos = static_cast<float>(yposIn);
@@ -395,7 +395,7 @@
 //
 //// glfw: whenever the mouse scroll wheel scrolls, this callback is called
 //// ----------------------------------------------------------------------
-//void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
+//void scroll_callback_pbr(GLFWwindow* window, double xoffset, double yoffset)
 //{
 //    camera.ProcessMouseScroll(static_cast<float>(yoffset));
 //}
@@ -404,7 +404,7 @@
 //// -------------------------------------------------
 //unsigned int sphereVAO = 0;
 //unsigned int indexCount;
-//void renderSphere()
+//void renderSphere_pbr()
 //{
 //    if (sphereVAO == 0)
 //    {
@@ -501,7 +501,7 @@
 //// -------------------------------------------------
 //unsigned int cubeVAO = 0;
 //unsigned int cubeVBO = 0;
-//void renderCube()
+//void renderCube_pbr()
 //{
 //    // initialize (if necessary)
 //    if (cubeVAO == 0)
