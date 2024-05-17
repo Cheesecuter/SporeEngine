@@ -44,7 +44,12 @@ namespace Spore
 	void Model::Draw(Shader& p_shader)
 	{
 		for (uint32 i = 0; i < m_meshes.size(); i++)
-			m_meshes [i].Draw(p_shader);
+			m_meshes [i]->Draw(p_shader);
+	}
+
+	std::vector<Mesh*> Model::GetMeshes()
+	{
+		return m_meshes;
 	}
 
 	void Model::LoadAsset(const char* p_path)
@@ -86,7 +91,7 @@ namespace Spore
 		}
 	}
 
-	Mesh Model::ProcessMesh(aiMesh* p_mesh, const aiScene* p_scene)
+	Mesh* Model::ProcessMesh(aiMesh* p_mesh, const aiScene* p_scene)
 	{
 		// data to fill
 		std::vector<Vertex> vertices;
@@ -239,7 +244,8 @@ namespace Spore
 		}
 
 		// return a mesh object created from the extracted mesh data
-		return Mesh(vertices, indices, textures);
+		Mesh* mesh = new Mesh(vertices, indices, textures);
+		return mesh;
 	}
 
 	std::vector<Texture*> Model::LoadMaterialTextures(aiMaterial* p_material, aiTextureType p_type, std::string p_type_name)
@@ -265,54 +271,11 @@ namespace Spore
 				// if texture hasn't been loaded already, load it
 				std::string path = str.C_Str();
 				Texture* texture = new Texture(std::string(this->m_directory + "/" + path).c_str());
-				//texture.m_ID = TextureFromFile(str.C_Str(), this->m_directory);
-				//texture.m_type = p_type_name;
-				//texture.m_path = str.C_Str();
 				textures.push_back(texture);
 				// store it as texture loaded for entire model, to ensure we won't unnecessary load duplicate textures
 				m_textures_loaded.push_back(texture);
 			}
 		}
 		return textures;
-	}
-
-	uint32 TextureFromFile(const char* p_path, const std::string& p_directory, bool p_gamma)
-	{
-		std::string filename = std::string(p_path);
-		filename = p_directory + '/' + filename;
-
-		uint32 textureID;
-		glGenTextures(1, &textureID);
-
-		int32 width, height, nrComponents;
-		unsigned char* data = stbi_load(filename.c_str(), &width, &height, &nrComponents, 0);
-		if (data)
-		{
-			GLenum format = GL_RED;
-			if (nrComponents == 1)
-				format = GL_RED;
-			else if (nrComponents == 3)
-				format = GL_RGB;
-			else if (nrComponents == 4)
-				format = GL_RGBA;
-
-			glBindTexture(GL_TEXTURE_2D, textureID);
-			glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, format, GL_UNSIGNED_BYTE, data);
-			glGenerateMipmap(GL_TEXTURE_2D);
-
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
-			stbi_image_free(data);
-		}
-		else
-		{
-			ConsoleLogger::GetInstance().Logger()->error("Model::TextureFromFile: Texture failed to load at path: {}", p_path);
-			stbi_image_free(data);
-		}
-
-		return textureID;
 	}
 }
