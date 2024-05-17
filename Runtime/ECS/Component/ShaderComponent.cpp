@@ -74,7 +74,6 @@ namespace Spore
 				m_shaders.erase(shadersToDelete[i]);
 			}
 		}
-
 		if (m_show_adding_uniforms_panel)
 		{
 			AddingUniformsPanel(m_selected_shadernode);
