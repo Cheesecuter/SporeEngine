@@ -34,10 +34,71 @@ namespace Spore
 					ImGui::EndDragDropTarget();
 				}
 			}
+			ImGuiIO& io = ImGui::GetIO();
 			for (std::pair<std::string, Model*> it_model : m_model_mapper)
 			{
 				ImGui::Separator();
 				ImGui::Text(it_model.second->m_identifier.c_str());
+				std::vector<Mesh*> meshes = it_model.second->GetMeshes();
+				ImGui::Text("Meshes");
+				for (Mesh* it_mesh : meshes)
+				{
+					ImGui::Separator();
+					for (Texture*& it_texture : it_mesh->m_textures)
+					{
+						ImGui::Image((ImTextureID) (intptr_t) it_texture->m_ID, ImVec2(13, 13));
+						if (ImGui::BeginDragDropTarget())
+						{
+							if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("AssetTextureDragDrop"))
+							{
+								const char* textureIdentifier = static_cast<const char*>(payload->Data);
+								Texture* textureTemp = AssetsManager::GetInstance().m_texture_mapper [textureIdentifier];
+								if (textureTemp != nullptr)
+								{
+									it_texture = textureTemp;
+								}
+								ImGui::EndDragDropTarget();
+							}
+						}
+						float32 tex_w = (float32) 32;
+						float32 tex_h = (float32) 32;
+						ImVec4 tint_col = ImVec4(1.0f, 1.0f, 1.0f, 1.0f);
+						ImVec4 border_col = ImGui::GetStyleColorVec4(ImGuiCol_Border);
+						ImVec2 pos = ImGui::GetCursorScreenPos();
+						if (ImGui::BeginItemTooltip())
+						{
+							float32 region_sz = 32.0f;
+							float32 region_x = io.MousePos.x - pos.x - region_sz * 0.5f;
+							float32 region_y = io.MousePos.y - pos.y - region_sz * 0.5f;
+							float32 zoom = 4.0f;
+							if (region_x < 0.0f)
+							{
+								region_x = 0.0f;
+							}
+							else if (region_x > tex_w - region_sz)
+							{
+								region_x = tex_w - region_sz;
+							}
+							if (region_y < 0.0f)
+							{
+								region_y = 0.0f;
+							}
+							else if (region_y > tex_h - region_sz)
+							{
+								region_y = tex_h - region_sz;
+							}
+							ImVec2 uv0 = ImVec2((region_x) / tex_w, (region_y) / tex_h);
+							ImVec2 uv1 = ImVec2((region_x + region_sz) / tex_w, (region_y + region_sz) / tex_h);
+							ImGui::Image((ImTextureID) (intptr_t) it_texture->m_ID, ImVec2(region_sz * zoom, region_sz * zoom), uv0, uv1, tint_col, border_col);
+							ImGui::EndTooltip();
+						}
+						ImGui::SameLine();
+						ImGui::Text(it_texture->m_identifier.c_str());
+						ImGui::Text("Add Texture");
+						
+						ImGui::SetItemTooltip(it_texture->m_identifier.c_str());
+					}
+				}
 			}
 		}
 	}
