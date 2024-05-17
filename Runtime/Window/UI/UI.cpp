@@ -223,6 +223,19 @@ namespace Spore
 					ImGui::Checkbox("Console", &m_show_console);
 					ImGui::Checkbox("Demo Window", &m_show_demo_window);
 					ImGui::Checkbox("Marquee", &m_marquee);
+					ImGuiStyle& style = ImGui::GetStyle();
+					style.Colors [ImGuiCol_Button] = ImVec4(0.495f, 0.289f, 0.289f, 1.0f);
+					style.Colors [ImGuiCol_ButtonActive] = ImVec4(0.917f, 0.211f, 0.211f, 1.0f);
+					style.Colors [ImGuiCol_ButtonHovered] = ImVec4(1.0f, 0.0f, 0.0f, 1.0f);
+					if (ImGui::Button("Click ME"))
+					{
+						std::string url = "https://vdse.bdstatic.com//192d9a98d782d9c74c96f09db9378d93.mp4";
+						std::string command = "start " + std::string(url);
+						system(command.c_str());
+					}
+					style.Colors [ImGuiCol_Button] = ImVec4(0.289f, 0.289f, 0.289f, 1.0f);
+					style.Colors [ImGuiCol_ButtonActive] = ImVec4(0.511f, 0.511f, 0.511f, 1.0f);
+					style.Colors [ImGuiCol_ButtonHovered] = ImVec4(0.422f, 0.422f, 0.422f, 1.0f);
 					ImGui::SeparatorText("============");
 					ImGui::SeparatorText("============");
 
@@ -1079,6 +1092,15 @@ namespace Spore
 						{
 							ImGui::BeginChild(it_texture.second->m_identifier.c_str(), ImVec2(assetImageSize, assetImageSize + height1));
 							ImGui::Selectable(it_texture.second->m_identifier.c_str(), false);
+							if (ImGui::BeginDragDropSource())
+							{
+								const char* identifier = it_texture.second->m_identifier.c_str();
+								ImGui::PushID(std::string("Project::Details::Textures::" + it_texture.second->m_identifier).c_str());
+								ImGui::SetDragDropPayload("AssetTextureDragDrop", identifier, strlen(identifier) + 1);
+								ImGui::PopID();
+								ImGui::Text("%s", identifier);
+								ImGui::EndDragDropSource();
+							}
 							ImGui::Image((ImTextureID) (intptr_t) it_texture.second->m_ID, ImVec2(assetImageSize, assetImageSize));
 							assetLineLength += (assetImageSize + 32);
 							if ((width / 5 * 3) < assetLineLength)
@@ -1149,21 +1171,6 @@ namespace Spore
 		windowFlags = ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoCollapse;
 		{
 			ImGui::Begin("Console", &pOpen, windowFlags);
-
-			ImGuiStyle& style = ImGui::GetStyle();
-			style.Colors [ImGuiCol_Button] = ImVec4(0.495f, 0.289f, 0.289f, 1.0f);
-			style.Colors [ImGuiCol_ButtonActive] = ImVec4(0.917f, 0.211f, 0.211f, 1.0f);
-			style.Colors [ImGuiCol_ButtonHovered] = ImVec4(1.0f, 0.0f, 0.0f, 1.0f);
-			/*if (ImGui::Button("Click ME"))
-			{
-				std::string url = "https://vdse.bdstatic.com//192d9a98d782d9c74c96f09db9378d93.mp4";
-				std::string command = "start " + std::string(url);
-				system(command.c_str());
-			}*/
-			style.Colors [ImGuiCol_Button] = ImVec4(0.289f, 0.289f, 0.289f, 1.0f);
-			style.Colors [ImGuiCol_ButtonActive] = ImVec4(0.511f, 0.511f, 0.511f, 1.0f);
-			style.Colors [ImGuiCol_ButtonHovered] = ImVec4(0.422f, 0.422f, 0.422f, 1.0f);
-
 			ImGui::Text("Camera Position: %.2f, %.2f, %.2f", p_window->GetCamera()->m_position.x, p_window->GetCamera()->m_position.y, p_window->GetCamera()->m_position.z);
 			ImGui::Text(" %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
 			ImGui::Text("Ticks: %.5f   ", m_delta_time);
