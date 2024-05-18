@@ -288,18 +288,7 @@ namespace Spore
 
 	static void MouseScrollCallback(GLFWwindow* p_window, float64 p_x_offset, float64 p_y_offset)
 	{
-		vec2f pos = MainWindow::GetGraphicRenderer()->GetRenderPipeline()->GetScenePos();
-		vec2f size = MainWindow::GetGraphicRenderer()->GetRenderPipeline()->GetSceneSize();
-
-		float32 x1 = pos.x;
-		float32 y1 = 0;
-		float32 x2 = x1 + size.x;
-		float32 y2 = size.y;
-
-		float32 xPos = Mouse::GetInstance().m_last_x;
-		float32 yPos = Mouse::GetInstance().m_last_y;
-
-		if (xPos >= x1 && xPos <= x2 && yPos >= y1 && yPos <= y2)
+		if (MainWindow::GetGraphicRenderer()->GetRenderPipeline()->m_cursor_on_scene_panel)
 		{
 			MainWindow::m_camera->ProcessMouseScroll(static_cast<float32>(p_y_offset));
 		}
