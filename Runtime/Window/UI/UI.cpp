@@ -3,14 +3,17 @@
 #include <UI.hpp>
 #include <AudioComponent.hpp>
 #include <CameraComponent.hpp>
+#include <CharacterControllerComponent.hpp>
+#include <IDComponent.hpp>
 #include <LightComponent.hpp>
 #include <ModelComponent.hpp>
 #include <PhysicsComponent.hpp>
 #include <ShaderComponent.hpp>
+#include <ShadowComponent.hpp>
 #include <TransformComponent.hpp>
-#include <CameraComponent.hpp>
-#include <CharacterControllerComponent.hpp>
 #include <ConsoleLogger.hpp>
+#include <FrameBuffer.hpp>
+#include <FrameBufferController.hpp>
 
 namespace fs = std::filesystem;
 namespace Spore
@@ -37,6 +40,31 @@ namespace Spore
 	{
 		InitImGui(m_window);
 		InitImages();
+		
+		m_scene_framebuffer = new FrameBuffer();
+		m_scene_framebuffer->m_identifier = "fb_scene_panel";
+		FrameBufferController::GetInstance().AddFrameBuffer(m_scene_framebuffer);
+		glBindFramebuffer(GL_FRAMEBUFFER, m_scene_framebuffer->m_framebuffer);
+
+		glGenTextures(1, &m_scene_texture);
+		glBindTexture(GL_TEXTURE_2D, m_scene_texture);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 1200 / 6 * 4, 900 / 3 * 2, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, m_scene_texture, 0);
+		
+		glGenRenderbuffers(1, &m_render_buffer);
+		glBindRenderbuffer(GL_RENDERBUFFER, m_render_buffer);
+		glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT, 1200 / 6 * 4, 900 / 3 * 2);
+		glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, m_render_buffer);
+
+		if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
+		{
+			ConsoleLogger::GetInstance().Logger()->error("PostProcesser::PostProcesser: Framebuffer is not complete");
+		}
+		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	}
 
 	void UI::InitImGui(MainWindow* p_window)
@@ -48,6 +76,8 @@ namespace Spore
 		io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
 		io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;
 		//io.ConfigFlags |= ImGuiConfigFlags_NavEnableSetMousePos;
+		io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
+		io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;
 
 		//ImGui::StyleColorsDark();
 		ImGui_ImplGlfw_InitForOpenGL(p_window->GetWindow(), true);
@@ -76,6 +106,15 @@ namespace Spore
 		style.Colors [ImGuiCol_SliderGrab] = ImVec4(0.289f, 0.289f, 0.289f, 1.0f);
 		style.Colors [ImGuiCol_SliderGrabActive] = ImVec4(0.511f, 0.511f, 0.511f, 1.0f);
 		style.Colors [ImGuiCol_WindowBg] = ImVec4(0.141f, 0.141f, 0.141f, 1.0f);
+		style.Colors[ImGuiCol_TabUnfocused] = ImVec4(0.289f, 0.289f, 0.289f, 1.0f);
+		style.Colors [ImGuiCol_TabUnfocusedActive] = ImVec4(0.382f, 0.382f, 0.382f, 1.0f);
+		style.Colors [ImGuiCol_ResizeGrip] = ImVec4(0.382f, 0.382f, 0.382f, 1.0f);
+		style.Colors [ImGuiCol_ResizeGripActive] = ImVec4(0.382f, 0.382f, 0.382f, 1.0f);
+		style.Colors [ImGuiCol_ResizeGripHovered] = ImVec4(0.382f, 0.382f, 0.382f, 1.0f);
+		style.Colors [ImGuiCol_Separator] = ImVec4(0.382f, 0.382f, 0.382f, 1.0f);
+		style.Colors [ImGuiCol_SeparatorActive] = ImVec4(0.382f, 0.382f, 0.382f, 1.0f);
+		style.Colors [ImGuiCol_SeparatorHovered] = ImVec4(0.382f, 0.382f, 0.382f, 1.0f);
+		style.Colors [ImGuiCol_DockingPreview] = ImVec4(0.382f, 0.382f, 0.382f, 1.0f);
 
 
 	#ifdef __EMSCRIPTEN__
@@ -95,12 +134,22 @@ namespace Spore
 		ImGui_ImplOpenGL3_NewFrame();
 		ImGui_ImplGlfw_NewFrame();
 		ImGui::NewFrame();
+		ImGui::DockSpaceOverViewport();
 	}
 
 	void UI::Render()
 	{
 		ImGui::Render();
 		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+		ImGuiIO& io = ImGui::GetIO();
+		(void) io;
+		if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
+		{
+			GLFWwindow* backup_current_context = glfwGetCurrentContext();
+			ImGui::UpdatePlatformWindows();
+			ImGui::RenderPlatformWindowsDefault();
+			glfwMakeContextCurrent(backup_current_context);
+		}
 	}
 
 	void UI::RenderPanels(MainWindow* p_window)
@@ -117,10 +166,13 @@ namespace Spore
 		{
 			RenderScenePanel(p_window);
 		}
-		RenderGizmos(p_window);
-		RenderInspectorPanel(p_window);
+		//RenderGizmos(p_window);
 		RenderProjectPanel(p_window);
+		RenderInspectorPanel(p_window);
 		RenderConsolePanel(p_window);
+
+		//ImGuizmo::SetDrawlist();
+		RenderGizmos(p_window);
 
 		ShowDemoWindow();
 		if (m_marquee)
@@ -136,18 +188,8 @@ namespace Spore
 
 	void UI::RenderMenuBar(MainWindow* p_window)
 	{
-		int32 width = p_window->GetWindowWidth();
-		int32 height = (int32) (ImGui::GetTextLineHeightWithSpacing() + ImGui::GetStyle().FramePadding.y * 2.0f);
-		ImGui::SetNextWindowPos(ImVec2(0.0f, 0.0f), ImGuiCond_Always);
-		ImGui::SetNextWindowSize(ImVec2((float32) width, (float32) height), ImGuiCond_Always);
-		ImGuiWindowFlags windowFlags = 0;
-		static bool pOpen = true;
-		windowFlags = ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize |
-			ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoCollapse |
-			ImGuiWindowFlags_NoBackground | ImGuiWindowFlags_MenuBar;
 		{
-			ImGui::Begin("Menu Bar", &pOpen, windowFlags);
-			if (ImGui::BeginMenuBar())
+			if (ImGui::BeginMainMenuBar())
 			{
 				if (ImGui::BeginMenu("File"))
 				{
@@ -419,9 +461,8 @@ namespace Spore
 					ImGui::MenuItem("Reset Packages to defaults", NULL, false, true);
 					ImGui::EndMenu();
 				}
-				ImGui::EndMenuBar();
+				ImGui::EndMainMenuBar();
 			}
-			ImGui::End();
 		}
 	}
 
@@ -430,13 +471,14 @@ namespace Spore
 		int32 width = p_window->GetWindowWidth() / 6;
 		int32 height = p_window->GetWindowHeight() / 3 * 2;
 		int32 height1 = (int32) (ImGui::GetTextLineHeightWithSpacing() + ImGui::GetStyle().FramePadding.y * 0.5f);
-		ImGui::SetNextWindowPos(ImVec2(0.0f, (float32) height1), ImGuiCond_Always);
-		ImGui::SetNextWindowSize(ImVec2((float32) width, (float32) (height - height1)), ImGuiCond_Always);
-		ImGuiWindowFlags windowFlags = 0;
 		static bool pOpen = true;
-		windowFlags = ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoCollapse;
+		ImGuiWindowFlags windowFlags = ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoBringToFrontOnFocus;
 		{
 			ImGui::Begin("Hierarchy", &pOpen, windowFlags);
+
+			ImVec2 windowSize = ImGui::GetWindowSize();
+			ImVec2 windowPos = ImGui::GetWindowPos();
+
 			std::map<std::string, Scene*> sceneMapper = p_window->GetRenderPipeline()->m_scene_mapper;
 			std::map<std::string, Object*> objectMapper;
 			std::map<std::string, std::map<std::string, Object*>> sceneObjectMapper;
@@ -460,7 +502,7 @@ namespace Spore
 				{
 					std::string childFrameIdentifier = "##Hierarchy::Scene::" + it_scene->second->m_identifier;
 					int32 collapsingHeaderLength = (int32) it_scene->second->m_object_mapper.size() + 1;
-					ImGui::BeginChild(childFrameIdentifier.c_str(), ImVec2((float32) (width - 4), (float32) (collapsingHeaderLength * height1)));
+					ImGui::BeginChild(childFrameIdentifier.c_str(), ImVec2((float32) (windowSize.x), (float32) (collapsingHeaderLength * height1)));
 
 					//ImGui::SetItemTooltip(it_scene->second->m_identifier.c_str());
 					if (ImGui::CollapsingHeader(it_scene->second->m_identifier.c_str(), true))
@@ -624,25 +666,26 @@ namespace Spore
 
 	void UI::RenderScenePanel(MainWindow* p_window)
 	{
-		int32 width = p_window->GetWindowWidth() / 6 * 4;
-		int32 height = p_window->GetWindowHeight() / 3 * 2;
-		int32 height1 = (int32) (ImGui::GetTextLineHeightWithSpacing() + ImGui::GetStyle().FramePadding.y * 0.5f);
-		ImGui::SetNextWindowPos(ImVec2((float32) (p_window->GetWindowWidth() - p_window->GetWindowWidth() / 6 * 5), (float32) height1), ImGuiCond_Always);
-		ImGui::SetNextWindowSize(ImVec2((float32) width, (float32) (height - height1)), ImGuiCond_Always);
-		ImGuiWindowFlags windowFlags = 0;
 		static bool pOpen = true;
-		windowFlags = ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoCollapse;
+		ImGuiWindowFlags windowFlags = ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoBringToFrontOnFocus | ImGuiWindowFlags_NoBackground;
 		{
 			ImGui::Begin("Scene", &pOpen, windowFlags);
 
+			p_window->GetRenderPipeline()->m_cursor_on_scene_panel = ImGui::IsWindowHovered(ImGuiHoveredFlags_None);
+
+			ImVec2 windowSize = ImGui::GetWindowSize();
+			ImVec2 windowPos = ImGui::GetWindowPos();
+			p_window->GetRenderPipeline()->SetSceneSize((uint32) windowSize.x, (uint32) windowSize.y);
+			p_window->GetRenderPipeline()->SetScenePos((uint32) windowPos.x, (uint32) windowPos.y);
 			ImVec2 size = ImGui::GetContentRegionAvail();
 
-			ImGuizmo::SetDrawlist();
-			RenderGizmos(p_window);
+			/*ImGuizmo::SetDrawlist();
+			RenderGizmos(p_window);*/
 			//p_window->m_render_pipeline->RenderSceneFramebufferEnd();
 			//uint32 framebufferTexture = p_window->m_render_pipeline->GetSceneTexture();
 			uint32 framebufferTexture = p_window->GetRenderPipeline()->GetPostProcesser()->GetFrameBufferTexture();
 			ImGui::Image((void*) (intptr_t) framebufferTexture, size, ImVec2(0, 1), ImVec2(1, 0));
+			//ImGui::Image((void*) (intptr_t) m_scene_texture, size, ImVec2(0, 1), ImVec2(1, 0));
 
 			ImGui::End();
 		}
@@ -650,14 +693,8 @@ namespace Spore
 
 	void UI::RenderInspectorPanel(MainWindow* p_window)
 	{
-		int32 width = p_window->GetWindowWidth() / 6;
-		int32 height = p_window->GetWindowHeight() / 3 * 2;
-		int32 height1 = (int32) (ImGui::GetTextLineHeightWithSpacing() + ImGui::GetStyle().FramePadding.y * 0.5f);
-		ImGui::SetNextWindowPos(ImVec2((float32) (p_window->GetWindowWidth() - width), (float32) height1), ImGuiCond_Always);
-		ImGui::SetNextWindowSize(ImVec2((float32) width, (float32) (height - height1)), ImGuiCond_Always);
-		ImGuiWindowFlags windowFlags = 0;
 		static bool pOpen = true;
-		windowFlags = ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoCollapse;
+		ImGuiWindowFlags windowFlags = ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoBringToFrontOnFocus;
 		{
 			ImGui::Begin("Inspector", &pOpen, windowFlags);
 
@@ -753,16 +790,15 @@ namespace Spore
 
 	void UI::RenderProjectPanel(MainWindow* p_window)
 	{
-		int32 width = p_window->GetWindowWidth() / 10 * 6;
-		int32 height = p_window->GetWindowHeight() / 3;
 		int32 height1 = (int32) (ImGui::GetTextLineHeightWithSpacing() + ImGui::GetStyle().FramePadding.y * 0.5f);
-		ImGui::SetNextWindowPos(ImVec2(0.0f, (float32) (p_window->GetWindowHeight() - height)), ImGuiCond_Always);
-		ImGui::SetNextWindowSize(ImVec2((float32) width, (float32) height), ImGuiCond_Always);
-		ImGuiWindowFlags windowFlags = 0;
 		static bool pOpen = true;
-		windowFlags = ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoCollapse;
+		ImGuiWindowFlags windowFlags = ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoBringToFrontOnFocus;
 		{
 			ImGui::Begin("Project", &pOpen, windowFlags);
+
+			ImVec2 panelSize = ImGui::GetWindowSize();
+			ImVec2 panelPos = ImGui::GetWindowPos();
+
 			std::vector<std::string> shaderIdentifiers;
 			std::vector<std::string> textureIdentifiers;
 			std::vector<std::string> modelIdentifiers;
@@ -792,7 +828,7 @@ namespace Spore
 			bool textureDetailsPanel = false;
 			bool audioDetailsPanel = false;
 			{
-				ImGui::BeginChild("Assets Folders", ImVec2((float32) (width / 5 * 2), (float32) height - 35));
+				ImGui::BeginChild("Assets Folders", ImVec2((float32) (panelSize.x / 5 * 2), (float32) panelSize.y - 35));
 				ImGui::Image((ImTextureID) (intptr_t) m_image_folder->m_ID, ImVec2((float32) height1, (float32) height1));
 				ImGui::SameLine();
 				if (ImGui::CollapsingHeader("Assets", true))
@@ -1007,7 +1043,7 @@ namespace Spore
 			}
 			ImGui::SameLine();
 			{
-				ImGui::BeginChild("Assets Details", ImVec2((float32) (width / 5 * 3), (float32) height - 35));
+				ImGui::BeginChild("Assets Details", ImVec2((float32) (panelSize.x / 5 * 3), (float32) panelSize.y - 35));
 
 				std::map<std::string, Model*> modelMapper = AssetsManager::GetInstance().m_model_mapper;
 				std::map<std::string, Shader*> shaderMapper = AssetsManager::GetInstance().m_shader_mapper;
@@ -1033,7 +1069,7 @@ namespace Spore
 						}
 						ImGui::Image((ImTextureID) (intptr_t) m_image_model->m_ID, ImVec2(assetImageSize, assetImageSize));
 						assetLineLength += (assetImageSize + 32);
-						if ((width / 5 * 3) < assetLineLength)
+						if ((panelSize.x / 5 * 3) < assetLineLength)
 						{
 							assetLineLength = 0;
 							ImGui::EndChild();
@@ -1067,7 +1103,7 @@ namespace Spore
 						}
 						ImGui::Image((ImTextureID) (intptr_t) m_image_file->m_ID, ImVec2(assetImageSize, assetImageSize));
 						assetLineLength += (assetImageSize + 20);
-						if ((width / 5 * 3) < assetLineLength)
+						if ((panelSize.x / 5 * 3) < assetLineLength)
 						{
 							assetLineLength = 0;
 							ImGui::EndChild();
@@ -1103,7 +1139,7 @@ namespace Spore
 							}
 							ImGui::Image((ImTextureID) (intptr_t) it_texture.second->m_ID, ImVec2(assetImageSize, assetImageSize));
 							assetLineLength += (assetImageSize + 32);
-							if ((width / 5 * 3) < assetLineLength)
+							if ((panelSize.x / 5 * 3) < assetLineLength)
 							{
 								assetLineLength = 0;
 								ImGui::EndChild();
@@ -1139,7 +1175,7 @@ namespace Spore
 						}
 						ImGui::Image((ImTextureID) (intptr_t) m_image_audio->m_ID, ImVec2(assetImageSize, assetImageSize));
 						assetLineLength += (assetImageSize + 32);
-						if ((width / 5 * 3) < assetLineLength)
+						if ((panelSize.x / 5 * 3) < assetLineLength)
 						{
 							assetLineLength = 0;
 							ImGui::EndChild();
@@ -1162,15 +1198,14 @@ namespace Spore
 
 	void UI::RenderConsolePanel(MainWindow* p_window)
 	{
-		int32 width = p_window->GetWindowWidth() / 10 * 4;
-		int32 height = p_window->GetWindowHeight() / 3;
-		ImGui::SetNextWindowPos(ImVec2((float32) (p_window->GetWindowWidth() - width), (float32) (p_window->GetWindowHeight() - height)), ImGuiCond_Always);
-		ImGui::SetNextWindowSize(ImVec2((float32) width, (float32) height), ImGuiCond_Always);
-		ImGuiWindowFlags windowFlags = 0;
 		static bool pOpen = true;
-		windowFlags = ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoCollapse;
+		ImGuiWindowFlags windowFlags = ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoBringToFrontOnFocus;
 		{
 			ImGui::Begin("Console", &pOpen, windowFlags);
+
+			ImVec2 panelSize = ImGui::GetWindowSize();
+			ImVec2 panelPos = ImGui::GetWindowPos();
+
 			ImGui::Text("Camera Position: %.2f, %.2f, %.2f", p_window->GetCamera()->m_position.x, p_window->GetCamera()->m_position.y, p_window->GetCamera()->m_position.z);
 			ImGui::Text(" %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
 			ImGui::Text("Ticks: %.5f   ", m_delta_time);
@@ -1226,7 +1261,7 @@ namespace Spore
 				serializer->Serialize("./Assets/Configs/config3.json");
 			}
 			{
-				ImGui::BeginChild("Console logout", ImVec2((float32) width, (float32) height - 132));
+				ImGui::BeginChild("Console logout", ImVec2((float32) panelSize.x, (float32) panelSize.y - 132));
 				
 				ImGui::TextWrapped("%s", g_terminal_output.c_str());
 
@@ -1263,10 +1298,7 @@ namespace Spore
 		int32 width = 200;
 		int32 height = 200;
 		int32 textHeight = (int32) (ImGui::GetTextLineHeightWithSpacing() + ImGui::GetStyle().FramePadding.y * 0.5f);
-		ImGui::SetNextWindowPos(ImVec2((float32) (p_window->GetWindowWidth() / 2 - 100), (float32) (p_window->GetWindowHeight() / 2 - 100)), ImGuiCond_Always);
-		ImGui::SetNextWindowSize(ImVec2((float32) width, (float32) height), ImGuiCond_Always);
-		ImGuiWindowFlags windowFlags = 0;
-		windowFlags = ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse;
+		ImGuiWindowFlags windowFlags = ImGuiWindowFlags_NoCollapse;
 		{
 			ImGui::Begin("Component", &m_show_adding_components_panel, windowFlags);
 
@@ -1309,6 +1341,20 @@ namespace Spore
 				m_selected_object->AddComponent(characterControllerComponentTemp);
 			}
 			if (disableCharacterController)
+			{
+				ImGui::EndDisabled();
+			}
+			bool disableUUID = m_selected_object->HasComponent("UUID");
+			if (disableUUID)
+			{
+				ImGui::BeginDisabled();
+			}
+			if (ImGui::Button("UUID", ImVec2((float32) width - 15, (float32) textHeight)))
+			{
+				IDComponent* idComponentTemp = new IDComponent();
+				m_selected_object->AddComponent(idComponentTemp);
+			}
+			if (disableUUID)
 			{
 				ImGui::EndDisabled();
 			}
@@ -1368,6 +1414,20 @@ namespace Spore
 			{
 				ImGui::EndDisabled();
 			}
+			bool disableShadow = m_selected_object->HasComponent("Shadow");
+			if (disableShadow)
+			{
+				ImGui::BeginDisabled();
+			}
+			if (ImGui::Button("Shadow", ImVec2((float32) width - 15, (float32) textHeight)))
+			{
+				ShadowComponent* shadowComponentTemp = new ShadowComponent();
+				m_selected_object->AddComponent(shadowComponentTemp);
+			}
+			if (disableShadow)
+			{
+				ImGui::EndDisabled();
+			}
 			bool disableTransform = m_selected_object->HasComponent("Transform");
 			if (disableTransform)
 			{
@@ -1382,8 +1442,6 @@ namespace Spore
 			{
 				ImGui::EndDisabled();
 			}
-
-
 			ImGui::End();
 		}
 	}
