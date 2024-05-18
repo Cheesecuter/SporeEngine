@@ -17,6 +17,7 @@
 #include <cstdarg>
 #include <thread>
 #include <mutex>
+#define NOMINMAX
 #include <Windows.h>
 
 #include <glad/glad.h>
