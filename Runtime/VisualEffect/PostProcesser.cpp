@@ -1,13 +1,17 @@
 #include <PostProcesser.hpp>
 #include <ConsoleLogger.hpp>
+#include <FrameBuffer.hpp>
+#include <FrameBufferController.hpp>
 
 namespace Spore
 {
 	PostProcesser::PostProcesser(uint32 p_scene_width, uint32 p_scene_height, PostProcess* p_post_process)
 	{
 		m_post_process = p_post_process;
-		glGenFramebuffers(1, &m_FBO);
-		glBindFramebuffer(GL_FRAMEBUFFER, m_FBO);
+		m_framebuffer = new FrameBuffer();
+		m_framebuffer->m_identifier = "fb_post_process";
+		FrameBufferController::GetInstance().AddFrameBuffer(m_framebuffer);
+		glBindFramebuffer(GL_FRAMEBUFFER, m_framebuffer->m_framebuffer);
 
 		glGenTextures(1, &m_texture);
 		glBindTexture(GL_TEXTURE_2D, m_texture);
@@ -18,10 +22,10 @@ namespace Spore
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, m_texture, 0);
 		
-		glGenRenderbuffers(1, &m_depth_buffer);
-		glBindRenderbuffer(GL_RENDERBUFFER, m_depth_buffer);
+		glGenRenderbuffers(1, &m_render_buffer);
+		glBindRenderbuffer(GL_RENDERBUFFER, m_render_buffer);
 		glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT, p_scene_width, p_scene_height);
-		glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, m_depth_buffer);
+		glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, m_render_buffer);
 
 		if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
 		{
@@ -47,7 +51,9 @@ namespace Spore
 
 	void PostProcesser::SetPostProcess(std::string p_identifier)
 	{
+		FrameBufferController::GetInstance().RemoveFrameBuffer(m_framebuffer->m_identifier);
 		m_post_process = m_post_process_mapper[p_identifier];
+		FrameBufferController::GetInstance().AddFrameBuffer(m_framebuffer);
 	}
 
 	void PostProcesser::AddPostProcess(PostProcess* p_post_process)
@@ -72,12 +78,20 @@ namespace Spore
 
 	uint32 PostProcesser::GetDepthBuffer()
 	{
-		return m_depth_buffer;
+		return m_render_buffer;
+	}
+
+	void Render()
+	{
+
 	}
 
 	void PostProcesser::RenderToFBO()
 	{
-		m_post_process->RenderToFBO(m_FBO);
+		std::vector<std::string> framebuffers;
+		framebuffers.push_back(m_framebuffer->m_identifier);
+		//m_post_process->RenderToFBO(m_framebuffer->m_framebuffer);
+		FrameBufferController::GetInstance().RenderToFBO(framebuffers, Render);
 	}
 
 	void PostProcesser::RenderFBO()
@@ -88,10 +102,12 @@ namespace Spore
 		m_post_process->GetShader()->Use();
 		glBindVertexArray(m_quad_VAO);
 		glBindTexture(GL_TEXTURE_2D, m_texture);
+		glBindFramebuffer(GL_FRAMEBUFFER, m_framebuffer->m_framebuffer);
 		glDrawArrays(GL_TRIANGLES, 0, 6);
+		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	}
 
-	uint32 PostProcesser::getquadvao()
+	uint32 PostProcesser::GetQuadVAO()
 	{
 		return m_quad_VAO;
 	}
