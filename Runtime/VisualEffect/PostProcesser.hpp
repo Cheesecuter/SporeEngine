@@ -5,6 +5,7 @@
 
 namespace Spore
 {
+	class FrameBuffer;
 	class PostProcesser
 	{
 	public:
@@ -16,18 +17,18 @@ namespace Spore
 		PostProcess* GetPostProcess();
 		std::unordered_map<std::string, PostProcess*>* GetPostProcesses();
 		uint32 GetFrameBufferTexture();
-		uint32 GetDepthBuffer();
+		uint32 GetRenderBuffer();
 		void RenderToFBO();
 		void RenderFBO();
-
-		uint32 getquadvao();
+		uint32 GetQuadVAO();
 
 	protected:
 
 	private:
-		uint32 m_FBO, m_quad_VAO, m_quad_VBO;
+		uint32 m_quad_VAO, m_quad_VBO;
+		FrameBuffer* m_framebuffer;
 		uint32 m_texture;
-		uint32 m_depth_buffer;
+		uint32 m_render_buffer;
 		PostProcess* m_post_process;
 		std::unordered_map<std::string, PostProcess*> m_post_process_mapper;
 		float m_quad_vertices [24] = { 

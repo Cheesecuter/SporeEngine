@@ -76,7 +76,7 @@ namespace Spore
 		return m_texture;
 	}
 
-	uint32 PostProcesser::GetDepthBuffer()
+	uint32 PostProcesser::GetRenderBuffer()
 	{
 		return m_render_buffer;
 	}
