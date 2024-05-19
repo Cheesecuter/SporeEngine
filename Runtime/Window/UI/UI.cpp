@@ -172,7 +172,7 @@ namespace Spore
 		RenderConsolePanel(p_window);
 
 		//ImGuizmo::SetDrawlist();
-		RenderGizmos(p_window);
+		//RenderGizmos(p_window);
 
 		ShowDemoWindow();
 		if (m_marquee)
@@ -686,6 +686,8 @@ namespace Spore
 			uint32 framebufferTexture = p_window->GetRenderPipeline()->GetPostProcesser()->GetFrameBufferTexture();
 			ImGui::Image((void*) (intptr_t) framebufferTexture, size, ImVec2(0, 1), ImVec2(1, 0));
 			//ImGui::Image((void*) (intptr_t) m_scene_texture, size, ImVec2(0, 1), ImVec2(1, 0));
+
+			RenderGizmos(p_window);
 
 			ImGui::End();
 		}
@@ -1278,6 +1280,7 @@ namespace Spore
 		ImGuizmo::BeginFrame();
 		if (m_selected_object != nullptr)
 		{
+			ImGuizmo::SetDrawlist();
 			float32* cameraView = const_cast<float32*>(glm::value_ptr(m_window->GetCamera()->GetViewMatrix()));
 			vec2f sceneSize = p_window->GetRenderPipeline()->GetSceneSize();
 			mat4f projection = glm::perspective(glm::radians(m_window->GetCamera()->m_zoom),
