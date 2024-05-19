@@ -14,7 +14,6 @@ namespace Spore
 
 		std::string m_identifier;
 		Shader* m_shader;
-		//std::vector<Shader*> shaders;
 		
 		void SetShader(Shader* p_shader);
 		Shader* GetShader();
