@@ -679,13 +679,9 @@ namespace Spore
 			p_window->GetRenderPipeline()->SetScenePos((uint32) windowPos.x, (uint32) windowPos.y);
 			ImVec2 size = ImGui::GetContentRegionAvail();
 
-			/*ImGuizmo::SetDrawlist();
-			RenderGizmos(p_window);*/
-			//p_window->m_render_pipeline->RenderSceneFramebufferEnd();
-			//uint32 framebufferTexture = p_window->m_render_pipeline->GetSceneTexture();
 			uint32 framebufferTexture = p_window->GetRenderPipeline()->GetPostProcesser()->GetFrameBufferTexture();
+
 			ImGui::Image((void*) (intptr_t) framebufferTexture, size, ImVec2(0, 1), ImVec2(1, 0));
-			//ImGui::Image((void*) (intptr_t) m_scene_texture, size, ImVec2(0, 1), ImVec2(1, 0));
 
 			RenderGizmos(p_window);
 
@@ -699,6 +695,13 @@ namespace Spore
 		ImGuiWindowFlags windowFlags = ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoBringToFrontOnFocus;
 		{
 			ImGui::Begin("Inspector", &pOpen, windowFlags);
+
+
+			ImVec2 windowSize = ImGui::GetWindowSize();
+			vec2f sceneSize = p_window->GetRenderPipeline()->GetSceneSize();
+			uint32 framebufferTexture = p_window->GetRenderPipeline()->GetPostProcesser()->GetFrameBufferTexture();
+
+			ImGui::Image((void*) (intptr_t) framebufferTexture, ImVec2(windowSize.x, (windowSize.x / sceneSize.x) * sceneSize.y), ImVec2(0, 1), ImVec2(1, 0));
 
 			if (m_selected_object != nullptr)
 			{
