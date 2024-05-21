@@ -61,16 +61,6 @@ namespace Spore
 	using float32 = float;
 	using float64 = double;
 
-	// floating-point num vector
-	using vec2f = glm::vec2;
-	using vec3f = glm::vec3;
-	using vec4f = glm::vec4;
-
-	// double-precision floating-point num vector
-	using vec2d = glm::dvec2;
-	using vec3d = glm::dvec3;
-	using vec4d = glm::dvec4;
-
 	// signed integer num vecter
 	using vec2i = glm::ivec2;
 	using vec3i = glm::ivec3;
@@ -80,6 +70,16 @@ namespace Spore
 	using vec2u = glm::uvec2;
 	using vec3u = glm::uvec3;
 	using vec4u = glm::uvec4;
+
+	// floating-point num vector
+	using vec2f = glm::vec2;
+	using vec3f = glm::vec3;
+	using vec4f = glm::vec4;
+
+	// double-precision floating-point num vector
+	using vec2d = glm::dvec2;
+	using vec3d = glm::dvec3;
+	using vec4d = glm::dvec4;
 
 	// boolean vector
 	using vec2b = glm::bvec2;
@@ -117,6 +117,7 @@ namespace Spore
 	using mat4d = glm::dmat4;
 
 	using quat = glm::quat;
+	using dquat = glm::dquat;
 
 	template<typename T>
 	using sptr = std::shared_ptr<T>;
