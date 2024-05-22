@@ -69,7 +69,7 @@ namespace Spore
 
 		std::vector<Scene*> scenesFromJson;
 		m_serializer->SetPhysicSystem(m_physicSystem);
-		m_serializer->Deserialize("./Assets/Configs/config3.json");
+		m_serializer->Deserialize("./Assets/Configs/config.json");
 		scenesFromJson = m_serializer->GetScenes();
 		for (int i = 0; i < scenesFromJson.size(); i++)
 		{
@@ -78,6 +78,7 @@ namespace Spore
 
 		m_window->GetRenderPipeline()->InitGrid();
 		m_window->GetRenderPipeline()->InitSkyBox();
+		//m_window->GetRenderPipeline()->InitShadowMap();
 
 		m_script_engine->s_data->m_scene_context = scenesFromJson [0];
 		m_script_engine->InvokeMethods();
@@ -161,16 +162,16 @@ namespace Spore
 			mat4f view = editorCamera->GetViewMatrix();
 			mat4f model = mat4f(1.0f);
 
-			m_window->GetRenderPipeline()->PreRender();
+			/*m_window->GetRenderPipeline()->PreRender();
 
 			if (m_window->GetRenderPipeline()->m_post_process_on)
 			{
 				m_window->GetRenderPipeline()->PostProcessRenderToFBO();
-			}
+			}*/
 
 			m_window->GetRenderPipeline()->Render(editorCamera,
-												(uint32) windowWidth, (uint32) windowHeight, deltaTime);
-			m_window->GetRenderPipeline()->RenderSkyBox(editorCamera, projection, view);
+												(uint32) windowWidth, (uint32) windowHeight, deltaTime, projection, view);
+			/*m_window->GetRenderPipeline()->RenderSkyBox(editorCamera, projection, view);
 			m_window->GetRenderPipeline()->RenderGrid(editorCamera, projection, view);
 
 			if (m_window->GetRenderPipeline()->m_post_process_on)
@@ -178,7 +179,7 @@ namespace Spore
 				m_window->GetRenderPipeline()->UpdateSceneFBO();
 				m_window->GetRenderPipeline()->UpdateSceneRBO();
 				m_window->GetRenderPipeline()->PostProcessFBO();
-			}
+			}*/
 
 			glViewport(windowWidth / 6, windowHeight / 3, windowWidth / 6 * 4, windowHeight / 3 * 2);
 			glfwGetWindowSize(m_window->GetWindow(), &displayW, &displayH);
