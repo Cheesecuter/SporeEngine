@@ -82,6 +82,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
+    <IncludePath>.\Runtime\Asset;.\Runtime\Core\Base;.\Runtime\Core\Math;.\Runtime\Core\Reflection;.\Runtime\Core\Serializer;.\Runtime\ECS;.\Runtime\ECS\Component;.\Runtime\ECS\Objects;.\Runtime\ECS\Utils;.\Runtime\Input;.\Runtime\Input\Utils;.\Runtime\Physics;.\Runtime\Physics\Test;.\Runtime\Physics\Utils;.\Runtime\Renderer\AudioRenderer;.\Runtime\Renderer\GraphicRenderer;.\Runtime\Renderer\GraphicRenderer\glad;.\Runtime\Renderer\GraphicRenderer\stb_image;.\Runtime\Renderer\GraphicRenderer\Utils;.\Runtime\Sandbox;.\Runtime\Sandbox\BrickOut;.\Runtime\Scripts;.\Runtime\Spore;.\Runtime\Spore\Utils;.\Runtime\Utils;.\Runtime\VisualEffect;.\Runtime\Window;.\Runtime\Window\UI;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -124,7 +125,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>.\SDKs\alut\libs;.\SDKs\assimp-master\build\lib\Debug;.\SDKs\GLFW\lib-vc2010-64;.\SDKs\OpenAL\libs\Win64;.\SDKs\OpenAL\libs\Win64\EFX-Util_MT;.\SDKs\Mono\lib;.\SDKs\Mono\lib\4.5;.\SDKs\WindowsLibs\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>.\SDKs\alut\libs;.\SDKs\assimp-master\build\lib\Debug;.\SDKs\GLFW\lib-vc2010-64;.\SDKs\OpenAL\libs\Win64;.\SDKs\OpenAL\libs\Win64\EFX-Util_MT;.\SDKs\Mono\lib;.\SDKs\Mono\lib\mono\4.5;.\SDKs\WindowsLibs\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <IgnoreSpecificDefaultLibraries>msvcrt.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <AdditionalDependencies>assimp-vc143-mtd.lib;glfw3.lib;opengl32.lib;OpenAL32.lib;alut.lib;EFX-Util.lib;eglib.lib;libgcmonosgen.lib;libmini-sgen.lib;libmonoruntime-sgen.lib;libmono-static-sgen.lib;libmonoutils.lib;mono-2.0-sgen.lib;MonoPosixHelper.lib;bcrypt.lib;MsWSock.Lib;psapi.lib;Version.Lib;WinMM.Lib;WS2_32.Lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
@@ -137,12 +138,18 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalIncludeDirectories>.\SDKs;.\SDKs\alut\include;.\SDKs\assimp-master\include;.\SDKs\GL;.\SDKs\glad\include;.\SDKs\GLFW;.\SDKs\imgui;.\SDKs\imgui\backends;.\SDKs\ImGuizmo;.\SDKs\JoltPhysics\Jolt\..;.\SDKs\Mono\include;.\SDKs\OpenAL\include;.\SDKs\spdlog-1.x\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard_C>Default</LanguageStandard_C>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>.\SDKs\alut\libs;.\SDKs\assimp-master\build\lib\Debug;.\SDKs\GLFW\lib-vc2010-64;.\SDKs\OpenAL\libs\Win64;.\SDKs\OpenAL\libs\Win64\EFX-Util_MT;.\SDKs\Mono\lib;.\SDKs\Mono\lib\mono\4.5;.\SDKs\WindowsLibs\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>assimp-vc143-mtd.lib;glfw3.lib;opengl32.lib;OpenAL32.lib;alut.lib;EFX-Util.lib;eglib.lib;libgcmonosgen.lib;libmini-sgen.lib;libmonoruntime-sgen.lib;libmono-static-sgen.lib;libmonoutils.lib;mono-2.0-sgen.lib;MonoPosixHelper.lib;bcrypt.lib;MsWSock.Lib;psapi.lib;Version.Lib;WinMM.Lib;WS2_32.Lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <IgnoreSpecificDefaultLibraries>msvcrt.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -166,6 +173,7 @@
     <ClCompile Include="Runtime\ECS\Component\ModelComponent.cpp" />
     <ClCompile Include="Runtime\ECS\Component\PhysicsComponent.cpp" />
     <ClCompile Include="Runtime\ECS\Component\ShaderComponent.cpp" />
+    <ClCompile Include="Runtime\ECS\Component\ShadowComponent.cpp" />
     <ClCompile Include="Runtime\ECS\Component\TransformComponent.cpp" />
     <ClCompile Include="Runtime\ECS\Light.cpp" />
     <ClCompile Include="Runtime\ECS\Object.cpp" />
@@ -196,6 +204,8 @@
     <ClCompile Include="Runtime\Renderer\GraphicRenderer\Utils\BasicModelsRegister.cpp" />
     <ClCompile Include="Runtime\Renderer\GraphicRenderer\Utils\BasicShadersRegister.cpp" />
     <ClCompile Include="Runtime\Renderer\GraphicRenderer\Utils\BasicTexturesRegister.cpp" />
+    <ClCompile Include="Runtime\Renderer\GraphicRenderer\Utils\FrameBuffer.cpp" />
+    <ClCompile Include="Runtime\Renderer\GraphicRenderer\Utils\FrameBufferController.cpp" />
     <ClCompile Include="Runtime\Renderer\GraphicRenderer\Utils\ModelObserver.cpp" />
     <ClCompile Include="Runtime\Sandbox\BKBallObject.cpp" />
     <ClCompile Include="Runtime\Sandbox\BKGame.cpp" />
@@ -221,6 +231,7 @@
     <ClCompile Include="Runtime\Spore\Utils\GraphicRenderer.cpp" />
     <ClCompile Include="Runtime\Test\AddvantageRenderTest.cpp" />
     <ClCompile Include="Runtime\Test\BasicLightingTest.cpp" />
+    <ClCompile Include="Runtime\Test\CSMShadowMappingTest.cpp" />
     <ClCompile Include="Runtime\Test\DeferredShaderingTest.cpp" />
     <ClCompile Include="Runtime\Test\DepthTest.cpp" />
     <ClCompile Include="Runtime\Test\FrameBufferTest.cpp" />
@@ -415,6 +426,7 @@
     <ClInclude Include="Runtime\ECS\Component\ModelComponent.hpp" />
     <ClInclude Include="Runtime\ECS\Component\PhysicsComponent.hpp" />
     <ClInclude Include="Runtime\ECS\Component\ShaderComponent.hpp" />
+    <ClInclude Include="Runtime\ECS\Component\ShadowComponent.hpp" />
     <ClInclude Include="Runtime\ECS\Component\TransformComponent.hpp" />
     <ClInclude Include="Runtime\ECS\Light.hpp" />
     <ClInclude Include="Runtime\ECS\Object.hpp" />
@@ -447,6 +459,8 @@
     <ClInclude Include="Runtime\Renderer\GraphicRenderer\Utils\BasicModelsRegister.hpp" />
     <ClInclude Include="Runtime\Renderer\GraphicRenderer\Utils\BasicShadersRegister.hpp" />
     <ClInclude Include="Runtime\Renderer\GraphicRenderer\Utils\BasicTexturesRegister.hpp" />
+    <ClInclude Include="Runtime\Renderer\GraphicRenderer\Utils\FrameBuffer.hpp" />
+    <ClInclude Include="Runtime\Renderer\GraphicRenderer\Utils\FrameBufferController.hpp" />
     <ClInclude Include="Runtime\Renderer\GraphicRenderer\Utils\ModelObserver.hpp" />
     <ClInclude Include="Runtime\Renderer\GraphicRenderer\Utils\ModelType.hpp" />
     <ClInclude Include="Runtime\Renderer\GraphicRenderer\Utils\ShaderUniformType.hpp" />
@@ -790,6 +804,9 @@
     <None Include="Assets\Shaders\BlendingFragment.glsl" />
     <None Include="Assets\Shaders\BlendingVertex.glsl" />
     <None Include="Assets\Shaders\CubemapVertex.glsl" />
+    <None Include="Assets\Shaders\DebugCascadeFragment.glsl" />
+    <None Include="Assets\Shaders\DebugCascadeVertex.glsl" />
+    <None Include="Assets\Shaders\DebugQuadDepthFragment.glsl" />
     <None Include="Assets\Shaders\DebugQuadFragment.glsl" />
     <None Include="Assets\Shaders\DebugQuadVertex.glsl" />
     <None Include="Assets\Shaders\DeferredLightBoxFragment.glsl" />
@@ -836,6 +853,7 @@
     <None Include="Assets\Shaders\PostProcesses\InversionPostProcessFS.glsl" />
     <None Include="Assets\Shaders\PostProcesses\SharpenPostProcessFS.glsl" />
     <None Include="Assets\Shaders\ShadowMappingDepthFragment.glsl" />
+    <None Include="Assets\Shaders\ShadowMappingDepthGeometry.glsl" />
     <None Include="Assets\Shaders\ShadowMappingDepthVertex.glsl" />
     <None Include="Assets\Shaders\ShadowMappingFragment.glsl" />
     <None Include="Assets\Shaders\ShadowMappingVertex.glsl" />

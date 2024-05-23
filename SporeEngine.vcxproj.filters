@@ -882,6 +882,18 @@
     <ClCompile Include="Runtime\Scripts\ScriptBinder.cpp">
       <Filter>源文件\Scripts</Filter>
     </ClCompile>
+    <ClCompile Include="Runtime\Renderer\GraphicRenderer\Utils\FrameBuffer.cpp">
+      <Filter>源文件\Renderer\GraphicRenderer\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Renderer\GraphicRenderer\Utils\FrameBufferController.cpp">
+      <Filter>源文件\Renderer\GraphicRenderer\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Test\CSMShadowMappingTest.cpp">
+      <Filter>源文件\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\ECS\Component\ShadowComponent.cpp">
+      <Filter>源文件\ECS\Component</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Runtime\Core\Base\Types.hpp">
@@ -2051,6 +2063,15 @@
     <ClInclude Include="Runtime\Renderer\GraphicRenderer\Utils\ShaderUniformType.hpp">
       <Filter>源文件\Renderer\GraphicRenderer\Utils</Filter>
     </ClInclude>
+    <ClInclude Include="Runtime\Renderer\GraphicRenderer\Utils\FrameBuffer.hpp">
+      <Filter>源文件\Renderer\GraphicRenderer\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\Renderer\GraphicRenderer\Utils\FrameBufferController.hpp">
+      <Filter>源文件\Renderer\GraphicRenderer\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\ECS\Component\ShadowComponent.hpp">
+      <Filter>源文件\ECS\Component</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Shaders\BackgroundFragment.glsl">
@@ -2303,6 +2324,18 @@
       <Filter>资源文件\Assets\Shaders</Filter>
     </None>
     <None Include="Assets\Shaders\SobelEdgeShadingFragment.glsl">
+      <Filter>资源文件\Assets\Shaders</Filter>
+    </None>
+    <None Include="Assets\Shaders\ShadowMappingDepthGeometry.glsl">
+      <Filter>资源文件\Assets\Shaders</Filter>
+    </None>
+    <None Include="Assets\Shaders\DebugQuadDepthFragment.glsl">
+      <Filter>资源文件\Assets\Shaders</Filter>
+    </None>
+    <None Include="Assets\Shaders\DebugCascadeVertex.glsl">
+      <Filter>资源文件\Assets\Shaders</Filter>
+    </None>
+    <None Include="Assets\Shaders\DebugCascadeFragment.glsl">
       <Filter>资源文件\Assets\Shaders</Filter>
     </None>
   </ItemGroup>
