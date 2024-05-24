@@ -25,7 +25,7 @@ namespace Spore
 		static void OnRuntimeStop();
 		static bool ObjectClassExists(const std::string& p_class_name);
 		static void OnCreateObject(Object* p_object);
-		static void OnUpdateObject(Object* p_object, float32 ts);
+		static void OnUpdateObject(Object* p_object, float32 p_time_step);
 		static int InvokeMethods();
 		static Scene* GetSceneContext();
 		static sptr<ScriptInstance> GetObjectScriptInstance(UUID p_object_uuid);

@@ -194,13 +194,13 @@ namespace Spore
 		}
 	}
 
-	void ScriptEngine::OnUpdateObject(Object* p_object, float32 ts)
+	void ScriptEngine::OnUpdateObject(Object* p_object, float32 p_time_step)
 	{
 		UUID objectID = p_object->GetUUID();
 		if (s_data->m_object_instances.find(objectID) != s_data->m_object_instances.end())
 		{
 			sptr<ScriptInstance> instance = s_data->m_object_instances [objectID];
-			instance->InvokeOnUpdate((float32) ts);
+			instance->InvokeOnUpdate((float32) p_time_step);
 		}
 		else
 		{
