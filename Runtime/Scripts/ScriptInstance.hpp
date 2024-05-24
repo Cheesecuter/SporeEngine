@@ -13,7 +13,7 @@ namespace Spore
 		ScriptInstance(sptr<ScriptClass> p_script_class, Object* p_object);
 
 		void InvokeOnCreate();
-		void InvokeOnUpdate(float32 p_ts);
+		void InvokeOnUpdate(float32 p_time_step);
 		sptr<ScriptClass> GetScriptClass();
 		template<typename T>
 		void SetFieldValue(const std::string& p_name, T p_value);

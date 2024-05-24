@@ -29,11 +29,11 @@ namespace Spore
 		}
 	}
 
-	void ScriptInstance::InvokeOnUpdate(float32 p_ts)
+	void ScriptInstance::InvokeOnUpdate(float32 p_time_step)
 	{
 		if (m_on_update_method)
 		{
-			void* param = &p_ts;
+			void* param = &p_time_step;
 			m_script_class->InvokeMethod(m_instance, m_on_update_method, &param);
 		}
 	}
