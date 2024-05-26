@@ -78,7 +78,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>.\Runtime\Asset;.\Runtime\Core\Base;.\Runtime\Core\Math;.\Runtime\Core\Reflection;.\Runtime\Core\Serializer;.\Runtime\ECS;.\Runtime\ECS\Component;.\Runtime\ECS\Objects;.\Runtime\ECS\Utils;.\Runtime\Input;.\Runtime\Input\Utils;.\Runtime\Physics;.\Runtime\Physics\Test;.\Runtime\Physics\Utils;.\Runtime\Renderer\AudioRenderer;.\Runtime\Renderer\GraphicRenderer;.\Runtime\Renderer\GraphicRenderer\glad;.\Runtime\Renderer\GraphicRenderer\stb_image;.\Runtime\Renderer\GraphicRenderer\Utils;.\Runtime\Sandbox;.\Runtime\Sandbox\BrickOut;.\Runtime\Scripts;.\Runtime\Spore;.\Runtime\Spore\Utils;.\Runtime\Utils;.\Runtime\VisualEffect;.\Runtime\Window;.\Runtime\Window\UI;$(IncludePath)</IncludePath>
+    <IncludePath>.\Runtime\..;.\Runtime\Asset;.\Runtime\Core\Base;.\Runtime\Core\Math;.\Runtime\Core\Reflection;.\Runtime\Core\Serializer;.\Runtime\ECS;.\Runtime\ECS\Component;.\Runtime\ECS\Objects;.\Runtime\ECS\Utils;.\Runtime\Input;.\Runtime\Input\Utils;.\Runtime\Physics;.\Runtime\Tests\..;.\Runtime\Physics\Utils;.\Runtime\Renderer\AudioRenderer;.\Runtime\Renderer\GraphicRenderer;.\Runtime\Renderer\GraphicRenderer\glad;.\Runtime\Renderer\GraphicRenderer\stb_image;.\Runtime\Renderer\GraphicRenderer\Utils;.\Runtime\Sandbox;.\Runtime\Sandbox\BrickOut;.\Runtime\Scripts;.\Runtime\Spore;.\Runtime\Spore\Utils;.\Runtime\Utils;.\Runtime\VisualEffect;.\Runtime\Window;.\Runtime\Window\UI;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -186,8 +186,6 @@
     <ClCompile Include="Runtime\Input\Mouse.cpp" />
     <ClCompile Include="Runtime\Physics\PhysicsHelloWorld.cpp" />
     <ClCompile Include="Runtime\Physics\PhysicSystem.cpp" />
-    <ClCompile Include="Runtime\Physics\Test\PhysicsTest.cpp" />
-    <ClCompile Include="Runtime\Physics\Test\PTSimpleTest.cpp" />
     <ClCompile Include="Runtime\Physics\Utils\ContactListenerImpl.cpp" />
     <ClCompile Include="Runtime\Renderer\AudioRenderer\Audio.cpp" />
     <ClCompile Include="Runtime\Renderer\AudioRenderer\AudioSystem.cpp" />
@@ -229,25 +227,29 @@
     <ClCompile Include="Runtime\Spore\Spore.cpp" />
     <ClCompile Include="Runtime\Spore\Utils\AudioRenderer.cpp" />
     <ClCompile Include="Runtime\Spore\Utils\GraphicRenderer.cpp" />
-    <ClCompile Include="Runtime\Test\AddvantageRenderTest.cpp" />
-    <ClCompile Include="Runtime\Test\BasicLightingTest.cpp" />
-    <ClCompile Include="Runtime\Test\CSMShadowMappingTest.cpp" />
-    <ClCompile Include="Runtime\Test\DeferredShaderingTest.cpp" />
-    <ClCompile Include="Runtime\Test\DepthTest.cpp" />
-    <ClCompile Include="Runtime\Test\FrameBufferTest.cpp" />
-    <ClCompile Include="Runtime\Test\HDRTest.cpp" />
-    <ClCompile Include="Runtime\Test\ImGuiTest.cpp" />
-    <ClCompile Include="Runtime\Test\LightingTest.cpp" />
-    <ClCompile Include="Runtime\Test\ModelTest.cpp" />
-    <ClCompile Include="Runtime\Test\NamespaceTest.cpp" />
-    <ClCompile Include="Runtime\Test\NormalMappingTest.cpp" />
-    <ClCompile Include="Runtime\Test\ParallaxMappingTest.cpp" />
-    <ClCompile Include="Runtime\Test\PbrTest.cpp" />
-    <ClCompile Include="Runtime\Test\PointShadowTest.cpp" />
-    <ClCompile Include="Runtime\Test\RendererDemo.cpp" />
-    <ClCompile Include="Runtime\Test\ShadowTest.cpp" />
-    <ClCompile Include="Runtime\Test\SSAOTest.cpp" />
-    <ClCompile Include="Runtime\Test\StencilTest.cpp" />
+    <ClCompile Include="Runtime\Tests\AddvantageRenderTest.cpp" />
+    <ClCompile Include="Runtime\Tests\BasicLightingTest.cpp" />
+    <ClCompile Include="Runtime\Tests\CSMShadowMappingTest.cpp" />
+    <ClCompile Include="Runtime\Tests\DeferredShaderingTest.cpp" />
+    <ClCompile Include="Runtime\Tests\DepthTest.cpp" />
+    <ClCompile Include="Runtime\Tests\FrameBufferTest.cpp" />
+    <ClCompile Include="Runtime\Tests\HDRTest.cpp" />
+    <ClCompile Include="Runtime\Tests\ImGuiTest.cpp" />
+    <ClCompile Include="Runtime\Tests\LightingTest.cpp" />
+    <ClCompile Include="Runtime\Tests\ModelTestApp.cpp" />
+    <ClCompile Include="Runtime\Tests\NamespaceTest.cpp" />
+    <ClCompile Include="Runtime\Tests\NormalMappingTest.cpp" />
+    <ClCompile Include="Runtime\Tests\ParallaxMappingTest.cpp" />
+    <ClCompile Include="Runtime\Tests\PbrTest.cpp" />
+    <ClCompile Include="Runtime\Tests\PointShadowTest.cpp" />
+    <ClCompile Include="Runtime\Tests\RendererDemo.cpp" />
+    <ClCompile Include="Runtime\Tests\Renderer\GraphicRenderer\CameraTest.cpp" />
+    <ClCompile Include="Runtime\Tests\Renderer\GraphicRenderer\ModelTest.cpp" />
+    <ClCompile Include="Runtime\Tests\Renderer\GraphicRenderer\RenderPipelineTest.cpp" />
+    <ClCompile Include="Runtime\Tests\ShadowTest.cpp" />
+    <ClCompile Include="Runtime\Tests\SSAOTest.cpp" />
+    <ClCompile Include="Runtime\Tests\StencilTest.cpp" />
+    <ClCompile Include="Runtime\Tests\Tests.cpp" />
     <ClCompile Include="Runtime\Utils\ConsoleLogger.cpp" />
     <ClCompile Include="Runtime\Utils\Gizmos.cpp" />
     <ClCompile Include="Runtime\VisualEffect\PostProcess.cpp" />
@@ -442,8 +444,6 @@
     <ClInclude Include="Runtime\Physics\PhysicsSettings.h" />
     <ClInclude Include="Runtime\Physics\PhysicSyetemHeaders.h" />
     <ClInclude Include="Runtime\Physics\PhysicSystem.hpp" />
-    <ClInclude Include="Runtime\Physics\Test\PhysicsTest.hpp" />
-    <ClInclude Include="Runtime\Physics\Test\PTSimpleTest.hpp" />
     <ClInclude Include="Runtime\Physics\Utils\ContactListenerImpl.hpp" />
     <ClInclude Include="Runtime\Renderer\AudioRenderer\Audio.hpp" />
     <ClInclude Include="Runtime\Renderer\AudioRenderer\AudioSystem.hpp" />
@@ -486,6 +486,11 @@
     <ClInclude Include="Runtime\Spore\Spore.hpp" />
     <ClInclude Include="Runtime\Spore\Utils\AudioRenderer.hpp" />
     <ClInclude Include="Runtime\Spore\Utils\GraphicRenderer.hpp" />
+    <ClInclude Include="Runtime\Tests\BaseTest.hpp" />
+    <ClInclude Include="Runtime\Tests\Renderer\GraphicRenderer\CameraTest.hpp" />
+    <ClInclude Include="Runtime\Tests\Renderer\GraphicRenderer\ModelTest.hpp" />
+    <ClInclude Include="Runtime\Tests\Renderer\GraphicRenderer\RenderPipelineTest.hpp" />
+    <ClInclude Include="Runtime\Tests\Tests.hpp" />
     <ClInclude Include="Runtime\Utils\ConsoleLogger.hpp" />
     <ClInclude Include="Runtime\Utils\Gizmos.hpp" />
     <ClInclude Include="Runtime\Utils\SingletonInstance.hpp" />
