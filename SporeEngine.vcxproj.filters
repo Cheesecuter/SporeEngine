@@ -76,9 +76,6 @@
     <Filter Include="源文件\Physics">
       <UniqueIdentifier>{cb6de989-83cb-4f79-8391-03ab67bea11b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="源文件\Test">
-      <UniqueIdentifier>{7383f39e-05d9-4f0a-8f29-d2574b056269}</UniqueIdentifier>
-    </Filter>
     <Filter Include="源文件\Physics\Test">
       <UniqueIdentifier>{b9750e0b-b87d-4bee-8bd6-f300b4a69380}</UniqueIdentifier>
     </Filter>
@@ -105,9 +102,6 @@
     </Filter>
     <Filter Include="源文件\Renderer\GraphicRenderer\stb_image">
       <UniqueIdentifier>{18775f3d-5def-4f28-b02f-b28c569a61aa}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="源文件\Test\Projects">
-      <UniqueIdentifier>{b268d086-1f21-4a11-a810-3b56082524a0}</UniqueIdentifier>
     </Filter>
     <Filter Include="头文件\imgui">
       <UniqueIdentifier>{565d2fcd-8bff-4770-847f-7e61ce7e95bf}</UniqueIdentifier>
@@ -141,6 +135,15 @@
     </Filter>
     <Filter Include="源文件\Scripts\ScriptEngine">
       <UniqueIdentifier>{e7cd83ff-7711-408d-85bc-a6bdaf030c13}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Asset\Tests">
+      <UniqueIdentifier>{426683ab-cee0-4d93-ac01-c25e705f486d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Tests">
+      <UniqueIdentifier>{7383f39e-05d9-4f0a-8f29-d2574b056269}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Tests\Projects">
+      <UniqueIdentifier>{b268d086-1f21-4a11-a810-3b56082524a0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -229,58 +232,58 @@
       <Filter>源文件\Physics</Filter>
     </ClCompile>
     <ClCompile Include="Runtime\Test\AddvantageRenderTest.cpp">
-      <Filter>源文件\Test</Filter>
+      <Filter>源文件\Tests</Filter>
     </ClCompile>
     <ClCompile Include="Runtime\Test\BasicLightingTest.cpp">
-      <Filter>源文件\Test</Filter>
+      <Filter>源文件\Tests</Filter>
     </ClCompile>
     <ClCompile Include="Runtime\Test\DeferredShaderingTest.cpp">
-      <Filter>源文件\Test</Filter>
+      <Filter>源文件\Tests</Filter>
     </ClCompile>
     <ClCompile Include="Runtime\Test\DepthTest.cpp">
-      <Filter>源文件\Test</Filter>
+      <Filter>源文件\Tests</Filter>
     </ClCompile>
     <ClCompile Include="Runtime\Test\FrameBufferTest.cpp">
-      <Filter>源文件\Test</Filter>
+      <Filter>源文件\Tests</Filter>
     </ClCompile>
     <ClCompile Include="Runtime\Test\HDRTest.cpp">
-      <Filter>源文件\Test</Filter>
+      <Filter>源文件\Tests</Filter>
     </ClCompile>
     <ClCompile Include="Runtime\Test\ImGuiTest.cpp">
-      <Filter>源文件\Test</Filter>
+      <Filter>源文件\Tests</Filter>
     </ClCompile>
     <ClCompile Include="Runtime\Test\LightingTest.cpp">
-      <Filter>源文件\Test</Filter>
+      <Filter>源文件\Tests</Filter>
     </ClCompile>
     <ClCompile Include="Runtime\Test\ModelTest.cpp">
-      <Filter>源文件\Test</Filter>
+      <Filter>源文件\Tests</Filter>
     </ClCompile>
     <ClCompile Include="Runtime\Test\NamespaceTest.cpp">
-      <Filter>源文件\Test</Filter>
+      <Filter>源文件\Tests</Filter>
     </ClCompile>
     <ClCompile Include="Runtime\Test\NormalMappingTest.cpp">
-      <Filter>源文件\Test</Filter>
+      <Filter>源文件\Tests</Filter>
     </ClCompile>
     <ClCompile Include="Runtime\Test\ParallaxMappingTest.cpp">
-      <Filter>源文件\Test</Filter>
+      <Filter>源文件\Tests</Filter>
     </ClCompile>
     <ClCompile Include="Runtime\Test\PbrTest.cpp">
-      <Filter>源文件\Test</Filter>
+      <Filter>源文件\Tests</Filter>
     </ClCompile>
     <ClCompile Include="Runtime\Test\PointShadowTest.cpp">
-      <Filter>源文件\Test</Filter>
+      <Filter>源文件\Tests</Filter>
     </ClCompile>
     <ClCompile Include="Runtime\Test\RendererDemo.cpp">
-      <Filter>源文件\Test</Filter>
+      <Filter>源文件\Tests</Filter>
     </ClCompile>
     <ClCompile Include="Runtime\Test\ShadowTest.cpp">
-      <Filter>源文件\Test</Filter>
+      <Filter>源文件\Tests</Filter>
     </ClCompile>
     <ClCompile Include="Runtime\Test\SSAOTest.cpp">
-      <Filter>源文件\Test</Filter>
+      <Filter>源文件\Tests</Filter>
     </ClCompile>
     <ClCompile Include="Runtime\Test\StencilTest.cpp">
-      <Filter>源文件\Test</Filter>
+      <Filter>源文件\Tests</Filter>
     </ClCompile>
     <ClCompile Include="Runtime\Physics\Test\PTSimpleTest.cpp">
       <Filter>源文件\Physics\Test</Filter>
@@ -889,7 +892,7 @@
       <Filter>源文件\Renderer\GraphicRenderer\Utils</Filter>
     </ClCompile>
     <ClCompile Include="Runtime\Test\CSMShadowMappingTest.cpp">
-      <Filter>源文件\Test</Filter>
+      <Filter>源文件\Tests</Filter>
     </ClCompile>
     <ClCompile Include="Runtime\ECS\Component\ShadowComponent.cpp">
       <Filter>源文件\ECS\Component</Filter>
